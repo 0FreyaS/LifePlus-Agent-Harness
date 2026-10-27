@@ -2,137 +2,43 @@
   "capture": "computer-use-browser-screenshot-segments",
   "continuous_native_recording": false,
   "capture_cadence_ms": 650,
-  "duration_ms": 113366,
+  "source_duration_ms": 113366,
+  "duration_ms": 81159,
   "total_frames_captured": 161,
   "output_fps": 12,
   "silent": true,
-  "notes": "12 fps encoding repeats source frames; effective capture rate is approximately 1–2 fps. Preparation gaps between segments are removed. This is not a latency benchmark.",
+  "burned_subtitles": true,
+  "notes": "Real browser interaction in the original order. Waiting-only segments are accelerated by 2x to 3x, preparation gaps are removed, and explanatory Chinese subtitles are burned in. This is not a latency benchmark.",
+  "speed_edits": [
+    {"source_start_ms": 2861, "source_end_ms": 21313, "speed": 3.0, "reason": "model planning wait"},
+    {"source_start_ms": 34130, "source_end_ms": 47640, "speed": 2.0, "reason": "candidate and task progress wait"},
+    {"source_start_ms": 47640, "source_end_ms": 62458, "speed": 2.5, "reason": "route service wait"},
+    {"source_start_ms": 66805, "source_end_ms": 76056, "speed": 2.0, "reason": "driving route recalculation wait"},
+    {"source_start_ms": 80390, "source_end_ms": 89661, "speed": 2.0, "reason": "cycling route recalculation wait"}
+  ],
   "chapters": [
-    {
-      "title": "01 输入四任务请求",
-      "start_ms": 0,
-      "end_ms": 2861,
-      "frames": 4
-    },
-    {
-      "title": "02 提交并等待真实模型规划",
-      "start_ms": 2861,
-      "end_ms": 21313,
-      "frames": 26
-    },
-    {
-      "title": "03 查看并行任务与结果依赖",
-      "start_ms": 21313,
-      "end_ms": 24182,
-      "frames": 4
-    },
-    {
-      "title": "04 展开各领域子图",
-      "start_ms": 24182,
-      "end_ms": 27646,
-      "frames": 5
-    },
-    {
-      "title": "05 返回对话继续候选选择",
-      "start_ms": 27646,
-      "end_ms": 31889,
-      "frames": 6
-    },
-    {
-      "title": "06 选择车站并恢复前置任务",
-      "start_ms": 31889,
-      "end_ms": 34130,
-      "frames": 3
-    },
-    {
-      "title": "07 选择音乐候选，其他任务继续执行",
-      "start_ms": 34130,
-      "end_ms": 47640,
-      "frames": 19
-    },
-    {
-      "title": "08 选择目的地并等待真实路线返回",
-      "start_ms": 47640,
-      "end_ms": 62458,
-      "frames": 21
-    },
-    {
-      "title": "09 展示步行地图与方式切换入口",
-      "start_ms": 62458,
-      "end_ms": 64630,
-      "frames": 3
-    },
-    {
-      "title": "10 展示真实步行路线",
-      "start_ms": 64630,
-      "end_ms": 66805,
-      "frames": 3
-    },
-    {
-      "title": "11 从步行切换驾车并实际重新规划",
-      "start_ms": 66805,
-      "end_ms": 76056,
-      "frames": 13
-    },
-    {
-      "title": "12 选择第二条驾车方案并更新地图",
-      "start_ms": 76056,
-      "end_ms": 80390,
-      "frames": 6
-    },
-    {
-      "title": "13 切换骑行，调用真实路线服务",
-      "start_ms": 80390,
-      "end_ms": 89661,
-      "frames": 13
-    },
-    {
-      "title": "14 展示骑行路线",
-      "start_ms": 89661,
-      "end_ms": 91779,
-      "frames": 3
-    },
-    {
-      "title": "15 查看四任务全部完成后的依赖图",
-      "start_ms": 91779,
-      "end_ms": 96114,
-      "frames": 6
-    },
-    {
-      "title": "16 完整展示并行入口与依赖边",
-      "start_ms": 96114,
-      "end_ms": 98936,
-      "frames": 4
-    },
-    {
-      "title": "17 查看独立路线任务的领域子图",
-      "start_ms": 98936,
-      "end_ms": 101798,
-      "frames": 4
-    },
-    {
-      "title": "18 展示完整子图并查看候选选择事件",
-      "start_ms": 101798,
-      "end_ms": 104663,
-      "frames": 4
-    },
-    {
-      "title": "19 查看中断、选择和工具事件证据",
-      "start_ms": 104663,
-      "end_ms": 107606,
-      "frames": 5
-    },
-    {
-      "title": "20 查看检查点与 Bad Case 归因入口",
-      "start_ms": 107606,
-      "end_ms": 110529,
-      "frames": 5
-    },
-    {
-      "title": "21 补充镜头：骑行结果与默认选中方式",
-      "start_ms": 110529,
-      "end_ms": 113366,
-      "frames": 4
-    }
+    {"title": "LifePlus Agent Harness", "start_ms": 0, "end_ms": 2500},
+    {"title": "01 输入四任务请求", "start_ms": 2500, "end_ms": 5361},
+    {"title": "02 真实模型规划（3倍加速）", "start_ms": 5361, "end_ms": 11512},
+    {"title": "03 查看并行任务与结果依赖", "start_ms": 11512, "end_ms": 14381},
+    {"title": "04 展开各领域子图", "start_ms": 14381, "end_ms": 17845},
+    {"title": "05 返回对话继续候选选择", "start_ms": 17845, "end_ms": 22088},
+    {"title": "06 选择车站并恢复前置任务", "start_ms": 22088, "end_ms": 24329},
+    {"title": "07 选择音乐候选（2倍加速）", "start_ms": 24329, "end_ms": 31084},
+    {"title": "08 选择目的地并等待路线（2.5倍加速）", "start_ms": 31084, "end_ms": 37011},
+    {"title": "09 展示步行地图与方式切换", "start_ms": 37011, "end_ms": 39183},
+    {"title": "10 展示真实步行路线", "start_ms": 39183, "end_ms": 41358},
+    {"title": "11 切换驾车并重新规划（2倍加速）", "start_ms": 41358, "end_ms": 45984},
+    {"title": "12 选择第二条驾车方案", "start_ms": 45984, "end_ms": 50318},
+    {"title": "13 切换骑行并重新规划（2倍加速）", "start_ms": 50318, "end_ms": 54954},
+    {"title": "14 展示骑行路线", "start_ms": 54954, "end_ms": 57072},
+    {"title": "15 查看四任务全部完成", "start_ms": 57072, "end_ms": 61407},
+    {"title": "16 展示并行入口与依赖边", "start_ms": 61407, "end_ms": 64229},
+    {"title": "17 查看路线任务领域子图", "start_ms": 64229, "end_ms": 67091},
+    {"title": "18 查看候选选择与恢复", "start_ms": 67091, "end_ms": 69956},
+    {"title": "19 查看中断、选择和工具事件", "start_ms": 69956, "end_ms": 72899},
+    {"title": "20 查看检查点与 Bad Case 归因", "start_ms": 72899, "end_ms": 75822},
+    {"title": "21 展示骑行结果与默认方式", "start_ms": 75822, "end_ms": 78659},
+    {"title": "演示结束", "start_ms": 78659, "end_ms": 81159}
   ]
 }

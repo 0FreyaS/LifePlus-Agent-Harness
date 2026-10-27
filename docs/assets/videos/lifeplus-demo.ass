@@ -1,0 +1,39 @@
+[Script Info]
+Title: LifePlus GitHub demo subtitles
+ScriptType: v4.00+
+PlayResX: 1280
+PlayResY: 720
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Title,Hiragino Sans GB,46,&H00FFFFFF,&H00FFFFFF,&H000F5132,&H000F5132,-1,0,0,0,100,100,0,0,1,0,0,5,70,70,0,1
+Style: Caption,Hiragino Sans GB,28,&H00FFFFFF,&H00FFFFFF,&H99000000,&H88000000,0,0,0,0,100,100,0,0,3,1,0,2,80,80,28,1
+Style: Outro,Hiragino Sans GB,42,&H00FFFFFF,&H00FFFFFF,&H000F5132,&H000F5132,-1,0,0,0,100,100,0,0,1,0,0,5,70,70,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.50,Title,,0,0,0,,LifePlus Agent Harness\N{\fs29\b0}多任务并行 · 信息澄清 · 可恢复执行
+Dialogue: 0,0:00:02.50,0:00:05.36,Caption,,0,0,0,,输入一个包含 4 个目标的复合请求\N系统需要识别并行分支与前置依赖
+Dialogue: 0,0:00:05.36,0:00:11.51,Caption,,0,0,0,,模型正在拆解任务并生成依赖图（3× 加速）\N前三项可并行，路线任务等待地点选择
+Dialogue: 0,0:00:11.51,0:00:14.38,Caption,,0,0,0,,执行图实时展示任务状态\N并行分支与依赖边来自真实调度计划
+Dialogue: 0,0:00:14.38,0:00:17.85,Caption,,0,0,0,,展开领域子图\N查看意图、澄清、工具与结果校验节点
+Dialogue: 0,0:00:17.85,0:00:22.09,Caption,,0,0,0,,回到对话继续处理待澄清任务\NCheckpoint 保留候选与任务状态
+Dialogue: 0,0:00:22.09,0:00:24.33,Caption,,0,0,0,,用户选择车站候选\N恢复 T1，并将真实坐标绑定给依赖任务
+Dialogue: 0,0:00:24.33,0:00:31.08,Caption,,0,0,0,,音乐候选选择与其他任务继续执行（2× 加速）\N一个分支等待时，不阻塞无依赖分支
+Dialogue: 0,0:00:31.08,0:00:37.01,Caption,,0,0,0,,选择目的地并调用路线服务（2.5× 加速）\N依赖任务只在前置结果就绪后启动
+Dialogue: 0,0:00:37.01,0:00:39.18,Caption,,0,0,0,,步行路线返回\N地图、距离、耗时和切换入口一并呈现
+Dialogue: 0,0:00:39.18,0:00:41.36,Caption,,0,0,0,,当前默认方式：步行\N路线规划完成不等于设备导航已启动
+Dialogue: 0,0:00:41.36,0:00:45.98,Caption,,0,0,0,,切换驾车会重新调用真实路线服务（2× 加速）\N新回执到达后才更新地图
+Dialogue: 0,0:00:45.98,0:00:50.32,Caption,,0,0,0,,选择第二条驾车方案\N地图折线与路线摘要同步更新
+Dialogue: 0,0:00:50.32,0:00:54.95,Caption,,0,0,0,,切换骑行并重新规划（2× 加速）\N不使用假的时长或路线占位结果
+Dialogue: 0,0:00:54.95,0:00:57.07,Caption,,0,0,0,,骑行路线返回\N默认选中方式与用户指令保持一致
+Dialogue: 0,0:00:57.07,0:01:01.41,Caption,,0,0,0,,4 个子任务全部完成\N结果分别展示，避免将部分成功误报为全部成功
+Dialogue: 0,0:01:01.41,0:01:04.23,Caption,,0,0,0,,执行图显示 T1 / T2 / T3 并行\NT4 在 T1 完成后才启动
+Dialogue: 0,0:01:04.23,0:01:07.09,Caption,,0,0,0,,查看路线任务的领域子图\N节点状态与工具回执可追溯
+Dialogue: 0,0:01:07.09,0:01:09.96,Caption,,0,0,0,,候选选择后从中断点恢复\N已完成节点不重复执行副作用
+Dialogue: 0,0:01:09.96,0:01:12.90,Caption,,0,0,0,,Trace 记录中断、选择、工具调用与回执\N可按请求、任务和工具 Job 进行定位
+Dialogue: 0,0:01:12.90,0:01:15.82,Caption,,0,0,0,,检查点与 Bad Case 入口\N用于复盘失败阶段和恢复过程
+Dialogue: 0,0:01:15.82,0:01:18.66,Caption,,0,0,0,,最终骑行结果与默认方式保持一致\N演示结束，不将录屏耗时作为性能指标
+Dialogue: 0,0:01:18.66,0:01:21.16,Outro,,0,0,0,,LifePlus Agent Harness\N{\fs27\b0}真实模型 · MCP 工具 · LangGraph 编排\N{\fs22}github.com/0FreyaS/LifePlus-Agent-Harness

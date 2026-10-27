@@ -30,9 +30,9 @@
 
 [![点击观看 LifePlus 实际运行视频](docs/assets/videos/lifeplus-demo-poster.jpg)](docs/assets/videos/lifeplus-demo.mp4)
 
-[观看 MP4（约 1 分 53 秒）](docs/assets/videos/lifeplus-demo.mp4) · [章节字幕](docs/assets/videos/lifeplus-demo.srt)
+[观看 MP4（约 1 分 21 秒，已内嵌中文字幕）](docs/assets/videos/lifeplus-demo.mp4) · [独立字幕](docs/assets/videos/lifeplus-demo.srt) · [章节与剪辑说明](docs/assets/videos/lifeplus-demo-chapters.json)
 
-覆盖输入、四任务并行与依赖、候选选择、执行 DAG、领域子图、步行/驾车/骑行切换、备选路线及检查点。真实模型与 MCP 实际执行；采用 computer use 低帧率分段采集，无旁白，删除段间准备停顿，非原生连续录屏，不用于衡量端到端延迟。
+覆盖输入、四任务并行与依赖、候选选择、执行 DAG、领域子图、步行/驾车/骑行切换、备选路线及检查点。真实模型与 MCP 实际执行；采用 computer use 低帧率分段采集，无旁白。剪辑版保留真实交互顺序，将纯等待段以 2–3 倍加速，并烧录解释性中文字幕；非原生连续录屏，不用于衡量端到端延迟。
 
 以下为 **2026-10-26 通过 computer use 操作本地应用截取的真实界面**，使用真实模型与 MCP，非设计稿。点击图片可查看原图；工具数据、路线和候选随时间变化。
 
