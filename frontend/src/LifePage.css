@@ -1,0 +1,16 @@
+.life-page { max-width: 1040px; margin: 0 auto; padding: 28px 32px; }
+.life-heading { display: flex; align-items: center; justify-content: space-between; }
+.life-heading h1 { margin: 0; font-size: 23px; letter-spacing: 0; }
+.life-section { padding: 24px 0; border-bottom: 1px solid #e1e5e8; }
+.life-section h2 { display: flex; gap: 9px; align-items: center; font-size: 15px; margin: 0 0 14px; }
+.life-section h2 svg { color: #21775d; }
+.life-row { display: flex; align-items: center; gap: 12px; min-height: 65px; padding: 13px 12px; border-top: 1px solid #e6e9ec; }
+.life-row.unread { border-left: 3px solid #21775d; background: #f0f8f3; }
+.life-row > div { flex: 1; min-width: 0; }
+.life-row strong, .life-row small { display: block; overflow-wrap: anywhere; }
+.life-row strong { font-size: 13px; font-weight: 600; }
+.life-row small { font-size: 11px; color: #77818d; margin-top: 6px; }
+.life-status { flex-shrink: 0; font-size: 11px; color: #47749b; }
+.life-empty { font-size: 13px; color: #77818d; padding: 12px 0; }
+.life-row .resource-id { font-family: monospace; font-size: 10px; }
+@media (max-width: 600px) { .life-page { padding: 20px 14px; } .life-heading h1 { font-size: 20px; } }

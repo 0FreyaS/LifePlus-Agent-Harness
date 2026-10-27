@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": {
+    "first_turn_completed": true,
+    "live_model_uses_previous_turn": true,
+    "explicit_preference_saved": true,
+    "live_model_reads_cross_session_preference": true,
+    "exact_first_input": true,
+    "first_input_has_database_evidence": true,
+    "preference_deleted": true
+  },
+  "elapsed_seconds": 41.596,
+  "scope": "real configured model over HTTP; synthetic isolated user; no browser verification"
+}

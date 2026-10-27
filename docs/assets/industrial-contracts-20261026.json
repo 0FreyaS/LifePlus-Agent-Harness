@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-26",
+  "scope": "controlled boundary fault injection; isolated SQLite; no production load claim",
+  "same_targeted_case_ids": true,
+  "runs": {
+    "baseline": {
+      "tested": 451,
+      "passed": 450,
+      "failed": 0,
+      "skipped": 1,
+      "seconds": 22.102
+    },
+    "targeted_before": {
+      "tested": 33,
+      "passed": 5,
+      "failed": 28,
+      "skipped": 0,
+      "seconds": 0.588
+    },
+    "targeted_after": {
+      "tested": 33,
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 0.983
+    },
+    "regression": {
+      "tested": 484,
+      "passed": 483,
+      "failed": 0,
+      "skipped": 1,
+      "seconds": 22.616
+    }
+  },
+  "reproduced_failures": [
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_or_invalid_slots[forged-owner]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_or_invalid_slots[injected-tool]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_or_invalid_slots[preselected-candidate]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_or_invalid_slots[wrong-city-type]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_or_invalid_slots[negative-radius]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_or_invalid_slots[oversized-radius]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_or_invalid_slots[invalid-rating]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_or_invalid_slots[negative-budget]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_or_invalid_slots[unknown-category]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_binding_target[user_id]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_binding_target[selection]",
+    "tests.test_industrial_contracts::test_plan_rejects_unknown_binding_target[tool_name]",
+    "tests.test_industrial_contracts::test_plan_rejects_duplicate_dependency_edges",
+    "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[business-false-without-error]",
+    "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[business-false-message]",
+    "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-false]",
+    "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-success]",
+    "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[integer-success-flag]",
+    "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[contradictory-flags]",
+    "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-clarification]",
+    "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[save_itinerary]",
+    "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[create_reminder]",
+    "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[cancel_reminder]",
+    "tests.test_industrial_contracts::test_mcp_malformed_reply_is_not_accepted_as_a_completed_text_result[not json]",
+    "tests.test_industrial_contracts::test_mcp_malformed_reply_is_not_accepted_as_a_completed_text_result[<html>proxy error</html>]",
+    "tests.test_industrial_contracts::test_mcp_malformed_reply_is_not_accepted_as_a_completed_text_result[{\"ok\":]",
+    "tests.test_industrial_contracts::test_mcp_malformed_reply_is_not_accepted_as_a_completed_text_result[delete_everything()]",
+    "tests.test_industrial_contracts::test_mcp_structured_content_is_used_without_requiring_text_content"
+  ],
+  "changes": [
+    "shared typed planning slots and binding targets",
+    "duplicate dependency rejection",
+    "business-failure and boolean-envelope validation",
+    "structured MCP response parsing"
+  ],
+  "excluded": [
+    "real model accuracy",
+    "live provider availability",
+    "distributed recovery",
+    "QPS or production SLA"
+  ]
+}

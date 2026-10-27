@@ -1,0 +1,138 @@
+{
+  "capture": "computer-use-browser-screenshot-segments",
+  "continuous_native_recording": false,
+  "capture_cadence_ms": 650,
+  "duration_ms": 113366,
+  "total_frames_captured": 161,
+  "output_fps": 12,
+  "silent": true,
+  "notes": "12 fps encoding repeats source frames; effective capture rate is approximately 1–2 fps. Preparation gaps between segments are removed. This is not a latency benchmark.",
+  "chapters": [
+    {
+      "title": "01 输入四任务请求",
+      "start_ms": 0,
+      "end_ms": 2861,
+      "frames": 4
+    },
+    {
+      "title": "02 提交并等待真实模型规划",
+      "start_ms": 2861,
+      "end_ms": 21313,
+      "frames": 26
+    },
+    {
+      "title": "03 查看并行任务与结果依赖",
+      "start_ms": 21313,
+      "end_ms": 24182,
+      "frames": 4
+    },
+    {
+      "title": "04 展开各领域子图",
+      "start_ms": 24182,
+      "end_ms": 27646,
+      "frames": 5
+    },
+    {
+      "title": "05 返回对话继续候选选择",
+      "start_ms": 27646,
+      "end_ms": 31889,
+      "frames": 6
+    },
+    {
+      "title": "06 选择车站并恢复前置任务",
+      "start_ms": 31889,
+      "end_ms": 34130,
+      "frames": 3
+    },
+    {
+      "title": "07 选择音乐候选，其他任务继续执行",
+      "start_ms": 34130,
+      "end_ms": 47640,
+      "frames": 19
+    },
+    {
+      "title": "08 选择目的地并等待真实路线返回",
+      "start_ms": 47640,
+      "end_ms": 62458,
+      "frames": 21
+    },
+    {
+      "title": "09 展示步行地图与方式切换入口",
+      "start_ms": 62458,
+      "end_ms": 64630,
+      "frames": 3
+    },
+    {
+      "title": "10 展示真实步行路线",
+      "start_ms": 64630,
+      "end_ms": 66805,
+      "frames": 3
+    },
+    {
+      "title": "11 从步行切换驾车并实际重新规划",
+      "start_ms": 66805,
+      "end_ms": 76056,
+      "frames": 13
+    },
+    {
+      "title": "12 选择第二条驾车方案并更新地图",
+      "start_ms": 76056,
+      "end_ms": 80390,
+      "frames": 6
+    },
+    {
+      "title": "13 切换骑行，调用真实路线服务",
+      "start_ms": 80390,
+      "end_ms": 89661,
+      "frames": 13
+    },
+    {
+      "title": "14 展示骑行路线",
+      "start_ms": 89661,
+      "end_ms": 91779,
+      "frames": 3
+    },
+    {
+      "title": "15 查看四任务全部完成后的依赖图",
+      "start_ms": 91779,
+      "end_ms": 96114,
+      "frames": 6
+    },
+    {
+      "title": "16 完整展示并行入口与依赖边",
+      "start_ms": 96114,
+      "end_ms": 98936,
+      "frames": 4
+    },
+    {
+      "title": "17 查看独立路线任务的领域子图",
+      "start_ms": 98936,
+      "end_ms": 101798,
+      "frames": 4
+    },
+    {
+      "title": "18 展示完整子图并查看候选选择事件",
+      "start_ms": 101798,
+      "end_ms": 104663,
+      "frames": 4
+    },
+    {
+      "title": "19 查看中断、选择和工具事件证据",
+      "start_ms": 104663,
+      "end_ms": 107606,
+      "frames": 5
+    },
+    {
+      "title": "20 查看检查点与 Bad Case 归因入口",
+      "start_ms": 107606,
+      "end_ms": 110529,
+      "frames": 5
+    },
+    {
+      "title": "21 补充镜头：骑行结果与默认选中方式",
+      "start_ms": 110529,
+      "end_ms": 113366,
+      "frames": 4
+    }
+  ]
+}

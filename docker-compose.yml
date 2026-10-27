@@ -1,0 +1,41 @@
+name: lifeplus
+services:
+  app:
+    build: .
+    image: lifeplus-agent:local
+    restart: unless-stopped
+    init: true
+    env_file: ${LIFEPLUS_ENV_FILE:-.env}
+    environment:
+      APP_MODE: showcase
+      SHOWCASE_USERNAME: ${SHOWCASE_USERNAME:-interviewer}
+      SHOWCASE_PASSWORD: ${SHOWCASE_PASSWORD:?Set a random SHOWCASE_PASSWORD of at least 24 characters in your private .env}
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-}
+      SHOWCASE_ALLOW_HTTP: "true"
+      FORWARDED_ALLOW_IPS: "127.0.0.1"
+      DATABASE_PATH: /app/data/lifeplus.sqlite3
+      CHROMA_PATH: /app/data/chroma
+      CHECKPOINT_POSTGRES_DSN: ${CHECKPOINT_POSTGRES_DSN:-}
+      MYSQL_DSN: ${MYSQL_DSN:-}
+      REDIS_URL: ${REDIS_URL:-}
+      MAX_ACTIVE_TASKS_PER_USER: ${MAX_ACTIVE_TASKS_PER_USER:-4}
+    ports:
+      - "127.0.0.1:${LIFEPLUS_PORT:-8088}:8000"
+    volumes:
+      - lifeplus-data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    mem_limit: 2g
+    cpus: 2
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+volumes:
+  lifeplus-data:

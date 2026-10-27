@@ -1,0 +1,12 @@
+.task-results { margin: 18px 0; border-top: 1px solid #dce4df; border-bottom: 1px solid #dce4df; }
+.task-results-heading { display: flex; align-items: center; gap: 8px; padding: 14px 0; font-size: 12px; color: #21775d; }
+.task-result { padding: 12px 0; border-top: 1px solid #e6e9ec; }
+.task-result header { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.task-result header a { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+.task-result header > span { flex-shrink: 0; color: #6d7781; font-size: 11px; }
+.task-result p { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; line-height: 1.8; margin: 8px 0; }
+.task-clarification > strong { display: block; font-size: 12px; margin-top: 16px; }
+.stream-caret { display: inline-block; width: 2px; height: 12px; margin-left: 3px; background: #21775d; animation: stream-blink 1s steps(2, start) infinite; }
+.status-badge.partial { color: #916512; background: #fff6df; }
+@keyframes stream-blink { to { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .stream-caret { animation: none; } }

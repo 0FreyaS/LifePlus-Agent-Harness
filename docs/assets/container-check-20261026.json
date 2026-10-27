@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "checks": {
+    "unauthenticated_html_denied": true,
+    "unauthenticated_api_denied": true,
+    "frontend_served": true,
+    "spa_deep_link": true,
+    "missing_api_is_404": true,
+    "missing_asset_is_404": true,
+    "showcase_active": true,
+    "no_provider_key_baked_in": true,
+    "chroma_loaded": true,
+    "tool_catalog_loaded": true,
+    "isolated_demo_task_completed": true,
+    "sse_response": true,
+    "packaged_resources": true,
+    "non_root": true,
+    "no_env_file_in_image": true
+  },
+  "image": "lifeplus-agent:readme-check",
+  "scope": "real Docker container; isolated demo task; no live providers; no browser screenshot",
+  "public_deployment": false
+}

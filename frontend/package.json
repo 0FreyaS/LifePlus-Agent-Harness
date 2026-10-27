@@ -1,0 +1,16 @@
+{
+  "name": "lifeplus-agent-harness-ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {"dev": "vite --host 0.0.0.0", "build": "tsc -b && vite build", "test": "node --test tests/*.test.cjs", "preview": "vite preview --host 0.0.0.0"},
+  "dependencies": {
+    "@microsoft/fetch-event-source": "^2.0.1",
+    "@xyflow/react": "^12.8.6",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.1"
+  },
+  "devDependencies": {"@types/react": "^18.3.12", "@types/react-dom": "^18.3.1", "@vitejs/plugin-react": "^4.3.4", "typescript": "~5.7.2", "vite": "^6.0.5"}
+}

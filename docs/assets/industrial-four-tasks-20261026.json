@@ -1,0 +1,55 @@
+{
+  "query": "请同时完成以下四个子任务，必须恰好拆成四项：1. 检索杭州东站这个车站地点的经纬度，不是饭店等商家检索；2. 查询无锡今天的天气；3. 搜索周杰伦的歌曲；4. 第一项选定地点后，以第一项所选地点的坐标作为origin，步行规划到杭州西湖的路线。前三项互相独立，同时执行；只有第四项依赖第一项，不能猜起点，也不能使用默认起点。有多个候选时等待我选择，不要预先设置selection；不创建提醒、不保存行程或执行其他写入。",
+  "status": "passed",
+  "elapsed_seconds": 26.453,
+  "branches": [
+    {
+      "branch": "place",
+      "domain": "navigation",
+      "status": "completed",
+      "depends_on": [],
+      "elapsed_seconds": 5.076
+    },
+    {
+      "branch": "weather",
+      "domain": "weather",
+      "status": "completed",
+      "depends_on": [],
+      "elapsed_seconds": 7.073
+    },
+    {
+      "branch": "music",
+      "domain": "music",
+      "status": "completed",
+      "depends_on": [],
+      "elapsed_seconds": 8.975
+    },
+    {
+      "branch": "route",
+      "domain": "navigation",
+      "status": "completed",
+      "depends_on": [
+        "place"
+      ],
+      "elapsed_seconds": 8.485
+    }
+  ],
+  "selected_public_poi_name": "杭州东站",
+  "checks": {
+    "evidence_schema_valid": true,
+    "capture_finished": true,
+    "four_tasks_three_roots_one_dependency": true,
+    "all_completed": true,
+    "live_model_and_mcp": true,
+    "trace_order_valid": true,
+    "dependency_completed_before_start": true,
+    "independent_execution_overlap": true,
+    "place_search_receipt": true,
+    "weather_today_receipt": true,
+    "music_search_receipt": true,
+    "first_candidates_only": true,
+    "route_origin_bound_to_selected_place": true,
+    "walking_to_west_lake": true,
+    "no_business_writes": true
+  }
+}

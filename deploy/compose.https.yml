@@ -1,0 +1,28 @@
+services:
+  app:
+    environment:
+      SHOWCASE_ALLOW_HTTP: "false"
+      FORWARDED_ALLOW_IPS: "172.28.90.2"
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      LIFEPLUS_DOMAIN: ${LIFEPLUS_DOMAIN:?Set your DNS domain}
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - lifeplus-caddy-data:/data
+      - lifeplus-caddy-config:/config
+    depends_on:
+      app: {condition: service_healthy}
+    networks:
+      default:
+        ipv4_address: 172.28.90.2
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.28.90.0/24
+volumes:
+  lifeplus-caddy-data:
+  lifeplus-caddy-config:

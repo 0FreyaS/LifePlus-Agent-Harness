@@ -1,0 +1,52 @@
+# Optional durable adapters; all DB ports stay inside the Compose network.
+services:
+  app:
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      MYSQL_DSN: mysql+asyncmy://lifeplus:${MYSQL_PASSWORD:?Set a URL-safe MYSQL_PASSWORD}@mysql:3306/lifeplus
+      CHECKPOINT_POSTGRES_DSN: postgresql://lifeplus:${POSTGRES_PASSWORD:?Set a URL-safe POSTGRES_PASSWORD}@postgres:5432/lifeplus
+    depends_on:
+      redis: {condition: service_healthy}
+      mysql: {condition: service_healthy}
+      postgres: {condition: service_healthy}
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    command: [redis-server, --appendonly, "yes"]
+    volumes: [lifeplus-redis:/data]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: lifeplus
+      MYSQL_USER: lifeplus
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD}
+    volumes: [lifeplus-mysql:/var/lib/mysql]
+    healthcheck:
+      test: [CMD-SHELL, 'MYSQL_PWD="$${MYSQL_PASSWORD}" mysql --user=lifeplus --database=lifeplus --execute="SELECT 1"']
+      interval: 5s
+      timeout: 3s
+      retries: 30
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lifeplus
+      POSTGRES_USER: lifeplus
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes: [lifeplus-postgres:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U lifeplus -d lifeplus]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  lifeplus-redis:
+  lifeplus-mysql:
+  lifeplus-postgres:
