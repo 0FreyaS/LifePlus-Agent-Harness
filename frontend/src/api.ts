@@ -1,6 +1,7 @@
 import { fetchEventSource } from '@microsoft/fetch-event-source'
 
 export type Session = { id: string; title: string; created_at: string; updated_at: string }
+export type InputResponse = { task_id: string; status: string; created_task_id?: string; additional_task_error?: { message: string; query: string } }
 export type Review = { is_bad_case: boolean; category: string; root_cause: string; expected_answer: string; note: string; updated_at?: string }
 export type Task = { id: string; session_id: string; user_id?: string; query: string; status: string; mode: string; answer?: string; domain?: string; review?: Review | null; interrupt_json?: string; interrupt?: Interrupt; last_seq: number; created_at: string; children?: Task[]; parent_task_id?: string; plan_json?: string; can_retry?: boolean }
 export type Interrupt = { id: string; kind: 'clarification' | 'selection' | 'approval'; question: string; domain?: string; field?: string; arguments?: Record<string, unknown>; candidates?: Record<string, unknown>[]; operation_key?: string; issued_at?: string; expires_at?: string; expired?: boolean }
@@ -56,9 +57,9 @@ export const api = {
   review: (id: string) => request<Review | null>(`/api/tasks/${id}/review`),
   saveReview: (id: string, review: Omit<Review, 'updated_at'>) => request<Review>(`/api/tasks/${id}/review`, { method: 'PUT', body: JSON.stringify(review) }),
   task: (id: string) => request<Task>(`/api/tasks/${id}`),
-  submit: (session: string, message: string, mode: string) => request<{ task_id: string; status: string }>(`/api/sessions/${session}/messages`, { method: 'POST', body: JSON.stringify({ message, mode, request_id: crypto.randomUUID() }) }),
+  submit: (session: string, message: string, mode: string) => request<InputResponse>(`/api/sessions/${session}/messages`, { method: 'POST', body: JSON.stringify({ message, mode, request_id: crypto.randomUUID() }) }),
   localTask: (session: string, action: 'local_search' | 'local_detail' | 'local_route', parameters: Record<string, unknown>) => request<{ task_id: string; status: string }>('/api/local-life/tasks', { method: 'POST', body: JSON.stringify({ session_id: session, action, parameters, mode: 'live', request_id: crypto.randomUUID() }) }),
-  resume: (task: string, interrupt: Interrupt, action: string, value: Record<string, unknown> = {}) => request<{ task_id: string; created_task_id?: string }>(`/api/tasks/${task}/resume`, { method: 'POST', body: JSON.stringify({ interrupt_id: interrupt.id, action, value }) }),
+  resume: (task: string, interrupt: Interrupt, action: string, value: Record<string, unknown> = {}) => request<InputResponse>(`/api/tasks/${task}/resume`, { method: 'POST', body: JSON.stringify({ interrupt_id: interrupt.id, action, value }) }),
   cancel: (task: string) => request(`/api/tasks/${task}/cancel`, { method: 'POST' }),
   retry: (task: string) => request<{ task_id: string; root_task_id: string; retried_task_ids: string[] }>(`/api/tasks/${task}/retry`, { method: 'POST' }),
   refreshTask: (task: string, interrupt: Interrupt) => request<{ task_id: string }>(`/api/tasks/${task}/refresh`, { method: 'POST', body: JSON.stringify({ interrupt_id: interrupt.id }) }),

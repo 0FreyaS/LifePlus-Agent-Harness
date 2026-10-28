@@ -27,6 +27,18 @@ class ResumeRequest(BaseModel):
     action: Literal["approve", "reject", "answer"]
     value: dict[str, Any] = Field(default_factory=dict)
 
+    @field_validator("value")
+    @classmethod
+    def validate_text(cls, value):
+        if "text" in value:
+            if not isinstance(value["text"], str):
+                raise ValueError("回复文本必须是字符串")
+            text = ChatRequest.normalize_message(value["text"])
+            if len(text) > 4000:
+                raise ValueError("回复文本不能超过4000字符")
+            value = {**value, "text": text}
+        return value
+
 
 class LocalLifeRequest(BaseModel):
     session_id: str

@@ -24,6 +24,18 @@ CREATE TABLE IF NOT EXISTS runtime_usage (
   model_calls INTEGER NOT NULL DEFAULT 0, tool_calls INTEGER NOT NULL DEFAULT 0,
   resumes INTEGER NOT NULL DEFAULT 0, refreshes INTEGER NOT NULL DEFAULT 0, retries INTEGER NOT NULL DEFAULT 0
 );
+CREATE TABLE IF NOT EXISTS input_event_decisions (
+  id TEXT PRIMARY KEY, user_id TEXT NOT NULL, session_id TEXT NOT NULL,
+  request_id TEXT NOT NULL, status TEXT NOT NULL, decision_json TEXT NOT NULL,
+  created_at TEXT NOT NULL, error_type TEXT
+);
+CREATE INDEX IF NOT EXISTS input_event_decisions_session_idx
+  ON input_event_decisions(user_id,session_id,created_at);
+CREATE TABLE IF NOT EXISTS input_event_spans (
+  seq INTEGER PRIMARY KEY AUTOINCREMENT, input_event_id TEXT NOT NULL,
+  type TEXT NOT NULL, data_json TEXT NOT NULL, created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS input_event_spans_input_idx ON input_event_spans(input_event_id,seq);
 CREATE TABLE IF NOT EXISTS events (
   task_id TEXT NOT NULL, seq INTEGER NOT NULL, event_id TEXT NOT NULL UNIQUE,
   type TEXT NOT NULL, created_at TEXT NOT NULL, data_json TEXT NOT NULL,

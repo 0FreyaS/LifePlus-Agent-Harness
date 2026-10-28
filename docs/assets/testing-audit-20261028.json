@@ -1,0 +1,416 @@
+{
+  "version": 1,
+  "verified_at": "2026-10-28T19:45:05.261401+08:00",
+  "scope": "2026-10-28 test audit; no runtime code changes or deployment update",
+  "evidence_boundary": "Counts from local raw reports. Synthetic authored cases, repeated configurations reported separately; no production SLA or latency A/B claim.",
+  "source_files_changed_during_audit": [],
+  "existing_backend_regression": {
+    "total": 564,
+    "passed": 563,
+    "skipped": 1,
+    "failed": 0
+  },
+  "frontend": {
+    "total": 44,
+    "passed": 43,
+    "skipped": 1,
+    "failed": 0
+  },
+  "planner": {
+    "model": "grok-4.3",
+    "variant": "baseline",
+    "concurrency": 1,
+    "frozen_now": "2026-10-27T10:00:00+08:00",
+    "planning_deadline_seconds": 45,
+    "groups": {
+      "existing_frozen": {
+        "passed": 28,
+        "total": 30,
+        "p50_ms": 8217.308,
+        "p95_ms": 17196.127,
+        "failures": [
+          {
+            "id": "single03",
+            "errors": [
+              "l:slot:anchor"
+            ]
+          },
+          {
+            "id": "single05",
+            "errors": [
+              "h:intent"
+            ]
+          }
+        ]
+      },
+      "new_authored": {
+        "passed": 4,
+        "total": 8,
+        "p50_ms": 0.108,
+        "p95_ms": 16793.069,
+        "failures": [
+          {
+            "id": "holdout01",
+            "errors": [
+              "missing_plan"
+            ]
+          },
+          {
+            "id": "holdout02",
+            "errors": [
+              "missing_plan"
+            ]
+          },
+          {
+            "id": "holdout03",
+            "errors": [
+              "missing_plan"
+            ]
+          },
+          {
+            "id": "holdout04",
+            "errors": [
+              "missing_plan"
+            ]
+          }
+        ]
+      },
+      "context_reference": {
+        "passed": 5,
+        "total": 5,
+        "p50_ms": 7672.219,
+        "p95_ms": 10610.233,
+        "failures": []
+      },
+      "dependency": {
+        "passed": 5,
+        "total": 5,
+        "p50_ms": 12896.965,
+        "p95_ms": 17910.465,
+        "failures": []
+      },
+      "heldout_delimiters": {
+        "passed": 0,
+        "total": 4,
+        "p50_ms": 0.04,
+        "p95_ms": 0.108,
+        "failures": [
+          {
+            "id": "holdout01",
+            "errors": [
+              "missing_plan"
+            ]
+          },
+          {
+            "id": "holdout02",
+            "errors": [
+              "missing_plan"
+            ]
+          },
+          {
+            "id": "holdout03",
+            "errors": [
+              "missing_plan"
+            ]
+          },
+          {
+            "id": "holdout04",
+            "errors": [
+              "missing_plan"
+            ]
+          }
+        ]
+      },
+      "heldout_dependency": {
+        "passed": 1,
+        "total": 1,
+        "p50_ms": 16793.069,
+        "p95_ms": 16793.069,
+        "failures": []
+      },
+      "heldout_negation": {
+        "passed": 1,
+        "total": 1,
+        "p50_ms": 5472.501,
+        "p95_ms": 5472.501,
+        "failures": []
+      },
+      "heldout_same_domain": {
+        "passed": 2,
+        "total": 2,
+        "p50_ms": 6156.854,
+        "p95_ms": 7166.191,
+        "failures": []
+      },
+      "missing_information": {
+        "passed": 5,
+        "total": 5,
+        "p50_ms": 8217.308,
+        "p95_ms": 9037.577,
+        "failures": []
+      },
+      "multi_boundary": {
+        "passed": 5,
+        "total": 5,
+        "p50_ms": 11579.28,
+        "p95_ms": 17196.127,
+        "failures": []
+      },
+      "parallel": {
+        "passed": 5,
+        "total": 5,
+        "p50_ms": 8473.532,
+        "p95_ms": 8712.87,
+        "failures": []
+      },
+      "single_punctuation": {
+        "passed": 3,
+        "total": 5,
+        "p50_ms": 5852.181,
+        "p95_ms": 6989.708,
+        "failures": [
+          {
+            "id": "single03",
+            "errors": [
+              "l:slot:anchor"
+            ]
+          },
+          {
+            "id": "single05",
+            "errors": [
+              "h:intent"
+            ]
+          }
+        ]
+      }
+    },
+    "model_attempts": 34,
+    "reported_tokens": 82794,
+    "scope": "Existing 30 frozen cases and 8 new authored boundary cases; only 34 requests invoked the model."
+  },
+  "completion_current_default": {
+    "model": "grok-4.3",
+    "started_at": "2026-10-28T16:42:30.858596+08:00",
+    "concurrency": 2,
+    "case_budget_seconds": 150,
+    "checkpoint_backend": "sqlite",
+    "tested": 90,
+    "completed": 77,
+    "groups": {
+      "clarified_completion": {
+        "tested": 30,
+        "planned": 30,
+        "completed": 17,
+        "completion_rate": 0.5666666666666667,
+        "wilson95": [
+          0.392,
+          0.7262
+        ],
+        "goals_completed": 19,
+        "goals_total": 32,
+        "structured_false_completion": {
+          "numerator": 13,
+          "denominator": 30
+        },
+        "p50_ms": 14978,
+        "p95_ms": 32167,
+        "failures": [
+          "clarified_completion-16",
+          "clarified_completion-18",
+          "clarified_completion-17",
+          "clarified_completion-19",
+          "clarified_completion-20",
+          "clarified_completion-21",
+          "clarified_completion-22",
+          "clarified_completion-23",
+          "clarified_completion-24",
+          "clarified_completion-25",
+          "clarified_completion-26",
+          "clarified_completion-28",
+          "clarified_completion-27"
+        ]
+      },
+      "multi_completion": {
+        "tested": 30,
+        "planned": 30,
+        "completed": 30,
+        "completion_rate": 1,
+        "wilson95": [
+          0.8865,
+          1
+        ],
+        "goals_completed": 68,
+        "goals_total": 68,
+        "structured_false_completion": {
+          "numerator": 0,
+          "denominator": 30
+        },
+        "p50_ms": 15703,
+        "p95_ms": 29196,
+        "failures": []
+      },
+      "single_completion": {
+        "tested": 30,
+        "planned": 30,
+        "completed": 30,
+        "completion_rate": 1,
+        "wilson95": [
+          0.8865,
+          1
+        ],
+        "goals_completed": 30,
+        "goals_total": 30,
+        "structured_false_completion": {
+          "numerator": 0,
+          "denominator": 30
+        },
+        "p50_ms": 14616,
+        "p95_ms": 22109,
+        "failures": []
+      }
+    }
+  },
+  "completion_no_default": {
+    "model": "grok-4.3",
+    "started_at": "2026-10-28T16:56:20.779784+08:00",
+    "concurrency": 2,
+    "case_budget_seconds": 150,
+    "checkpoint_backend": "sqlite",
+    "tested": 30,
+    "completed": 30,
+    "groups": {
+      "clarified_completion": {
+        "tested": 30,
+        "planned": 30,
+        "completed": 30,
+        "completion_rate": 1,
+        "wilson95": [
+          0.8865,
+          1
+        ],
+        "goals_completed": 32,
+        "goals_total": 32,
+        "structured_false_completion": {
+          "numerator": 0,
+          "denominator": 30
+        },
+        "p50_ms": 13632,
+        "p95_ms": 17001,
+        "failures": []
+      }
+    },
+    "profile": "DEFAULT_CURRENT_LOCATION empty only in isolated test subprocess; .env unchanged"
+  },
+  "completion_new_holdouts": {
+    "model": "grok-4.3",
+    "started_at": "2026-10-28T16:55:12.605353+08:00",
+    "concurrency": 2,
+    "case_budget_seconds": 150,
+    "checkpoint_backend": "sqlite",
+    "tested": 5,
+    "completed": 1,
+    "groups": {
+      "mixed_four_holdout": {
+        "tested": 1,
+        "planned": 1,
+        "completed": 1,
+        "completion_rate": 1,
+        "wilson95": [
+          0.2065,
+          1
+        ],
+        "goals_completed": 4,
+        "goals_total": 4,
+        "structured_false_completion": {
+          "numerator": 0,
+          "denominator": 1
+        },
+        "p50_ms": 23702,
+        "p95_ms": 23702,
+        "failures": []
+      },
+      "trigger_holdout": {
+        "tested": 4,
+        "planned": 4,
+        "completed": 0,
+        "completion_rate": 0,
+        "wilson95": [
+          0,
+          0.4899
+        ],
+        "goals_completed": 4,
+        "goals_total": 8,
+        "structured_false_completion": {
+          "numerator": 4,
+          "denominator": 4
+        },
+        "p50_ms": 21920,
+        "p95_ms": 23057,
+        "failures": [
+          "trigger-e2e-newline",
+          "trigger-e2e-space",
+          "trigger-e2e-comma",
+          "trigger-e2e-period"
+        ]
+      }
+    }
+  },
+  "controlled_and_tools": {
+    "executed": 120,
+    "passed": 120,
+    "scope": "candidate_selection 30, recovery 30, tool_failure 30 with controlled receipts; real_tools 30 over real MCP"
+  },
+  "all_real_tools": {
+    "passed": 28,
+    "total": 28
+  },
+  "additional_local_contracts": {
+    "total": 4,
+    "passed": 0,
+    "skipped": 2,
+    "failed": 2,
+    "scope": "Two orphaned-read restart failures; two local Chroma checks skipped due to missing dependency. Docker Chroma checked separately."
+  },
+  "rag_docker": {
+    "scope": "existing Docker image; isolated temporary indexes; no application data changes",
+    "source_sha256": "b0163d9e14b7c3d0eb97ccba445a45c001b8a27d5848d1bdf84dcb141dcf92da",
+    "cases": [
+      {
+        "case": "delete_document",
+        "backend": "chroma",
+        "before": 2,
+        "expected": 0,
+        "after": 2,
+        "stale_retrievable": true,
+        "passed": false
+      },
+      {
+        "case": "shrink_document",
+        "backend": "chroma",
+        "before": 2,
+        "expected": 1,
+        "after": 2,
+        "stale_retrievable": true,
+        "passed": false
+      }
+    ]
+  },
+  "four_task_evidence": {
+    "case_id": "mixed-four-e2e",
+    "completed": true,
+    "goals_completed": 4,
+    "elapsed_ms": 23702,
+    "independent_dispatches_overlap": true,
+    "dispatch_start_spread_ms": 0.146,
+    "dependent_starts_after_weather_task_completed": true,
+    "dependent_delay_ms": 2.691,
+    "scope": "host dispatch and task intervals, not a provider-side trace"
+  },
+  "private_evidence_root": "data/testing-audit-20261028/",
+  "private_evidence_policy": "Raw traces, conversation databases, credentials and provider responses are not exported.",
+  "known_unfixed_issues": [
+    "Multi-task trigger skips space/newline/full-stop/enumeration-comma requests; all four end-to-end probes omit music.",
+    "Queued and running task records lack a runner or safe retry path after startup.",
+    "Chroma upsert leaves deleted or removed-section evidence retrievable."
+  ]
+}

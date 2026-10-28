@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     max_active_tasks_per_user: int = Field(default=8, ge=1, le=1000)
     runtime_active_seconds: float = Field(default=120, gt=0, le=1800)
     runtime_planning_seconds: float = Field(default=45, gt=0, le=300)
+    input_event_timeout_seconds: float = Field(default=25, ge=1, le=60)
     runtime_model_calls: int = Field(default=8, ge=1, le=100)
     runtime_tool_calls: int = Field(default=24, ge=1, le=200)
     runtime_resumes: int = Field(default=8, ge=1, le=100)

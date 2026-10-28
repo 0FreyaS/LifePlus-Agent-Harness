@@ -1,0 +1,312 @@
+{
+  "version": 1,
+  "scope": "Input event interpretation: production resolver and configured grok-4.3. Component model evaluation is distinct from two real-model/MCP ASGI conversations.",
+  "contracts": {
+    "tested": 39,
+    "passed": 39
+  },
+  "release_candidate": {
+    "scope": "Exported Git index, excluding unrelated pre-existing worktree modifications",
+    "backend": {"passed": 601, "skipped": 1, "failed": 0, "seconds": 29.86},
+    "frontend": {"passed": 43, "skipped": 1, "failed": 0, "build": "passed"},
+    "private_junit": "data/input-events-20261028/release-regression-final.xml",
+    "earlier_check": "A prior check imported the ASGI app before the frontend build completed and failed one SPA route assertion; retained as release-regression.xml. Final check ran after build completion."
+  },
+  "development_iterations": [
+    {
+      "name": "live-v1",
+      "started_at": "2026-10-28T14:07:12.982794+00:00",
+      "model": "grok-4.3",
+      "cases": 30,
+      "concurrency": 1,
+      "timeout_seconds": 15,
+      "cases_sha256": "a86c2acc8da789df51831333708032480292c44ff34d1e609bde397a33477e4f",
+      "source_sha256": {
+        "src/car_agent/input_events.py": "66fad4699f92a05ef2a6329fde68ec22e4e6f00897120e9e4e1572ad40ad2df2",
+        "src/car_agent/user_events.py": "686f5d34b7d1446837f0b91b558c1d05a04788faea47a0cf9a0ba88b95606bdd",
+        "evaluations/input_event_cases.py": "e52bc9c99d7195ae4aa5db39130f8baef3ca719eaf9db113b9105f0387be685f"
+      },
+      "passed": 25,
+      "tested": 30,
+      "by_source": {
+        "error": {
+          "tested": 2,
+          "passed": 0
+        },
+        "llm": {
+          "tested": 17,
+          "passed": 14
+        },
+        "rules": {
+          "tested": 11,
+          "passed": 11
+        }
+      },
+      "failures": [
+        {
+          "id": "llm03",
+          "errors": [
+            "route",
+            "target",
+            "selection"
+          ]
+        },
+        {
+          "id": "llm04",
+          "errors": [
+            "route",
+            "target",
+            "selection"
+          ]
+        },
+        {
+          "id": "llm07",
+          "errors": [
+            "HTTPException"
+          ]
+        },
+        {
+          "id": "llm08",
+          "errors": [
+            "HTTPException"
+          ]
+        },
+        {
+          "id": "focus01",
+          "errors": [
+            "route",
+            "target",
+            "selection",
+            "new_task_presence",
+            "new_task_content"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "live-v2",
+      "started_at": "2026-10-28T14:11:15.793518+00:00",
+      "model": "grok-4.3",
+      "cases": 30,
+      "concurrency": 1,
+      "timeout_seconds": 25,
+      "cases_sha256": "a86c2acc8da789df51831333708032480292c44ff34d1e609bde397a33477e4f",
+      "source_sha256": {
+        "src/car_agent/input_events.py": "8e35da21e01bdc308e831a2aba6500c460af3bb4b8f19f1c42ab92a7ab1cd351",
+        "src/car_agent/user_events.py": "686f5d34b7d1446837f0b91b558c1d05a04788faea47a0cf9a0ba88b95606bdd",
+        "evaluations/input_event_cases.py": "e52bc9c99d7195ae4aa5db39130f8baef3ca719eaf9db113b9105f0387be685f"
+      },
+      "passed": 28,
+      "tested": 30,
+      "by_source": {
+        "error": {
+          "tested": 1,
+          "passed": 0
+        },
+        "llm": {
+          "tested": 18,
+          "passed": 17
+        },
+        "rules": {
+          "tested": 11,
+          "passed": 11
+        }
+      },
+      "failures": [
+        {
+          "id": "llm02",
+          "errors": [
+            "route",
+            "target",
+            "selection",
+            "new_task_presence",
+            "new_task_content"
+          ]
+        },
+        {
+          "id": "llm09",
+          "errors": [
+            "HTTPException"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "live-v3",
+      "started_at": "2026-10-28T14:16:09.938009+00:00",
+      "model": "grok-4.3",
+      "cases": 30,
+      "dataset": "development",
+      "concurrency": 1,
+      "timeout_seconds": 25,
+      "cases_sha256": "a86c2acc8da789df51831333708032480292c44ff34d1e609bde397a33477e4f",
+      "source_sha256": {
+        "src/car_agent/input_events.py": "91ea8629a210baef32b51bf948231ebd969e5350f51ae74f77c24c861e2527ee",
+        "src/car_agent/user_events.py": "686f5d34b7d1446837f0b91b558c1d05a04788faea47a0cf9a0ba88b95606bdd",
+        "evaluations/input_event_cases.py": "d76b702b9061f419fab25bb3ecd8ae7274d12b8972a2fd2572f8e18153bdae4d"
+      },
+      "passed": 29,
+      "tested": 30,
+      "by_source": {
+        "error": {
+          "tested": 1,
+          "passed": 0
+        },
+        "llm": {
+          "tested": 18,
+          "passed": 18
+        },
+        "rules": {
+          "tested": 11,
+          "passed": 11
+        }
+      },
+      "failures": [
+        {
+          "id": "llm08",
+          "errors": [
+            "HTTPException"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "live-v4",
+      "started_at": "2026-10-28T14:19:21.524003+00:00",
+      "model": "grok-4.3",
+      "cases": 30,
+      "dataset": "development",
+      "concurrency": 1,
+      "timeout_seconds": 25,
+      "cases_sha256": "a86c2acc8da789df51831333708032480292c44ff34d1e609bde397a33477e4f",
+      "source_sha256": {
+        "src/car_agent/input_events.py": "12954e8d96883e38267378f50ba74f70fc2866767aa92ad8bf04054703a53a3c",
+        "src/car_agent/user_events.py": "686f5d34b7d1446837f0b91b558c1d05a04788faea47a0cf9a0ba88b95606bdd",
+        "evaluations/input_event_cases.py": "d76b702b9061f419fab25bb3ecd8ae7274d12b8972a2fd2572f8e18153bdae4d"
+      },
+      "passed": 30,
+      "tested": 30,
+      "by_source": {
+        "llm": {
+          "tested": 17,
+          "passed": 17
+        },
+        "rules": {
+          "tested": 13,
+          "passed": 13
+        }
+      },
+      "failures": []
+    }
+  ],
+  "holdout": {
+    "started_at": "2026-10-28T14:21:16.600909+00:00",
+    "model": "grok-4.3",
+    "cases": 6,
+    "dataset": "holdout",
+    "concurrency": 1,
+    "timeout_seconds": 25,
+    "cases_sha256": "4b03ad4dc8a4c295fe0ae5acde6e1e8ce691129a01ba3b983cefdb951dc8dbe3",
+    "source_sha256": {
+      "src/car_agent/input_events.py": "12954e8d96883e38267378f50ba74f70fc2866767aa92ad8bf04054703a53a3c",
+      "src/car_agent/user_events.py": "686f5d34b7d1446837f0b91b558c1d05a04788faea47a0cf9a0ba88b95606bdd",
+      "evaluations/input_event_cases.py": "d76b702b9061f419fab25bb3ecd8ae7274d12b8972a2fd2572f8e18153bdae4d"
+    },
+    "passed": 6,
+    "tested": 6,
+    "by_source": {
+      "llm": {
+        "tested": 6,
+        "passed": 6
+      }
+    },
+    "failures": []
+  },
+  "completion": {
+    "started_at": "2026-10-28T22:22:00.797995+08:00",
+    "model": "grok-4.3",
+    "concurrency": 1,
+    "case_budget_seconds": 150,
+    "dataset_sha256": "1848eb4506bbbb9bcf0793697922d5e9da980fb79f4d21e0fa0c89393a6fc985",
+    "checkpoint_backend": "sqlite",
+    "source_sha256": {
+      "src/car_agent/structured_output.py": "2bf352a223c88c3f5293638fd543656020f7f6cf35abb40cd783d575d463fdac",
+      "src/car_agent/runtime_limits.py": "d812764d754f92dc351c51ec604a2b716ccb41301a2798edc1f04a861e768a47",
+      "src/car_agent/freshness.py": "d193cc188a2def4983b5bf18a574c3e3f0faf9ac21ec42a5bad0936ff94905c3",
+      "src/car_agent/tool_queue.py": "f3ef6b2c19a86193e9474d0d014f092e407eba2c8eacca30de15c066092bd217",
+      "src/car_agent/intent_schema.py": "44b9d48b3e943355f2714f3024b791855ecfd7d56b1ddf2efb6e85e6548245cc",
+      "src/car_agent/execution_verification.py": "9a4ec8b4513012f9eae49aafeb1e97584188419b95889d703f49c1021418a265",
+      "src/car_agent/harness.py": "6c118ce52014f3ae1b1fd3c66f0d73c7385a799274b6bb249d9563b32661cf2e",
+      "src/car_agent/persistence.py": "baf4f3c54cb1df37d621286062ff9799e1a935bc47092df0ba90d11283c7a215",
+      "src/car_agent/config.py": "5292d28a5fd5c248a9401a011c51f3f1070fdcfabc2e744f2c0adbe3600caa17",
+      "src/car_agent/models.py": "98660f39cce153206363ea2c71dc9fd9cc55835806505c17ad50ad7c19743380",
+      "src/car_agent/memory.py": "778cb47fd3171e2ba61c18e85acd8396b27db439ecb63297cc778b9563f06df7",
+      "src/car_agent/input_events.py": "12954e8d96883e38267378f50ba74f70fc2866767aa92ad8bf04054703a53a3c",
+      "src/car_agent/http_workflow_smoke.py": "3acd667d1dfe6694b2cb9dc9222dac22736a00717e405dca779b8d32a034037d",
+      "src/car_agent/conversation.py": "b23d235716d0459f1ce502edbacc69b5ce4be3ae85a7d5421c9672287e8bfadc",
+      "src/car_agent/diagnostics.py": "e96c34372c60edaee4e24eacb39c5a60bde87da4c2232116e5b478f3048e3dfc",
+      "src/car_agent/route_geometry.py": "f03a5aca8c86442d36e17325503eb5c52f402b9a38e52ab68b65b39d299ddc63",
+      "src/car_agent/runtime_context.py": "1687eb54c5c914f48e7c32c7d32ba7e60062243584956410839e1cb95f52c656",
+      "src/car_agent/access.py": "ee0199782422b95930645ea8a1a1dd8009cf7506ae87d35d15fb6233bd7f1805",
+      "src/car_agent/__init__.py": "c9dbbd53685eccf16428521b978799c5877f51dbfd9cd790f2db9f593eab7498",
+      "src/car_agent/reminders.py": "b149e983e553b5805ba1d57ed0340d410b2a4ee2f83a4a97e87562f87b9f3b27",
+      "src/car_agent/retry.py": "ffd853714e5c308af741dc26834d367eda3c28e4677f0bcccdd3c5191c581c74",
+      "src/car_agent/orchestration.py": "e7b34c76f48d6e52fb712a7874920b0b03b2558f11f97cc30e182fe53f76f8af",
+      "src/car_agent/route_presentation.py": "8f50a6efa8f54cb11d0c315e40d996a41bba53b0220366524823b37870143f4f",
+      "src/car_agent/cli.py": "1355fc962a17bc7caa12eaa0c775023ce71ed7ef516757898b89958e884a645a",
+      "src/car_agent/rag.py": "b0163d9e14b7c3d0eb97ccba445a45c001b8a27d5848d1bdf84dcb141dcf92da",
+      "src/car_agent/location_defaults.py": "4d1c34d4e1a463b41760853f87ad3a74be6c21386a466e351133da7bd781264d",
+      "src/car_agent/model_roles.py": "88efec274facdd9216f424f96e94a6dc8ff827939624afc3a7818edc903ff247",
+      "src/car_agent/route_workflow_smoke.py": "c62ef6a3a3458f2951a45470e228054080548e2b7e6d2153b54695f9fd4ecd6e",
+      "src/car_agent/stream_multi_smoke.py": "a0a2106db8fb37ba8662ae6f415024bbe6935346a6b5a1c53272dcf6b482a8bc",
+      "src/car_agent/interactions.py": "72d9d9d224b39ba9e3ea41dd010cf8b17702862f8054c3ac8e42c1f518777d55",
+      "src/car_agent/local_life_smoke.py": "8b840f54b5434852e30a373b99cdfc9f5497d4262a7a9ca50ad756794fab1cfe",
+      "src/car_agent/skill_registry.py": "fd4686782ff5aac34e1abef88fa9cee7a2b3a4568a565f071e99e0126612dfb6",
+      "src/car_agent/travel_modes.py": "bc86039dacec1b1dee514d1d712a47e4c472eda3262ac8ca56555130f9e21062",
+      "src/car_agent/tool_policy.py": "898a15d3f16b9d97c7961e146fe59a7d3f707a44a97634b39bdecb1625f7c614",
+      "src/car_agent/streaming.py": "78bed5a919bbac2f15686b848ad6661e78b6301b1a6964bbd498e52b1ae0d675",
+      "src/car_agent/mcp_server.py": "b404d632f71cf1e7a7c6ebeec81678674159b5dd66f85cfa68d40a2d85a7d69b",
+      "src/car_agent/task_planning.py": "704d7262c274d13776f1bcb4fb88443de0a7aa86e4041615668ed1db28a40b87",
+      "src/car_agent/user_events.py": "686f5d34b7d1446837f0b91b558c1d05a04788faea47a0cf9a0ba88b95606bdd",
+      "src/car_agent/tool_smoke.py": "fe04c97d31c2b9b1e141e380d89573ec7d53e7948d3ed84f4bb712a50f626eb9",
+      "src/car_agent/tools/service.py": "fa954ab7acb6e2782d48706e6f78da4bdb5f75728661701d6dec0389f7eee2b6",
+      "src/car_agent/tools/__init__.py": "62ba94d60cac16dcf24460f2d6ffcb52527b52f88dc9be5e56b51cf26b94e626",
+      "src/car_agent/adapters/mcp_client.py": "5c01c6aac475cd7a8a79e3941417b1b500b282a9c7c55af70aa3e9a6e0fb8d35",
+      "src/car_agent/adapters/demo.py": "244a820ba12f66a915ac31b088dbb9c6390fd6b04362c9ffac1f01c875ef5718",
+      "src/car_agent/api/app.py": "f46af82ecae0b683a76023cc1c2b7c0c5dedb7c762ea9aaf837156c701d727e5",
+      "evaluations/completion_dataset.py": "a9bb582f49ed886008ecd8920ed9783c8fedeb1ab7d526b5af3a663fa6c64a8e"
+    },
+    "tested": 2,
+    "completed": 2,
+    "groups": {
+      "event_completion": {
+        "tested": 2,
+        "planned": 2,
+        "completed": 2,
+        "completion_rate": 1,
+        "wilson95": [
+          0.3424,
+          1
+        ],
+        "goals_completed": 4,
+        "goals_total": 4,
+        "structured_false_completion": {
+          "numerator": 0,
+          "denominator": 2
+        },
+        "p50_ms": 25972,
+        "p95_ms": 29015,
+        "failures": []
+      }
+    }
+  },
+  "interpretation": "The same 30 authored development cases were reused during fixes; these are not independent A/B trials or production accuracy. Six later-authored holdout cases were evaluated once without retuning.",
+  "source_boundaries": "13 rule decisions and 17 real model decisions in the final 30-case run; 6 real model holdout decisions. Structured attempts and safe failure boundaries are tested separately.",
+  "private_evidence_root": "data/input-events-20261028/",
+  "notes": [
+    "Earlier failures and timeouts remain in raw reports.",
+    "Two ASGI conversations achieved all 4 goals using real model and MCP; no browser or reverse-proxy latency measured.",
+    "No credentials, user histories, provider response bodies, private databases or raw model prompts exported.",
+    "Multi-task trigger without pending tasks, restart rehydration and RAG deletion synchronization remain separate unresolved issues."
+  ]
+}

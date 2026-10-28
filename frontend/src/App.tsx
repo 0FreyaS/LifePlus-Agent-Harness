@@ -156,6 +156,7 @@ function ChatPage({ onTask, health }: { onTask: () => void; health: Health | nul
     setError(''); setBusy(true); setText('')
     try {
       const task = await api.submit(sessionId, value.trim(), mode)
+      if (task.additional_task_error) setError(task.additional_task_error.message)
       followOutput.current = true
       setActive({ id: task.task_id, session_id: sessionId, query: value.trim(), status: task.status, mode, last_seq: 0, created_at: new Date().toISOString() })
       setHistory(current => [...current, { role: 'human', content: value.trim() }])
@@ -168,6 +169,7 @@ function ChatPage({ onTask, health }: { onTask: () => void; health: Health | nul
     setError(''); setBusy(true)
     try {
       const result = await api.resume(taskId, interrupt, action, value)
+      if (result.additional_task_error) setError(result.additional_task_error.message)
       await refreshHistory()
       if (result.created_task_id) {
         setActive(await api.task(result.created_task_id))

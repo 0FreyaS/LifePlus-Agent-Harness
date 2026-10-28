@@ -121,12 +121,14 @@ async def refresh_waiting(app, task_id: str, identifier: str, owner: str, run_ta
         return {"task_id": task_id, "status": "queued"}
 
 
-async def cancel_running(app, task_id: str, owner: str) -> dict:
+async def cancel_running(app, task_id: str, owner: str, expected_interrupt_id: str | None = None) -> dict:
     import asyncio
 
     initial = await owned_task(app, task_id, owner)
     async with lifecycle_lock(app, initial):
         task = await owned_task(app, task_id, owner)
+        if expected_interrupt_id is not None:
+            pending_interrupt(task, expected_interrupt_id)
         if task["status"] in TERMINAL:
             raise HTTPException(409, "任务已经结束")
         runners = []

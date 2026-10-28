@@ -17,12 +17,13 @@ from ..adapters.mcp_client import LocalMCPClient
 from ..config import get_settings
 from ..model_roles import build_models
 from ..access import ShowcaseAccess, validate_showcase
-from ..conversation import save_reference, selection_reply, city_reply
+from ..conversation import save_reference
+from ..input_events import resolve_input
 from ..harness import build_graph, CITY_NAMES
 from ..memory import MemoryRepository
 from ..models import ChatRequest, LocalLifeRequest, ResumeRequest, RefreshRequest, RouteReplanRequest
-from ..freshness import FreshnessPolicy
-from ..interactions import cancel_running, effective_values, refresh_waiting, resume_waiting
+from ..freshness import FreshnessPolicy, expired
+from ..interactions import cancel_running, effective_values, refresh_waiting, resume_waiting, owned_task, pending_interrupt
 from ..runtime_limits import RuntimeLimits, execution_scope
 from ..diagnostics import summarize
 from ..persistence import Database
@@ -112,6 +113,7 @@ async def lifespan(app: FastAPI):
     app.state.locks = {}
     app.state.runners = {}
     app.state.closing = False
+    app.state.input_event_timeout = settings.input_event_timeout_seconds
     app.state.coordinator = TaskCoordinator(app, run_task)
     yield
     app.state.closing = True
@@ -257,25 +259,63 @@ async def submit(session_id: str, payload: ChatRequest, request: Request,
             return await enqueue_message(session_id, payload, request, owner)
         waiting = await db.fetchall("SELECT * FROM tasks WHERE session_id=? AND user_id=? AND status='waiting_user' AND domain!='multi'",
                                     (session_id, owner))
-        matched = selection_reply(payload.message, waiting)
-        city_task = city_reply(payload.message, waiting, CITY_NAMES)
-        if matched and city_task and matched[0]["id"] != city_task["id"]:
-            raise HTTPException(409, "这条回复可能属于不同任务，请使用对应任务卡片补充或选择。")
-        if matched or city_task:
-            task = matched[0] if matched else city_task
-            value = {"index": matched[1]} if matched else {"text": payload.message}
-            pending = json.loads(task["interrupt_json"])
-            response, _ = await resume_waiting(request.app, task["id"], ResumeRequest(
-                interrupt_id=pending["id"], action="answer", value=value), owner, run_task)
-            response.update(task_id=task.get("parent_task_id") or task["id"], resumed_task_id=task["id"],
-                            session_id=session_id, resumed=True)
-            await db.execute("INSERT INTO conversation_inputs VALUES(?,?,?,?,?,?,?)",
-                             (request_id, owner, session_id, payload.message, payload.mode,
-                              json.dumps(response), datetime.now(timezone.utc).isoformat()))
-            return response
-        if re.fullmatch(r"(?:我选|选择|选)?第?([一二三四五六七八九十]|\d+)(?:个结果|个|项|家|条)?[吧。！!]*", payload.message):
-            raise HTTPException(409, "当前候选不明确、已过期或多个任务同时等待，请在对应任务卡片中选择。")
-        return await enqueue_message(session_id, payload, request, owner)
+        resolved = await resolve_input(request.app, payload.message, waiting, CITY_NAMES, owner=owner,
+                                       session_id=session_id, mode=payload.mode, request_id=request_id)
+        return await apply_input_events(resolved, waiting, session_id, payload, request, owner)
+
+
+async def apply_input_events(resolved, waiting, session_id, payload, request, owner):
+    decision, db = resolved.decision, request.app.state.db
+    if decision.route == "clarify":
+        raise HTTPException(409, {"code": "INPUT_EVENT_CLARIFICATION_REQUIRED", "message": decision.question,
+                                  "input_event_id": resolved.audit_id})
+    if decision.route == "new":
+        response = await enqueue_message(session_id, payload.model_copy(update={"message": decision.new_query}), request, owner)
+        if resolved.audit_id:
+            await db.publish(response["task_id"], "input.events.resolved", {"input_event_id": resolved.audit_id, "source": resolved.source, "route": "new"})
+        return response
+    task = next(task for task in waiting if task["id"] == decision.task_id)
+    if decision.route == "cancel":
+        response = await cancel_running(request.app, task["id"], owner,
+                                        expected_interrupt_id=json.loads(task["interrupt_json"])["id"])
+    else:
+        pending = json.loads(task["interrupt_json"])
+        response, _ = await resume_waiting(request.app, task["id"], ResumeRequest(
+            interrupt_id=pending["id"], action="answer", value={"text": decision.answer}), owner, run_task)
+        response.update(task_id=task.get("parent_task_id") or task["id"], resumed_task_id=task["id"], resumed=True)
+    response.update(session_id=session_id, event_source=resolved.source, input_event_id=resolved.audit_id)
+    await db.publish(task["id"], "input.events.resolved", {"input_event_id": resolved.audit_id,
+                     "source": resolved.source, "route": decision.route, "has_new_task": bool(decision.new_query)})
+    if decision.new_query:
+        child_request = str(uuid.uuid5(uuid.NAMESPACE_URL, owner + ":" + payload.request_id + ":additional"))
+        try:
+            created = await enqueue_message(session_id, ChatRequest(message=decision.new_query, mode=payload.mode,
+                                                                   request_id=child_request), request, owner)
+            response["created_task_id"] = created["task_id"]
+        except Exception as exc:
+            # The old task has already resumed; expose partial submission instead of losing the new intent.
+            response["additional_task_error"] = {"query": decision.new_query, "error_type": type(exc).__name__,
+                "message": ("原任务已恢复" if decision.route == "resume" else "原任务已取消") + "，但新增任务提交失败，请单独发送：" + decision.new_query}
+    await db.execute("INSERT INTO conversation_inputs VALUES(?,?,?,?,?,?,?)", (
+        payload.request_id, owner, session_id, payload.message, payload.mode, json.dumps(response), datetime.now(timezone.utc).isoformat()))
+    return response
+
+
+@app.get("/api/sessions/{session_id}/input-events")
+async def input_event_history(session_id: str, request: Request, x_demo_user: str | None = Header(default=None)):
+    owner = user_id(request, x_demo_user)
+    await ensure_session(request, session_id, owner)
+    rows = await request.app.state.db.fetchall(
+        "SELECT * FROM input_event_decisions WHERE user_id=? AND session_id=? ORDER BY created_at DESC LIMIT 100", (owner, session_id))
+    for row in rows:
+        row["decision"] = json.loads(row.pop("decision_json"))
+        proposed = await request.app.state.db.fetchone(
+            "SELECT data_json FROM input_event_spans WHERE input_event_id=? AND type='input.events.proposed' ORDER BY seq DESC LIMIT 1", (row["id"],))
+        row["proposal"] = json.loads(proposed["data_json"])["decision"] if proposed else None
+        row["attempts"] = await request.app.state.db.fetchall(
+            "SELECT type,data_json FROM input_event_spans WHERE input_event_id=? AND type LIKE 'model.%' ORDER BY seq", (row["id"],))
+        row["attempts"] = [{"type": event["type"], **json.loads(event["data_json"])} for event in row["attempts"]]
+    return rows
 
 
 @app.post("/api/local-life/tasks")
@@ -440,6 +480,19 @@ async def run_task(app: FastAPI, task_id: str, session_id: str, owner: str, quer
 async def resume_task(task_id: str, payload: ResumeRequest, request: Request,
                       x_demo_user: str | None = Header(default=None)):
     owner = user_id(request, x_demo_user)
+    if payload.action == "answer" and payload.value.get("text"):
+        task = await owned_task(request.app, task_id, owner)
+        pending = pending_interrupt(task, payload.interrupt_id)
+        if expired(pending):
+            raise HTTPException(409, {"code": "INTERRUPT_EXPIRED", "message": "候选或确认已过期，请刷新后重新回复。"})
+        message = ChatRequest(message=str(payload.value["text"]), mode=task["mode"], request_id=str(uuid.uuid4()))
+        async with request.app.state.locks.setdefault("conversation-input:" + owner + ":" + task["session_id"], asyncio.Lock()):
+            resolved = await resolve_input(request.app, message.message, [task], CITY_NAMES, owner=owner,
+                session_id=task["session_id"], mode=task["mode"], request_id=message.request_id, focus=task_id)
+            result = await apply_input_events(resolved, [task], task["session_id"], message, request, owner)
+            if resolved.decision.route == "new":
+                result["created_task_id"] = result["task_id"]
+            return result
     response, new_query = await resume_waiting(request.app, task_id, payload, owner, run_task)
     if new_query:
         task = await request.app.state.db.fetchone("SELECT session_id,mode FROM tasks WHERE id=?", (task_id,))

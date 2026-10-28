@@ -1,6 +1,7 @@
 """Only split explicit additional commands; the existing task owns the answer prefix."""
 import re
 
+ORDINAL_REPLY = re.compile(r"(?:我选|选择|先选|选|我想要|我要|就要|给我|要)?第?([一二三四五六七八九十]|\d+)(?:个结果|首歌|首|个|项|家|条)?(?:吧|。|！|!)?")
 
 def selection_index(value: dict, candidates: list[dict]) -> int | None:
     index = value.get("index")
@@ -13,7 +14,7 @@ def selection_index(value: dict, candidates: list[dict]) -> int | None:
                and (text in item["name"] or item["name"] in text)]
     if len(matches) == 1:
         return matches[0]
-    ordinal = re.fullmatch(r"(?:我选|选择|选)?第?([一二三四五六七八九十]|\d+)(?:个结果|个|项|家|条)?(?:吧|。|！|!)?", text)
+    ordinal = ORDINAL_REPLY.fullmatch(text)
     if not ordinal:
         return None
     number = ordinal.group(1)
