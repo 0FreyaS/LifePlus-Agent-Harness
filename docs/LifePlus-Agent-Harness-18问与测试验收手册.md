@@ -152,6 +152,58 @@ live 未配置模型时拒绝新请求，不静默切 demo。规划非法则失�
 
 **面试核心：** 模型解释需求，协调器处理任务关系，图控制状态，队列管理调用；单任务和多任务的模型路径不同。
 
+### 架构与数据存储选型补充
+
+#### 存储不是“所有数据找一个库”
+
+| 数据/组件 | 当前位置 | 为什么这样选 | 边界 |
+|---|---|---|---|
+| 会话、任务、运行预算、事件、bad case | SQLite | 当前为单机展示/验收，单文件、零服务依赖，可以直接查证据 | 单进程写锁，未验证多实例 HA |
+| durable tool job、dead letter、操作账本 | SQLite | 作业与回执可追踪，重启后能区分待运行、失败和结果未知 | 是本地 durable queue，不是多节点消息集群 |
+| 行程/提醒 + `tool_receipts` | 同一 SQLite 工具事务 | 业务写入和本地幂等回执一起提交 | 只覆盖本地工具；远程副作用要上游幂等/结果查询 |
+| LangGraph 图状态 | 默认 AsyncSqliteSaver；可选 PostgreSQL Saver | 本地便于复现，生产可换成服务端 Checkpointer | 换 Saver 不会迁移应用任务表 |
+| 会话 MemoryBrief/ModelHistory | 可选 Redis 缓存 + MySQL/SQLite 持久层 | 高频、有 TTL 的上下文与持久偏好分开 | Redis 不是业务回执；当前未验证 Cluster/主从切换 |
+| 用户长期偏好 | 可选 MySQL，否则 SQLite | 偏好跨会话，但不属于任务 Checkpoint | 临时位置等字段仍要有短 TTL，不能当永久真相 |
+| RAG 索引 | 可选 Chroma，否则 local-vector | 小型本地知识库容易持久化和重建 | 原文才是权威源；当前无混合检索/rerank 实测结论 |
+
+#### 为什么当前不直接全部使用 PostgreSQL
+
+SQLite 是基于项目阶段的主动选择，不是因为它比 PostgreSQL 更适合最终生产。当前最重要的是让面试官或开发者拉取代码后，不先搭数据库集群也能复现任务、工具、恢复和 Trace。SQLite 支持事务、唯一约束和实际表数据，比全内存 demo 有更真实的恢复与幂等证据；每个测试又可以创建独立临时库。
+
+但上线条件变成多实例、高并发写入和自动故障切换时，选型也应变。需要把 `tasks/tool_jobs/events/operations` 等权威表迁到 PostgreSQL 或明确分库边界，使用原子 job 领取，增加 schema migration、outbox/inbox、对账、备份恢复和故障注入。只配置 PostgreSQL Checkpointer 不能宣称整个系统已分布式化。
+
+#### 其他技术为什么这样选
+
+| 技术 | 选型理由 | 没有解决的问题 |
+|---|---|---|
+| FastAPI + Pydantic | 模型与工具是 I/O 密集型；异步 API、Schema 校验和 OpenAPI 契约适合 | CPU 密集任务与跨节点调度 |
+| LangGraph | 显式状态、条件边、中断和恢复比自由 loop 更容易测试 | 外部副作用幂等和分布式事务 |
+| TaskCoordinator + 每任务子图 | 请求级 DAG 与单任务领域流程分开，等待澄清不阻断独立分支 | 任意自治多 Agent 协商 |
+| 持久 Tool Queue | 为工具提供独立预算、并发、deadline、有限重试和死信 | 当前不是 Celery/Kafka 级多节点队列 |
+| MCP stdio | 用标准协议解耦工具发现/调用，本地环境无额外网络运维 | 不提供授权、重试、成功判定或远程传输安全 |
+| SSE | 主要是服务端单向输出进度/结果，可基于事件序号续读，比 WebSocket 更简单 | 用户选择和确认仍走显式 HTTP 命令；SSE 本身不是消息队列 |
+| React + TypeScript | 方便把动态任务、路线方案和执行 DAG 做成类型化 UI | 前端状态不能取代后端权威状态 |
+
+#### 失败、测试和证据边界
+
+- SQLite 失败时不能把任务当成成功；工具本地写入在异常时 rollback。
+- Redis miss 可以回源，但不给过期持久摘要重置完整 TTL；旧候选不会因缓存回填而续命。
+- Chroma 不可用时当前可使用 local-vector，但这只保证小型知识功能可运行，不保证两种后端排序完全相同。
+- 当前广泛回归和真实工具验收使用 SQLite；有假 Redis 时效与回源测试，但没有 Redis Cluster、MySQL 主从、PostgreSQL HA 和 Chroma 集群的实测报告。
+- 应用表、Checkpoint、外部工具不在同一原子事务中；当前依靠状态机、幂等键和结果未知隔离，不声称 exactly-once。
+
+源码证据：[persistence.py](../src/car_agent/persistence.py)、[memory.py](../src/car_agent/memory.py)、[api/app.py](../src/car_agent/api/app.py)、[rag.py](../src/car_agent/rag.py)。实测边界：[回归报告](regression-2026-10-23.md)。
+
+### 面试追问：为什么用 SQLite，数据怎么规划（约三分钟）
+
+> 这个项目的默认存储是 SQLite，但这是对当前单机展示和工业化验收阶段的选择，不是把 SQLite 当成最终的分布式方案。我们需要让仓库在没有外部数据库的情况下也能运行真实任务、持久 job、中断恢复和 Trace。SQLite 是单文件，支持事务和唯一约束，测试又能每例创建临时库，比全内存 demo 更能检查写入和恢复证据。
+>
+> 我没有把所有数据当成一种。任务、工具 job、操作账本和业务回执是权威事实；LangGraph Checkpoint 只保存图状态和待续位置；Redis 只缓存带 TTL 的 MemoryBrief 和受限历史；MySQL 可以持久长期偏好和会话摘要；Chroma 是从知识原文可重建的向量索引。这个分层保证 Redis 丢失能回源，索引损坏能重建，但用户行程是否写成功只能看业务行和 receipt，不能问模型。
+>
+> 上线到多实例时，SQLite 的写竞争、备份和故障切换就不够。我会把应用权威表、job 和 Checkpoint 迁到 PostgreSQL 或为分库建立明确的状态权威，用原子领取代替进程内锁，再补 schema migration、outbox、对账和备份恢复演练。当前代码支持 PostgreSQL Checkpointer 和 Redis/MySQL 记忆配置，但没有把它包装成已验证的集群容灾。
+>
+> 这套原则也解释了其他架构选型：FastAPI 处理异步 I/O 和 SSE，LangGraph 管明确状态与中断，TaskCoordinator 管跨任务 DAG，Tool Queue 管调用生命周期，MCP 只管工具协议。我选的不是技术名词的组合，而是让每一层的失败可以单独定位和验证。
+
 ### 取舍复盘：架构为什么要拆三层
 
 **问题性质：设计推演，执行隔离和真实并发已有测试。** “查天气、找地点，再把路线存下来”同时包含并发、数据依赖和写授权；一条按文本顺序执行的链无法准确表达三种关系。

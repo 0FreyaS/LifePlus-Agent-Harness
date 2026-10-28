@@ -202,6 +202,24 @@ flowchart TB
 
 这里 `CO → MAIN` 表示协调器启动单任务运行，不表示所有任务串行。多任务会有多个独立的 `MAIN` 实例运行上下文。
 
+### 1.8 为什么选择这套技术架构
+
+选型的主线不是“组件越多越像企业级”，而是把不确定的语言理解与必须确定的任务状态、权限、副作用和执行证据分开。每个组件都必须有明确责任和替代方案：
+
+| 技术/组件 | 当前职责 | 选择原因 | 不选它或扩容时怎么办 |
+|---|---|---|---|
+| FastAPI + Pydantic | HTTP 接入、参数校验、任务控制和 SSE | 主要负载是模型/工具 I/O，异步处理与结构化 Schema 适合这类服务；OpenAPI 也便于前后端对齐 | CPU 密集任务不应直接堆在 API 进程；规模扩大后要拆 worker 与网关 |
+| TaskCoordinator | 拆分复合请求、校验 DAG、调度就绪子任务和聚合部分成功 | 任务依赖是请求级问题，与单个领域内部流程的生命周期不同 | 小型单任务可以不需要协调器；用一张巨型图也能实现，但动态子任务和独立中断更容易耦合 |
+| LangGraph | 单任务的显式状态、条件边、领域子图、`interrupt/resume` 和 Checkpoint | 比自由 ReAct loop 更容易说清“现在在哪一步、为什么停下、从哪里继续” | 固定的简单 CRUD 用普通服务代码更直接；LangGraph 不是分布式事务或业务幂等的替代品 |
+| Agent Harness | 统一模型、上下文、预算、权限、状态、工具与 Trace | 避免把模型调用、执行权限和恢复语义散落在每个节点 | Harness 是工程边界，不是一个新框架名称，也不能用一个大 Prompt 代替 |
+| 持久化 Tool Queue | durable job、依赖、并发、deadline、有限重试、取消与死信 | 工具调用的失败语义与图节点不同；持久作业方便追踪和重启后核对 | 当前是 SQLite + 进程内 worker，不是 Celery/Kafka 级集群队列；多实例要改为 PostgreSQL 原子领取或外部消息系统 |
+| MCP stdio | 工具发现、Schema 与调用协议边界 | 工具实现与 Agent 编排解耦；本地 stdio 不需要额外网络服务，便于展示和测试 | MCP 不负责业务授权、重试与成功判定；远程 MCP 还需要认证、传输加密和服务级限流 |
+| SSE | 服务端向前端递增传送任务、工具和部分结果事件 | 交互主要是服务端单向推送；标准 HTTP、反向代理友好，可用事件序号续读 | 用户选择/确认仍走 HTTP 命令；强双向实时场景可选 WebSocket，但不会自动获得可重放性 |
+| React + TypeScript | 对话、路线卡片、任务 DAG、领域子图和运行数据展示 | 执行过程是持续变化的结构化状态，类型化组件比服务端拼 HTML 更容易维护 | 前端只是投影，不能作为任务状态权威来源 |
+| Docker Compose | 固化私有展示环境、挂载数据卷和限制进程资源 | 面试展示和单机复现成本低 | Compose 不等于高可用编排；多副本、滚动发布、秘钥管理和自动扩缩容仍需要部署平台 |
+
+选型时遵循三条约束：第一，模型只提交结构化意图，不直接获得工具权限；第二，任务状态、图状态、工具作业和业务回执分层保存；第三，本地默认优先可复现，生产扩展不写成已完成的性能结论。
+
 <a id="chapter-2"></a>
 
 ## 2. 用户输入后：请求接入与事件分类
@@ -307,6 +325,85 @@ flowchart TB
 配置 PostgreSQL Checkpointer，不会自动把上述所有 SQLite 业务表迁移到 PostgreSQL；配置 MySQL 也不等于队列已变成 MySQL 队列。
 
 2026-10-26 的多轮修复另增加 conversation_inputs（主输入框恢复输入及幂等回执）和 conversation_references（会话内已完成任务的紧凑实体证据）。完整消息、模型窗口与实体引用不是一张表或同一套有效期。
+
+#### 2.6.1 先区分权威数据、快照、缓存和可重建索引
+
+| 类别 | 代表数据 | 恢复原则 |
+|---|---|---|
+| 业务权威事实 | `tasks`、`tool_jobs`、`operations`、`tool_receipts`、`itinerary_items`、`reminders` | 必须从持久层查询，不从模型文本或前端状态反推 |
+| 图执行快照 | LangGraph Checkpoint 的 values、next、interrupt 和元数据 | 用于沿原 thread 继续，但不能证明外部副作用已成功 |
+| 有时效的交互快照 | 候选列表、已选 POI、会话引用、MemoryBrief | 恢复时复验 owner、task/interrupt 和有效期，过期后重查而不续命 |
+| 可丢失缓存 | Redis 中的会话摘要与受限历史 | miss 后从 MySQL/SQLite 持久层回填；不作为写操作成功证据 |
+| 可重建派生数据 | Chroma/本地向量索引 | 由 `knowledge/*.md` 重建；原文和版本是权威来源，向量库不是 |
+
+这个区分决定了故障处理：Redis 丢失可以回源，Chroma 损坏可以重建，但 `tool_receipts` 丢失后不能让模型猜“应该写成功了”。
+
+#### 2.6.2 为什么本地默认选 SQLite
+
+当前仓库的实际默认是 `aiosqlite + SQLite` 单文件数据库。会话、任务、运行预算、事件、bad case、工具 job、死信、幂等操作、本地行程/提醒与会话记忆都有真实表。选它不是因为 SQLite 比 PostgreSQL 更“企业级”，而是当前阶段的约束是单机展示、可复现回归和最低部署成本：
+
+1. **零外部依赖：** 拉取仓库即可创建库，Docker 只要挂载一个数据卷。
+2. **事务与约束足够表达当前逻辑：** 本地行程写入和 `tool_receipts` 可以在同一 SQLite 事务中提交，用联合主键拒绝同幂等键异参重放。
+3. **测试隔离简单：** 每个用例使用临时库，能直接检查任务、job、回执和业务行，不只断言最终文字。
+4. **运维和取证直观：** 数据文件可备份，断网演示仍可查看 Trace 与历史证据。
+
+它的边界同样要说清：当前应用用单进程 `asyncio.Lock` 串行化通用写入，没有据此验证多实例高并发；也没有完整的 schema migration 框架、高可用、在线备份和自动故障转移。应用表和 AsyncSqliteSaver 即使指向同一文件，也由不同连接提交，**不是一个覆盖任务表、Checkpoint 和外部工具的原子事务**。
+
+因此准确表达是：“SQLite 是当前单实例及验收环境的权威业务存储”，而不是“SQLite 已支撑了生产分布式队列”。
+
+#### 2.6.3 Redis 和 MySQL 为什么只放在记忆层
+
+`MemoryRepository` 把会话摘要和受限 `ModelHistory` 先持久化到 MySQL/SQLite，配置 Redis 时再写入带 TTL 的缓存。读取时 Redis 命中直接使用，miss 才回源并只续剩余有效期。
+
+- **Redis 的理由：** 上下文读频高、有明确 TTL、可从持久层重建，适合做缓存而不是业务成功证据。默认上下文时效为 30 分钟，不是 Redis key 存在就永不过期。
+- **MySQL 的理由：** 长期偏好和会话摘要需要跨进程持久化；很多业务已有用户中心/MySQL，可以只把这部分接入既有数据库。
+- **为什么不全部放 Redis：** TTL、内存驱逐和运维操作都不应让用户偏好或写入证据无声消失。
+- **为什么不强制 MySQL：** 对当前单机展示会增加部署复杂度；未配置时 SQLite 实现同一仓储接口。
+
+边界：当前存在假 Redis 的时效/回源回归，但本文引用的完整验收没有证明 Redis Cluster 故障转移或 MySQL 主从切换。一旦显式配置后连接失败，当前启动路径也不是完整的自动降级方案。
+
+#### 2.6.4 PostgreSQL Checkpointer 解决什么，不解决什么
+
+配置 `CHECKPOINT_POSTGRES_DSN` 时，LangGraph 使用 `AsyncPostgresSaver`；未配置时使用 `AsyncSqliteSaver`。选 PostgreSQL 作为生产 Checkpoint 方向，是因为它更适合多连接、服务端并发、备份和运维观测。
+
+但当前这个开关只替换**图 Checkpoint**，不会自动迁移 `tasks/tool_jobs/events/operations` 等应用表。若要多实例上线，需要将应用权威表也迁到服务端数据库，为 job 领取使用条件更新或 `FOR UPDATE SKIP LOCKED`，并设计状态对账/outbox。单独换 Checkpointer 不等于完成分布式一致性。
+
+#### 2.6.5 Chroma 为什么是可重建的 RAG 索引
+
+健康知识文档从 `knowledge/*.md` 按标题切分，生成本地确定性哈希向量。安装 Chroma 时持久化到指定目录，未安装时使用内存 local-vector 检索。选 Chroma 是因为小型本地知识库容易复现，能保存向量和 source 元数据，不需要先运维独立检索集群。
+
+当前不应宣称的部分：这不是专业语义 embedding，没有 BM25/混合检索/reranker 的实测收益，也没有完成删除旧 chunk、原子索引版本切换和回滚。大规模资料或多实例可考虑 pgvector/OpenSearch/托管向量库，但必须用检索质量、更新 SLA 和成本数据决策，不是为了增加技术名称。
+
+#### 2.6.6 跨存储一致性如何处理
+
+本地行程/提醒与 `tool_receipts` 在同一工具服务事务内写入，解决“业务行已成功但本地幂等回执没有记录”的一类问题。但下列操作仍然分属不同事务：
+
+1. API 创建 task；
+2. LangGraph 提交 Checkpoint；
+3. Tool Queue 创建/更新 job；
+4. 外部服务真实执行；
+5. 回执、事件与最终答复落库。
+
+当前通过状态机、幂等键、重启扫描和结果未知隔离降低风险，没有宣称跨存储 exactly-once。生产需要定义每个状态的权威来源，使用 outbox/inbox、周期对账和可查询的上游幂等能力，而不是用一个“分布式锁”包住全流程。
+
+#### 2.6.7 从当前展示到生产的存储演进
+
+| 阶段 | 建议组合 | 适用范围与上线门禁 |
+|---|---|---|
+| 本地开发/面试展示 | SQLite + AsyncSqliteSaver + 可选 local-vector/Chroma | 单实例、数据卷持久化、定期备份；不声称 HA |
+| 私有单机服务 | SQLite 或服务端数据库 + 可选 Redis | 要做磁盘备份、恢复演练、数据保留/删除策略和容量阈值 |
+| 多实例生产 | PostgreSQL 统一业务状态/Checkpoint/job 或明确的分库边界 + Redis 缓存 | 原子 job 领取、多 worker 竞争、outbox/对账、迁移工具、备份恢复、主从/故障切换实测 |
+| 大规模知识服务 | 独立文档源 + 版本化索引 + 选定的向量/混合检索系统 | 增量更新、删除传播、原子切换、回滚、检索评测与租户隔离 |
+
+**面试回答：**
+
+> 我没有把 SQLite 包装成生产集群方案。当前是单机可展示、可回归的 Agent 项目，SQLite 无外部依赖，又能用事务和唯一约束保存任务、工具 job、回执和 Trace，测试也能每例使用独立临时库。所以它是当前阶段的主动选择，不是最终容量结论。
+>
+> 数据上我分四类：任务、job 和业务回执是权威事实；LangGraph Checkpoint 是图恢复快照；Redis 只是带 TTL 的会话缓存；Chroma 是可由原文重建的派生索引。这样 Redis 丢失可回源，索引损坏可重建，但工具回执绝不能靠模型猜。
+>
+> 生产多实例时，我会优先把业务权威表、job 领取和 Checkpoint 收敛到 PostgreSQL 或者明确分库边界，Redis 继续做缓存，再增加 schema migration、outbox/对账、备份恢复和故障切换测试。当前代码支持 PostgreSQL Checkpointer 和 MySQL/Redis 记忆配置，但没有把这说成已经验证过集群容灾。
+
+**测试与证据：** SQLite 是当前后端、工具幂等、重启恢复和完整验收的实际后端；Redis 时效与 durable fallback 有受控回归。当前没有 Redis Cluster、MySQL 主从、PostgreSQL 高可用或 Chroma 集群的真实故障注入报告。源码见 [persistence.py](<../src/car_agent/persistence.py>)、[memory.py](<../src/car_agent/memory.py>)、[api/app.py](<../src/car_agent/api/app.py>)、[rag.py](<../src/car_agent/rag.py>)；实测边界见 [回归报告](regression-2026-10-23.md)。
 
 ### 2.7 接入的真实顺序与去重边界
 
