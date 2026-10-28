@@ -1703,10 +1703,10 @@ uv run --frozen --extra dev --extra music python -m evaluations.completion \
 
 ### D.2 本次原始证据
 
-- [完整回归基线](../data/industrial-baseline-20261026.xml)：450 passed、1 skipped。
-- [新专项修复前](../data/industrial-contracts-before-20261026.xml)：28 failed、5 passed。
-- [新专项修复后](../data/industrial-contracts-after-20261026.xml)：33 passed。
-- [完整回归修复后](../data/industrial-regression-20261026.xml)：483 passed、1 skipped。
+- 完整回归基线：450 passed、1 skipped（[公开脱敏摘要](assets/industrial-contracts-20261026.json)）。
+- 新专项修复前：28 failed、5 passed（[同一组 33 个案例摘要](assets/industrial-contracts-20261026.json)）。
+- 新专项修复后：33 passed（[同一组 33 个案例摘要](assets/industrial-contracts-20261026.json)）。
+- 完整回归修复后：483 passed、1 skipped（[公开脱敏摘要](assets/industrial-contracts-20261026.json)）。
 - [新增测试源码](../tests/test_industrial_contracts.py)：验收条件可检查，不只给汇总数字。
 - [公开契约测试摘要](assets/industrial-contracts-20261026.json)：脚本从 XML 提取，核对前后是同一组 33 个案例 ID。
 - [修复后真实四任务摘要](assets/industrial-four-tasks-20261026.json)：4/4 目标、15/15 检查；26.453 秒，不作为 P95。
@@ -1743,9 +1743,9 @@ XML 和私有运行目录是本机原始证据，默认发布导出排除 data/ 
 
 | 运行 | 结果 | 证据与含义 |
 |---|---|---|
-| 本轮合并前完整回归 | 529 passed、1 skipped，25.95 秒 | [baseline.xml](../data/interview-images-20261027/baseline.xml)；与 10-26 的 483 项历史运行分开 |
-| 新增文档专项 | 33 passed，0.07 秒 | [handbook.xml](../data/interview-images-20261027/handbook.xml)；直接执行 Markdown 中的转树代码并验证引用、图片题目入口与目录数量 |
-| 合并后完整回归 | 562 passed、1 skipped，25.35 秒 | [regression.xml](../data/interview-images-20261027/regression.xml)；529+33 为当前通过用例数量，另有 1 项跳过，不是两轮结果相加 |
+| 本轮合并前完整回归 | 529 passed、1 skipped，25.95 秒 | 本地私有证据 `data/interview-images-20261027/baseline.xml`；与 10-26 的 483 项历史运行分开 |
+| 新增文档专项 | 33 passed，0.07 秒 | 本地私有证据 `data/interview-images-20261027/handbook.xml`；直接执行 Markdown 中的转树代码并验证引用、图片题目入口与目录数量 |
+| 合并后完整回归 | 562 passed、1 skipped，25.35 秒 | 本地私有证据 `data/interview-images-20261027/regression.xml`；529+33 为当前通过用例数量，另有 1 项跳过，不是两轮结果相加 |
 
 这里的 33 项与 10-26 的 33 项工业契约测试不是同一组：本轮验证乱序、多根、0 ID、重复、孤儿、断开的环、深链与输入隔离等编码边界，以及本地链接/锚点。不能用新增通过数宣称已经补齐通用沙箱、跨实例锁、RAG 重排或语义止环。
 
