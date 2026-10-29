@@ -4,6 +4,8 @@
 
 ## 当前启用决策
 
+2026-10-29后续用户批准自由文本直接交给DeepSeek：本机与模板使用`INPUT_EVENT_PROVIDER=llm_direct`，不先走事件规则或Jev过滤；卡片索引、确认、拒绝、取消仍走宿主结构化协议，模型输出仍需原文、任务、有效期与权限校验。领域Jev和门控rules不变。此批准覆盖下面历史记录中的“事件仍用llm”；只证明比Jev过滤更快，不声称优于零模型规则。12例全局的两条失败为依赖结果保存的GoalPlan绑定目标非法，详见[启用与失败分析](llm-direct-rollout.md)。
+
 2026-10-29后续用户批准基础LLM切为`deepseek-flash`，`MODEL_THINKING=disabled`通过HTTP参数关闭思考；planner/intent/response继承同一模型，不留Grok角色覆盖。保留`DOMAIN_ROUTE_PROVIDER=jev_cascade`、`INPUT_EVENT_PROVIDER=llm`、`PLANNING_GATE_PROVIDER=rules`，事件纯回复过滤仍仅实验。此前Grok测试属于历史基准，不能外推为DeepSeek上的Jev收益。[切换、复现与回滚](deepseek-rollout.md)及[DeepSeek基准配对证据](../evaluations/jev/2026-10-29-deepseek/v1/README.md)分别记录。真实Key不进入Git。
 
 2026-10-29用户明确批准先启用单任务领域仲裁并同步GitHub。本地`.env`和仓库`.env.example`为`DOMAIN_ROUTE_PROVIDER=jev_cascade`、`INPUT_EVENT_PROVIDER=llm`、`PLANNING_GATE_PROVIDER=rules`。需要独立JEV_API_KEY；低分、defer和异常回退原LLM。未显式配置provider时Settings类仍用llm兼容旧部署。仅改变领域分类，其他实验不启用；以下“默认不切换”是此前试验当时的状态，不能用来推翻本次批准。[启用说明](jev-domain-rollout.md)。
@@ -13,7 +15,7 @@
 ## 当前事实
 
 - 项目名称为 LifePlus，提供生活健康与出行服务；当前七领域、十一个 MCP 工具，不沿用座舱量产、十二领域、四百工具或日均十万请求的未验证规模。
-- 自然语言入口先做事件理解：高确定性规则优先，复杂输入由 LLM 提出 `new/resume/cancel/clarify`，宿主核对任务归属、原文片段、候选、有效期及授权。事件分类先于业务规划，不负责自由生成工具参数。
+- live自然语言入口直接由LLM提出 `new/resume/cancel/clarify`；结构化卡片保持宿主协议。宿主核对任务归属、原文片段、候选、有效期及授权。事件分类先于业务规划，不负责自由生成工具参数。`llm`保留为可回滚的规则优先策略，不是当前配置。
 - 普通单目标通过主图 `route` 做领域仲裁；复合请求由全局模型输出 `GoalPlan`。每项目标只有 `id/query/domain/depends_on/bind_slots`；全局不选工具、不抽取槽位。内部 `TaskPlan` 的旧字段是兼容结构。
 - `TaskCoordinator` 校验 DAG、并发推进就绪任务，依赖任务等前置成功后读取真实 Checkpoint/回执。`depends_on` 约束何时运行，`bind_slots` 定义数据来源。
 - Coordinator 将前置证据放入 `prepared_decision.bound_slots`。领域 `understand` 加载宿主允许的候选工具及 Schema，联合选择动作、工具并提取本领域槽位；随后宿主合并绑定字段，真实回执优先于模型生成值。

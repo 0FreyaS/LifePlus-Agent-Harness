@@ -1,0 +1,7 @@
+{
+  "submitted": 5,
+  "completed": 5,
+  "input_event_llm_attempts": 9,
+  "input_event_jev_attempts": 0,
+  "limitations": "Single-arm repeat after deployment decision; not a new AB comparison or production SLA."
+}

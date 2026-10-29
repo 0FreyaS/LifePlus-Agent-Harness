@@ -190,3 +190,20 @@ LLM统一deepseek-flash关闭思考，固定模型/提示词/阈值；领域与�
 [分组结果、具体两例、阶段耗时、全部数据与失败证据](../evaluations/jev/2026-10-29-deepseek/v1/README.md)。
 
 <!-- deepseek-jev-v1:end -->
+
+<!-- llm-direct-rollout:v1:start -->
+
+## 后续批准：自由文本直接交给DeepSeek
+
+2026-10-29，用户批准模板和本机采用`INPUT_EVENT_PROVIDER=llm_direct`。自由文本不先走事件规则或事件Jev，模型提案仍经过宿主校验；结构化选择、确认、拒绝、取消不走文本模型。领域Jev及数量门控rules保持不变。该选择依据直接LLM相对Jev过滤的结果，不宣称优于零模型规则路径。
+
+切换后独立单臂回归5/5完整会话通过，9次事件DeepSeek、0次事件Jev；本机Docker真实认证HTTP/SSE天气和歌手介绍2/2完成。新验收不并入旧A/B指标。[新回归数据](../evaluations/jev/2026-10-29-deepseek/v1/rollout/llm-direct/summary.json)。
+
+### 12例全局中失败的两例
+
+- `multi_completion-04`：查询无锡天气后将完整回执保存到行程，原计划输出`bind_slots={"result":"t1.result"}`，错误地把前置结果名用作后继接收字段；合法接收字段是`details`。两组均在一次修复后仍未通过GoalPlan校验，尚未执行工具。
+- `jev-four-goals`：天气、音乐、行程列表并行，保存仅依赖天气。原日志被300字符上限截断，只能确认两次规划解析失败；本次独立planner诊断完整复现相同的非法目标字段`result`。这不是原始响应的无损恢复，诊断不混入旧测试统计。
+
+正确契约为`depends_on=["t1"]`、`bind_slots={"details":"t1.result"}`。JSON本身可解析，失败在业务语义校验；不是高德接口错误，也不是Jev领域分类错误。本次不修改绑定规划逻辑、不删除失败、不把10/12改写为12/12。[具体原文、证据边界及改进方向](llm-direct-rollout.md) · [独立诊断完整输出](../evaluations/jev/2026-10-29-deepseek/v1/diagnostics/planning-20261029.json)。
+
+<!-- llm-direct-rollout:v1:end -->

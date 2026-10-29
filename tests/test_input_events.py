@@ -128,7 +128,9 @@ class Model:
 async def client(tmp_path, monkeypatch):
     for field, value in {"database_path": str(tmp_path / "input.sqlite3"), "chroma_path": str(tmp_path / "chroma"),
                           "model_api_key": None, "redis_url": None, "mysql_dsn": None,
-                          "checkpoint_postgres_dsn": None, "app_mode": "local"}.items():
+                          "checkpoint_postgres_dsn": None, "app_mode": "local",
+                          "input_event_provider": "llm", "domain_route_provider": "llm",
+                          "planning_gate_provider": "rules"}.items():
         monkeypatch.setattr(settings, field, value)
     async with app.router.lifespan_context(app):
         async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://test",

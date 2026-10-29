@@ -13,7 +13,7 @@ PLANNER_MODEL_NAME=
 INTENT_MODEL_NAME=
 RESPONSE_MODEL_NAME=
 DOMAIN_ROUTE_PROVIDER=jev_cascade
-INPUT_EVENT_PROVIDER=llm
+INPUT_EVENT_PROVIDER=llm_direct
 PLANNING_GATE_PROVIDER=rules
 ```
 
@@ -27,7 +27,7 @@ PLANNING_GATE_PROVIDER=rules
 2. [DeepSeek基准下Jev领域与事件对比](../evaluations/jev/2026-10-29-deepseek/v1/README.md)：21条局部领域、12个领域全局场景、36条文本事件与5个事件全局场景；分别配对，避免混淆改动。
 3. [持续维护测试记录](jev-front-ab-2026-10-29.md)：保留旧Grok基准、模型替换及新DeepSeek基准，不修改历史数字。
 
-领域实验A为DeepSeek分类，B为Jev分类＋DeepSeek回退。事件实验A为自由文本直接DeepSeek，B为Jev纯回复过滤＋DeepSeek；两组事件实验均保留领域Jev。后者不是当前规则优先服务的基线，实验开关不自动启用。
+领域实验A为DeepSeek分类，B为Jev分类＋DeepSeek回退。事件实验A为自由文本直接DeepSeek，B为Jev纯回复过滤＋DeepSeek；两组事件实验均保留领域Jev。实验当时服务为规则优先；用户随后批准采用A（`llm_direct`），B仍不启用。[最新启用与失败分析](llm-direct-rollout.md)。
 
 ## 部署与验证
 

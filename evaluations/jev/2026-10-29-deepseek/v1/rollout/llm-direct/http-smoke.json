@@ -1,0 +1,113 @@
+{
+  "health": {
+    "status": "ok",
+    "auth_mode": "showcase",
+    "default_task_mode": "live",
+    "model_configured": true,
+    "model_name": "deepseek-flash",
+    "maps_configured": true,
+    "checkpoint_backend": "sqlite",
+    "session_cache": "local",
+    "long_term_memory": "sqlite",
+    "tool_queue_workers": 4,
+    "rag_backend": "chroma",
+    "reminder_delivery": "in_app",
+    "tools_backend": "real_mcp",
+    "response_streaming": true,
+    "multi_task": true,
+    "domain_route_provider": "jev_cascade",
+    "input_event_provider": "llm_direct",
+    "planning_gate_provider": "rules",
+    "jev_configured": true
+  },
+  "transport": "real_authenticated_http_sse",
+  "cases": [
+    {
+      "query": "查询无锡今天天气",
+      "status": "completed",
+      "elapsed_ms": 5260,
+      "events": 83,
+      "model_attempts": [
+        {
+          "stage": "domain_route_precheck",
+          "model_name": "jev-1.14.0",
+          "provider": "typesafe",
+          "elapsed_ms": 793,
+          "usage": {
+            "input_tokens": 676,
+            "output_tokens": 80
+          }
+        },
+        {
+          "stage": "domain_understanding",
+          "model_name": "deepseek-flash",
+          "provider": null,
+          "elapsed_ms": 894,
+          "usage": {
+            "input_tokens": 724,
+            "output_tokens": 37,
+            "total_tokens": 761,
+            "input_token_details": {
+              "cache_read": 512
+            },
+            "output_token_details": {}
+          }
+        },
+        {
+          "stage": "response",
+          "model_name": "deepseek-flash",
+          "provider": null,
+          "elapsed_ms": 994,
+          "usage": {
+            "input_tokens": 440,
+            "output_tokens": 35,
+            "total_tokens": 475,
+            "input_token_details": {
+              "cache_read": 0
+            },
+            "output_token_details": {}
+          }
+        }
+      ]
+    },
+    {
+      "query": "介绍歌手陶喆",
+      "status": "completed",
+      "elapsed_ms": 3931,
+      "events": 226,
+      "model_attempts": [
+        {
+          "stage": "domain_route_precheck",
+          "model_name": "jev-1.14.0",
+          "provider": "typesafe",
+          "elapsed_ms": 286,
+          "usage": {
+            "input_tokens": 674,
+            "output_tokens": 80
+          }
+        },
+        {
+          "stage": "response",
+          "model_name": "deepseek-flash",
+          "provider": null,
+          "elapsed_ms": 2437,
+          "usage": {
+            "input_tokens": 161,
+            "output_tokens": 186,
+            "total_tokens": 347,
+            "input_token_details": {
+              "cache_read": 0
+            },
+            "output_token_details": {}
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": "Two post-deployment smoke requests, not a paired performance benchmark or factual-answer audit.",
+  "test_snapshot": {
+    "passed": 790,
+    "skipped": 2,
+    "failures": 0
+  }
+}

@@ -104,7 +104,7 @@ GitHub 页面内可直接播放（约 1 分 21 秒，已内嵌中文字幕）。
 
 当前基础模型为 **DeepSeek Flash（关闭思考）**：`MODEL_NAME=deepseek-flash`、`MODEL_BASE_URL=https://api.deepseek.com/v1`、`MODEL_THINKING=disabled`。规划、领域提参与回复共享该配置；API Key仅在私有环境中填写。[模型切换、Docker验收与回滚](docs/deepseek-rollout.md)。
 
-单任务领域仲裁采用 **Jev 优先、DeepSeek 兜底**：配置模板为 `DOMAIN_ROUTE_PROVIDER=jev_cascade`，需要填写独立 `JEV_API_KEY`；不使用 Jev 时设为 `llm`。置信度不足、defer、1.5秒超时或服务异常均回退基础模型；规划、领域工具选择、槽位提取及回复不由Jev替代。事件解释仍为 `INPUT_EVENT_PROVIDER=llm`。[本次启用范围与回滚](docs/jev-domain-rollout.md) · [真实局部/全局 A/B 结果](docs/jev-front-ab-2026-10-29.md) · [接入与复跑](docs/jev-integration-and-ab.md)。
+单任务领域仲裁采用 **Jev 优先、DeepSeek 兜底**：配置模板为 `DOMAIN_ROUTE_PROVIDER=jev_cascade`，需要填写独立 `JEV_API_KEY`；不使用 Jev 时设为 `llm`。置信度不足、defer、1.5秒超时或服务异常均回退基础模型；规划、领域工具选择、槽位提取及回复不由Jev替代。自由文本事件解释采用 `INPUT_EVENT_PROVIDER=llm_direct`，不先走规则或Jev过滤；结构化卡片仍由宿主协议处理。[文本直达策略与失败案例](docs/llm-direct-rollout.md) · [真实局部/全局 A/B 结果](docs/jev-front-ab-2026-10-29.md) · [接入与复跑](docs/jev-integration-and-ab.md)。
 
 [DeepSeek基准下的独立Jev对比](evaluations/jev/2026-10-29-deepseek/v1/README.md)：领域21条正确率持平，P50为0.748→0.302秒；全链路12例均10/12完成，P50为3.731→3.265秒，但Token增加。自由文本回复过滤在本批数据中更慢，保持实验关闭。小样本结果不代表生产SLA；失败、回退和未知用量均保留。
 

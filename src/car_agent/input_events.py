@@ -205,7 +205,8 @@ async def resolve_input(app, query, waiting, cities, *, owner, session_id, mode,
         identifier, owner, session_id, request_id, "running", "{}", utcnow().isoformat(), None))
     from .orchestration import session_messages
     history = await session_messages(db, session_id, completed_only=True, max_age_seconds=context.freshness.context_seconds)
-    event_router = getattr(context, "input_event_router", None)
+    # Direct text must not call a leftover/injected prefilter from another policy.
+    event_router = None if policy == "llm_direct" else getattr(context, "input_event_router", None)
     limits = replace(context.limits, active_seconds=app.state.input_event_timeout, model_calls=2 + int(event_router is not None))
     try:
         model = context.model_for("intent")

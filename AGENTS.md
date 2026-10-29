@@ -4,7 +4,7 @@ Read `docs/PROJECT_MEMORY.md` before explaining or changing architecture. It rec
 2026-10-29 global-goal / domain-execution split and links to the source contracts.
 
 - The user subsequently approved `deepseek-flash` with `MODEL_THINKING=disabled`.
-  Keep domain Jev enabled, event `llm` and planning gate `rules`. Compare Jev against
+  Keep domain Jev enabled, event `llm_direct` and planning gate `rules`. Compare Jev against
   this DeepSeek baseline separately from older Grok evidence; do not enable event
   filters automatically. See `docs/deepseek-rollout.md`. Credentials stay private.
 - The global model outputs `GoalPlan`: task query, domain, dependencies and bindings.
@@ -16,7 +16,7 @@ Read `docs/PROJECT_MEMORY.md` before explaining or changing architecture. It rec
 - The user approved single-goal Jev routing on 2026-10-29. Local settings and
   `.env.example` use `DOMAIN_ROUTE_PROVIDER=jev_cascade`, with the original LLM
   fallback. Bare Settings retains llm for backwards compatibility. Keep
-  `INPUT_EVENT_PROVIDER=llm` and `PLANNING_GATE_PROVIDER=rules`; other Jev paths
+  `INPUT_EVENT_PROVIDER=llm_direct` (subsequently approved) and `PLANNING_GATE_PROVIDER=rules`; other Jev paths
   remain experiments. Real-provider experiments are authorized; keys stay local.
 - The optional front-gate experiment uses `PLANNING_GATE_PROVIDER=jev_front`
   (cardinality and single-goal domain in one Jev request) and event proposal

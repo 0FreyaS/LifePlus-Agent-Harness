@@ -21,7 +21,7 @@ async def run(base_url, output):
         health = (await client.get("/api/health")).raise_for_status().json()
         assert health["model_name"] == "deepseek-flash"
         assert health["domain_route_provider"] == "jev_cascade"
-        assert health["input_event_provider"] == "llm"
+        assert health["input_event_provider"] == settings.input_event_provider
         assert health["planning_gate_provider"] == "rules"
         for query in ("查询无锡今天天气", "介绍歌手陶喆"):
             session = (await client.post("/api/sessions")).raise_for_status().json()["id"]

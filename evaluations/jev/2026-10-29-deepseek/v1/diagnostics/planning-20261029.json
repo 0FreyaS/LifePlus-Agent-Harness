@@ -1,0 +1,52 @@
+{
+  "model": "deepseek-flash",
+  "thinking": "disabled",
+  "scope": "planner_only_no_tools",
+  "results": [
+    {
+      "id": "multi_completion-04",
+      "query": "查无锡今天天气，然后把查到的完整天气结果保存到行程，标题为无锡天气记录",
+      "content": "{\"tasks\":[{\"id\":\"t1\",\"query\":\"查无锡今天天气\",\"domain\":\"weather\",\"depends_on\":[]},{\"id\":\"t2\",\"query\":\"把查到的完整天气结果保存到行程，标题为无锡天气记录\",\"domain\":\"planning\",\"depends_on\":[\"t1\"],\"bind_slots\":{\"result\":\"t1.result\"}}]}",
+      "usage": {
+        "input_tokens": 712,
+        "output_tokens": 75,
+        "total_tokens": 787,
+        "input_token_details": {
+          "cache_read": 512
+        },
+        "output_token_details": {}
+      },
+      "valid": false,
+      "validation_errors": [
+        {
+          "field": [],
+          "type": "value_error",
+          "message": "Value error, 槽位绑定目标不属于允许的业务字段"
+        }
+      ]
+    },
+    {
+      "id": "jev-four-goals",
+      "query": "查无锡今天的天气，同时搜索周杰伦的歌曲，同时查看我的行程清单，天气查询成功后把完整天气结果保存到行程，标题为无锡天气记录。前三项可以并行，保存只依赖天气结果。",
+      "content": "{\"tasks\":[{\"id\":\"t1\",\"query\":\"查无锡今天的天气\",\"domain\":\"weather\",\"depends_on\":[]},{\"id\":\"t2\",\"query\":\"搜索周杰伦的歌曲\",\"domain\":\"music\",\"depends_on\":[]},{\"id\":\"t3\",\"query\":\"查看我的行程清单\",\"domain\":\"planning\",\"depends_on\":[]},{\"id\":\"t4\",\"query\":\"把完整天气结果保存到行程，标题为无锡天气记录\",\"domain\":\"planning\",\"depends_on\":[\"t1\"],\"bind_slots\":{\"result\":\"t1.result\"}}]}",
+      "usage": {
+        "input_tokens": 739,
+        "output_tokens": 120,
+        "total_tokens": 859,
+        "input_token_details": {
+          "cache_read": 512
+        },
+        "output_token_details": {}
+      },
+      "valid": false,
+      "validation_errors": [
+        {
+          "field": [],
+          "type": "value_error",
+          "message": "Value error, 槽位绑定目标不属于允许的业务字段"
+        }
+      ]
+    }
+  ],
+  "limitations": "Separate new diagnostic calls with empty memory and current time, not the exact original attempts; historical A/B remains unchanged."
+}
