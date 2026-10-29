@@ -96,7 +96,7 @@ async def test_first_model_delta_is_observable_before_generation_finishes(runtim
         def with_structured_output(self, schema, **_kwargs):
             class Router:
                 async def ainvoke(self, _messages):
-                    return schema.model_validate({"domain": "chat", "slots": {}})
+                    return schema.model_validate({"domain": "chat"})
             return Router()
 
         async def astream(self, _messages):
@@ -190,7 +190,7 @@ async def test_live_chat_uses_model_and_keeps_recent_conversation(runtime):
 
     class Decision:
         def model_dump(self):
-            return {"domain": "chat", "intent": "chat_answer", "slots": {}}
+            return {"domain": "chat"}
 
     class Router:
         async def ainvoke(self, _messages):
@@ -231,12 +231,14 @@ async def test_live_tool_result_is_summarized_by_model(runtime):
                 "forecast_date": (date.today() + timedelta(days=1)).isoformat(),
             }}
 
-    class Router:
-        async def ainvoke(self, _messages):
-            return Decision()
-
     class FakeLLM:
-        def with_structured_output(self, *_args, **_kwargs):
+        def with_structured_output(self, schema, **_kwargs):
+            class Router:
+                async def ainvoke(self, _messages):
+                    if schema.__name__ == "DomainRoute":
+                        return {"domain": "weather"}
+                    return {"domain": "weather", "action": "weather_lookup", "tool_name": "maps_weather",
+                            "slots": {"forecast_date": (date.today() + timedelta(days=1)).isoformat()}}
             return Router()
 
         async def ainvoke(self, _messages):
@@ -265,7 +267,9 @@ async def test_live_music_reply_is_bound_to_selected_song_and_real_link(runtime)
             class Router:
                 async def ainvoke(self, messages):
                     assert "JSON Schema" in messages[0]["content"]
-                    return schema.model_validate({"domain": "music", "action": "music_search",
+                    if schema.__name__ == "DomainRoute":
+                        return schema.model_validate({"domain": "music"})
+                    return schema.model_validate({"domain": "music", "action": "music_search", "tool_name": "search_music",
                                                   "slots": {"keyword": "陶喆"}})
             return Router()
 

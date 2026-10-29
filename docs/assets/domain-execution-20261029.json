@@ -1,0 +1,299 @@
+{
+  "date": "2026-10-29",
+  "model": "grok-4.3",
+  "arms": {
+    "baseline": {
+      "tested": 16,
+      "passed": 11,
+      "error_types": {
+        "OpenAITimeoutError": 2
+      },
+      "p50_ms_including_failures": 8777.5,
+      "p95_ms_including_failures": 25022,
+      "attempts": 16,
+      "cases": [
+        {
+          "id": "single01",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 4263
+        },
+        {
+          "id": "single02",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 9062
+        },
+        {
+          "id": "single03",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 5971
+        },
+        {
+          "id": "single04",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 7022
+        },
+        {
+          "id": "single05",
+          "passed": false,
+          "errors": [
+            "h:intent"
+          ],
+          "elapsed_ms": 4362
+        },
+        {
+          "id": "parallel01",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 4245
+        },
+        {
+          "id": "parallel03",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 7921
+        },
+        {
+          "id": "parallel04",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 4569
+        },
+        {
+          "id": "parallel05",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 11608
+        },
+        {
+          "id": "dependency01",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 9666
+        },
+        {
+          "id": "dependency05",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 11519
+        },
+        {
+          "id": "context02",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 8493
+        },
+        {
+          "id": "delimiter-space",
+          "passed": false,
+          "errors": [
+            "OpenAITimeoutError"
+          ],
+          "elapsed_ms": 25022
+        },
+        {
+          "id": "delimiter-newline",
+          "passed": false,
+          "errors": [
+            "task_count:1!=2"
+          ],
+          "elapsed_ms": 24254
+        },
+        {
+          "id": "delimiter-period",
+          "passed": false,
+          "errors": [
+            "task_count:1!=2"
+          ],
+          "elapsed_ms": 19650
+        },
+        {
+          "id": "delimiter-enumeration",
+          "passed": false,
+          "errors": [
+            "OpenAITimeoutError"
+          ],
+          "elapsed_ms": 25020
+        }
+      ]
+    },
+    "candidate": {
+      "tested": 16,
+      "passed": 3,
+      "error_types": {
+        "OpenAITimeoutError": 4,
+        "OpenAIRateLimitError": 6,
+        "OutputParserException": 2
+      },
+      "p50_ms_including_failures": 11006.5,
+      "p95_ms_including_failures": 40871,
+      "attempts": 27,
+      "cases": [
+        {
+          "id": "single01",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 9702
+        },
+        {
+          "id": "single02",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 9940
+        },
+        {
+          "id": "single03",
+          "passed": false,
+          "errors": [
+            "OpenAITimeoutError"
+          ],
+          "elapsed_ms": 30184
+        },
+        {
+          "id": "single04",
+          "passed": false,
+          "errors": [
+            "OpenAITimeoutError"
+          ],
+          "elapsed_ms": 28303
+        },
+        {
+          "id": "single05",
+          "passed": true,
+          "errors": [],
+          "elapsed_ms": 11015
+        },
+        {
+          "id": "parallel01",
+          "passed": false,
+          "errors": [
+            "OpenAIRateLimitError"
+          ],
+          "elapsed_ms": 10827
+        },
+        {
+          "id": "parallel03",
+          "passed": false,
+          "errors": [
+            "OpenAITimeoutError"
+          ],
+          "elapsed_ms": 33670
+        },
+        {
+          "id": "parallel04",
+          "passed": false,
+          "errors": [
+            "p:intent"
+          ],
+          "elapsed_ms": 37939
+        },
+        {
+          "id": "parallel05",
+          "passed": false,
+          "errors": [
+            "OpenAITimeoutError"
+          ],
+          "elapsed_ms": 25010
+        },
+        {
+          "id": "dependency01",
+          "passed": false,
+          "errors": [
+            "OutputParserException"
+          ],
+          "elapsed_ms": 40871
+        },
+        {
+          "id": "dependency05",
+          "passed": false,
+          "errors": [
+            "OutputParserException"
+          ],
+          "elapsed_ms": 36320
+        },
+        {
+          "id": "context02",
+          "passed": false,
+          "errors": [
+            "OpenAIRateLimitError"
+          ],
+          "elapsed_ms": 527
+        },
+        {
+          "id": "delimiter-space",
+          "passed": false,
+          "errors": [
+            "OpenAIRateLimitError"
+          ],
+          "elapsed_ms": 498
+        },
+        {
+          "id": "delimiter-newline",
+          "passed": false,
+          "errors": [
+            "OpenAIRateLimitError"
+          ],
+          "elapsed_ms": 10998
+        },
+        {
+          "id": "delimiter-period",
+          "passed": false,
+          "errors": [
+            "OpenAIRateLimitError"
+          ],
+          "elapsed_ms": 728
+        },
+        {
+          "id": "delimiter-enumeration",
+          "passed": false,
+          "errors": [
+            "OpenAIRateLimitError"
+          ],
+          "elapsed_ms": 522
+        }
+      ]
+    }
+  },
+  "backend": {
+    "tests": 618,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 617
+  },
+  "real_mcp": {
+    "passed": 30,
+    "total": 30
+  },
+  "frontend": {
+    "passed": 43,
+    "skipped": 1,
+    "build": "passed"
+  },
+  "comparison_valid": false,
+  "improvement_proven": false,
+  "conditions": {
+    "reference_time": "2026-10-27T10:00:00+08:00",
+    "cases_per_arm": 16,
+    "case_timeout_seconds": 120,
+    "provider_timeout_seconds": 25,
+    "provider_retries": 0,
+    "scope": "Planning and domain parameter readiness; no business tools, no response model, dependency layers sequential.",
+    "case_order": "Same order, each arm serial; arm run windows overlapped. Not balanced randomized AB/BA."
+  },
+  "limitations": [
+    "Pilot candidate preceded final domain wording and checkpoint-refresh fixes; not a final production acceptance.",
+    "Provider timeouts/429 and two candidate parser failures remain in denominators.",
+    "Readiness latency is not end-to-end P95; subset successes do not establish improved accuracy.",
+    "No new real-model plus tool end-to-end success claim; controlled integrations and real MCP are separate evidence."
+  ],
+  "final_source_sha256": {
+    "task_planning.py": "e5bf4b8dcba729923fbb1e650b16a990e5e0b390d1eca14a36d57f1041c5b8fb",
+    "harness.py": "d0dc93e0ec4d374b1b8951c59c4386cfe54d8c6fea29d8f07c129a0d9eb7a0b4",
+    "domain_understanding.py": "12c3697b9e417ef017eee73b00dda572588880c1910e7a882a3a760e1f2b632b",
+    "orchestration.py": "31cb9e6bb7f1a74c361215dc749edd5fc9cc749b83f145d7f548ec964bf8e9a9"
+  }
+}

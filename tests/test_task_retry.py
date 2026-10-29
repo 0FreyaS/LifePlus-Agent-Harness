@@ -33,7 +33,7 @@ class Provider:
             async def ainvoke(self, _):
                 if parent.fail_route and not parent.online:
                     raise APIConnectionError(request=httpx.Request("POST", "https://model.invalid"))
-                return schema.model_validate({"domain": "chat", "slots": {}})
+                return schema.model_validate({"domain": "chat"})
         return Model()
 
     async def astream(self, messages):

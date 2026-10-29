@@ -131,7 +131,7 @@ async def test_explicit_preference_persists_across_sessions_and_reaches_live_cha
             class Router:
                 async def ainvoke(self, messages):
                     captured.append(messages)
-                    return schema.model_validate({"domain": "chat", "action": "chat_answer", "slots": {}})
+                    return schema.model_validate({"domain": "chat"})
             return Router()
 
         async def ainvoke(self, messages):

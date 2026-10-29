@@ -90,14 +90,14 @@ async def test_production_router_recovers_from_first_invalid_model_response():
                     calls.append(messages)
                     if len(calls) == 1:
                         raise OutputParserException("missing required domain")
-                    return schema.model_validate({"domain": "weather", "slots": {"city": "无锡"}})
+                    return schema.model_validate({"domain": "weather"})
             return Model()
 
     result = await resolve_intent({"original_query": "查询无锡今天的天气", "mode": "live"}, {},
         SimpleNamespace(context=SimpleNamespace(llm=LLM())))
     assert len(calls) == 2
-    assert result["domain"] == "weather" and result["slots"]["city"] == "无锡"
-    assert result["action"] == "weather_lookup"
+    assert result["domain"] == "weather" and "slots" not in result
+    assert "action" not in result
 
 
 @pytest.mark.asyncio
@@ -110,8 +110,8 @@ async def test_production_planner_repairs_invalid_output_binding_before_running_
                 async def ainvoke(self, messages):
                     calls.append(messages)
                     return schema.model_validate({"tasks": [
-                        {"id": "w", "query": "查无锡天气", "domain": "weather", "action": "weather_lookup", "slots": {"city": "无锡"}},
-                        {"id": "s", "query": "保存天气", "domain": "planning", "action": "save_itinerary", "depends_on": ["w"],
+                        {"id": "w", "query": "查无锡天气", "domain": "weather"},
+                        {"id": "s", "query": "保存天气", "domain": "planning", "depends_on": ["w"],
                          "bind_slots": {"details": "w.tool_result" if len(calls) == 1 else "w.result"}},
                     ]})
             return Model()

@@ -19,7 +19,7 @@ from langchain_openai import ChatOpenAI
 
 from car_agent.adapters.mcp_client import LocalMCPClient
 from car_agent.config import get_settings
-from car_agent.harness import resolve_intent
+from car_agent.harness import resolve_intent, resolve_domain_intent
 from car_agent.task_planning import plan_tasks
 
 from .runtime import RuntimeLab
@@ -223,7 +223,10 @@ async def model_case(case, llm, lab, anchor):
             tasks = [{"id": "single", **decision}]
         passed, metrics = score_plan(case, tasks)
         return passed, metrics, {"tasks": tasks}
-    decision = await resolve_intent({"original_query": case["query"], "mode": "live"}, {}, SimpleNamespace(context=SimpleNamespace(llm=llm)))
+    state = {"original_query": case["query"], "mode": "live"}
+    runtime = SimpleNamespace(context=SimpleNamespace(llm=llm))
+    state.update(await resolve_intent(state, {}, runtime))
+    decision = await resolve_domain_intent(state, {}, runtime)
     if case["group"] == "clarification":
         result = await lab.clarification(case, decision)
         expected, actual = case["expected"]["missing_field"], result["missing_field"]

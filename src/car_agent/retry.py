@@ -17,6 +17,8 @@ async def failure_kind(db, task_id: str) -> str | None:
         return None
     error = str(json.loads(event["data_json"]).get("error", ""))
     kind = error.split(":", 1)[0].strip()
+    kind = {"OpenAIConnectionError": "APIConnectionError", "OpenAITimeoutError": "APITimeoutError",
+            "OpenAIRateLimitError": "RateLimitError", "OpenAIInternalServerError": "InternalServerError"}.get(kind, kind)
     return kind if kind in RECOVERABLE else None
 
 

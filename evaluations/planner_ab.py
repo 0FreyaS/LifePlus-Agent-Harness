@@ -15,7 +15,7 @@ from pathlib import Path
 from car_agent.config import Settings
 from car_agent.model_roles import build_models
 from car_agent.task_planning import plan_tasks
-from evaluations.planner_cases import CASES, grade
+from evaluations.planner_cases import CASES, grade_goals
 
 NOW = datetime.fromisoformat("2026-10-27T10:00:00+08:00")
 GATE = {"min_quality": 0.95, "max_new_failures": 0, "min_median_speedup": 0.15,
@@ -164,7 +164,7 @@ def render_report(result):
     lines.extend(["", "新增退化配对：" + ("、".join(f"`{item}`" for item in result["new_failures"]) or "无；两组共有错误仍计入总体通过率。"), ""])
     lines.extend(["", "## 证据与边界", "",
                   "- `manifest.json` 固定条件和门槛；`cases.json` 保存标注；`results.jsonl` 保存每条实际计划、断言和用量；`summary.json` 可复算结果。",
-                  "- 通过要求任务数、领域动作、标注槽位、不得推断字段、依赖边及结果绑定同时正确；任务 ID 和拓扑等价顺序不影响评分。",
+                  "- 当前使用 GoalPlan：检查任务数、领域、标注 Query 约束、依赖边与结果绑定；不测动作和槽位准确率，需另跑 domain_split。历史版本结果不可直接比较。",
                   "- 城市仅容许市后缀差异，其他字段采用冻结的严格契约，不把所有语义近似自动判对。应区分契约失败与实际业务失败。",
                   "- 30 个手工合成场景不是生产流量。重复请求不是新增独立样本，不能把 60 次请求当作 60 个独立用户场景。",
                   "- 未执行业务工具，未测端到端完成率、地图可见时间、首 token 或系统 P95；不得外推为生产 SLA。",
@@ -197,6 +197,7 @@ async def run(args):
     orders = {}
     for index, (case, repeat) in enumerate(jobs):
         orders[(case["id"], repeat)] = ["baseline", "compact"] if index % 2 == 0 else ["compact", "baseline"]
+    # This runner grades global goals only; use domain_split for slot readiness.
     rows = []
     sem = asyncio.Semaphore(args.concurrency)
 
@@ -211,7 +212,7 @@ async def run(args):
                     async with asyncio.timeout(config.runtime_planning_seconds):
                         plan = await plan_tasks(case["query"], "live", meter, case["memory_brief"], variant=variant, now=NOW)
                     row["plan"] = plan.model_dump() if plan else None
-                    row["grade"] = grade(case, plan)
+                    row["grade"] = grade_goals(case, plan)
                 except Exception as exc:
                     row["error"] = type(exc).__name__
                     row["grade"] = {"passed": False, "errors": [type(exc).__name__]}

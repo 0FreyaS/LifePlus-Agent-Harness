@@ -8,7 +8,7 @@ from langchain_core.messages import AIMessageChunk
 from pydantic import ValidationError
 
 from car_agent.api.app import app, settings
-from car_agent.task_planning import TaskPlan
+from car_agent.task_planning import GoalPlan, TaskPlan
 
 
 @pytest.fixture
@@ -95,19 +95,19 @@ async def test_independent_domain_tools_are_actually_in_flight_together(api_clie
 
 
 @pytest.mark.parametrize("variant", ["baseline", "compact"])
-async def test_role_models_reach_children_and_prepared_plan_skips_intent(api_client, variant):
-    counts = {"planner": 0, "response": 0}
+async def test_role_models_reach_children_and_domains_extract_their_own_slots(api_client, variant):
+    counts = {"planner": 0, "intent": 0, "response": 0}
 
     class Planner:
         def with_structured_output(self, schema, **kwargs):
-            assert schema is TaskPlan
+            assert schema is GoalPlan
 
             class Call:
                 async def ainvoke(self, messages):
                     counts["planner"] += 1
                     return schema.model_validate({"tasks": [
-                        {"id": "w1", "query": "无锡天气", "domain": "weather", "action": "weather_lookup", "slots": {"city": "无锡"}},
-                        {"id": "w2", "query": "杭州天气", "domain": "weather", "action": "weather_lookup", "slots": {"city": "杭州"}},
+                        {"id": "w1", "query": "无锡天气", "domain": "weather"},
+                        {"id": "w2", "query": "杭州天气", "domain": "weather"},
                     ]})
             return Call()
 
@@ -124,20 +124,32 @@ async def test_role_models_reach_children_and_prepared_plan_skips_intent(api_cli
             raise AssertionError("The default model must not replace the response role")
             yield
 
+    class Domain:
+        def with_structured_output(self, schema, **kwargs):
+            assert schema.__name__ == "WeatherExecutionDecision"
+
+            class Call:
+                async def ainvoke(self, messages):
+                    counts["intent"] += 1
+                    query = json.loads(messages[-1]["content"])["query"]
+                    return schema.model_validate({"action": "weather_lookup", "tool_name": "maps_weather",
+                                                  "slots": {"city": "无锡" if "无锡" in query else "杭州"}})
+            return Call()
+
     async def dispatch(name, arguments, task_id):
         assert name == "maps_weather"
         return {"ok": True, "city": arguments["city"], "date": "2026-10-27", "day_weather": "晴", "low": 10, "high": 20}
 
     context = app.state.context
     context.llm = Forbidden()
-    context.model_roles = {"planner": Planner(), "intent": Forbidden(), "response": Response()}
+    context.model_roles = {"planner": Planner(), "intent": Domain(), "response": Response()}
     context.planner_variant = variant
     context.tool_queue.dispatcher = dispatch
     task_id, _ = await submit(api_client, "查询无锡和杭州的天气", mode="live")
     group = await wait_for(api_client, task_id, lambda item: item["status"] in {"completed", "failed", "partial"})
     assert group["status"] == "completed", group
     assert len(group["children"]) == 2
-    assert counts == {"planner": 1, "response": 2}
+    assert counts == {"planner": 1, "intent": 2, "response": 2}
 
 
 @pytest.mark.asyncio
@@ -212,6 +224,72 @@ async def test_dependent_write_receives_upstream_evidence_and_requires_approval(
     await wait_for(api_client, task_id, lambda task: task["status"] == "completed")
 
 
+async def test_goal_only_plan_binds_actual_receipt_after_domain_extraction(api_client):
+    calls = []
+
+    class Model:
+        def with_structured_output(self, schema, **kwargs):
+            class Call:
+                async def ainvoke(self, messages):
+                    calls.append(schema.__name__)
+                    if schema is GoalPlan:
+                        return {"tasks": [
+                            {"id": "w", "query": "查杭州天气", "domain": "weather"},
+                            {"id": "s", "query": "保存杭州天气结果到行程", "domain": "planning",
+                             "depends_on": ["w"], "bind_slots": {"details": "w.result"}},
+                        ]}
+                    if schema.__name__ == "WeatherExecutionDecision":
+                        return {"action": "weather_lookup", "tool_name": "maps_weather", "slots": {"city": "杭州"}}
+                    assert schema.__name__ == "PlanningExecutionDecision"
+                    data = json.loads(messages[-1]["content"])
+                    assert data["bound_slots"]["details"]["city"] == "杭州"
+                    return {"action": "save_itinerary", "tool_name": "save_itinerary",
+                            "slots": {"title": "杭州天气", "details": {"city": "南京"}}}
+            return Call()
+
+        async def astream(self, messages):
+            yield AIMessageChunk(content="杭州天气已查询。")
+
+    async def dispatch(name, arguments, task_id):
+        assert name == "maps_weather", "The write must wait for explicit approval"
+        return {"ok": True, "city": "杭州", "date": arguments["forecast_date"], "day_weather": "雨", "low": 10, "high": 20}
+
+    app.state.context.llm = Model()
+    app.state.context.tool_queue.dispatcher = dispatch
+    task_id, _ = await submit(api_client, "查杭州天气，然后保存查询结果到行程", mode="live")
+    group = await wait_for(api_client, task_id, lambda task: task["status"] == "waiting_user")
+    assert calls == ["GoalPlan", "WeatherExecutionDecision", "PlanningExecutionDecision"]
+    save = group["children"][1]
+    assert save["interrupt"]["arguments"]["details"]["city"] == "杭州"
+    assert save["interrupt"]["kind"] == "approval"
+    plan = json.loads(group["plan_json"])
+    assert all(not spec["action"] and not spec["slots"] for spec in plan["tasks"])
+
+
+async def test_invalid_domain_tool_never_reaches_queue(api_client):
+    submitted = []
+
+    class Model:
+        def with_structured_output(self, schema, **kwargs):
+            class Call:
+                async def ainvoke(self, messages):
+                    if schema.__name__ == "DomainRoute":
+                        return {"domain": "weather"}
+                    return {"action": "weather_lookup", "tool_name": "cancel_reminder", "slots": {"city": "杭州"}}
+            return Call()
+
+    async def dispatch(*args):
+        submitted.append(args)
+        raise AssertionError("An invalid model proposal must never execute")
+
+    app.state.context.llm = Model()
+    app.state.context.tool_queue.dispatcher = dispatch
+    task_id, _ = await submit(api_client, "查杭州天气", mode="live")
+    await wait_for(api_client, task_id, lambda task: task["status"] == "failed")
+    assert submitted == []
+    assert not await app.state.db.fetchall("SELECT * FROM tool_jobs WHERE task_id=?", (task_id,))
+
+
 @pytest.mark.asyncio
 async def test_cancelling_waiting_branch_preserves_finished_sibling(api_client):
     task_id, _ = await submit(api_client, "杭州天气怎么样，同时搜索陶喆的歌曲")
@@ -228,7 +306,7 @@ class StreamingModel:
     def with_structured_output(self, schema, **_kwargs):
         class Router:
             async def ainvoke(self, _messages):
-                return schema.model_validate({"domain": "chat", "slots": {}})
+                return schema.model_validate({"domain": "chat"})
         return Router()
 
     async def astream(self, _messages):
@@ -465,7 +543,9 @@ async def test_interrupted_response_stream_is_replaced_with_tool_evidence(api_cl
         def with_structured_output(self, schema, **kwargs):
             class Router:
                 async def ainvoke(self, messages):
-                    return schema.model_validate({"domain": "weather", "action": "weather_lookup", "slots": {"city": "杭州"}})
+                    if schema.__name__ == "DomainRoute":
+                        return schema.model_validate({"domain": "weather"})
+                    return schema.model_validate({"domain": "weather", "action": "weather_lookup", "tool_name": "maps_weather", "slots": {"city": "杭州"}})
             return Router()
 
         async def astream(self, messages):

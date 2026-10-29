@@ -111,3 +111,32 @@ def grade(case, plan):
         if not errors:
             break
     return {"passed": not best, "errors": best}
+
+
+def grade_goals(case, plan):
+    """Global-only contract; slots are evaluated after domain extraction."""
+    if plan is None:
+        return {"passed": False, "errors": ["missing_plan"]}
+    actual, expected = plan.model_dump()["tasks"], case["tasks"]
+    if len(actual) != len(expected):
+        return {"passed": False, "errors": [f"task_count:{len(actual)}!={len(expected)}"]}
+    best = None
+    for order in permutations(actual):
+        ids = {spec["label"]: item["id"] for spec, item in zip(expected, order)}
+        errors = []
+        for spec, item in zip(expected, order):
+            label = spec["label"]
+            if item["domain"] != spec["domain"]:
+                errors.append(label + ":domain")
+            if any(term not in item["query"] for term in spec["query_terms"]):
+                errors.append(label + ":query_constraint")
+            binds = {key: ids[source] + "." + field for key, (source, field) in spec["binds"].items()}
+            if item.get("bind_slots", {}) != binds:
+                errors.append(label + ":bindings")
+            if set(item.get("depends_on", [])) != {ids[source] for source, _ in spec["binds"].values()}:
+                errors.append(label + ":dependencies")
+        if best is None or len(errors) < len(best):
+            best = errors
+        if not errors:
+            break
+    return {"passed": not best, "errors": best}

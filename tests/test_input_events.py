@@ -112,9 +112,12 @@ class Model:
                     if parent.error:
                         raise parent.error
                     return parent.proposal
-                if "搜索周杰伦" in messages[-1]["content"]:
-                    return schema.model_validate({"domain": "music", "action": "music_search", "slots": {"keyword": "周杰伦"}})
-                return schema.model_validate({"domain": "weather", "action": "weather_lookup", "slots": {"city": "杭州"}})
+                music = "搜索周杰伦" in messages[-1]["content"]
+                if schema.__name__ == "DomainRoute":
+                    return schema.model_validate({"domain": "music" if music else "weather"})
+                if music:
+                    return schema.model_validate({"domain": "music", "action": "music_search", "tool_name": "search_music", "slots": {"keyword": "周杰伦"}})
+                return schema.model_validate({"domain": "weather", "action": "weather_lookup", "tool_name": "maps_weather", "slots": {"city": "杭州"}})
         return Call()
 
     async def astream(self, messages):

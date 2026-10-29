@@ -60,9 +60,12 @@ async def test_readonly_domain_uses_canonical_action(domain, alias, canonical):
         def with_structured_output(self, schema, **_):
             class Router:
                 async def ainvoke(self, _):
-                    return schema.model_validate({"domain": domain, "action": alias, "slots": {"city": "无锡"}})
+                    return schema.model_validate({"domain": domain})
             return Router()
-    decision = await resolve_intent({"original_query": "无锡天气", "mode": "live"}, {}, SimpleNamespace(context=SimpleNamespace(llm=LLM())))
+    from car_agent.harness import resolve_domain_intent
+    decision = await resolve_domain_intent({"original_query": "无锡天气", "domain": domain, "mode": "live",
+        "prepared_decision": {"domain": domain, "action": alias, "slots": {"city": "无锡"}}}, {},
+        SimpleNamespace(context=SimpleNamespace(llm=LLM())))
     assert decision["action"] == canonical
 
 
@@ -72,9 +75,11 @@ async def test_null_slots_for_chat_are_treated_as_no_parameters():
         def with_structured_output(self, schema, **_):
             class Router:
                 async def ainvoke(self, _):
-                    return schema.model_validate({"domain": "chat", "slots": None})
+                    return schema.model_validate({"domain": "chat"})
             return Router()
     result = await resolve_intent({"original_query": "讲故事", "mode": "live"}, {}, SimpleNamespace(context=SimpleNamespace(llm=LLM())))
+    from car_agent.harness import resolve_domain_intent
+    result = await resolve_domain_intent({"original_query": "讲故事", "mode": "live", **result}, {}, SimpleNamespace(context=SimpleNamespace(llm=LLM())))
     assert result["slots"] == {}
     assert result["action"] == "chat_answer"
 

@@ -7,7 +7,7 @@ export type TraceNodeData = {
 }
 export type TraceGraph = { nodes: Node<TraceNodeData>[]; edges: Edge[]; warnings: string[] }
 const domainNames: Record<string, string> = { weather: '天气', navigation: '地点与路线', music: '音乐', planning: '行程提醒', wellbeing: '健康知识', local_life: '本地生活', chat: '对话' }
-const phaseNames: Record<string, string> = { memory: '准备上下文', route: '意图路由', load_skill: '加载领域规则', clarify: '参数校验与澄清', execute: '查询与生成', select: '候选选择', authorize: '权限与操作确认', perform: '执行操作', respond: '结果校验与回复' }
+const phaseNames: Record<string, string> = { memory: '准备上下文', route: '领域仲裁', understand: '工具选择与参数提取', load_skill: '加载领域规则', clarify: '参数校验与澄清', execute: '查询与生成', select: '候选选择', authorize: '权限与操作确认', perform: '执行操作', respond: '结果校验与回复' }
 const terminal = ['completed', 'partial', 'failed', 'cancelled', 'interrupted']
 const WIDTH = 296
 const GAP = 80

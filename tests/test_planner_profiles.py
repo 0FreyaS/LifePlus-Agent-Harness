@@ -8,7 +8,7 @@ from pydantic import ValidationError
 from car_agent.config import Settings
 from car_agent.model_roles import build_models, select_model
 from car_agent.runtime_context import RunContext
-from car_agent.task_planning import TaskPlan, compact_schema, plan_tasks, planning_prompt
+from car_agent.task_planning import GoalPlan, TaskPlan, compact_schema, plan_tasks, planning_prompt
 from evaluations.planner_ab import summarize
 from evaluations.planner_cases import CASES, grade
 
@@ -81,7 +81,7 @@ class Model:
         self.calls = []
 
     def with_structured_output(self, schema, **kwargs):
-        assert schema is TaskPlan and kwargs["method"] == "json_mode"
+        assert schema is GoalPlan and kwargs["method"] == "json_mode"
         parent = self
 
         class Call:
@@ -93,7 +93,7 @@ class Model:
 
 @pytest.mark.parametrize("variant", ["baseline", "compact"])
 async def test_invalid_binding_repaired_before_plan_can_execute(variant):
-    valid = {"tasks": [{"id": "w", "query": "查无锡天气", "domain": "weather", "action": "weather_lookup"}]}
+    valid = {"tasks": [{"id": "w", "query": "查无锡天气", "domain": "weather"}]}
     invalid = {"tasks": [{**valid["tasks"][0], "bind_slots": {"city": "missing.result"}}]}
     model = Model([invalid, valid])
     plan = await plan_tasks("查无锡天气，谢谢", "live", model, variant=variant)

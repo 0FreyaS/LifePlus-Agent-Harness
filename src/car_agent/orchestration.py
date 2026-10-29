@@ -113,7 +113,10 @@ class TaskCoordinator:
             await self.db.publish(task_id, "task.failed", {"answer": answer, "error": type(exc).__name__})
 
     async def _bind(self, spec: dict, children: dict[str, dict]) -> dict:
-        decision = {"domain": spec["domain"], "action": spec["action"], "slots": dict(spec.get("slots", {}))}
+        decision = {"domain": spec["domain"], "bound_slots": {}}
+        # Forms and persisted pre-migration plans remain trusted prepared decisions.
+        if spec.get("action"):
+            decision.update(action=spec["action"], slots=dict(spec.get("slots", {})))
         for slot, path in spec.get("bind_slots", {}).items():
             source, *keys = path.split(".")
             child = children[source]
@@ -128,7 +131,9 @@ class TaskCoordinator:
                 if not isinstance(value, dict) or key not in value:
                     raise ValueError(f"前置任务未提供绑定字段：{path}")
                 value = value[key]
-            decision["slots"][slot] = value
+            decision["bound_slots"][slot] = value
+            if "slots" in decision:
+                decision["slots"][slot] = value
         return decision
 
     async def refresh(self, parent_id: str) -> None:

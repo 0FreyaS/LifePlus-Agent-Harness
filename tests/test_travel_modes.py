@@ -2,7 +2,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from car_agent.harness import infer, resolve_intent
+from car_agent.harness import infer, resolve_domain_intent
 from car_agent.travel_modes import explicit_travel_mode, mode_choices
 
 
@@ -38,15 +38,15 @@ def test_mode_choices_keep_all_supported_modes_and_mark_exactly_one_default(mode
     ("local_life", "local_route", "骑行到这家饭店", "bicycling"),
 ])
 async def test_explicit_transport_overrides_wrong_model_or_planner_slot(domain, action, query, expected):
-    state = {"original_query": query, "mode": "live", "memory_brief": "之前偏好驾车，不代表当前要求。",
+    state = {"original_query": query, "domain": domain, "mode": "live", "memory_brief": "之前偏好驾车，不代表当前要求。",
              "prepared_decision": {"domain": domain, "action": action, "slots": {"travel_mode": "driving"}}}
-    result = await resolve_intent(state, {}, SimpleNamespace(context=SimpleNamespace(llm=None)))
+    result = await resolve_domain_intent(state, {}, SimpleNamespace(context=SimpleNamespace(llm=None)))
     assert result["slots"]["travel_mode"] == expected
 
 
 @pytest.mark.asyncio
 async def test_a_route_without_an_explicit_mode_does_not_reset_a_valid_selected_mode():
-    result = await resolve_intent({"original_query": "导航到西湖", "mode": "live", "prepared_decision": {
+    result = await resolve_domain_intent({"original_query": "导航到西湖", "domain": "navigation", "mode": "live", "prepared_decision": {
         "domain": "navigation", "action": "navigation_search", "slots": {"travel_mode": "bicycling"}}}, {},
         SimpleNamespace(context=SimpleNamespace(llm=None)))
     assert result["slots"]["travel_mode"] == "bicycling"

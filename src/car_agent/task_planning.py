@@ -16,7 +16,7 @@ class PlannedTask(BaseModel):
     id: str = Field(pattern=r"^[a-zA-Z0-9_-]{1,40}$")
     query: str = Field(min_length=1, max_length=4000)
     domain: Literal["weather", "navigation", "music", "planning", "wellbeing", "local_life", "chat"]
-    action: str
+    action: str = ""
     slots: dict[str, Any] = Field(default_factory=dict, json_schema_extra=SlotValues.model_json_schema())
     depends_on: list[str] = Field(default_factory=list)
     bind_slots: dict[str, str] = Field(default_factory=dict)
@@ -32,7 +32,7 @@ class PlannedTask(BaseModel):
             "planning": {"create_reminder", "save_itinerary", "list_reminders", "list_itineraries", "cancel_reminder"},
             "local_life": {"local_search", "local_detail", "local_route"},
         }
-        if self.domain in allowed and self.action not in allowed[self.domain]:
+        if self.action and self.domain in allowed and self.action not in allowed[self.domain]:
             raise ValueError("子任务动作不属于该领域支持的动作集合")
         if self.domain in {"navigation", "local_life"} and self.slots.get("travel_mode") is not None:
             if not isinstance(self.slots["travel_mode"], str) or self.slots["travel_mode"] not in {"driving", "walking", "bicycling"}:
@@ -73,8 +73,23 @@ class TaskPlan(BaseModel):
         return self
 
 
+class TaskGoal(BaseModel):
+    """Global goals preserve constraints without exposing tool parameter schemas."""
+    model_config = ConfigDict(extra="forbid")
+    id: str = Field(pattern=r"^[a-zA-Z0-9_-]{1,40}$")
+    query: str = Field(min_length=1, max_length=4000)
+    domain: Literal["weather", "navigation", "music", "planning", "wellbeing", "local_life", "chat"]
+    depends_on: list[str] = Field(default_factory=list)
+    bind_slots: dict[str, str] = Field(default_factory=dict)
+
+
+class GoalPlan(TaskPlan):
+    tasks: list[TaskGoal] = Field(min_length=1, max_length=6)
+
+
 def may_have_multiple_tasks(query: str) -> bool:
-    return bool(re.search(r"同时|并且|并(?=查|搜|播|保|提|导)|顺便|然后|以及|还要|另外|接着|再帮|和|[，,；;]", query))
+    return bool(re.search(r"同时|并且|并(?=查|搜|播|保|提|导)|顺便|然后|以及|还要|另外|接着|再帮|和|[，,；;。\n、]", query)
+                or len(re.findall(r"查(?:询)?|搜索|播放|导航|提醒我|保存|列出|找", query)) >= 2)
 
 
 def compact_schema(value: Any) -> Any:
@@ -91,25 +106,23 @@ def compact_schema(value: Any) -> Any:
 def planning_prompt(memory_brief: str = "", *, variant: str = "baseline", now: datetime | None = None) -> str:
     if variant not in {"baseline", "compact"}:
         raise ValueError("Unknown planning variant")
-    schema = TaskPlan.model_json_schema()
+    schema = GoalPlan.model_json_schema()
     contract = (json.dumps(compact_schema(schema), ensure_ascii=False, separators=(",", ":"))
                 if variant == "compact" else json.dumps(schema, ensure_ascii=False))
     return (
         "将用户的请求拆为可执行子任务。只保留用户明确要求的事情，最多6个，不增加任务。"
         "单一任务仍返回只有一项的tasks，坐标逗号、地点名称和普通修饰语不构成独立任务。"
-        "独立任务depends_on=[]，不能因为用户说同时或顺便就添加依赖。"
-        "只有需要前一结果的任务才设depends_on。不要为未知地点或时间猜值，缺失slots留空交给澄清。"
-        "action按领域取值：weather_lookup/navigation_search/music_search/knowledge_search/chat_answer；"
-        "planning取create_reminder/save_itinerary/list_reminders/list_itineraries/cancel_reminder。"
-        "本地商家检索用local_life/local_search，slots含category(restaurant/ktv/cinema/cafe)、anchor、city、keyword、radius_m、sort_by、min_rating、max_cost。"
-        "附近没有参考地点时anchor留空；不猜定位。已指定商家ID查详情用local_detail，slots.poi_id；商家ID规划路线用local_route，slots.poi_id/anchor/travel_mode。"
-        "slots字段：天气city/forecast_date（必须转为YYYY-MM-DD，禁止返回today等相对文本）；导航origin/destination/city/travel_mode（仅driving/walking/bicycling，步行必须为walking）；音乐keyword；"
-        "提醒title/remind_at；行程title/details；取消提醒reminder_id。"
-        "query必须是该项完整、独立的用户请求，明确引用的城市和时间应保留。"
-        "路线子任务也必须保留用户明确说的出行方式；骑行/骑车对应bicycling，步行/走路对应walking，驾车/开车对应driving，不得擅自改为驾车。"
+        "只负责目标拆分、领域分派和依赖关系，不输出action、slots或工具参数。"
+        "独立任务depends_on=[]。然后只是话语顺序，不自动构成依赖；同时或顺便不构成依赖。"
+        "只有需要前置结果，或用户明确要求等待前置成功时才设depends_on。数据依赖还需bind_slots，纯控制依赖可以没有绑定。"
+        "domain取weather/navigation/music/planning/wellbeing/local_life/chat。"
+        "weather查天气；music歌曲检索；planning负责创建取消查询提醒、保存查询行程；wellbeing仅健康知识检索。"
+        "local_life负责商家检索、详情及商家路线；navigation负责一般地点路线；chat负责闲聊与歌手介绍等知识问答。"
+        "query必须保留本项目标、城市、时间、起终点、出行方式、否定及筛选限制。共享城市时间要传递到相关子任务，不增加用户未表达的信息。"
+        "每个明确目标恰好覆盖一次；未知地点、时间和ID交给领域澄清，不猜值。"
         "依赖输出绑定用bind_slots，例如destination='t1.selected.location'，details='t1.route'。"
         "可引用selected(用户选中的地点/歌曲)、route(路线回执)、result(工具结果)、slots。"
-        "用户说先找地点再导航过去：可保留为一个navigation_search子任务，不必分开。"
+        "用户说先找地点再导航过去：可保留为一个navigation领域目标，由领域子图完成检索选择和路线。"
         "输出只包含符合JSON Schema的JSON：" + contract
         + "\n当前北京时间：" + (now or datetime.now(timezone(timedelta(hours=8)))).isoformat()
         + "\n会话摘要：" + memory_brief
@@ -129,14 +142,14 @@ async def plan_tasks(query: str, mode: str, llm: Any, memory_brief: str = "", *,
         parts = [part.strip() for part in re.split(r"(?:同时|并且|顺便|然后|以及|还要|另外|接着|[，；;])", query) if part.strip()]
         if len(parts) < 2:
             return None
-        return TaskPlan(tasks=[PlannedTask(id=f"t{index}", query=part, **infer(part))
+        return TaskPlan(tasks=[PlannedTask(id=f"t{index}", query=part, domain=infer(part)["domain"])
                                for index, part in enumerate(parts[:6], 1)])
     if llm is None:
         raise RuntimeError("多任务规划需要配置真实模型")
     prompt = planning_prompt(memory_brief, variant=variant, now=now)
     from .harness import emit
 
-    result = await invoke_structured(llm, TaskPlan, [
+    result = await invoke_structured(llm, GoalPlan, [
         {"role": "system", "content": prompt}, {"role": "user", "content": query},
     ], stage="plan", report=emit)
     return TaskPlan.model_validate(result.model_dump())
