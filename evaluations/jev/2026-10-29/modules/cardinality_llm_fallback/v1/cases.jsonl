@@ -1,0 +1,42 @@
+{"id": "count-single-01", "query": "查无锡天气", "expected_label": "single", "expected_domain": "weather", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-02", "query": "查无锡天气，谢谢", "expected_label": "single", "expected_domain": "weather", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-03", "query": "明天呢", "expected_label": "single", "expected_domain": "weather", "group": "single", "context": "上轮用户明确查询无锡天气。", "split": "regression"}
+{"id": "count-single-04", "query": "从杭州东站步行到西湖", "expected_label": "single", "expected_domain": "navigation", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-05", "query": "从120.272791,31.474621步行到东南大学无锡校区", "expected_label": "single", "expected_domain": "navigation", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-06", "query": "先找到东南大学然后导航过去", "expected_label": "single", "expected_domain": "navigation", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-07", "query": "搜索周杰伦的歌曲", "expected_label": "single", "expected_domain": "music", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-08", "query": "介绍周杰伦", "expected_label": "single", "expected_domain": "chat", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-09", "query": "搜索歌曲《你和我》", "expected_label": "single", "expected_domain": "music", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-10", "query": "帮我找无锡市梁溪区和平路的电影院", "expected_label": "single", "expected_domain": "local_life", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-11", "query": "找个适合聊天、有停车位的无锡咖啡店", "expected_label": "single", "expected_domain": "local_life", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-12", "query": "查一查明天下午无锡下不下雨以及气温", "expected_label": "single", "expected_domain": "weather", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-13", "query": "保存名为音乐和旅行的行程", "expected_label": "single", "expected_domain": "planning", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-14", "query": "提醒我明早八点带雨伞和钥匙", "expected_label": "single", "expected_domain": "planning", "group": "single", "context": "", "split": "regression"}
+{"id": "count-single-15", "query": "久坐后腰不舒服有什么日常活动建议", "expected_label": "single", "expected_domain": "wellbeing", "group": "single", "context": "", "split": "regression"}
+{"id": "count-multi-01", "query": "查无锡天气，搜索周杰伦歌曲", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-02", "query": "无锡天气和南京天气都查一下", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-03", "query": "查无锡天气然后保存查询结果到行程", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-04", "query": "从杭州东站步行到西湖并且搜索周杰伦歌曲", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-05", "query": "查天气同时帮我查提醒列表", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-06", "query": "搜索歌曲晴天再介绍一下演唱者周杰伦", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-07", "query": "无锡天气周杰伦歌曲都要", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-08", "query": "我要无锡明日天气外加周杰伦的歌", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-09", "query": "附近电影院找一家再帮我查无锡天气", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-10", "query": "先查天气成功后再搜索周杰伦歌曲", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-11", "query": "列出我的行程另外看看明天无锡下雨吗", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-12", "query": "找无锡咖啡店再搜索陶喆的歌", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-13", "query": "介绍陶喆并搜索他的歌曲", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-14", "query": "帮我查无锡天气、步行去西湖、搜索晴天、列出提醒", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "count-multi-15", "query": "查南京天气并查杭州天气，两个城市都要", "expected_label": "multi", "group": "multi", "context": "", "split": "regression"}
+{"id": "fallback-holdout-01", "query": "提醒我周五十点买牛奶和面包", "expected_label": "single", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-02", "query": "查广州明天的湿度和降雨情况", "expected_label": "single", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-03", "query": "搜索歌曲《风和日丽》", "expected_label": "single", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-04", "query": "南京南站到夫子庙先搜地点再给我步行路线", "expected_label": "single", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-05", "query": "刚才的天气改为后天的", "expected_label": "single", "context": "上轮用户查询南京天气。", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-06", "query": "不是查天气，是想搜索陶喆的歌曲", "expected_label": "single", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-07", "query": "明早八点提醒我出门，也看看南京明天天气", "expected_label": "multi", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-08", "query": "看看苏州天气外加张学友歌曲", "expected_label": "multi", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-09", "query": "查上海天气，成功后将结果保存到行程", "expected_label": "multi", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-10", "query": "杭州天气苏州天气都看一下", "expected_label": "multi", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-11", "query": "周杰伦介绍和歌曲搜索分别给我", "expected_label": "multi", "context": "", "group": "holdout", "split": "holdout"}
+{"id": "fallback-holdout-12", "query": "找附近影院以及查看我的提醒", "expected_label": "multi", "context": "", "group": "holdout", "split": "holdout"}

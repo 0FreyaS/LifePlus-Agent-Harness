@@ -134,10 +134,15 @@ async def plan_tasks(query: str, mode: str, llm: Any, memory_brief: str = "", *,
     from .conversation import preference_command, asks_first_input
     if preference_command(query) or asks_first_input(query):
         return None
-    cardinality, domain = await gate.classify(query, memory_brief) if gate and mode == "live" else (None, None)
+    gate_enabled = gate is not None and mode == "live"
+    cardinality, domain = await gate.classify(query, memory_brief) if gate_enabled else (None, None)
     if cardinality == "single":
         return TaskPlan(tasks=[PlannedTask(id="t1", query=query, domain=domain)]) if domain else None
-    if cardinality != "multi" and not may_have_multiple_tasks(query):
+    if gate_enabled and cardinality is None:
+        from .runtime_limits import record
+
+        await record("planning.fallback.started", source="jev", target="llm_planner", reason="gate_abstained")
+    if not gate_enabled and not may_have_multiple_tasks(query):
         return None
     if mode != "live":
         from .harness import infer

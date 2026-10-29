@@ -1,0 +1,154 @@
+{
+  "arms": {
+    "baseline": {
+      "tested": 30,
+      "passed": 27,
+      "accuracy_or_completion_rate": 0.9,
+      "errors": 0,
+      "p50_ms": 293,
+      "p95_ms": 1404,
+      "success_only_p95_ms": 1404,
+      "fallbacks": 4,
+      "model_attempts": 30,
+      "attempts_with_usage": 30,
+      "attempts_missing_usage": 0,
+      "observed_tokens": {
+        "input_tokens": 28481,
+        "output_tokens": 3565
+      },
+      "observed_total_tokens": 32046,
+      "reported_reasoning_tokens": 0,
+      "total_tokens": 32046,
+      "tokens_per_submitted_case": 1068.2,
+      "tokens_per_successful_case": 1186.888888888889,
+      "confusion_matrix": [
+        {
+          "expected": "multi",
+          "actual": "multi",
+          "count": 14
+        },
+        {
+          "expected": "multi",
+          "actual": "single",
+          "count": 1
+        },
+        {
+          "expected": "single",
+          "actual": "multi",
+          "count": 2
+        },
+        {
+          "expected": "single",
+          "actual": "single",
+          "count": 13
+        }
+      ],
+      "by_group": {
+        "multi": {
+          "tested": 15,
+          "passed": 14,
+          "p95_ms": 893
+        },
+        "single": {
+          "tested": 15,
+          "passed": 13,
+          "p95_ms": 1434
+        }
+      },
+      "by_stage": {
+        "planning_gate_precheck": {
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 28481,
+            "output_tokens": 3565
+          },
+          "observed_total_tokens": 32046,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 32046
+        }
+      }
+    },
+    "candidate": {
+      "tested": 30,
+      "passed": 30,
+      "accuracy_or_completion_rate": 1.0,
+      "errors": 0,
+      "p50_ms": 335,
+      "p95_ms": 7088,
+      "success_only_p95_ms": 7088,
+      "fallbacks": 4,
+      "model_attempts": 34,
+      "attempts_with_usage": 34,
+      "attempts_missing_usage": 0,
+      "observed_tokens": {
+        "input_tokens": 31964,
+        "output_tokens": 3780
+      },
+      "observed_total_tokens": 37177,
+      "reported_reasoning_tokens": 1433,
+      "total_tokens": 37177,
+      "tokens_per_submitted_case": 1239.2333333333333,
+      "tokens_per_successful_case": 1239.2333333333333,
+      "confusion_matrix": [
+        {
+          "expected": "multi",
+          "actual": "multi",
+          "count": 15
+        },
+        {
+          "expected": "single",
+          "actual": "single",
+          "count": 15
+        }
+      ],
+      "by_group": {
+        "multi": {
+          "tested": 15,
+          "passed": 15,
+          "p95_ms": 8571
+        },
+        "single": {
+          "tested": 15,
+          "passed": 15,
+          "p95_ms": 7088
+        }
+      },
+      "by_stage": {
+        "plan": {
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 3483,
+            "output_tokens": 215
+          },
+          "observed_total_tokens": 5131,
+          "reported_reasoning_tokens": 1433,
+          "total_tokens": 5131
+        },
+        "planning_gate_precheck": {
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 28481,
+            "output_tokens": 3565
+          },
+          "observed_total_tokens": 32046,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 32046
+        }
+      }
+    }
+  },
+  "paired_cases": 30,
+  "paired_regressions": [],
+  "p50_reduction": -0.14334470989761083,
+  "p95_reduction": -4.048433048433049,
+  "auto_enable": false,
+  "decision": "evidence_only_not_a_rollout",
+  "prices_applied": false,
+  "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+}

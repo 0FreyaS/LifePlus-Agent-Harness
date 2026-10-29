@@ -1,0 +1,28 @@
+{
+  "started_at": "2026-10-29T11:55:45.554413+00:00",
+  "scope": "cardinality_gate_and_uncertain_planner_fallback_only",
+  "baseline": "Jev high confidence else original regex",
+  "candidate": "Jev high confidence else original GoalPlan LLM",
+  "pairing": "One shared real Jev response per case; no duplicate Jev request, no cache simulation",
+  "limits": "Accepted multi only classified, not expanded; no tools or E2E measured. Baseline has no planner generation.",
+  "statistical_unit": "authored_query_and_context",
+  "splits": {
+    "regression": 30,
+    "holdout": 12
+  },
+  "jev_model": "jev-1.14.0",
+  "planner_model": "grok-4.3",
+  "jev_timeout": 1.5,
+  "min_confidence": 0.8,
+  "min_probability": 0.9,
+  "planner_variant": "baseline",
+  "seed": 20261029,
+  "actual_jev_requests": 42,
+  "automatic_deployment": false,
+  "data_hash": "32e90962f074d2c8f2389d10089415bfc027d1ccb086b8e57d9edc6335a5010a",
+  "source_hashes": {
+    "src/car_agent/planning_gate.py": "a72f2e6edca58ddf2855190bd74bd313636288e22877ca2530a92c7af0f0c366",
+    "src/car_agent/task_planning.py": "2e443b31cd928217fcd4e4cda06e28b435c7399278d9b700f3a3265e75d4c30d",
+    "src/car_agent/structured_output.py": "2bf352a223c88c3f5293638fd543656020f7f6cf35abb40cd783d575d463fdac"
+  }
+}
