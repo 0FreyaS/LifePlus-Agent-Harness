@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     runtime_graph_steps: int = Field(default=64, ge=8, le=500)
     model_max_output_tokens: int = Field(default=2048, ge=128, le=8192)
     model_stream_usage: bool = True
+    model_thinking: Literal["enabled", "disabled"] | None = None
     planner_variant: Literal["baseline", "compact"] = "baseline"
     planner_model_name: str | None = None
     intent_model_name: str | None = None
@@ -45,7 +46,7 @@ class Settings(BaseSettings):
     intent_max_output_tokens: int | None = Field(default=None, ge=128, le=8192)
     response_max_output_tokens: int | None = Field(default=None, ge=128, le=8192)
     domain_route_provider: Literal["llm", "jev_cascade"] = "llm"
-    input_event_provider: Literal["llm", "jev_cascade", "jev_gate"] = "llm"
+    input_event_provider: Literal["llm", "jev_cascade", "jev_gate", "llm_direct", "jev_resume_filter"] = "llm"
     planning_gate_provider: Literal["rules", "jev_cardinality", "jev_front"] = "rules"
     jev_api_key: SecretStr | None = None
     jev_base_url: str = "https://api.typesafe.ai/v1"

@@ -1,0 +1,11 @@
+id,group,arm,passed,elapsed_ms,total_tokens,unknown_attempts,source
+resume-compound-music,compound,baseline,True,7918,5483,0,
+resume-compound-music,compound,candidate,True,8699,6327,0,
+resume-pure-city,pure_reply,candidate,True,5200,3998,0,
+resume-pure-city,pure_reply,baseline,True,5452,3259,0,
+resume-pure-music,pure_reply,baseline,True,5373,3319,0,
+resume-pure-music,pure_reply,candidate,True,7595,4155,0,
+resume-compound-city,compound,candidate,True,8563,6001,0,
+resume-compound-city,compound,baseline,True,7116,5252,0,
+resume-card-control,structured_card,baseline,True,4327,2560,0,
+resume-card-control,structured_card,candidate,True,6220,unknown,1,

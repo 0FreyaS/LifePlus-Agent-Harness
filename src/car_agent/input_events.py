@@ -188,7 +188,9 @@ def event_messages(query, waiting, history, focus=None):
 
 
 async def resolve_input(app, query, waiting, cities, *, owner, session_id, mode, request_id, focus=None):
-    decision = rule_decision(query, waiting, cities, focus)
+    policy = getattr(app.state.context, "input_event_policy", "llm")
+    direct_text = mode == "live" and policy in {"llm_direct", "jev_resume_filter"}
+    decision = None if direct_text else rule_decision(query, waiting, cities, focus)
     if decision is not None:
         return ResolvedInput(decision)
     if mode != "live":

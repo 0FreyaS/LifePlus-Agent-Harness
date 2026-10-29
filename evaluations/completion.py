@@ -171,7 +171,7 @@ async def run(args):
         "planning_gate_provider": settings.planning_gate_provider,
         "role_models": {role: getattr(settings, role + "_model_name") or settings.model_name for role in ("planner", "intent", "response")},
         "execution_conditions": {name: getattr(settings, name) for name in (
-            "model_base_url", "model_max_output_tokens", "model_stream_usage", "planner_variant", "planner_max_output_tokens",
+            "model_base_url", "model_max_output_tokens", "model_stream_usage", "model_thinking", "planner_variant", "planner_max_output_tokens",
             "intent_max_output_tokens", "response_max_output_tokens", "runtime_active_seconds", "runtime_model_calls",
             "runtime_tool_calls", "runtime_resumes", "runtime_refreshes", "runtime_retries", "runtime_graph_steps",
             "runtime_planning_seconds", "input_event_timeout_seconds", "tool_queue_workers",
@@ -246,6 +246,8 @@ async def run(args):
                                             if not candidates:
                                                 raise RuntimeError("selection_without_candidates")
                                             action, value = "answer", {"index": min(2, len(candidates))}
+                                            if policy.get("selection_text"):
+                                                value = {"text": "第二个" if len(candidates) >= 2 else "第一个"}
                                             if policy.get("compound") and not policy.get("compound_on_field") and not compound_sent:
                                                 value = {"text": ("第二个" if len(candidates) >= 2 else "第一个") + policy.get("compound_separator", "，") + policy["compound"]}
                                                 compound_sent = True
@@ -255,7 +257,10 @@ async def run(args):
                                             action, value = "approve", {}
                                         else:
                                             raise RuntimeError("unknown_interrupt:" + str(kind))
-                                        response = await request("POST", f"/api/tasks/{task['id']}/resume", json={"interrupt_id": pending["id"], "action": action, "value": value})
+                                        if policy.get("reply_entry") == "composer" and action == "answer" and "text" in value:
+                                            response = await request("POST", f"/api/sessions/{session}/messages", json={"message": value["text"], "mode": "live"})
+                                        else:
+                                            response = await request("POST", f"/api/tasks/{task['id']}/resume", json={"interrupt_id": pending["id"], "action": action, "value": value})
                                         interactions.append({"task_id": task["id"], "kind": kind, "field": field, "action": action, "value": value})
                                         if response.get("created_task_id"):
                                             root_ids.append(response["created_task_id"])

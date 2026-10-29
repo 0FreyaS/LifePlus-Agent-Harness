@@ -31,6 +31,7 @@ class RunContext:
     planner_variant: str = "baseline"
     domain_router: Any = None
     input_event_router: Any = None
+    input_event_policy: str = "llm"
     planning_gate: Any = None
 
     def model_for(self, role: str):

@@ -147,11 +147,15 @@ class JevEventGate(JevEventRouter):
 
 
 def build_event_router(settings):
-    if settings.input_event_provider == "llm":
+    if settings.input_event_provider in {"llm", "llm_direct"}:
         return None
     if not settings.jev_api_key or not settings.jev_api_key.get_secret_value().strip():
-        raise ValueError("INPUT_EVENT_PROVIDER=jev_cascade requires JEV_API_KEY")
-    cls = JevEventGate if settings.input_event_provider == "jev_gate" else JevEventRouter
+        raise ValueError("Configured Jev event provider requires JEV_API_KEY")
+    if settings.input_event_provider == "jev_resume_filter":
+        from .event_resume_filter import JevResumeFilter
+        cls = JevResumeFilter
+    else:
+        cls = JevEventGate if settings.input_event_provider == "jev_gate" else JevEventRouter
     return cls(JevClient(settings.jev_api_key.get_secret_value(), base_url=settings.jev_base_url,
         model=settings.jev_model_name, timeout=settings.jev_timeout_seconds),
         min_confidence=settings.jev_min_confidence, min_probability=settings.jev_min_probability)

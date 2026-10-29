@@ -1,0 +1,1687 @@
+{
+  "all": {
+    "arms": {
+      "baseline": {
+        "tested": 5,
+        "passed": 5,
+        "accuracy_or_completion_rate": 1.0,
+        "errors": 0,
+        "p50_ms": 5452,
+        "p95_ms": 7918,
+        "success_only_p95_ms": 7918,
+        "fallbacks": 0,
+        "model_attempts": 30,
+        "attempts_with_usage": 30,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 18741,
+          "output_tokens": 1132
+        },
+        "observed_total_tokens": 19873,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 19873,
+        "tokens_per_submitted_case": 3974.6,
+        "tokens_per_successful_case": 3974.6,
+        "confusion_matrix": [],
+        "by_group": {
+          "compound": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 7918
+          },
+          "pure_reply": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 5452
+          },
+          "structured_card": {
+            "tested": 1,
+            "passed": 1,
+            "p95_ms": 4327
+          }
+        },
+        "by_stage": {
+          "domain_route_precheck": {
+            "model_attempts": 5,
+            "attempts_with_usage": 5,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 3362,
+              "output_tokens": 400
+            },
+            "observed_total_tokens": 3762,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 3762
+          },
+          "domain_understanding": {
+            "model_attempts": 7,
+            "attempts_with_usage": 7,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 5212,
+              "output_tokens": 215
+            },
+            "observed_total_tokens": 5427,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 5427
+          },
+          "input_events": {
+            "model_attempts": 9,
+            "attempts_with_usage": 9,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 5594,
+              "output_tokens": 274
+            },
+            "observed_total_tokens": 5868,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 5868
+          },
+          "plan": {
+            "model_attempts": 2,
+            "attempts_with_usage": 2,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 1442,
+              "output_tokens": 67
+            },
+            "observed_total_tokens": 1509,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 1509
+          },
+          "response": {
+            "model_attempts": 7,
+            "attempts_with_usage": 7,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 3131,
+              "output_tokens": 176
+            },
+            "observed_total_tokens": 3307,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 3307
+          }
+        }
+      },
+      "candidate": {
+        "tested": 5,
+        "passed": 5,
+        "accuracy_or_completion_rate": 1.0,
+        "errors": 0,
+        "p50_ms": 7595,
+        "p95_ms": 8699,
+        "success_only_p95_ms": 8699,
+        "fallbacks": 5,
+        "model_attempts": 35,
+        "attempts_with_usage": 34,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 21309,
+          "output_tokens": 1202
+        },
+        "observed_total_tokens": 22511,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null,
+        "tokens_per_submitted_case": null,
+        "tokens_per_successful_case": null,
+        "confusion_matrix": [],
+        "by_group": {
+          "compound": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 8699
+          },
+          "pure_reply": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 7595
+          },
+          "structured_card": {
+            "tested": 1,
+            "passed": 1,
+            "p95_ms": 6220
+          }
+        },
+        "by_stage": {
+          "domain_route": {
+            "model_attempts": 1,
+            "attempts_with_usage": 1,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 214,
+              "output_tokens": 6
+            },
+            "observed_total_tokens": 220,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 220
+          },
+          "domain_route_precheck": {
+            "model_attempts": 5,
+            "attempts_with_usage": 4,
+            "attempts_missing_usage": 1,
+            "observed_tokens": {
+              "input_tokens": 2688,
+              "output_tokens": 320
+            },
+            "observed_total_tokens": 3008,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": null
+          },
+          "domain_understanding": {
+            "model_attempts": 7,
+            "attempts_with_usage": 7,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 5209,
+              "output_tokens": 215
+            },
+            "observed_total_tokens": 5424,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 5424
+          },
+          "input_events": {
+            "model_attempts": 9,
+            "attempts_with_usage": 9,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 5592,
+              "output_tokens": 275
+            },
+            "observed_total_tokens": 5867,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 5867
+          },
+          "input_events_precheck": {
+            "model_attempts": 4,
+            "attempts_with_usage": 4,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 3035,
+              "output_tokens": 146
+            },
+            "observed_total_tokens": 3181,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 3181
+          },
+          "plan": {
+            "model_attempts": 2,
+            "attempts_with_usage": 2,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 1442,
+              "output_tokens": 61
+            },
+            "observed_total_tokens": 1503,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 1503
+          },
+          "response": {
+            "model_attempts": 7,
+            "attempts_with_usage": 7,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 3129,
+              "output_tokens": 179
+            },
+            "observed_total_tokens": 3308,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 3308
+          }
+        }
+      }
+    },
+    "paired_cases": 5,
+    "paired_regressions": [],
+    "p50_reduction": -0.39306676449009537,
+    "p95_reduction": -0.09863601919676679,
+    "auto_enable": false,
+    "decision": "evidence_only_not_a_rollout",
+    "prices_applied": false,
+    "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+  },
+  "by_group": {
+    "compound": {
+      "arms": {
+        "baseline": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 7116,
+          "p95_ms": 7918,
+          "success_only_p95_ms": 7918,
+          "fallbacks": 0,
+          "model_attempts": 16,
+          "attempts_with_usage": 16,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 10140,
+            "output_tokens": 595
+          },
+          "observed_total_tokens": 10735,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 10735,
+          "tokens_per_submitted_case": 5367.5,
+          "tokens_per_successful_case": 5367.5,
+          "confusion_matrix": [],
+          "by_group": {
+            "compound": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7918
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1344,
+                "output_tokens": 160
+              },
+              "observed_total_tokens": 1504,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1504
+            },
+            "domain_understanding": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3050,
+                "output_tokens": 126
+              },
+              "observed_total_tokens": 3176,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 3176
+            },
+            "input_events": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2518,
+                "output_tokens": 137
+              },
+              "observed_total_tokens": 2655,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 2655
+            },
+            "plan": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1442,
+                "output_tokens": 67
+              },
+              "observed_total_tokens": 1509,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1509
+            },
+            "response": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1786,
+                "output_tokens": 105
+              },
+              "observed_total_tokens": 1891,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1891
+            }
+          }
+        },
+        "candidate": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 8563,
+          "p95_ms": 8699,
+          "success_only_p95_ms": 8699,
+          "fallbacks": 2,
+          "model_attempts": 18,
+          "attempts_with_usage": 18,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 11662,
+            "output_tokens": 666
+          },
+          "observed_total_tokens": 12328,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 12328,
+          "tokens_per_submitted_case": 6164.0,
+          "tokens_per_successful_case": 6164.0,
+          "confusion_matrix": [],
+          "by_group": {
+            "compound": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 8699
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1344,
+                "output_tokens": 160
+              },
+              "observed_total_tokens": 1504,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1504
+            },
+            "domain_understanding": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3047,
+                "output_tokens": 126
+              },
+              "observed_total_tokens": 3173,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 3173
+            },
+            "input_events": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2517,
+                "output_tokens": 139
+              },
+              "observed_total_tokens": 2656,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 2656
+            },
+            "input_events_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1527,
+                "output_tokens": 74
+              },
+              "observed_total_tokens": 1601,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1601
+            },
+            "plan": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1442,
+                "output_tokens": 61
+              },
+              "observed_total_tokens": 1503,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1503
+            },
+            "response": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1785,
+                "output_tokens": 106
+              },
+              "observed_total_tokens": 1891,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1891
+            }
+          }
+        }
+      },
+      "paired_cases": 2,
+      "paired_regressions": [],
+      "p50_reduction": -0.203344575604272,
+      "p95_reduction": -0.09863601919676679,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "pure_reply": {
+      "arms": {
+        "baseline": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 5373,
+          "p95_ms": 5452,
+          "success_only_p95_ms": 5452,
+          "fallbacks": 0,
+          "model_attempts": 10,
+          "attempts_with_usage": 10,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 6179,
+            "output_tokens": 399
+          },
+          "observed_total_tokens": 6578,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 6578,
+          "tokens_per_submitted_case": 3289.0,
+          "tokens_per_successful_case": 3289.0,
+          "confusion_matrix": [],
+          "by_group": {
+            "pure_reply": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5452
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1344,
+                "output_tokens": 160
+              },
+              "observed_total_tokens": 1504,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1504
+            },
+            "domain_understanding": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1442,
+                "output_tokens": 63
+              },
+              "observed_total_tokens": 1505,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1505
+            },
+            "input_events": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2502,
+                "output_tokens": 123
+              },
+              "observed_total_tokens": 2625,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 2625
+            },
+            "response": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 891,
+                "output_tokens": 53
+              },
+              "observed_total_tokens": 944,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 944
+            }
+          }
+        },
+        "candidate": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 5200,
+          "p95_ms": 7595,
+          "success_only_p95_ms": 7595,
+          "fallbacks": 2,
+          "model_attempts": 12,
+          "attempts_with_usage": 12,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 7686,
+            "output_tokens": 467
+          },
+          "observed_total_tokens": 8153,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 8153,
+          "tokens_per_submitted_case": 4076.5,
+          "tokens_per_successful_case": 4076.5,
+          "confusion_matrix": [],
+          "by_group": {
+            "pure_reply": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7595
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1344,
+                "output_tokens": 160
+              },
+              "observed_total_tokens": 1504,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1504
+            },
+            "domain_understanding": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1442,
+                "output_tokens": 63
+              },
+              "observed_total_tokens": 1505,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1505
+            },
+            "input_events": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2501,
+                "output_tokens": 122
+              },
+              "observed_total_tokens": 2623,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 2623
+            },
+            "input_events_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1508,
+                "output_tokens": 72
+              },
+              "observed_total_tokens": 1580,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1580
+            },
+            "response": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 891,
+                "output_tokens": 50
+              },
+              "observed_total_tokens": 941,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 941
+            }
+          }
+        }
+      },
+      "paired_cases": 2,
+      "paired_regressions": [],
+      "p50_reduction": 0.032198027172901544,
+      "p95_reduction": -0.39306676449009537,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "structured_card": {
+      "arms": {
+        "baseline": {
+          "tested": 1,
+          "passed": 1,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 4327,
+          "p95_ms": 4327,
+          "success_only_p95_ms": 4327,
+          "fallbacks": 0,
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2422,
+            "output_tokens": 138
+          },
+          "observed_total_tokens": 2560,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 2560,
+          "tokens_per_submitted_case": 2560.0,
+          "tokens_per_successful_case": 2560.0,
+          "confusion_matrix": [],
+          "by_group": {
+            "structured_card": {
+              "tested": 1,
+              "passed": 1,
+              "p95_ms": 4327
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 674,
+                "output_tokens": 80
+              },
+              "observed_total_tokens": 754,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 754
+            },
+            "domain_understanding": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 720,
+                "output_tokens": 26
+              },
+              "observed_total_tokens": 746,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 746
+            },
+            "input_events": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 574,
+                "output_tokens": 14
+              },
+              "observed_total_tokens": 588,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 588
+            },
+            "response": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 454,
+                "output_tokens": 18
+              },
+              "observed_total_tokens": 472,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 472
+            }
+          }
+        },
+        "candidate": {
+          "tested": 1,
+          "passed": 1,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 6220,
+          "p95_ms": 6220,
+          "success_only_p95_ms": 6220,
+          "fallbacks": 1,
+          "model_attempts": 5,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 1961,
+            "output_tokens": 69
+          },
+          "observed_total_tokens": 2030,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [],
+          "by_group": {
+            "structured_card": {
+              "tested": 1,
+              "passed": 1,
+              "p95_ms": 6220
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 214,
+                "output_tokens": 6
+              },
+              "observed_total_tokens": 220,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 220
+            },
+            "domain_route_precheck": {
+              "model_attempts": 1,
+              "attempts_with_usage": 0,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 0,
+                "output_tokens": 0
+              },
+              "observed_total_tokens": 0,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            },
+            "domain_understanding": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 720,
+                "output_tokens": 26
+              },
+              "observed_total_tokens": 746,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 746
+            },
+            "input_events": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 574,
+                "output_tokens": 14
+              },
+              "observed_total_tokens": 588,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 588
+            },
+            "response": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 453,
+                "output_tokens": 23
+              },
+              "observed_total_tokens": 476,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 476
+            }
+          }
+        }
+      },
+      "paired_cases": 1,
+      "paired_regressions": [],
+      "p50_reduction": -0.43748555581234116,
+      "p95_reduction": -0.43748555581234116,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    }
+  },
+  "stages": {
+    "baseline": {
+      "domain_route_precheck": {
+        "calls": 5,
+        "p50_ms": 681,
+        "p95_ms": 863,
+        "model_attempts": 5,
+        "attempts_with_usage": 5,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 3362,
+          "output_tokens": 400
+        },
+        "observed_total_tokens": 3762,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 3762
+      },
+      "domain_understanding": {
+        "calls": 7,
+        "p50_ms": 952,
+        "p95_ms": 1455,
+        "model_attempts": 7,
+        "attempts_with_usage": 7,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 5212,
+          "output_tokens": 215
+        },
+        "observed_total_tokens": 5427,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 5427
+      },
+      "plan": {
+        "calls": 2,
+        "p50_ms": 889,
+        "p95_ms": 912,
+        "model_attempts": 2,
+        "attempts_with_usage": 2,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 1442,
+          "output_tokens": 67
+        },
+        "observed_total_tokens": 1509,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 1509
+      },
+      "response": {
+        "calls": 7,
+        "p50_ms": 903,
+        "p95_ms": 1326,
+        "model_attempts": 7,
+        "attempts_with_usage": 7,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 3131,
+          "output_tokens": 176
+        },
+        "observed_total_tokens": 3307,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 3307
+      },
+      "input_events": {
+        "calls": 9,
+        "p50_ms": 971,
+        "p95_ms": 1247,
+        "model_attempts": 9,
+        "attempts_with_usage": 9,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 5594,
+          "output_tokens": 274
+        },
+        "observed_total_tokens": 5868,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 5868
+      }
+    },
+    "candidate": {
+      "domain_route_precheck": {
+        "calls": 5,
+        "p50_ms": 771,
+        "p95_ms": 1502,
+        "model_attempts": 5,
+        "attempts_with_usage": 4,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 2688,
+          "output_tokens": 320
+        },
+        "observed_total_tokens": 3008,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null
+      },
+      "domain_understanding": {
+        "calls": 7,
+        "p50_ms": 1056,
+        "p95_ms": 1418,
+        "model_attempts": 7,
+        "attempts_with_usage": 7,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 5209,
+          "output_tokens": 215
+        },
+        "observed_total_tokens": 5424,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 5424
+      },
+      "plan": {
+        "calls": 2,
+        "p50_ms": 835,
+        "p95_ms": 1128,
+        "model_attempts": 2,
+        "attempts_with_usage": 2,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 1442,
+          "output_tokens": 61
+        },
+        "observed_total_tokens": 1503,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 1503
+      },
+      "response": {
+        "calls": 7,
+        "p50_ms": 869,
+        "p95_ms": 969,
+        "model_attempts": 7,
+        "attempts_with_usage": 7,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 3129,
+          "output_tokens": 179
+        },
+        "observed_total_tokens": 3308,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 3308
+      },
+      "input_events": {
+        "calls": 9,
+        "p50_ms": 962,
+        "p95_ms": 1544,
+        "model_attempts": 9,
+        "attempts_with_usage": 9,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 5592,
+          "output_tokens": 275
+        },
+        "observed_total_tokens": 5867,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 5867
+      },
+      "input_events_precheck": {
+        "calls": 4,
+        "p50_ms": 1114,
+        "p95_ms": 1195,
+        "model_attempts": 4,
+        "attempts_with_usage": 4,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 3035,
+          "output_tokens": 146
+        },
+        "observed_total_tokens": 3181,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 3181
+      },
+      "domain_route": {
+        "calls": 1,
+        "p50_ms": 615,
+        "p95_ms": 615,
+        "model_attempts": 1,
+        "attempts_with_usage": 1,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 214,
+          "output_tokens": 6
+        },
+        "observed_total_tokens": 220,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 220
+      }
+    }
+  },
+  "stages_by_group": {
+    "compound": {
+      "baseline": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 681,
+          "p95_ms": 863,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1344,
+            "output_tokens": 160
+          },
+          "observed_total_tokens": 1504,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1504
+        },
+        "domain_understanding": {
+          "calls": 4,
+          "p50_ms": 952,
+          "p95_ms": 1373,
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 3050,
+            "output_tokens": 126
+          },
+          "observed_total_tokens": 3176,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 3176
+        },
+        "plan": {
+          "calls": 2,
+          "p50_ms": 889,
+          "p95_ms": 912,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1442,
+            "output_tokens": 67
+          },
+          "observed_total_tokens": 1509,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1509
+        },
+        "response": {
+          "calls": 4,
+          "p50_ms": 707,
+          "p95_ms": 1124,
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1786,
+            "output_tokens": 105
+          },
+          "observed_total_tokens": 1891,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1891
+        },
+        "input_events": {
+          "calls": 4,
+          "p50_ms": 971,
+          "p95_ms": 1247,
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2518,
+            "output_tokens": 137
+          },
+          "observed_total_tokens": 2655,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 2655
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 585,
+          "p95_ms": 771,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1344,
+            "output_tokens": 160
+          },
+          "observed_total_tokens": 1504,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1504
+        },
+        "domain_understanding": {
+          "calls": 4,
+          "p50_ms": 1056,
+          "p95_ms": 1418,
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 3047,
+            "output_tokens": 126
+          },
+          "observed_total_tokens": 3173,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 3173
+        },
+        "plan": {
+          "calls": 2,
+          "p50_ms": 835,
+          "p95_ms": 1128,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1442,
+            "output_tokens": 61
+          },
+          "observed_total_tokens": 1503,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1503
+        },
+        "response": {
+          "calls": 4,
+          "p50_ms": 775,
+          "p95_ms": 930,
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1785,
+            "output_tokens": 106
+          },
+          "observed_total_tokens": 1891,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1891
+        },
+        "input_events": {
+          "calls": 4,
+          "p50_ms": 858,
+          "p95_ms": 1286,
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2517,
+            "output_tokens": 139
+          },
+          "observed_total_tokens": 2656,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 2656
+        },
+        "input_events_precheck": {
+          "calls": 2,
+          "p50_ms": 1114,
+          "p95_ms": 1195,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1527,
+            "output_tokens": 74
+          },
+          "observed_total_tokens": 1601,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1601
+        }
+      }
+    },
+    "pure_reply": {
+      "baseline": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 443,
+          "p95_ms": 741,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1344,
+            "output_tokens": 160
+          },
+          "observed_total_tokens": 1504,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1504
+        },
+        "domain_understanding": {
+          "calls": 2,
+          "p50_ms": 916,
+          "p95_ms": 1455,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1442,
+            "output_tokens": 63
+          },
+          "observed_total_tokens": 1505,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1505
+        },
+        "response": {
+          "calls": 2,
+          "p50_ms": 902,
+          "p95_ms": 1119,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 891,
+            "output_tokens": 53
+          },
+          "observed_total_tokens": 944,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 944
+        },
+        "input_events": {
+          "calls": 4,
+          "p50_ms": 834,
+          "p95_ms": 1077,
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2502,
+            "output_tokens": 123
+          },
+          "observed_total_tokens": 2625,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 2625
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 511,
+          "p95_ms": 973,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1344,
+            "output_tokens": 160
+          },
+          "observed_total_tokens": 1504,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1504
+        },
+        "domain_understanding": {
+          "calls": 2,
+          "p50_ms": 835,
+          "p95_ms": 1050,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1442,
+            "output_tokens": 63
+          },
+          "observed_total_tokens": 1505,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1505
+        },
+        "response": {
+          "calls": 2,
+          "p50_ms": 964,
+          "p95_ms": 969,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 891,
+            "output_tokens": 50
+          },
+          "observed_total_tokens": 941,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 941
+        },
+        "input_events": {
+          "calls": 4,
+          "p50_ms": 821,
+          "p95_ms": 1544,
+          "model_attempts": 4,
+          "attempts_with_usage": 4,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2501,
+            "output_tokens": 122
+          },
+          "observed_total_tokens": 2623,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 2623
+        },
+        "input_events_precheck": {
+          "calls": 2,
+          "p50_ms": 532,
+          "p95_ms": 1125,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1508,
+            "output_tokens": 72
+          },
+          "observed_total_tokens": 1580,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1580
+        }
+      }
+    },
+    "structured_card": {
+      "baseline": {
+        "domain_route_precheck": {
+          "calls": 1,
+          "p50_ms": 421,
+          "p95_ms": 421,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 674,
+            "output_tokens": 80
+          },
+          "observed_total_tokens": 754,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 754
+        },
+        "domain_understanding": {
+          "calls": 1,
+          "p50_ms": 879,
+          "p95_ms": 879,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 720,
+            "output_tokens": 26
+          },
+          "observed_total_tokens": 746,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 746
+        },
+        "response": {
+          "calls": 1,
+          "p50_ms": 1326,
+          "p95_ms": 1326,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 454,
+            "output_tokens": 18
+          },
+          "observed_total_tokens": 472,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 472
+        },
+        "input_events": {
+          "calls": 1,
+          "p50_ms": 983,
+          "p95_ms": 983,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 574,
+            "output_tokens": 14
+          },
+          "observed_total_tokens": 588,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 588
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 1,
+          "p50_ms": 1502,
+          "p95_ms": 1502,
+          "model_attempts": 1,
+          "attempts_with_usage": 0,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "observed_total_tokens": 0,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null
+        },
+        "domain_route": {
+          "calls": 1,
+          "p50_ms": 615,
+          "p95_ms": 615,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 214,
+            "output_tokens": 6
+          },
+          "observed_total_tokens": 220,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 220
+        },
+        "domain_understanding": {
+          "calls": 1,
+          "p50_ms": 1404,
+          "p95_ms": 1404,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 720,
+            "output_tokens": 26
+          },
+          "observed_total_tokens": 746,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 746
+        },
+        "response": {
+          "calls": 1,
+          "p50_ms": 821,
+          "p95_ms": 821,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 453,
+            "output_tokens": 23
+          },
+          "observed_total_tokens": 476,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 476
+        },
+        "input_events": {
+          "calls": 1,
+          "p50_ms": 1184,
+          "p95_ms": 1184,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 574,
+            "output_tokens": 14
+          },
+          "observed_total_tokens": 588,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 588
+        }
+      }
+    }
+  },
+  "complete_usage_pairs": {
+    "ids": [
+      "resume-compound-city",
+      "resume-compound-music",
+      "resume-pure-city",
+      "resume-pure-music"
+    ],
+    "summary": {
+      "arms": {
+        "baseline": {
+          "tested": 4,
+          "passed": 4,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 5452,
+          "p95_ms": 7918,
+          "success_only_p95_ms": 7918,
+          "fallbacks": 0,
+          "model_attempts": 26,
+          "attempts_with_usage": 26,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 16319,
+            "output_tokens": 994
+          },
+          "observed_total_tokens": 17313,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 17313,
+          "tokens_per_submitted_case": 4328.25,
+          "tokens_per_successful_case": 4328.25,
+          "confusion_matrix": [],
+          "by_group": {
+            "compound": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7918
+            },
+            "pure_reply": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5452
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2688,
+                "output_tokens": 320
+              },
+              "observed_total_tokens": 3008,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 3008
+            },
+            "domain_understanding": {
+              "model_attempts": 6,
+              "attempts_with_usage": 6,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 4492,
+                "output_tokens": 189
+              },
+              "observed_total_tokens": 4681,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 4681
+            },
+            "input_events": {
+              "model_attempts": 8,
+              "attempts_with_usage": 8,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5020,
+                "output_tokens": 260
+              },
+              "observed_total_tokens": 5280,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 5280
+            },
+            "plan": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1442,
+                "output_tokens": 67
+              },
+              "observed_total_tokens": 1509,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1509
+            },
+            "response": {
+              "model_attempts": 6,
+              "attempts_with_usage": 6,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2677,
+                "output_tokens": 158
+              },
+              "observed_total_tokens": 2835,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 2835
+            }
+          }
+        },
+        "candidate": {
+          "tested": 4,
+          "passed": 4,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 7595,
+          "p95_ms": 8699,
+          "success_only_p95_ms": 8699,
+          "fallbacks": 4,
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 19348,
+            "output_tokens": 1133
+          },
+          "observed_total_tokens": 20481,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 20481,
+          "tokens_per_submitted_case": 5120.25,
+          "tokens_per_successful_case": 5120.25,
+          "confusion_matrix": [],
+          "by_group": {
+            "compound": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 8699
+            },
+            "pure_reply": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7595
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2688,
+                "output_tokens": 320
+              },
+              "observed_total_tokens": 3008,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 3008
+            },
+            "domain_understanding": {
+              "model_attempts": 6,
+              "attempts_with_usage": 6,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 4489,
+                "output_tokens": 189
+              },
+              "observed_total_tokens": 4678,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 4678
+            },
+            "input_events": {
+              "model_attempts": 8,
+              "attempts_with_usage": 8,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5018,
+                "output_tokens": 261
+              },
+              "observed_total_tokens": 5279,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 5279
+            },
+            "input_events_precheck": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3035,
+                "output_tokens": 146
+              },
+              "observed_total_tokens": 3181,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 3181
+            },
+            "plan": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1442,
+                "output_tokens": 61
+              },
+              "observed_total_tokens": 1503,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1503
+            },
+            "response": {
+              "model_attempts": 6,
+              "attempts_with_usage": 6,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2676,
+                "output_tokens": 156
+              },
+              "observed_total_tokens": 2832,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 2832
+            }
+          }
+        }
+      },
+      "paired_cases": 4,
+      "paired_regressions": [],
+      "p50_reduction": -0.39306676449009537,
+      "p95_reduction": -0.09863601919676679,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "scope": "real_model_graph_mcp_isolated_storage",
+  "baseline_model": "grok-4.3",
+  "candidate_model": "deepseek-flash",
+  "candidate_base_url": "https://api.deepseek.com/v1",
+  "candidate_thinking": "disabled",
+  "baseline_thinking_override": null,
+  "domain_route_provider": "jev_cascade",
+  "input_event_provider": "llm",
+  "planning_gate_provider": "rules",
+  "seed": 20261029,
+  "order": "shuffled cases; alternating AB/BA",
+  "concurrency": 1,
+  "case_budget_seconds": 120,
+  "dataset_sha256": "a2e6304927f27e90044d9397f8f298a482daf1b3de896fc59ecf8c0115f67085",
+  "repeated_query_groups": {
+    "weather": 3,
+    "chat": 3
+  },
+  "additional_quality_scenarios": 2,
+  "limitations": "Eight scenario-runs from four query families, not eight independent users. ASGI excludes browser/TCP. Model, provider and candidate thinking mode are changed together; not a pure model-only ablation.",
+  "automatically_deployed": false,
+  "completed_arms": 16
+}

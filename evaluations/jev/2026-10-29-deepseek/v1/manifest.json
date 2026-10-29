@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-10-29T13:12:40.403952+00:00",
+  "model": "deepseek-flash",
+  "model_base_url": "https://api.deepseek.com/v1",
+  "model_thinking": "disabled",
+  "jev_model": "jev-1.14.0",
+  "jev_timeout_seconds": 1.5,
+  "jev_min_confidence": 0.8,
+  "jev_min_probability": 0.9,
+  "seed": 20261029,
+  "sequence": [
+    "local_domain",
+    "global_domain",
+    "local_events",
+    "global_events"
+  ],
+  "datasets": {
+    "domain-e2e.jsonl": "f578af1fa9aac4be481ba8200c1c5d7ab1e54b567d541514db3de796f48b17f4",
+    "events.jsonl": "dbbc68ae24e71082035e1c154b59d5a9ffc12cd30e597a203a1ed1386a7eb571",
+    "domain.jsonl": "e63d9383936a12b92bd8488677fe4bd50dc7a9b91cb1429015add9c07828c137",
+    "events-e2e.jsonl": "42be2cdd6d57ab06711532e2aa1d8467d432a7b0a4a017bfd4093f7e41199a68"
+  },
+  "rollout": "DeepSeek plus existing single-goal Jev; event policies are evidence-only",
+  "completed": [
+    "local_domain",
+    "global_domain",
+    "local_events",
+    "global_events"
+  ]
+}

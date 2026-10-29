@@ -1,0 +1,17 @@
+id,group,arm,model,passed,elapsed_ms,total_tokens,unknown_attempts
+model-weather-r3,weather,baseline,grok-4.3,True,14188,3208,0
+model-weather-r3,weather,candidate,deepseek-flash,True,2786,1988,0
+model-weather-r1,weather,candidate,deepseek-flash,True,3434,1992,0
+model-weather-r1,weather,baseline,grok-4.3,True,14482,3160,0
+model-multi,multi,baseline,grok-4.3,True,23916,6122,0
+model-multi,multi,candidate,deepseek-flash,True,2899,3221,0
+model-chat-r2,chat,candidate,deepseek-flash,True,3535,1117,0
+model-chat-r2,chat,baseline,grok-4.3,True,11270,1765,0
+model-weather-r2,weather,baseline,grok-4.3,True,23952,3275,0
+model-weather-r2,weather,candidate,deepseek-flash,True,3725,1992,0
+model-chat-r3,chat,candidate,deepseek-flash,True,3413,1115,0
+model-chat-r3,chat,baseline,grok-4.3,True,19012,unknown,1
+model-chat-r1,chat,baseline,grok-4.3,True,11815,1629,0
+model-chat-r1,chat,candidate,deepseek-flash,True,3518,1150,0
+model-clarify,clarify,candidate,deepseek-flash,True,3853,1985,0
+model-clarify,clarify,baseline,grok-4.3,True,26460,3491,0

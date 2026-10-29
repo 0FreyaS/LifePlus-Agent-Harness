@@ -118,6 +118,7 @@ async def lifespan(app: FastAPI):
         model_roles=model_roles, planner_variant=settings.planner_variant,
         domain_router=domain_router,
         input_event_router=input_event_router,
+        input_event_policy=settings.input_event_provider,
         planning_gate=planning_gate,
     )
     app.state.locks = {}

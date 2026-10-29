@@ -169,9 +169,12 @@ def compare_e2e(paths, output):
     defaults = {"domain_route_provider": "llm", "input_event_provider": "llm", "planning_gate_provider": "rules"}
     baseline = {field: manifests[0].get(field, default) for field, default in defaults.items()}
     candidate = {field: manifests[1].get(field, default) for field, default in defaults.items()}
-    allowed = {"domain_route_provider": {"llm", "jev_cascade"}, "input_event_provider": {"llm", "jev_cascade", "jev_gate"},
+    allowed = {"domain_route_provider": {"llm", "jev_cascade"}, "input_event_provider": {"llm", "jev_cascade", "jev_gate", "llm_direct", "jev_resume_filter"},
                "planning_gate_provider": {"rules", "jev_cardinality", "jev_front"}}
-    if baseline != defaults or any(candidate[k] not in allowed[k] for k in defaults) or baseline == candidate:
+    event_filter_pair = (baseline["input_event_provider"] == "llm_direct" and candidate["input_event_provider"] == "jev_resume_filter"
+        and baseline["domain_route_provider"] == candidate["domain_route_provider"]
+        and baseline["planning_gate_provider"] == candidate["planning_gate_provider"])
+    if (baseline != defaults and not event_filter_pair) or any(candidate[k] not in allowed[k] for k in defaults) or baseline == candidate:
         raise ValueError("Expected original baseline and at least one Jev candidate module")
     if manifests[0]["started_at"][:10] != manifests[1]["started_at"][:10]:
         raise ValueError("Relative-date cases must be compared on the same date")

@@ -289,3 +289,33 @@ async def test_invalid_text_is_rejected_before_event_model(client, text):
     response = await client.post(f"/api/tasks/{task['id']}/resume", json={"interrupt_id": task["interrupt"]["id"], "action": "answer", "value": {"text": text}})
     assert response.status_code == 422 and model.event_calls == 0
     assert (await client.get(f"/api/tasks/{task['id']}")).json()["status"] == "waiting_user"
+
+
+@pytest.mark.parametrize("policy", ["llm_direct", "jev_resume_filter"])
+async def test_structured_candidate_card_bypasses_both_text_policies(client, monkeypatch, policy):
+    _, task = await pending_music(client)
+    app.state.context.input_event_policy = policy
+    async def forbidden(*args, **kwargs):
+        raise AssertionError("Structured card must not interpret text or call an event model")
+    monkeypatch.setattr("car_agent.api.app.resolve_input", forbidden)
+    response = await client.post(f"/api/tasks/{task['id']}/resume", json={"interrupt_id": task["interrupt"]["id"],
+        "action": "answer", "value": {"index": 2}})
+    assert response.status_code == 200, response.text
+    await until(client, task["id"], "completed")
+
+
+@pytest.mark.parametrize("policy", ["llm_direct", "jev_resume_filter"])
+@pytest.mark.parametrize("action", ["approve", "reject"])
+async def test_structured_approval_card_never_calls_text_interpreter(client, monkeypatch, policy, action):
+    session = (await client.post("/api/sessions")).json()["id"]
+    created = await client.post(f"/api/sessions/{session}/messages", json={"message": "保存行程标题是受控审批测试", "mode": "demo"})
+    task = await until(client, created.json()["task_id"], "waiting_user")
+    assert task["interrupt"]["kind"] == "approval"
+    app.state.context.input_event_policy = policy
+    async def forbidden(*args, **kwargs):
+        raise AssertionError("Approval cards must not invoke text classification")
+    monkeypatch.setattr("car_agent.api.app.resolve_input", forbidden)
+    response = await client.post(f"/api/tasks/{task['id']}/resume", json={"interrupt_id": task["interrupt"]["id"],
+        "action": action, "value": {}})
+    assert response.status_code == 200, response.text
+    await until(client, task["id"], "completed" if action == "approve" else "cancelled")

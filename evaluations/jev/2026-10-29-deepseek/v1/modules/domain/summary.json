@@ -1,0 +1,1887 @@
+{
+  "all": {
+    "arms": {
+      "baseline": {
+        "tested": 21,
+        "passed": 21,
+        "accuracy_or_completion_rate": 1.0,
+        "errors": 0,
+        "p50_ms": 748,
+        "p95_ms": 1316,
+        "success_only_p95_ms": 1316,
+        "fallbacks": 0,
+        "model_attempts": 21,
+        "attempts_with_usage": 21,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 4356,
+          "output_tokens": 138
+        },
+        "observed_total_tokens": 4494,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 4494,
+        "tokens_per_submitted_case": 214.0,
+        "tokens_per_successful_case": 214.0,
+        "confusion_matrix": [
+          {
+            "expected": "chat",
+            "actual": "chat",
+            "count": 3
+          },
+          {
+            "expected": "local_life",
+            "actual": "local_life",
+            "count": 3
+          },
+          {
+            "expected": "music",
+            "actual": "music",
+            "count": 3
+          },
+          {
+            "expected": "navigation",
+            "actual": "navigation",
+            "count": 3
+          },
+          {
+            "expected": "planning",
+            "actual": "planning",
+            "count": 3
+          },
+          {
+            "expected": "weather",
+            "actual": "weather",
+            "count": 3
+          },
+          {
+            "expected": "wellbeing",
+            "actual": "wellbeing",
+            "count": 3
+          }
+        ],
+        "by_group": {
+          "chat": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 845
+          },
+          "context": {
+            "tested": 7,
+            "passed": 7,
+            "p95_ms": 971
+          },
+          "local_life": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 1139
+          },
+          "music": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 686
+          },
+          "navigation": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 1316
+          },
+          "planning": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 1194
+          },
+          "weather": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 779
+          },
+          "wellbeing": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 1820
+          }
+        },
+        "by_stage": {
+          "domain_route": {
+            "model_attempts": 21,
+            "attempts_with_usage": 21,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 4356,
+              "output_tokens": 138
+            },
+            "observed_total_tokens": 4494,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 4494
+          }
+        }
+      },
+      "candidate": {
+        "tested": 21,
+        "passed": 21,
+        "accuracy_or_completion_rate": 1.0,
+        "errors": 0,
+        "p50_ms": 302,
+        "p95_ms": 1232,
+        "success_only_p95_ms": 1232,
+        "fallbacks": 2,
+        "model_attempts": 23,
+        "attempts_with_usage": 22,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 13798,
+          "output_tokens": 1630
+        },
+        "observed_total_tokens": 15428,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null,
+        "tokens_per_submitted_case": null,
+        "tokens_per_successful_case": null,
+        "confusion_matrix": [
+          {
+            "expected": "chat",
+            "actual": "chat",
+            "count": 3
+          },
+          {
+            "expected": "local_life",
+            "actual": "local_life",
+            "count": 3
+          },
+          {
+            "expected": "music",
+            "actual": "music",
+            "count": 3
+          },
+          {
+            "expected": "navigation",
+            "actual": "navigation",
+            "count": 3
+          },
+          {
+            "expected": "planning",
+            "actual": "planning",
+            "count": 3
+          },
+          {
+            "expected": "weather",
+            "actual": "weather",
+            "count": 3
+          },
+          {
+            "expected": "wellbeing",
+            "actual": "wellbeing",
+            "count": 3
+          }
+        ],
+        "by_group": {
+          "chat": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 1004
+          },
+          "context": {
+            "tested": 7,
+            "passed": 7,
+            "p95_ms": 944
+          },
+          "local_life": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 503
+          },
+          "music": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 1071
+          },
+          "navigation": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 2141
+          },
+          "planning": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 265
+          },
+          "weather": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 1087
+          },
+          "wellbeing": {
+            "tested": 2,
+            "passed": 2,
+            "p95_ms": 302
+          }
+        },
+        "by_stage": {
+          "domain_route": {
+            "model_attempts": 2,
+            "attempts_with_usage": 2,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 409,
+              "output_tokens": 12
+            },
+            "observed_total_tokens": 421,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 421
+          },
+          "domain_route_precheck": {
+            "model_attempts": 21,
+            "attempts_with_usage": 20,
+            "attempts_missing_usage": 1,
+            "observed_tokens": {
+              "input_tokens": 13389,
+              "output_tokens": 1618
+            },
+            "observed_total_tokens": 15007,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": null
+          }
+        }
+      }
+    },
+    "paired_cases": 21,
+    "paired_regressions": [],
+    "p50_reduction": 0.5962566844919786,
+    "p95_reduction": 0.06382978723404253,
+    "auto_enable": false,
+    "decision": "evidence_only_not_a_rollout",
+    "prices_applied": false,
+    "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+  },
+  "by_group": {
+    "chat": {
+      "arms": {
+        "baseline": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 837,
+          "p95_ms": 845,
+          "success_only_p95_ms": 845,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 409,
+            "output_tokens": 12
+          },
+          "observed_total_tokens": 421,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 421,
+          "tokens_per_submitted_case": 210.5,
+          "tokens_per_successful_case": 210.5,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 845
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 409,
+                "output_tokens": 12
+              },
+              "observed_total_tokens": 421,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 421
+            }
+          }
+        },
+        "candidate": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 307,
+          "p95_ms": 1004,
+          "success_only_p95_ms": 1004,
+          "fallbacks": 1,
+          "model_attempts": 3,
+          "attempts_with_usage": 3,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1535,
+            "output_tokens": 166
+          },
+          "observed_total_tokens": 1701,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1701,
+          "tokens_per_submitted_case": 850.5,
+          "tokens_per_successful_case": 850.5,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1004
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 204,
+                "output_tokens": 6
+              },
+              "observed_total_tokens": 210,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 210
+            },
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1331,
+                "output_tokens": 160
+              },
+              "observed_total_tokens": 1491,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1491
+            }
+          }
+        }
+      },
+      "paired_cases": 2,
+      "paired_regressions": [],
+      "p50_reduction": 0.6332138590203107,
+      "p95_reduction": -0.18816568047337268,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "context": {
+      "arms": {
+        "baseline": {
+          "tested": 7,
+          "passed": 7,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 744,
+          "p95_ms": 971,
+          "success_only_p95_ms": 971,
+          "fallbacks": 0,
+          "model_attempts": 7,
+          "attempts_with_usage": 7,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1506,
+            "output_tokens": 46
+          },
+          "observed_total_tokens": 1552,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1552,
+          "tokens_per_submitted_case": 221.71428571428572,
+          "tokens_per_successful_case": 221.71428571428572,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 1
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 1
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 1
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 1
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 1
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 1
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 1
+            }
+          ],
+          "by_group": {
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 971
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 7,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1506,
+                "output_tokens": 46
+              },
+              "observed_total_tokens": 1552,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1552
+            }
+          }
+        },
+        "candidate": {
+          "tested": 7,
+          "passed": 7,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 286,
+          "p95_ms": 944,
+          "success_only_p95_ms": 944,
+          "fallbacks": 0,
+          "model_attempts": 7,
+          "attempts_with_usage": 7,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 4767,
+            "output_tokens": 566
+          },
+          "observed_total_tokens": 5333,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 5333,
+          "tokens_per_submitted_case": 761.8571428571429,
+          "tokens_per_successful_case": 761.8571428571429,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 1
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 1
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 1
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 1
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 1
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 1
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 1
+            }
+          ],
+          "by_group": {
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 944
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 7,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 4767,
+                "output_tokens": 566
+              },
+              "observed_total_tokens": 5333,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 5333
+            }
+          }
+        }
+      },
+      "paired_cases": 7,
+      "paired_regressions": [],
+      "p50_reduction": 0.6155913978494624,
+      "p95_reduction": 0.02780638516992795,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "local_life": {
+      "arms": {
+        "baseline": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 616,
+          "p95_ms": 1139,
+          "success_only_p95_ms": 1139,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 406,
+            "output_tokens": 16
+          },
+          "observed_total_tokens": 422,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 422,
+          "tokens_per_submitted_case": 211.0,
+          "tokens_per_successful_case": 211.0,
+          "confusion_matrix": [
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1139
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 406,
+                "output_tokens": 16
+              },
+              "observed_total_tokens": 422,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 422
+            }
+          }
+        },
+        "candidate": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 288,
+          "p95_ms": 503,
+          "success_only_p95_ms": 503,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1329,
+            "output_tokens": 164
+          },
+          "observed_total_tokens": 1493,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1493,
+          "tokens_per_submitted_case": 746.5,
+          "tokens_per_successful_case": 746.5,
+          "confusion_matrix": [
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 503
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1329,
+                "output_tokens": 164
+              },
+              "observed_total_tokens": 1493,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1493
+            }
+          }
+        }
+      },
+      "paired_cases": 2,
+      "paired_regressions": [],
+      "p50_reduction": 0.5324675324675325,
+      "p95_reduction": 0.5583845478489904,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "music": {
+      "arms": {
+        "baseline": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 586,
+          "p95_ms": 686,
+          "success_only_p95_ms": 686,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 409,
+            "output_tokens": 12
+          },
+          "observed_total_tokens": 421,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 421,
+          "tokens_per_submitted_case": 210.5,
+          "tokens_per_successful_case": 210.5,
+          "confusion_matrix": [
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 686
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 409,
+                "output_tokens": 12
+              },
+              "observed_total_tokens": 421,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 421
+            }
+          }
+        },
+        "candidate": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 261,
+          "p95_ms": 1071,
+          "success_only_p95_ms": 1071,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1325,
+            "output_tokens": 160
+          },
+          "observed_total_tokens": 1485,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1485,
+          "tokens_per_submitted_case": 742.5,
+          "tokens_per_successful_case": 742.5,
+          "confusion_matrix": [
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1071
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1325,
+                "output_tokens": 160
+              },
+              "observed_total_tokens": 1485,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1485
+            }
+          }
+        }
+      },
+      "paired_cases": 2,
+      "paired_regressions": [],
+      "p50_reduction": 0.5546075085324231,
+      "p95_reduction": -0.5612244897959184,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "navigation": {
+      "arms": {
+        "baseline": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 769,
+          "p95_ms": 1316,
+          "success_only_p95_ms": 1316,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 410,
+            "output_tokens": 12
+          },
+          "observed_total_tokens": 422,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 422,
+          "tokens_per_submitted_case": 211.0,
+          "tokens_per_successful_case": 211.0,
+          "confusion_matrix": [
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1316
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 410,
+                "output_tokens": 12
+              },
+              "observed_total_tokens": 422,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 422
+            }
+          }
+        },
+        "candidate": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 1232,
+          "p95_ms": 2141,
+          "success_only_p95_ms": 2141,
+          "fallbacks": 1,
+          "model_attempts": 3,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 870,
+            "output_tokens": 86
+          },
+          "observed_total_tokens": 956,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 2141
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 205,
+                "output_tokens": 6
+              },
+              "observed_total_tokens": 211,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 211
+            },
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 665,
+                "output_tokens": 80
+              },
+              "observed_total_tokens": 745,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            }
+          }
+        }
+      },
+      "paired_cases": 2,
+      "paired_regressions": [],
+      "p50_reduction": -0.6020806241872563,
+      "p95_reduction": -0.6268996960486322,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "planning": {
+      "arms": {
+        "baseline": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 567,
+          "p95_ms": 1194,
+          "success_only_p95_ms": 1194,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 406,
+            "output_tokens": 14
+          },
+          "observed_total_tokens": 420,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 420,
+          "tokens_per_submitted_case": 210.0,
+          "tokens_per_successful_case": 210.0,
+          "confusion_matrix": [
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1194
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 406,
+                "output_tokens": 14
+              },
+              "observed_total_tokens": 420,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 420
+            }
+          }
+        },
+        "candidate": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 231,
+          "p95_ms": 265,
+          "success_only_p95_ms": 265,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1324,
+            "output_tokens": 164
+          },
+          "observed_total_tokens": 1488,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1488,
+          "tokens_per_submitted_case": 744.0,
+          "tokens_per_successful_case": 744.0,
+          "confusion_matrix": [
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 265
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1324,
+                "output_tokens": 164
+              },
+              "observed_total_tokens": 1488,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1488
+            }
+          }
+        }
+      },
+      "paired_cases": 2,
+      "paired_regressions": [],
+      "p50_reduction": 0.5925925925925926,
+      "p95_reduction": 0.7780569514237856,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "weather": {
+      "arms": {
+        "baseline": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 744,
+          "p95_ms": 779,
+          "success_only_p95_ms": 779,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 404,
+            "output_tokens": 12
+          },
+          "observed_total_tokens": 416,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 416,
+          "tokens_per_submitted_case": 208.0,
+          "tokens_per_successful_case": 208.0,
+          "confusion_matrix": [
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 779
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 404,
+                "output_tokens": 12
+              },
+              "observed_total_tokens": 416,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 416
+            }
+          }
+        },
+        "candidate": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 532,
+          "p95_ms": 1087,
+          "success_only_p95_ms": 1087,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1322,
+            "output_tokens": 160
+          },
+          "observed_total_tokens": 1482,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1482,
+          "tokens_per_submitted_case": 741.0,
+          "tokens_per_successful_case": 741.0,
+          "confusion_matrix": [
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1087
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1322,
+                "output_tokens": 160
+              },
+              "observed_total_tokens": 1482,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1482
+            }
+          }
+        }
+      },
+      "paired_cases": 2,
+      "paired_regressions": [],
+      "p50_reduction": 0.28494623655913975,
+      "p95_reduction": -0.39537869062901154,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "wellbeing": {
+      "arms": {
+        "baseline": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 635,
+          "p95_ms": 1820,
+          "success_only_p95_ms": 1820,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 406,
+            "output_tokens": 14
+          },
+          "observed_total_tokens": 420,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 420,
+          "tokens_per_submitted_case": 210.0,
+          "tokens_per_successful_case": 210.0,
+          "confusion_matrix": [
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1820
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 406,
+                "output_tokens": 14
+              },
+              "observed_total_tokens": 420,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 420
+            }
+          }
+        },
+        "candidate": {
+          "tested": 2,
+          "passed": 2,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 270,
+          "p95_ms": 302,
+          "success_only_p95_ms": 302,
+          "fallbacks": 0,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1326,
+            "output_tokens": 164
+          },
+          "observed_total_tokens": 1490,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1490,
+          "tokens_per_submitted_case": 745.0,
+          "tokens_per_successful_case": 745.0,
+          "confusion_matrix": [
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 302
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1326,
+                "output_tokens": 164
+              },
+              "observed_total_tokens": 1490,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1490
+            }
+          }
+        }
+      },
+      "paired_cases": 2,
+      "paired_regressions": [],
+      "p50_reduction": 0.5748031496062992,
+      "p95_reduction": 0.8340659340659341,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    }
+  },
+  "stages": {
+    "baseline": {
+      "domain_route": {
+        "calls": 21,
+        "p50_ms": 739,
+        "p95_ms": 1304,
+        "model_attempts": 21,
+        "attempts_with_usage": 21,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 4356,
+          "output_tokens": 138
+        },
+        "observed_total_tokens": 4494,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 4494
+      }
+    },
+    "candidate": {
+      "domain_route_precheck": {
+        "calls": 21,
+        "p50_ms": 280,
+        "p95_ms": 1223,
+        "model_attempts": 21,
+        "attempts_with_usage": 20,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 13389,
+          "output_tokens": 1618
+        },
+        "observed_total_tokens": 15007,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null
+      },
+      "domain_route": {
+        "calls": 2,
+        "p50_ms": 626,
+        "p95_ms": 730,
+        "model_attempts": 2,
+        "attempts_with_usage": 2,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 409,
+          "output_tokens": 12
+        },
+        "observed_total_tokens": 421,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 421
+      }
+    }
+  },
+  "stages_by_group": {
+    "chat": {
+      "baseline": {
+        "domain_route": {
+          "calls": 2,
+          "p50_ms": 827,
+          "p95_ms": 835,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 409,
+            "output_tokens": 12
+          },
+          "observed_total_tokens": 421,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 421
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 255,
+          "p95_ms": 292,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1331,
+            "output_tokens": 160
+          },
+          "observed_total_tokens": 1491,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1491
+        },
+        "domain_route": {
+          "calls": 1,
+          "p50_ms": 730,
+          "p95_ms": 730,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 204,
+            "output_tokens": 6
+          },
+          "observed_total_tokens": 210,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 210
+        }
+      }
+    },
+    "context": {
+      "baseline": {
+        "domain_route": {
+          "calls": 7,
+          "p50_ms": 734,
+          "p95_ms": 954,
+          "model_attempts": 7,
+          "attempts_with_usage": 7,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1506,
+            "output_tokens": 46
+          },
+          "observed_total_tokens": 1552,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1552
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 7,
+          "p50_ms": 272,
+          "p95_ms": 930,
+          "model_attempts": 7,
+          "attempts_with_usage": 7,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 4767,
+            "output_tokens": 566
+          },
+          "observed_total_tokens": 5333,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 5333
+        }
+      }
+    },
+    "local_life": {
+      "baseline": {
+        "domain_route": {
+          "calls": 2,
+          "p50_ms": 603,
+          "p95_ms": 1129,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 406,
+            "output_tokens": 16
+          },
+          "observed_total_tokens": 422,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 422
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 278,
+          "p95_ms": 494,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1329,
+            "output_tokens": 164
+          },
+          "observed_total_tokens": 1493,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1493
+        }
+      }
+    },
+    "music": {
+      "baseline": {
+        "domain_route": {
+          "calls": 2,
+          "p50_ms": 576,
+          "p95_ms": 681,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 409,
+            "output_tokens": 12
+          },
+          "observed_total_tokens": 421,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 421
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 255,
+          "p95_ms": 1059,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1325,
+            "output_tokens": 160
+          },
+          "observed_total_tokens": 1485,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1485
+        }
+      }
+    },
+    "navigation": {
+      "baseline": {
+        "domain_route": {
+          "calls": 2,
+          "p50_ms": 761,
+          "p95_ms": 1304,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 410,
+            "output_tokens": 12
+          },
+          "observed_total_tokens": 422,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 422
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 1223,
+          "p95_ms": 1502,
+          "model_attempts": 2,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 665,
+            "output_tokens": 80
+          },
+          "observed_total_tokens": 745,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null
+        },
+        "domain_route": {
+          "calls": 1,
+          "p50_ms": 626,
+          "p95_ms": 626,
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 205,
+            "output_tokens": 6
+          },
+          "observed_total_tokens": 211,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 211
+        }
+      }
+    },
+    "planning": {
+      "baseline": {
+        "domain_route": {
+          "calls": 2,
+          "p50_ms": 560,
+          "p95_ms": 1182,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 406,
+            "output_tokens": 14
+          },
+          "observed_total_tokens": 420,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 420
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 222,
+          "p95_ms": 251,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1324,
+            "output_tokens": 164
+          },
+          "observed_total_tokens": 1488,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1488
+        }
+      }
+    },
+    "weather": {
+      "baseline": {
+        "domain_route": {
+          "calls": 2,
+          "p50_ms": 733,
+          "p95_ms": 774,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 404,
+            "output_tokens": 12
+          },
+          "observed_total_tokens": 416,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 416
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 528,
+          "p95_ms": 1076,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1322,
+            "output_tokens": 160
+          },
+          "observed_total_tokens": 1482,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1482
+        }
+      }
+    },
+    "wellbeing": {
+      "baseline": {
+        "domain_route": {
+          "calls": 2,
+          "p50_ms": 623,
+          "p95_ms": 1812,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 406,
+            "output_tokens": 14
+          },
+          "observed_total_tokens": 420,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 420
+        }
+      },
+      "candidate": {
+        "domain_route_precheck": {
+          "calls": 2,
+          "p50_ms": 255,
+          "p95_ms": 280,
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 1326,
+            "output_tokens": 164
+          },
+          "observed_total_tokens": 1490,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 1490
+        }
+      }
+    }
+  },
+  "complete_usage_pairs": {
+    "ids": [
+      "chat-3",
+      "chat-4",
+      "context-chat",
+      "context-local_life",
+      "context-music",
+      "context-navigation",
+      "context-planning",
+      "context-weather",
+      "context-wellbeing",
+      "local_life-3",
+      "local_life-4",
+      "music-3",
+      "music-4",
+      "navigation-3",
+      "planning-3",
+      "planning-4",
+      "weather-3",
+      "weather-4",
+      "wellbeing-3",
+      "wellbeing-4"
+    ],
+    "summary": {
+      "arms": {
+        "baseline": {
+          "tested": 20,
+          "passed": 20,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 744,
+          "p95_ms": 1316,
+          "success_only_p95_ms": 1316,
+          "fallbacks": 0,
+          "model_attempts": 20,
+          "attempts_with_usage": 20,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 4151,
+            "output_tokens": 132
+          },
+          "observed_total_tokens": 4283,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 4283,
+          "tokens_per_submitted_case": 214.15,
+          "tokens_per_successful_case": 214.15,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 3
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 3
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 3
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 2
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 3
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 3
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 3
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 845
+            },
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 971
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1139
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 686
+            },
+            "navigation": {
+              "tested": 1,
+              "passed": 1,
+              "p95_ms": 1316
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1194
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 779
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1820
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 20,
+              "attempts_with_usage": 20,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 4151,
+                "output_tokens": 132
+              },
+              "observed_total_tokens": 4283,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 4283
+            }
+          }
+        },
+        "candidate": {
+          "tested": 20,
+          "passed": 20,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 293,
+          "p95_ms": 1087,
+          "success_only_p95_ms": 1087,
+          "fallbacks": 1,
+          "model_attempts": 21,
+          "attempts_with_usage": 21,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 13593,
+            "output_tokens": 1624
+          },
+          "observed_total_tokens": 15217,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 15217,
+          "tokens_per_submitted_case": 760.85,
+          "tokens_per_successful_case": 760.85,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 3
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 3
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 3
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 2
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 3
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 3
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 3
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1004
+            },
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 944
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 503
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1071
+            },
+            "navigation": {
+              "tested": 1,
+              "passed": 1,
+              "p95_ms": 1232
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 265
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1087
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 302
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 204,
+                "output_tokens": 6
+              },
+              "observed_total_tokens": 210,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 210
+            },
+            "domain_route_precheck": {
+              "model_attempts": 20,
+              "attempts_with_usage": 20,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 13389,
+                "output_tokens": 1618
+              },
+              "observed_total_tokens": 15007,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 15007
+            }
+          }
+        }
+      },
+      "paired_cases": 20,
+      "paired_regressions": [],
+      "p50_reduction": 0.6061827956989247,
+      "p95_reduction": 0.17401215805471126,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    }
+  }
+}

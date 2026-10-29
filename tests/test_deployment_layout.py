@@ -31,6 +31,16 @@ def test_compose_configuration_is_valid_without_real_credentials():
                    cwd=ROOT, env=env, check=True, capture_output=True, timeout=15)
 
 
+def test_image_excludes_unused_music_sdk_and_checks_entrypoint_imports():
+    dockerfile = (ROOT / "Dockerfile").read_text()
+    assert "--extra production" in dockerfile
+    assert "--extra music" not in dockerfile
+    assert "import car_agent.api.app, car_agent.mcp_server" in dockerfile
+    service = (ROOT / "src/car_agent/tools/service.py").read_text()
+    assert "smartbox_new.fcg" in service
+    assert "import qqmusic_api" not in service
+
+
 @pytest.mark.asyncio
 async def test_frontend_fallback_never_masks_missing_api_or_assets():
     from car_agent.api.app import app, frontend_dist

@@ -12,7 +12,9 @@ ENV UV_PROJECT_ENVIRONMENT=/opt/venv UV_LINK_MODE=copy
 RUN pip install --no-cache-dir uv==0.10.12
 COPY pyproject.toml uv.lock ./
 COPY src/ ./src/
-RUN uv sync --frozen --no-dev --no-editable --extra music --extra production
+# Music search uses httpx directly; the unused SDK installs conflicting urllib3 packages.
+RUN uv sync --frozen --no-dev --no-editable --extra production \
+    && /opt/venv/bin/python -c "import car_agent.api.app, car_agent.mcp_server"
 
 FROM python:3.12-slim-bookworm AS runtime
 ENV PATH=/opt/venv/bin:$PATH PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 \

@@ -1,0 +1,215 @@
+{
+  "scope": "local_domain_route_only_no_tools",
+  "started_at": "2026-10-29T13:12:41.316764+00:00",
+  "cases": [
+    {
+      "id": "weather-3",
+      "group": "weather",
+      "query": "南京后天天气怎么样",
+      "expected_domain": "weather",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "weather-4",
+      "group": "weather",
+      "query": "上海今晚冷不冷",
+      "expected_domain": "weather",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "navigation-3",
+      "group": "navigation",
+      "query": "查东南大学无锡校区的地址",
+      "expected_domain": "navigation",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "navigation-4",
+      "group": "navigation",
+      "query": "骑行去无锡市图书馆怎么走",
+      "expected_domain": "navigation",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "music-3",
+      "group": "music",
+      "query": "有没有陈奕迅的十年",
+      "expected_domain": "music",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "music-4",
+      "group": "music",
+      "query": "搜一首林俊杰的江南",
+      "expected_domain": "music",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "planning-3",
+      "group": "planning",
+      "query": "列出我创建的提醒",
+      "expected_domain": "planning",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "planning-4",
+      "group": "planning",
+      "query": "查一下已经保存的行程",
+      "expected_domain": "planning",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "wellbeing-3",
+      "group": "wellbeing",
+      "query": "一般成年人如何安排作息",
+      "expected_domain": "wellbeing",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "wellbeing-4",
+      "group": "wellbeing",
+      "query": "日常运动前怎样热身",
+      "expected_domain": "wellbeing",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "local_life-3",
+      "group": "local_life",
+      "query": "查西湖附近的电影院",
+      "expected_domain": "local_life",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "local_life-4",
+      "group": "local_life",
+      "query": "推荐无锡图书馆附近的咖啡店",
+      "expected_domain": "local_life",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "chat-3",
+      "group": "chat",
+      "query": "给我解释一下什么是地理坐标",
+      "expected_domain": "chat",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "chat-4",
+      "group": "chat",
+      "query": "今天心情不错，陪我聊两句",
+      "expected_domain": "chat",
+      "split": "holdout",
+      "memory_brief": "",
+      "source": "人工编写的路由试验，非真实流量"
+    },
+    {
+      "id": "context-weather",
+      "group": "context",
+      "query": "那明天呢",
+      "expected_domain": "weather",
+      "split": "holdout",
+      "memory_brief": "用户上一轮询问了无锡今天的天气。",
+      "source": "人工编写的上下文试验，非真实流量"
+    },
+    {
+      "id": "context-navigation",
+      "group": "context",
+      "query": "改成步行怎么走",
+      "expected_domain": "navigation",
+      "split": "holdout",
+      "memory_brief": "用户上一轮规划了杭州东站到西湖的驾车路线。",
+      "source": "人工编写的上下文试验，非真实流量"
+    },
+    {
+      "id": "context-music",
+      "group": "context",
+      "query": "再找一首他的歌",
+      "expected_domain": "music",
+      "split": "holdout",
+      "memory_brief": "用户刚才搜索了陶喆的歌曲。",
+      "source": "人工编写的上下文试验，非真实流量"
+    },
+    {
+      "id": "context-planning",
+      "group": "context",
+      "query": "我之前存的有哪些",
+      "expected_domain": "planning",
+      "split": "holdout",
+      "memory_brief": "用户刚才保存了一条行程，现在想查看已存行程。",
+      "source": "人工编写的上下文试验，非真实流量"
+    },
+    {
+      "id": "context-wellbeing",
+      "group": "context",
+      "query": "睡前做这个合适吗",
+      "expected_domain": "wellbeing",
+      "split": "holdout",
+      "memory_brief": "用户上一轮讨论一般肩颈放松运动，不涉及诊断或治疗。",
+      "source": "人工编写的上下文试验，非真实流量"
+    },
+    {
+      "id": "context-local_life",
+      "group": "context",
+      "query": "附近还有咖啡店吗",
+      "expected_domain": "local_life",
+      "split": "holdout",
+      "memory_brief": "当前参考地点是无锡市图书馆，用户先前寻找附近饭店。",
+      "source": "人工编写的上下文试验，非真实流量"
+    },
+    {
+      "id": "context-chat",
+      "group": "context",
+      "query": "介绍一下他",
+      "expected_domain": "chat",
+      "split": "holdout",
+      "memory_brief": "用户刚才讨论的歌手是陶喆，现在想了解歌手生平。",
+      "source": "人工编写的上下文试验，非真实流量"
+    }
+  ],
+  "split": "holdout",
+  "repeats": 1,
+  "seed": 20261029,
+  "baseline_model": "deepseek-flash",
+  "candidate_model": "jev-1.14.0",
+  "candidate_url": "https://api.typesafe.ai/v1",
+  "confidence_threshold": 0.8,
+  "probability_threshold": 0.9,
+  "jev_timeout_seconds": 1.5,
+  "case_timeout_seconds": 60,
+  "dataset_sha256": "21fb90bd6b780212f4537dcbcd4d2224234f16c8d55187253c11f26635d55994",
+  "sources": {
+    "src/car_agent/harness.py": "0c3bfe4ca4a25dcbaf3fdba65353be9cfd760390254ed627389ddc25589b5434",
+    "src/car_agent/domain_routing.py": "32927a12735e8baa69565d2cfe364ec957d05a9b0926b851c0a9a4160baaf5b8",
+    "src/car_agent/adapters/jev.py": "b918244f9d6d632aef29b9dd42cbf073d59445000e02e4b56aaa6603503c6df5"
+  },
+  "auto_enable": false,
+  "model": "deepseek-flash",
+  "model_thinking": "disabled",
+  "source_run": "evaluations/runs/deepseek-jev-ab-20261029-01/local-domain"
+}

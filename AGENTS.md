@@ -3,6 +3,10 @@
 Read `docs/PROJECT_MEMORY.md` before explaining or changing architecture. It records the
 2026-10-29 global-goal / domain-execution split and links to the source contracts.
 
+- The user subsequently approved `deepseek-flash` with `MODEL_THINKING=disabled`.
+  Keep domain Jev enabled, event `llm` and planning gate `rules`. Compare Jev against
+  this DeepSeek baseline separately from older Grok evidence; do not enable event
+  filters automatically. See `docs/deepseek-rollout.md`. Credentials stay private.
 - The global model outputs `GoalPlan`: task query, domain, dependencies and bindings.
   Tool selection and domain slots belong to the domain `understand` node.
 - The internal `TaskPlan` still accepts historical action/slots for compatibility;

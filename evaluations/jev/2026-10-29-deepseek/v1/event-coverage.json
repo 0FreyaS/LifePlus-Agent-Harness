@@ -1,0 +1,12 @@
+{
+  "pure_accepted": 4,
+  "pure_submitted": 12,
+  "unsafe_shortcuts": 0,
+  "non_pure_submitted": 24,
+  "raw_filter_returned": 33,
+  "raw_filter_labels_correct": 30,
+  "llm_attempts": {
+    "baseline": 36,
+    "candidate": 32
+  }
+}

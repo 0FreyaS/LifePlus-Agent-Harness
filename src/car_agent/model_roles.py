@@ -14,9 +14,11 @@ def build_models(settings: Any) -> tuple[Any, dict[str, Any]]:
     from langchain_openai import ChatOpenAI
 
     def create(name: str, tokens: int):
+        thinking = getattr(settings, "model_thinking", None)
+        options = {"extra_body": {"thinking": {"type": thinking}}} if thinking else {}
         return ChatOpenAI(base_url=settings.model_base_url, api_key=settings.model_api_key,
                           model=name, temperature=0, timeout=25, max_retries=0,
-                          max_tokens=tokens, stream_usage=settings.model_stream_usage)
+                          max_tokens=tokens, stream_usage=settings.model_stream_usage, **options)
 
     default = create(settings.model_name, settings.model_max_output_tokens)
     roles = {}

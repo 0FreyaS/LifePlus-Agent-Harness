@@ -4,6 +4,8 @@
 
 ## 当前启用决策
 
+2026-10-29后续用户批准基础LLM切为`deepseek-flash`，`MODEL_THINKING=disabled`通过HTTP参数关闭思考；planner/intent/response继承同一模型，不留Grok角色覆盖。保留`DOMAIN_ROUTE_PROVIDER=jev_cascade`、`INPUT_EVENT_PROVIDER=llm`、`PLANNING_GATE_PROVIDER=rules`，事件纯回复过滤仍仅实验。此前Grok测试属于历史基准，不能外推为DeepSeek上的Jev收益。[切换、复现与回滚](deepseek-rollout.md)及[DeepSeek基准配对证据](../evaluations/jev/2026-10-29-deepseek/v1/README.md)分别记录。真实Key不进入Git。
+
 2026-10-29用户明确批准先启用单任务领域仲裁并同步GitHub。本地`.env`和仓库`.env.example`为`DOMAIN_ROUTE_PROVIDER=jev_cascade`、`INPUT_EVENT_PROVIDER=llm`、`PLANNING_GATE_PROVIDER=rules`。需要独立JEV_API_KEY；低分、defer和异常回退原LLM。未显式配置provider时Settings类仍用llm兼容旧部署。仅改变领域分类，其他实验不启用；以下“默认不切换”是此前试验当时的状态，不能用来推翻本次批准。[启用说明](jev-domain-rollout.md)。
 
 本机Docker服务8088已更新，真实天气/歌手介绍两例均completed，Trace确认Jev仲裁且无原domain_route调用；Jev耗时分别1.270/0.769秒，不能当端到端SLA。回归700通过、1跳过。本机基础镜像下载EOF，改用现有依赖加源码层运行，保留旧镜像回滚；未验证全新服务器镜像安装。Jev代码与脱敏实测报告已提交GitHub main，实际Key不提交。

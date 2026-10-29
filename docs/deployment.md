@@ -4,6 +4,8 @@
 
 ## 1. 最小部署
 
+2026-10-29起配置模板与本机基础LLM采用`deepseek-flash`，通过`MODEL_THINKING=disabled`关闭思考；三个模型角色继承同一配置。仍只启用领域Jev，事件纯回复过滤为独立实验，不随模型切换启用。[配置、实测与回滚说明](deepseek-rollout.md)。真实Key仅写私有`.env`，修改后须重建容器，不能仅restart。
+
 需要 Docker Engine 与 Compose 插件。镜像构建使用 Node.js 22 编译前端，Python 3.12 安装 `uv.lock` 中的依赖，包含 music / production extras；最终镜像不需要 Vite、Node.js 或开发依赖。
 
 ```bash

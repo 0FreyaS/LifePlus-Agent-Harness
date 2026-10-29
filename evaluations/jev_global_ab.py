@@ -34,6 +34,9 @@ async def run(args):
             env = {**os.environ, "DOMAIN_ROUTE_PROVIDER": "jev_cascade" if domain_enabled else "llm",
                    "INPUT_EVENT_PROVIDER": ("jev_gate" if args.candidate == "front" else "jev_cascade") if events_enabled else "llm",
                    "PLANNING_GATE_PROVIDER": gate_provider if arm == "candidate" else "rules"}
+            if args.candidate == "resume_filter":
+                env.update(DOMAIN_ROUTE_PROVIDER="jev_cascade", PLANNING_GATE_PROVIDER="rules",
+                    INPUT_EVENT_PROVIDER="llm_direct" if arm == "baseline" else "jev_resume_filter")
             command = [sys.executable, "-m", "evaluations.completion", "--dataset", str(args.dataset),
                        "--output", str(directories[arm]), "--ids", case["id"], "--concurrency", "1",
                        "--case-budget", str(args.case_budget)]
@@ -74,7 +77,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dataset", type=Path, default=Path("evaluations/data/jev-e2e-v1.jsonl"))
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--candidate", choices=("domain", "events", "both", "cardinality", "front"), default="both")
+    parser.add_argument("--candidate", choices=("domain", "events", "both", "cardinality", "front", "resume_filter"), default="both")
     parser.add_argument("--ids")
     parser.add_argument("--case-budget", type=float, default=120)
     parser.add_argument("--seed", type=int, default=20261029)
