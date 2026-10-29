@@ -94,6 +94,42 @@ async def test_independent_domain_tools_are_actually_in_flight_together(api_clie
     await wait_for(api_client, task_id, lambda task: task["status"] == "waiting_user")
 
 
+async def test_per_task_context_preserves_optional_routers_through_actual_graph(api_client):
+    calls = []
+
+    class Router:
+        async def route(self, state):
+            calls.append(state["user_id"])
+            return "weather"
+
+    class Model:
+        def with_structured_output(self, schema, **kwargs):
+            assert schema.__name__ == "WeatherExecutionDecision", "Domain LLM must be replaced in the real task context"
+
+            class Call:
+                async def ainvoke(self, messages):
+                    return {"action": "weather_lookup", "tool_name": "maps_weather", "slots": {"city": "无锡"}}
+            return Call()
+
+        async def astream(self, messages):
+            yield AIMessageChunk(content="受控天气回复")
+
+    async def dispatch(name, arguments, task_id):
+        return {"ok": True, "city": "无锡", "date": "2026-10-29", "day_weather": "晴", "low": 10, "high": 20}
+
+    context = app.state.context
+    context.domain_router = Router()
+    context.llm = Model()
+    context.model_roles = {}
+    context.tool_queue.dispatcher = dispatch
+    task_id, _ = await submit(api_client, "查无锡天气", mode="live")
+    done = await wait_for(api_client, task_id, lambda task: task["status"] in {"completed", "failed"})
+    assert done["status"] == "completed", done
+    assert calls == ["multi-test"]
+    trace = (await api_client.get(f"/api/tasks/{task_id}/trace")).json()
+    assert any(event["type"] == "route.completed" and event.get("source") == "jev_cascade" for event in trace)
+
+
 @pytest.mark.parametrize("variant", ["baseline", "compact"])
 async def test_role_models_reach_children_and_domains_extract_their_own_slots(api_client, variant):
     counts = {"planner": 0, "intent": 0, "response": 0}

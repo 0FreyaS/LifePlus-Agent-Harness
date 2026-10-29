@@ -166,6 +166,18 @@ async def run(args):
     output.mkdir(parents=True)
     anchor = datetime.now(TZ)
     metadata = {"started_at": anchor.isoformat(), "model": settings.model_name,
+        "domain_route_provider": settings.domain_route_provider,
+        "input_event_provider": settings.input_event_provider,
+        "planning_gate_provider": settings.planning_gate_provider,
+        "role_models": {role: getattr(settings, role + "_model_name") or settings.model_name for role in ("planner", "intent", "response")},
+        "execution_conditions": {name: getattr(settings, name) for name in (
+            "model_base_url", "model_max_output_tokens", "model_stream_usage", "planner_variant", "planner_max_output_tokens",
+            "intent_max_output_tokens", "response_max_output_tokens", "runtime_active_seconds", "runtime_model_calls",
+            "runtime_tool_calls", "runtime_resumes", "runtime_refreshes", "runtime_retries", "runtime_graph_steps",
+            "runtime_planning_seconds", "input_event_timeout_seconds", "tool_queue_workers",
+            "tool_queue_timeout_seconds", "tool_queue_max_retries", "memory_history_messages", "memory_history_characters")},
+        "jev": {"model": settings.jev_model_name, "timeout_seconds": settings.jev_timeout_seconds,
+                "min_confidence": settings.jev_min_confidence, "min_probability": settings.jev_min_probability},
         "concurrency": args.concurrency, "case_budget_seconds": args.case_budget,
         "dataset_sha256": hashlib.sha256(dataset.read_bytes()).hexdigest(),
         "selected_ids": [case["id"] for case in cases], "checkpoint_backend": "sqlite",

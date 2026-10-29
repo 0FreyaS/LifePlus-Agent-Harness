@@ -1,5 +1,15 @@
 # LifePlus 评测集 v1
 
+## 2026-10-29 当前架构与 Jev 试验
+
+新增三模块实测：`jev_gate_ab`比较零模型数量粗筛与Jev；`jev_event_ab --strategy jev_gate --front-holdout`验证事件明确性审核；`jev_global_ab --candidate front`验证合并数量/领域判定和事件审核的全局效果。`jev_front_report`从保留原始记录重建[三模块报告](../docs/jev-front-ab-2026-10-29.md)。默认不启用；普通12例与针对性4例分开，不混成总体收益。报告列明429、超时、未知用量和并行试验干扰。
+
+当前全局模型输出不含 action/slots 的 `GoalPlan`，工具选择和槽位提取在领域 `understand`。下文 v1 及旧规划报告保留历史条件，不自动视为新版基线。
+
+Jev 的真实服务试验入口已准备但默认关闭：`.venv/bin/python -m evaluations.jev_ab` 只显示准备状态。填入 `JEV_API_KEY` 后显式添加 `--run-live --output <新目录>`，或通过 `--compare-e2e A目录 B目录 --output <新目录>` 对比现有完成率测试的两组记录。未知用量记 null，失败和回退计入总消耗，父子事件按 span_id 去重，不自动启用候选。完整步骤与边界见 [Jev 接入与 A/B 方案](../docs/jev-integration-and-ab.md)。
+
+已增加事件候选选择的局部配对 `evaluations.jev_event_ab`、真实全链路交替AB/BA `evaluations.jev_global_ab` 和可复算报告生成器 `evaluations.jev_report`。参见 [2026-10-29真实结果](../docs/jev-ab-2026-10-29.md)。`DOMAIN_ROUTE_PROVIDER` 与 `INPUT_EVENT_PROVIDER` 独立配置；默认均为llm。总Token优先采用供应商total_tokens，包含推理但不重复加，流式回复通过stream_usage采集。
+
 ## 规划提速配对 A/B
 
 新增 `planner_cases.py` 的 30 个冻结场景，覆盖单任务标点、独立并行、结果依赖、缺参、上下文和六任务边界。只调用真实规划模型，不执行写工具，也不自动更改默认服务配置。

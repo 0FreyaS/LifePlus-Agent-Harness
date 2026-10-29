@@ -1,0 +1,2144 @@
+{
+  "scope": "authored_real_provider_pilot_not_production",
+  "default_changed": false,
+  "summaries": {
+    "domain": {
+      "arms": {
+        "baseline": {
+          "tested": 21,
+          "passed": 21,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 3551,
+          "p95_ms": 5684,
+          "success_only_p95_ms": 5684,
+          "fallbacks": 0,
+          "model_attempts": 21,
+          "attempts_with_usage": 21,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 8351,
+            "output_tokens": 135
+          },
+          "observed_total_tokens": 15161,
+          "reported_reasoning_tokens": 6675,
+          "total_tokens": 15161,
+          "tokens_per_submitted_case": 721.952380952381,
+          "tokens_per_successful_case": 721.952380952381,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 3
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 3
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 3
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 3
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 3
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 3
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 3
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 4214
+            },
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 4878
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 3360
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5684
+            },
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 3551
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 3759
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 10184
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 4263
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 21,
+              "attempts_with_usage": 21,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 8351,
+                "output_tokens": 135
+              },
+              "observed_total_tokens": 15161,
+              "reported_reasoning_tokens": 6675,
+              "total_tokens": 15161
+            }
+          }
+        },
+        "candidate": {
+          "tested": 21,
+          "passed": 21,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 548,
+          "p95_ms": 1481,
+          "success_only_p95_ms": 1481,
+          "fallbacks": 1,
+          "model_attempts": 22,
+          "attempts_with_usage": 22,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 14447,
+            "output_tokens": 1704
+          },
+          "observed_total_tokens": 16575,
+          "reported_reasoning_tokens": 424,
+          "total_tokens": 16575,
+          "tokens_per_submitted_case": 789.2857142857143,
+          "tokens_per_successful_case": 789.2857142857143,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 3
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 3
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 3
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 3
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 3
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 3
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 3
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 4916
+            },
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 1366
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 783
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1160
+            },
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 815
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1481
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 456
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 272
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 393,
+                "output_tokens": 6
+              },
+              "observed_total_tokens": 823,
+              "reported_reasoning_tokens": 424,
+              "total_tokens": 823
+            },
+            "domain_route_precheck": {
+              "model_attempts": 21,
+              "attempts_with_usage": 21,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 14054,
+                "output_tokens": 1698
+              },
+              "observed_total_tokens": 15752,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 15752
+            }
+          }
+        }
+      },
+      "paired_cases": 21,
+      "paired_regressions": [],
+      "p50_reduction": 0.8456772740073218,
+      "p95_reduction": 0.7394440534834623,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "cardinality": {
+      "arms": {
+        "baseline": {
+          "tested": 30,
+          "passed": 18,
+          "accuracy_or_completion_rate": 0.6,
+          "errors": 0,
+          "p50_ms": 0,
+          "p95_ms": 0,
+          "success_only_p95_ms": 0,
+          "fallbacks": 0,
+          "model_attempts": 0,
+          "attempts_with_usage": 0,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "observed_total_tokens": 0,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 0,
+          "tokens_per_submitted_case": 0.0,
+          "tokens_per_successful_case": 0.0,
+          "confusion_matrix": [
+            {
+              "expected": "multi",
+              "actual": "multi",
+              "count": 12
+            },
+            {
+              "expected": "multi",
+              "actual": "single",
+              "count": 3
+            },
+            {
+              "expected": "single",
+              "actual": "multi",
+              "count": 9
+            },
+            {
+              "expected": "single",
+              "actual": "single",
+              "count": 6
+            }
+          ],
+          "by_group": {
+            "multi": {
+              "tested": 15,
+              "passed": 12,
+              "p95_ms": 0
+            },
+            "single": {
+              "tested": 15,
+              "passed": 6,
+              "p95_ms": 0
+            }
+          },
+          "by_stage": {}
+        },
+        "candidate": {
+          "tested": 30,
+          "passed": 27,
+          "accuracy_or_completion_rate": 0.9,
+          "errors": 0,
+          "p50_ms": 252,
+          "p95_ms": 534,
+          "success_only_p95_ms": 534,
+          "fallbacks": 4,
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 28481,
+            "output_tokens": 3565
+          },
+          "observed_total_tokens": 32046,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 32046,
+          "tokens_per_submitted_case": 1068.2,
+          "tokens_per_successful_case": 1186.888888888889,
+          "confusion_matrix": [
+            {
+              "expected": "multi",
+              "actual": "multi",
+              "count": 14
+            },
+            {
+              "expected": "multi",
+              "actual": "single",
+              "count": 1
+            },
+            {
+              "expected": "single",
+              "actual": "multi",
+              "count": 2
+            },
+            {
+              "expected": "single",
+              "actual": "single",
+              "count": 13
+            }
+          ],
+          "by_group": {
+            "multi": {
+              "tested": 15,
+              "passed": 14,
+              "p95_ms": 534
+            },
+            "single": {
+              "tested": 15,
+              "passed": 13,
+              "p95_ms": 542
+            }
+          },
+          "by_stage": {
+            "planning_gate_precheck": {
+              "model_attempts": 30,
+              "attempts_with_usage": 30,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 28481,
+                "output_tokens": 3565
+              },
+              "observed_total_tokens": 32046,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 32046
+            }
+          }
+        }
+      },
+      "paired_cases": 30,
+      "paired_regressions": [],
+      "p50_reduction": null,
+      "p95_reduction": null,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "events_dev": {
+      "arms": {
+        "baseline": {
+          "tested": 30,
+          "passed": 29,
+          "accuracy_or_completion_rate": 0.9666666666666667,
+          "errors": 1,
+          "p50_ms": 4485,
+          "p95_ms": 17379,
+          "success_only_p95_ms": 17379,
+          "fallbacks": 0,
+          "model_attempts": 17,
+          "attempts_with_usage": 16,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 13651,
+            "output_tokens": 681
+          },
+          "observed_total_tokens": 23402,
+          "reported_reasoning_tokens": 9070,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "cancel",
+              "actual": "cancel",
+              "count": 1
+            },
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 9
+            },
+            {
+              "expected": "clarify",
+              "actual": "error",
+              "count": 1
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 4
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 15
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 17,
+              "passed": 16,
+              "p95_ms": 23980
+            },
+            "rules": {
+              "tested": 13,
+              "passed": 13,
+              "p95_ms": 0
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 17,
+              "attempts_with_usage": 16,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 13651,
+                "output_tokens": 681
+              },
+              "observed_total_tokens": 23402,
+              "reported_reasoning_tokens": 9070,
+              "total_tokens": null
+            }
+          }
+        },
+        "candidate": {
+          "tested": 30,
+          "passed": 29,
+          "accuracy_or_completion_rate": 0.9666666666666667,
+          "errors": 1,
+          "p50_ms": 782,
+          "p95_ms": 10519,
+          "success_only_p95_ms": 10519,
+          "fallbacks": 16,
+          "model_attempts": 25,
+          "attempts_with_usage": 24,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 19056,
+            "output_tokens": 934
+          },
+          "observed_total_tokens": 28430,
+          "reported_reasoning_tokens": 8440,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "cancel",
+              "actual": "cancel",
+              "count": 1
+            },
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 9
+            },
+            {
+              "expected": "clarify",
+              "actual": "error",
+              "count": 1
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 4
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 15
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 17,
+              "passed": 16,
+              "p95_ms": 16666
+            },
+            "rules": {
+              "tested": 13,
+              "passed": 13,
+              "p95_ms": 0
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 16,
+              "attempts_with_usage": 15,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 12811,
+                "output_tokens": 633
+              },
+              "observed_total_tokens": 21884,
+              "reported_reasoning_tokens": 8440,
+              "total_tokens": null
+            },
+            "input_events_precheck": {
+              "model_attempts": 9,
+              "attempts_with_usage": 9,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 6245,
+                "output_tokens": 301
+              },
+              "observed_total_tokens": 6546,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 6546
+            }
+          }
+        }
+      },
+      "paired_cases": 30,
+      "paired_regressions": [],
+      "p50_reduction": 0.8256410256410256,
+      "p95_reduction": 0.3947292709592036,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "events_holdout": {
+      "arms": {
+        "baseline": {
+          "tested": 12,
+          "passed": 12,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 8164,
+          "p95_ms": 18722,
+          "success_only_p95_ms": 18722,
+          "fallbacks": 0,
+          "model_attempts": 11,
+          "attempts_with_usage": 11,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 9313,
+            "output_tokens": 481
+          },
+          "observed_total_tokens": 16980,
+          "reported_reasoning_tokens": 7186,
+          "total_tokens": 16980,
+          "tokens_per_submitted_case": 1415.0,
+          "tokens_per_successful_case": 1415.0,
+          "confusion_matrix": [
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 4
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 1
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 7
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 11,
+              "passed": 11,
+              "p95_ms": 18722
+            },
+            "rules": {
+              "tested": 1,
+              "passed": 1,
+              "p95_ms": 0
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 11,
+              "attempts_with_usage": 11,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 9313,
+                "output_tokens": 481
+              },
+              "observed_total_tokens": 16980,
+              "reported_reasoning_tokens": 7186,
+              "total_tokens": 16980
+            }
+          }
+        },
+        "candidate": {
+          "tested": 12,
+          "passed": 10,
+          "accuracy_or_completion_rate": 0.8333333333333334,
+          "errors": 1,
+          "p50_ms": 11152,
+          "p95_ms": 17340,
+          "success_only_p95_ms": 17340,
+          "fallbacks": 10,
+          "model_attempts": 17,
+          "attempts_with_usage": 17,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 13350,
+            "output_tokens": 682
+          },
+          "observed_total_tokens": 21561,
+          "reported_reasoning_tokens": 7529,
+          "total_tokens": 21561,
+          "tokens_per_submitted_case": 1796.75,
+          "tokens_per_successful_case": 2156.1,
+          "confusion_matrix": [
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 2
+            },
+            {
+              "expected": "clarify",
+              "actual": "error",
+              "count": 1
+            },
+            {
+              "expected": "clarify",
+              "actual": "new",
+              "count": 1
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 1
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 7
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 11,
+              "passed": 9,
+              "p95_ms": 17340
+            },
+            "rules": {
+              "tested": 1,
+              "passed": 1,
+              "p95_ms": 0
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 11,
+              "attempts_with_usage": 11,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 9319,
+                "output_tokens": 482
+              },
+              "observed_total_tokens": 17330,
+              "reported_reasoning_tokens": 7529,
+              "total_tokens": 17330
+            },
+            "input_events_precheck": {
+              "model_attempts": 6,
+              "attempts_with_usage": 6,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 4031,
+                "output_tokens": 200
+              },
+              "observed_total_tokens": 4231,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 4231
+            }
+          }
+        }
+      },
+      "paired_cases": 12,
+      "paired_regressions": [
+        "front06",
+        "holdout03"
+      ],
+      "p50_reduction": -0.3659970602645761,
+      "p95_reduction": 0.07381689990385643,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "global": {
+      "arms": {
+        "baseline": {
+          "tested": 12,
+          "passed": 8,
+          "accuracy_or_completion_rate": 0.6666666666666666,
+          "errors": 1,
+          "p50_ms": 17820,
+          "p95_ms": 43658,
+          "success_only_p95_ms": 43658,
+          "fallbacks": 0,
+          "model_attempts": 39,
+          "attempts_with_usage": 36,
+          "attempts_missing_usage": 3,
+          "observed_tokens": {
+            "input_tokens": 28814,
+            "output_tokens": 1697
+          },
+          "observed_total_tokens": 45674,
+          "reported_reasoning_tokens": 15163,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [],
+          "by_group": {
+            "clarified_completion": {
+              "tested": 2,
+              "passed": 1,
+              "p95_ms": 26153
+            },
+            "event_completion": {
+              "tested": 2,
+              "passed": 1,
+              "p95_ms": 43658
+            },
+            "four_goals": {
+              "tested": 1,
+              "passed": 0,
+              "p95_ms": 15543
+            },
+            "multi_completion": {
+              "tested": 2,
+              "passed": 1,
+              "p95_ms": 25627
+            },
+            "single_completion": {
+              "tested": 5,
+              "passed": 5,
+              "p95_ms": 18252
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 8,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 2833,
+                "output_tokens": 46
+              },
+              "observed_total_tokens": 5232,
+              "reported_reasoning_tokens": 2353,
+              "total_tokens": null
+            },
+            "domain_understanding": {
+              "model_attempts": 11,
+              "attempts_with_usage": 11,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 11401,
+                "output_tokens": 652
+              },
+              "observed_total_tokens": 15946,
+              "reported_reasoning_tokens": 3893,
+              "total_tokens": 15946
+            },
+            "input_events": {
+              "model_attempts": 2,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 848,
+                "output_tokens": 67
+              },
+              "observed_total_tokens": 1581,
+              "reported_reasoning_tokens": 666,
+              "total_tokens": null
+            },
+            "plan": {
+              "model_attempts": 7,
+              "attempts_with_usage": 6,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 5436,
+                "output_tokens": 551
+              },
+              "observed_total_tokens": 9094,
+              "reported_reasoning_tokens": 3107,
+              "total_tokens": null
+            },
+            "response": {
+              "model_attempts": 11,
+              "attempts_with_usage": 11,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 8296,
+                "output_tokens": 381
+              },
+              "observed_total_tokens": 13821,
+              "reported_reasoning_tokens": 5144,
+              "total_tokens": 13821
+            }
+          }
+        },
+        "candidate": {
+          "tested": 12,
+          "passed": 10,
+          "accuracy_or_completion_rate": 0.8333333333333334,
+          "errors": 0,
+          "p50_ms": 18538,
+          "p95_ms": 47566,
+          "success_only_p95_ms": 47566,
+          "fallbacks": 3,
+          "model_attempts": 52,
+          "attempts_with_usage": 51,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 45500,
+            "output_tokens": 3736
+          },
+          "observed_total_tokens": 64892,
+          "reported_reasoning_tokens": 15656,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [],
+          "by_group": {
+            "clarified_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 24890
+            },
+            "event_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 47566
+            },
+            "four_goals": {
+              "tested": 1,
+              "passed": 0,
+              "p95_ms": 18538
+            },
+            "multi_completion": {
+              "tested": 2,
+              "passed": 1,
+              "p95_ms": 26751
+            },
+            "single_completion": {
+              "tested": 5,
+              "passed": 5,
+              "p95_ms": 18570
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 416,
+                "output_tokens": 6
+              },
+              "observed_total_tokens": 724,
+              "reported_reasoning_tokens": 302,
+              "total_tokens": 724
+            },
+            "domain_understanding": {
+              "model_attempts": 13,
+              "attempts_with_usage": 13,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 13305,
+                "output_tokens": 753
+              },
+              "observed_total_tokens": 18666,
+              "reported_reasoning_tokens": 4608,
+              "total_tokens": 18666
+            },
+            "input_events": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1782,
+                "output_tokens": 139
+              },
+              "observed_total_tokens": 3435,
+              "reported_reasoning_tokens": 1514,
+              "total_tokens": 3435
+            },
+            "input_events_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1579,
+                "output_tokens": 66
+              },
+              "observed_total_tokens": 1645,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1645
+            },
+            "plan": {
+              "model_attempts": 5,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 3674,
+                "output_tokens": 464
+              },
+              "observed_total_tokens": 6742,
+              "reported_reasoning_tokens": 2604,
+              "total_tokens": null
+            },
+            "planning_gate_precheck": {
+              "model_attempts": 15,
+              "attempts_with_usage": 15,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 14572,
+                "output_tokens": 1777
+              },
+              "observed_total_tokens": 16349,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 16349
+            },
+            "response": {
+              "model_attempts": 14,
+              "attempts_with_usage": 14,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 10172,
+                "output_tokens": 531
+              },
+              "observed_total_tokens": 17331,
+              "reported_reasoning_tokens": 6628,
+              "total_tokens": 17331
+            }
+          }
+        }
+      },
+      "paired_cases": 12,
+      "paired_regressions": [],
+      "p50_reduction": -0.040291806958473675,
+      "p95_reduction": -0.08951394933345558,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "boundaries": {
+      "arms": {
+        "baseline": {
+          "tested": 4,
+          "passed": 3,
+          "accuracy_or_completion_rate": 0.75,
+          "errors": 0,
+          "p50_ms": 17905,
+          "p95_ms": 24164,
+          "success_only_p95_ms": 24164,
+          "fallbacks": 0,
+          "model_attempts": 12,
+          "attempts_with_usage": 12,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 9730,
+            "output_tokens": 490
+          },
+          "observed_total_tokens": 15381,
+          "reported_reasoning_tokens": 5161,
+          "total_tokens": 15381,
+          "tokens_per_submitted_case": 3845.25,
+          "tokens_per_successful_case": 5127.0,
+          "confusion_matrix": [],
+          "by_group": {
+            "false_negative_planning": {
+              "tested": 1,
+              "passed": 0,
+              "p95_ms": 17056
+            },
+            "false_positive_planning": {
+              "tested": 3,
+              "passed": 3,
+              "p95_ms": 24164
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 417,
+                "output_tokens": 6
+              },
+              "observed_total_tokens": 1454,
+              "reported_reasoning_tokens": 1031,
+              "total_tokens": 1454
+            },
+            "domain_understanding": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3711,
+                "output_tokens": 230
+              },
+              "observed_total_tokens": 5448,
+              "reported_reasoning_tokens": 1507,
+              "total_tokens": 5448
+            },
+            "plan": {
+              "model_attempts": 3,
+              "attempts_with_usage": 3,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2644,
+                "output_tokens": 137
+              },
+              "observed_total_tokens": 3638,
+              "reported_reasoning_tokens": 857,
+              "total_tokens": 3638
+            },
+            "response": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 2958,
+                "output_tokens": 117
+              },
+              "observed_total_tokens": 4841,
+              "reported_reasoning_tokens": 1766,
+              "total_tokens": 4841
+            }
+          }
+        },
+        "candidate": {
+          "tested": 4,
+          "passed": 4,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 15823,
+          "p95_ms": 21964,
+          "success_only_p95_ms": 21964,
+          "fallbacks": 0,
+          "model_attempts": 15,
+          "attempts_with_usage": 15,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 12915,
+            "output_tokens": 1022
+          },
+          "observed_total_tokens": 18503,
+          "reported_reasoning_tokens": 4566,
+          "total_tokens": 18503,
+          "tokens_per_submitted_case": 4625.75,
+          "tokens_per_successful_case": 4625.75,
+          "confusion_matrix": [],
+          "by_group": {
+            "false_negative_planning": {
+              "tested": 1,
+              "passed": 1,
+              "p95_ms": 17766
+            },
+            "false_positive_planning": {
+              "tested": 3,
+              "passed": 3,
+              "p95_ms": 21964
+            }
+          },
+          "by_stage": {
+            "domain_understanding": {
+              "model_attempts": 5,
+              "attempts_with_usage": 5,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 4588,
+                "output_tokens": 278
+              },
+              "observed_total_tokens": 6696,
+              "reported_reasoning_tokens": 1830,
+              "total_tokens": 6696
+            },
+            "plan": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 883,
+                "output_tokens": 68
+              },
+              "observed_total_tokens": 1384,
+              "reported_reasoning_tokens": 433,
+              "total_tokens": 1384
+            },
+            "planning_gate_precheck": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3866,
+                "output_tokens": 473
+              },
+              "observed_total_tokens": 4339,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 4339
+            },
+            "response": {
+              "model_attempts": 5,
+              "attempts_with_usage": 5,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3578,
+                "output_tokens": 203
+              },
+              "observed_total_tokens": 6084,
+              "reported_reasoning_tokens": 2303,
+              "total_tokens": 6084
+            }
+          }
+        }
+      },
+      "paired_cases": 4,
+      "paired_regressions": [],
+      "p50_reduction": 0.11628036861211954,
+      "p95_reduction": 0.09104452905148153,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "events_dev_model_only": {
+      "arms": {
+        "baseline": {
+          "tested": 17,
+          "passed": 16,
+          "accuracy_or_completion_rate": 0.9411764705882353,
+          "errors": 1,
+          "p50_ms": 5038,
+          "p95_ms": 23980,
+          "success_only_p95_ms": 23980,
+          "fallbacks": 0,
+          "model_attempts": 17,
+          "attempts_with_usage": 16,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 13651,
+            "output_tokens": 681
+          },
+          "observed_total_tokens": 23402,
+          "reported_reasoning_tokens": 9070,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 5
+            },
+            {
+              "expected": "clarify",
+              "actual": "error",
+              "count": 1
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 2
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 9
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 17,
+              "passed": 16,
+              "p95_ms": 23980
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 17,
+              "attempts_with_usage": 16,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 13651,
+                "output_tokens": 681
+              },
+              "observed_total_tokens": 23402,
+              "reported_reasoning_tokens": 9070,
+              "total_tokens": null
+            }
+          }
+        },
+        "candidate": {
+          "tested": 17,
+          "passed": 16,
+          "accuracy_or_completion_rate": 0.9411764705882353,
+          "errors": 1,
+          "p50_ms": 6344,
+          "p95_ms": 16666,
+          "success_only_p95_ms": 16666,
+          "fallbacks": 16,
+          "model_attempts": 25,
+          "attempts_with_usage": 24,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 19056,
+            "output_tokens": 934
+          },
+          "observed_total_tokens": 28430,
+          "reported_reasoning_tokens": 8440,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 5
+            },
+            {
+              "expected": "clarify",
+              "actual": "error",
+              "count": 1
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 2
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 9
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 17,
+              "passed": 16,
+              "p95_ms": 16666
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 16,
+              "attempts_with_usage": 15,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 12811,
+                "output_tokens": 633
+              },
+              "observed_total_tokens": 21884,
+              "reported_reasoning_tokens": 8440,
+              "total_tokens": null
+            },
+            "input_events_precheck": {
+              "model_attempts": 9,
+              "attempts_with_usage": 9,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 6245,
+                "output_tokens": 301
+              },
+              "observed_total_tokens": 6546,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 6546
+            }
+          }
+        }
+      },
+      "paired_cases": 17,
+      "paired_regressions": [],
+      "p50_reduction": -0.25922985311631597,
+      "p95_reduction": 0.3050041701417848,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    }
+  },
+  "failures": {
+    "domain": [],
+    "cardinality": [
+      {
+        "id": "count-single-02",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-single-13",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-multi-08",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-single-11",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-single-05",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-single-09",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-single-14",
+        "arm": "candidate",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": [
+          {
+            "stage": "planning_gate_precheck",
+            "provider": "typesafe",
+            "elapsed_ms": 247,
+            "error_type": null
+          }
+        ]
+      },
+      {
+        "id": "count-single-14",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-multi-07",
+        "arm": "candidate",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": [
+          {
+            "stage": "planning_gate_precheck",
+            "provider": "typesafe",
+            "elapsed_ms": 250,
+            "error_type": null
+          }
+        ]
+      },
+      {
+        "id": "count-multi-07",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-single-06",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-single-10",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-single-12",
+        "arm": "candidate",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": [
+          {
+            "stage": "planning_gate_precheck",
+            "provider": "typesafe",
+            "elapsed_ms": 297,
+            "error_type": null
+          }
+        ]
+      },
+      {
+        "id": "count-single-12",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      },
+      {
+        "id": "count-multi-06",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": null,
+        "source": null,
+        "attempts": []
+      }
+    ],
+    "events_dev": [
+      {
+        "id": "llm14",
+        "arm": "candidate",
+        "errors": [],
+        "error_type": "HTTPException",
+        "source": null,
+        "attempts": [
+          {
+            "stage": "input_events_precheck",
+            "provider": "typesafe",
+            "elapsed_ms": 451,
+            "error_type": null
+          },
+          {
+            "stage": "input_events",
+            "provider": null,
+            "elapsed_ms": 319,
+            "error_type": "OpenAIRateLimitError"
+          }
+        ]
+      },
+      {
+        "id": "llm14",
+        "arm": "baseline",
+        "errors": [],
+        "error_type": "HTTPException",
+        "source": null,
+        "attempts": [
+          {
+            "stage": "input_events",
+            "provider": null,
+            "elapsed_ms": 323,
+            "error_type": "OpenAIRateLimitError"
+          }
+        ]
+      }
+    ],
+    "events_holdout": [
+      {
+        "id": "front06",
+        "arm": "candidate",
+        "errors": [],
+        "error_type": "HTTPException",
+        "source": null,
+        "attempts": [
+          {
+            "stage": "input_events",
+            "provider": null,
+            "elapsed_ms": 6527,
+            "error_type": "OutputParserException"
+          },
+          {
+            "stage": "input_events",
+            "provider": null,
+            "elapsed_ms": 5623,
+            "error_type": "OutputParserException"
+          }
+        ]
+      },
+      {
+        "id": "holdout03",
+        "arm": "candidate",
+        "errors": [
+          "route",
+          "new_task_presence"
+        ],
+        "error_type": null,
+        "source": "llm",
+        "attempts": [
+          {
+            "stage": "input_events",
+            "provider": null,
+            "elapsed_ms": 9767,
+            "error_type": null
+          }
+        ]
+      }
+    ],
+    "global": [
+      {
+        "id": "multi_completion-04",
+        "arm": "baseline",
+        "errors": [
+          "goal1:wrong_domain",
+          "goal1:leaf_not_completed",
+          "goal1:missing_successful_tool_receipt:maps_weather",
+          "goal2:missing_task",
+          "unexpected_task_count"
+        ],
+        "error_type": null,
+        "source": null,
+        "attempts": [
+          {
+            "stage": "plan",
+            "provider": null,
+            "elapsed_ms": 25540,
+            "error_type": "OpenAITimeoutError"
+          }
+        ]
+      },
+      {
+        "id": "multi_completion-04",
+        "arm": "candidate",
+        "errors": [
+          "goal1:wrong_domain",
+          "goal1:leaf_not_completed",
+          "goal1:missing_successful_tool_receipt:maps_weather",
+          "goal2:missing_task",
+          "unexpected_task_count"
+        ],
+        "error_type": null,
+        "source": null,
+        "attempts": [
+          {
+            "stage": "planning_gate_precheck",
+            "provider": "typesafe",
+            "elapsed_ms": 581,
+            "error_type": null
+          },
+          {
+            "stage": "plan",
+            "provider": null,
+            "elapsed_ms": 26128,
+            "error_type": "OpenAITimeoutError"
+          }
+        ]
+      },
+      {
+        "id": "jev-four-goals",
+        "arm": "candidate",
+        "errors": [
+          "goal1:wrong_domain",
+          "goal1:leaf_not_completed",
+          "goal1:missing_successful_tool_receipt:maps_weather",
+          "goal2:missing_task",
+          "goal3:missing_task",
+          "goal4:missing_task",
+          "unexpected_task_count"
+        ],
+        "error_type": null,
+        "source": null,
+        "attempts": [
+          {
+            "stage": "planning_gate_precheck",
+            "provider": "typesafe",
+            "elapsed_ms": 953,
+            "error_type": null
+          },
+          {
+            "stage": "plan",
+            "provider": null,
+            "elapsed_ms": 8033,
+            "error_type": "OutputParserException"
+          },
+          {
+            "stage": "plan",
+            "provider": null,
+            "elapsed_ms": 9462,
+            "error_type": "OutputParserException"
+          }
+        ]
+      },
+      {
+        "id": "jev-four-goals",
+        "arm": "baseline",
+        "errors": [
+          "goal1:wrong_domain",
+          "goal1:leaf_not_completed",
+          "goal1:missing_successful_tool_receipt:maps_weather",
+          "goal2:missing_task",
+          "goal3:missing_task",
+          "goal4:missing_task",
+          "unexpected_task_count"
+        ],
+        "error_type": null,
+        "source": null,
+        "attempts": [
+          {
+            "stage": "plan",
+            "provider": null,
+            "elapsed_ms": 7285,
+            "error_type": "OutputParserException"
+          },
+          {
+            "stage": "plan",
+            "provider": null,
+            "elapsed_ms": 8195,
+            "error_type": "OutputParserException"
+          }
+        ]
+      },
+      {
+        "id": "event_completion-01",
+        "arm": "baseline",
+        "errors": [
+          "HTTPStatusError:Server error '503 Service Unavailable' for url 'http://completion-eval/api/tasks/90b23463-3c66-4d5e-a024-404f6736804f/resume'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503"
+        ],
+        "error_type": "HTTPStatusError",
+        "source": null,
+        "attempts": [
+          {
+            "stage": "domain_route",
+            "provider": null,
+            "elapsed_ms": 3983,
+            "error_type": null
+          },
+          {
+            "stage": "domain_understanding",
+            "provider": null,
+            "elapsed_ms": 6616,
+            "error_type": null
+          },
+          {
+            "stage": "input_events",
+            "provider": null,
+            "elapsed_ms": 25001,
+            "error_type": "CancelledError"
+          }
+        ]
+      },
+      {
+        "id": "clarified_completion-29",
+        "arm": "baseline",
+        "errors": [
+          "goal2:wrong_domain",
+          "goal2:leaf_not_completed",
+          "goal2:missing_successful_tool_receipt:search_music"
+        ],
+        "error_type": null,
+        "source": null,
+        "attempts": [
+          {
+            "stage": "domain_route",
+            "provider": null,
+            "elapsed_ms": 10259,
+            "error_type": null
+          },
+          {
+            "stage": "domain_understanding",
+            "provider": null,
+            "elapsed_ms": 10205,
+            "error_type": null
+          },
+          {
+            "stage": "domain_route",
+            "provider": null,
+            "elapsed_ms": 402,
+            "error_type": "OpenAIRateLimitError"
+          },
+          {
+            "stage": "response",
+            "provider": null,
+            "elapsed_ms": 4545,
+            "error_type": null
+          }
+        ]
+      }
+    ],
+    "boundaries": [
+      {
+        "id": "front-implicit-multi",
+        "arm": "baseline",
+        "errors": [
+          "goal2:missing_task",
+          "unexpected_task_count"
+        ],
+        "error_type": null,
+        "source": null,
+        "attempts": [
+          {
+            "stage": "domain_route",
+            "provider": null,
+            "elapsed_ms": 8078,
+            "error_type": null
+          },
+          {
+            "stage": "domain_understanding",
+            "provider": null,
+            "elapsed_ms": 4747,
+            "error_type": null
+          },
+          {
+            "stage": "response",
+            "provider": null,
+            "elapsed_ms": 3539,
+            "error_type": null
+          }
+        ]
+      }
+    ]
+  },
+  "common_known_global": {
+    "case_ids": [
+      "jev-four-goals",
+      "single_completion-01",
+      "single_completion-30",
+      "single_completion-09",
+      "single_completion-23",
+      "event_completion-02",
+      "multi_completion-01",
+      "single_completion-26",
+      "clarified_completion-01"
+    ],
+    "usage": {
+      "baseline": {
+        "model_attempts": 31,
+        "attempts_with_usage": 31,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 23623,
+          "output_tokens": 1462
+        },
+        "observed_total_tokens": 38145,
+        "reported_reasoning_tokens": 13060,
+        "total_tokens": 38145
+      },
+      "candidate": {
+        "model_attempts": 35,
+        "attempts_with_usage": 35,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 30377,
+          "output_tokens": 2640
+        },
+        "observed_total_tokens": 44498,
+        "reported_reasoning_tokens": 11481,
+        "total_tokens": 44498
+      }
+    }
+  },
+  "global_case_results": [
+    {
+      "id": "multi_completion-04",
+      "arm": "baseline",
+      "passed": false,
+      "elapsed_ms": 25627,
+      "failures": [
+        "goal1:wrong_domain",
+        "goal1:leaf_not_completed",
+        "goal1:missing_successful_tool_receipt:maps_weather",
+        "goal2:missing_task",
+        "unexpected_task_count"
+      ],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "multi_completion-04",
+      "arm": "candidate",
+      "passed": false,
+      "elapsed_ms": 26751,
+      "failures": [
+        "goal1:wrong_domain",
+        "goal1:leaf_not_completed",
+        "goal1:missing_successful_tool_receipt:maps_weather",
+        "goal2:missing_task",
+        "unexpected_task_count"
+      ],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 1
+      }
+    },
+    {
+      "id": "jev-four-goals",
+      "arm": "candidate",
+      "passed": false,
+      "elapsed_ms": 18538,
+      "failures": [
+        "goal1:wrong_domain",
+        "goal1:leaf_not_completed",
+        "goal1:missing_successful_tool_receipt:maps_weather",
+        "goal2:missing_task",
+        "goal3:missing_task",
+        "goal4:missing_task",
+        "unexpected_task_count"
+      ],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 1
+      }
+    },
+    {
+      "id": "jev-four-goals",
+      "arm": "baseline",
+      "passed": false,
+      "elapsed_ms": 15543,
+      "failures": [
+        "goal1:wrong_domain",
+        "goal1:leaf_not_completed",
+        "goal1:missing_successful_tool_receipt:maps_weather",
+        "goal2:missing_task",
+        "goal3:missing_task",
+        "goal4:missing_task",
+        "unexpected_task_count"
+      ],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "single_completion-01",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 11502,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "single_completion-01",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 9495,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 1
+      }
+    },
+    {
+      "id": "single_completion-30",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 5680,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 1
+      }
+    },
+    {
+      "id": "single_completion-30",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 10754,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "event_completion-01",
+      "arm": "baseline",
+      "passed": false,
+      "elapsed_ms": 36241,
+      "failures": [
+        "HTTPStatusError:Server error '503 Service Unavailable' for url 'http://completion-eval/api/tasks/90b23463-3c66-4d5e-a024-404f6736804f/resume'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503"
+      ],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "event_completion-01",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 38730,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 1,
+        "planning.precheck.completed": 2
+      }
+    },
+    {
+      "id": "single_completion-09",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 14347,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 1
+      }
+    },
+    {
+      "id": "single_completion-09",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 17820,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "single_completion-23",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 18252,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "single_completion-23",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 18570,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 1
+      }
+    },
+    {
+      "id": "event_completion-02",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 47566,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 1,
+        "planning.precheck.completed": 2
+      }
+    },
+    {
+      "id": "event_completion-02",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 43658,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "multi_completion-01",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 24941,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "multi_completion-01",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 21672,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 1
+      }
+    },
+    {
+      "id": "single_completion-26",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 11133,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 1
+      }
+    },
+    {
+      "id": "single_completion-26",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 15784,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "clarified_completion-01",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 15278,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    },
+    {
+      "id": "clarified_completion-01",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 17434,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 1
+      }
+    },
+    {
+      "id": "clarified_completion-29",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 24890,
+      "failures": [],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 2
+      }
+    },
+    {
+      "id": "clarified_completion-29",
+      "arm": "baseline",
+      "passed": false,
+      "elapsed_ms": 26153,
+      "failures": [
+        "goal2:wrong_domain",
+        "goal2:leaf_not_completed",
+        "goal2:missing_successful_tool_receipt:search_music"
+      ],
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0,
+        "planning.precheck.completed": 0
+      }
+    }
+  ],
+  "source_runs": {
+    "domain": "evaluations/runs/jev-front-domain-20261029-01",
+    "cardinality": "evaluations/runs/jev-cardinality-20261029-01",
+    "events_dev": "evaluations/runs/jev-event-gate-dev-20261029-01",
+    "events_holdout": "evaluations/runs/jev-event-gate-holdout-20261029-01",
+    "global": "evaluations/runs/jev-front-global-20261029-01",
+    "boundaries": "evaluations/runs/jev-front-boundaries-global-20261029-01"
+  }
+}

@@ -1,0 +1,1675 @@
+{
+  "date": "2026-10-29",
+  "baseline_model": "grok-4.3",
+  "decision_model": "jev-1.14.0",
+  "reports": {
+    "领域开发集": {
+      "arms": {
+        "baseline": {
+          "tested": 14,
+          "passed": 13,
+          "accuracy_or_completion_rate": 0.9285714285714286,
+          "errors": 1,
+          "p50_ms": 8118,
+          "p95_ms": 13027,
+          "success_only_p95_ms": 13027,
+          "fallbacks": 0,
+          "model_attempts": 14,
+          "attempts_with_usage": 13,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 5120,
+            "output_tokens": 82
+          },
+          "observed_total_tokens": 9808,
+          "reported_reasoning_tokens": 4606,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 1
+            },
+            {
+              "expected": "chat",
+              "actual": "error",
+              "count": 1
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 2
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 2
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 2
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 2
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 2
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 1,
+              "p95_ms": 8439
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 10426
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 13027
+            },
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 11972
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7276
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5267
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 11401
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 14,
+              "attempts_with_usage": 13,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 5120,
+                "output_tokens": 82
+              },
+              "observed_total_tokens": 9808,
+              "reported_reasoning_tokens": 4606,
+              "total_tokens": null
+            }
+          }
+        },
+        "candidate": {
+          "tested": 14,
+          "passed": 14,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 455,
+          "p95_ms": 1268,
+          "success_only_p95_ms": 1268,
+          "fallbacks": 0,
+          "model_attempts": 14,
+          "attempts_with_usage": 14,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 9280,
+            "output_tokens": 1132
+          },
+          "observed_total_tokens": 10412,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 10412,
+          "tokens_per_submitted_case": 743.7142857142857,
+          "tokens_per_successful_case": 743.7142857142857,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 2
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 2
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 2
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 2
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 2
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 2
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 2
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1268
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1137
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 325
+            },
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 455
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 754
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 707
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 384
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 14,
+              "attempts_with_usage": 14,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 9280,
+                "output_tokens": 1132
+              },
+              "observed_total_tokens": 10412,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 10412
+            }
+          }
+        }
+      },
+      "paired_cases": 14,
+      "paired_regressions": [],
+      "p50_reduction": 0.9439517122443952,
+      "p95_reduction": 0.9026636984724035,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "领域留出集": {
+      "arms": {
+        "baseline": {
+          "tested": 21,
+          "passed": 21,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 4889,
+          "p95_ms": 6877,
+          "success_only_p95_ms": 6877,
+          "fallbacks": 0,
+          "model_attempts": 21,
+          "attempts_with_usage": 21,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 8351,
+            "output_tokens": 138
+          },
+          "observed_total_tokens": 14928,
+          "reported_reasoning_tokens": 6439,
+          "total_tokens": 14928,
+          "tokens_per_submitted_case": 710.8571428571429,
+          "tokens_per_successful_case": 710.8571428571429,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 3
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 3
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 3
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 3
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 3
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 3
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 3
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 6410
+            },
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 5218
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5191
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7221
+            },
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 6877
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5408
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 4889
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 4815
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 21,
+              "attempts_with_usage": 21,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 8351,
+                "output_tokens": 138
+              },
+              "observed_total_tokens": 14928,
+              "reported_reasoning_tokens": 6439,
+              "total_tokens": 14928
+            }
+          }
+        },
+        "candidate": {
+          "tested": 21,
+          "passed": 21,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 582,
+          "p95_ms": 6789,
+          "success_only_p95_ms": 6789,
+          "fallbacks": 3,
+          "model_attempts": 24,
+          "attempts_with_usage": 22,
+          "attempts_missing_usage": 2,
+          "observed_tokens": {
+            "input_tokens": 13909,
+            "output_tokens": 1557
+          },
+          "observed_total_tokens": 16410,
+          "reported_reasoning_tokens": 944,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 3
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 3
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 3
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 3
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 3
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 3
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 3
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7126
+            },
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 1366
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 435
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 582
+            },
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 6789
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5880
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 773
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 736
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 3,
+              "attempts_with_usage": 3,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1181,
+                "output_tokens": 21
+              },
+              "observed_total_tokens": 2146,
+              "reported_reasoning_tokens": 944,
+              "total_tokens": 2146
+            },
+            "domain_route_precheck": {
+              "model_attempts": 21,
+              "attempts_with_usage": 19,
+              "attempts_missing_usage": 2,
+              "observed_tokens": {
+                "input_tokens": 12728,
+                "output_tokens": 1536
+              },
+              "observed_total_tokens": 14264,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            }
+          }
+        }
+      },
+      "paired_cases": 21,
+      "paired_regressions": [],
+      "p50_reduction": 0.8809572509715689,
+      "p95_reduction": 0.012796277446560977,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "事件开发集全部输入": {
+      "arms": {
+        "baseline": {
+          "tested": 30,
+          "passed": 30,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 3458,
+          "p95_ms": 14806,
+          "success_only_p95_ms": 14806,
+          "fallbacks": 0,
+          "model_attempts": 17,
+          "attempts_with_usage": 17,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 14566,
+            "output_tokens": 694
+          },
+          "observed_total_tokens": 25259,
+          "reported_reasoning_tokens": 9999,
+          "total_tokens": 25259,
+          "tokens_per_submitted_case": 841.9666666666667,
+          "tokens_per_successful_case": 841.9666666666667,
+          "confusion_matrix": [
+            {
+              "expected": "cancel",
+              "actual": "cancel",
+              "count": 1
+            },
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 10
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 4
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 15
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 17,
+              "passed": 17,
+              "p95_ms": 17941
+            },
+            "rules": {
+              "tested": 13,
+              "passed": 13,
+              "p95_ms": 0
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 17,
+              "attempts_with_usage": 17,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 14566,
+                "output_tokens": 694
+              },
+              "observed_total_tokens": 25259,
+              "reported_reasoning_tokens": 9999,
+              "total_tokens": 25259
+            }
+          }
+        },
+        "candidate": {
+          "tested": 30,
+          "passed": 30,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 656,
+          "p95_ms": 11976,
+          "success_only_p95_ms": 11976,
+          "fallbacks": 14,
+          "model_attempts": 31,
+          "attempts_with_usage": 28,
+          "attempts_missing_usage": 3,
+          "observed_tokens": {
+            "input_tokens": 23744,
+            "output_tokens": 1303
+          },
+          "observed_total_tokens": 33283,
+          "reported_reasoning_tokens": 8236,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "cancel",
+              "actual": "cancel",
+              "count": 1
+            },
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 10
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 4
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 15
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 17,
+              "passed": 17,
+              "p95_ms": 12839
+            },
+            "rules": {
+              "tested": 13,
+              "passed": 13,
+              "p95_ms": 0
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 14,
+              "attempts_with_usage": 14,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 11911,
+                "output_tokens": 607
+              },
+              "observed_total_tokens": 20754,
+              "reported_reasoning_tokens": 8236,
+              "total_tokens": 20754
+            },
+            "input_events_precheck": {
+              "model_attempts": 17,
+              "attempts_with_usage": 14,
+              "attempts_missing_usage": 3,
+              "observed_tokens": {
+                "input_tokens": 11833,
+                "output_tokens": 696
+              },
+              "observed_total_tokens": 12529,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            }
+          }
+        }
+      },
+      "paired_cases": 30,
+      "paired_regressions": [],
+      "p50_reduction": 0.810294968189705,
+      "p95_reduction": 0.19113872754288797,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "事件留出集": {
+      "arms": {
+        "baseline": {
+          "tested": 6,
+          "passed": 6,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 4925,
+          "p95_ms": 9142,
+          "success_only_p95_ms": 9142,
+          "fallbacks": 0,
+          "model_attempts": 6,
+          "attempts_with_usage": 6,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 5094,
+            "output_tokens": 262
+          },
+          "observed_total_tokens": 8941,
+          "reported_reasoning_tokens": 3585,
+          "total_tokens": 8941,
+          "tokens_per_submitted_case": 1490.1666666666667,
+          "tokens_per_successful_case": 1490.1666666666667,
+          "confusion_matrix": [
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 2
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 4
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 6,
+              "passed": 6,
+              "p95_ms": 9142
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 6,
+              "attempts_with_usage": 6,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5094,
+                "output_tokens": 262
+              },
+              "observed_total_tokens": 8941,
+              "reported_reasoning_tokens": 3585,
+              "total_tokens": 8941
+            }
+          }
+        },
+        "candidate": {
+          "tested": 6,
+          "passed": 5,
+          "accuracy_or_completion_rate": 0.8333333333333334,
+          "errors": 1,
+          "p50_ms": 4439,
+          "p95_ms": 18476,
+          "success_only_p95_ms": 6566,
+          "fallbacks": 6,
+          "model_attempts": 13,
+          "attempts_with_usage": 13,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 11026,
+            "output_tokens": 603
+          },
+          "observed_total_tokens": 15828,
+          "reported_reasoning_tokens": 4199,
+          "total_tokens": 15828,
+          "tokens_per_submitted_case": 2638.0,
+          "tokens_per_successful_case": 3165.6,
+          "confusion_matrix": [
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 1
+            },
+            {
+              "expected": "clarify",
+              "actual": "error",
+              "count": 1
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 4
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 6,
+              "passed": 5,
+              "p95_ms": 18476
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 7,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5978,
+                "output_tokens": 299
+              },
+              "observed_total_tokens": 10476,
+              "reported_reasoning_tokens": 4199,
+              "total_tokens": 10476
+            },
+            "input_events_precheck": {
+              "model_attempts": 6,
+              "attempts_with_usage": 6,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5048,
+                "output_tokens": 304
+              },
+              "observed_total_tokens": 5352,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 5352
+            }
+          }
+        }
+      },
+      "paired_cases": 6,
+      "paired_regressions": [
+        "holdout06"
+      ],
+      "p50_reduction": 0.09868020304568526,
+      "p95_reduction": -1.0210019689345877,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "真实全链路": {
+      "arms": {
+        "baseline": {
+          "tested": 12,
+          "passed": 11,
+          "accuracy_or_completion_rate": 0.9166666666666666,
+          "errors": 0,
+          "p50_ms": 22270,
+          "p95_ms": 41042,
+          "success_only_p95_ms": 41042,
+          "fallbacks": 0,
+          "model_attempts": 49,
+          "attempts_with_usage": 49,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 39073,
+            "output_tokens": 2623
+          },
+          "observed_total_tokens": 63671,
+          "reported_reasoning_tokens": 21975,
+          "total_tokens": 63671,
+          "tokens_per_submitted_case": 5305.916666666667,
+          "tokens_per_successful_case": 5788.272727272727,
+          "confusion_matrix": [],
+          "by_group": {
+            "clarified_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 22600
+            },
+            "event_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 41042
+            },
+            "four_goals": {
+              "tested": 1,
+              "passed": 0,
+              "p95_ms": 28453
+            },
+            "multi_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 39345
+            },
+            "single_completion": {
+              "tested": 5,
+              "passed": 5,
+              "p95_ms": 24353
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 9,
+              "attempts_with_usage": 9,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3671,
+                "output_tokens": 58
+              },
+              "observed_total_tokens": 6547,
+              "reported_reasoning_tokens": 2818,
+              "total_tokens": 6547
+            },
+            "domain_understanding": {
+              "model_attempts": 15,
+              "attempts_with_usage": 15,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 15699,
+                "output_tokens": 1048
+              },
+              "observed_total_tokens": 22618,
+              "reported_reasoning_tokens": 5871,
+              "total_tokens": 22618
+            },
+            "input_events": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1772,
+                "output_tokens": 134
+              },
+              "observed_total_tokens": 3325,
+              "reported_reasoning_tokens": 1419,
+              "total_tokens": 3325
+            },
+            "plan": {
+              "model_attempts": 7,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 6329,
+                "output_tokens": 620
+              },
+              "observed_total_tokens": 11191,
+              "reported_reasoning_tokens": 4242,
+              "total_tokens": 11191
+            },
+            "response": {
+              "model_attempts": 16,
+              "attempts_with_usage": 16,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 11602,
+                "output_tokens": 763
+              },
+              "observed_total_tokens": 19990,
+              "reported_reasoning_tokens": 7625,
+              "total_tokens": 19990
+            }
+          }
+        },
+        "candidate": {
+          "tested": 12,
+          "passed": 11,
+          "accuracy_or_completion_rate": 0.9166666666666666,
+          "errors": 0,
+          "p50_ms": 16953,
+          "p95_ms": 36384,
+          "success_only_p95_ms": 36384,
+          "fallbacks": 4,
+          "model_attempts": 52,
+          "attempts_with_usage": 48,
+          "attempts_missing_usage": 4,
+          "observed_tokens": {
+            "input_tokens": 40093,
+            "output_tokens": 2920
+          },
+          "observed_total_tokens": 59635,
+          "reported_reasoning_tokens": 16622,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [],
+          "by_group": {
+            "clarified_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 23771
+            },
+            "event_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 36384
+            },
+            "four_goals": {
+              "tested": 1,
+              "passed": 0,
+              "p95_ms": 15031
+            },
+            "multi_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 35227
+            },
+            "single_completion": {
+              "tested": 5,
+              "passed": 5,
+              "p95_ms": 19922
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 806,
+                "output_tokens": 13
+              },
+              "observed_total_tokens": 1397,
+              "reported_reasoning_tokens": 578,
+              "total_tokens": 1397
+            },
+            "domain_route_precheck": {
+              "model_attempts": 9,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 2,
+              "observed_tokens": {
+                "input_tokens": 4788,
+                "output_tokens": 560
+              },
+              "observed_total_tokens": 5348,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            },
+            "domain_understanding": {
+              "model_attempts": 15,
+              "attempts_with_usage": 15,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 15703,
+                "output_tokens": 1048
+              },
+              "observed_total_tokens": 22377,
+              "reported_reasoning_tokens": 5626,
+              "total_tokens": 22377
+            },
+            "input_events": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1772,
+                "output_tokens": 134
+              },
+              "observed_total_tokens": 3127,
+              "reported_reasoning_tokens": 1221,
+              "total_tokens": 3127
+            },
+            "input_events_precheck": {
+              "model_attempts": 2,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 991,
+                "output_tokens": 51
+              },
+              "observed_total_tokens": 1042,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            },
+            "plan": {
+              "model_attempts": 6,
+              "attempts_with_usage": 5,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 4438,
+                "output_tokens": 321
+              },
+              "observed_total_tokens": 6712,
+              "reported_reasoning_tokens": 1953,
+              "total_tokens": null
+            },
+            "response": {
+              "model_attempts": 16,
+              "attempts_with_usage": 16,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 11595,
+                "output_tokens": 793
+              },
+              "observed_total_tokens": 19632,
+              "reported_reasoning_tokens": 7244,
+              "total_tokens": 19632
+            }
+          }
+        }
+      },
+      "paired_cases": 12,
+      "paired_regressions": [],
+      "p50_reduction": 0.23875168387965873,
+      "p95_reduction": 0.11349349446908041,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "事件开发集需模型子集": {
+      "arms": {
+        "baseline": {
+          "tested": 17,
+          "passed": 17,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 5780,
+          "p95_ms": 17941,
+          "success_only_p95_ms": 17941,
+          "fallbacks": 0,
+          "model_attempts": 17,
+          "attempts_with_usage": 17,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 14566,
+            "output_tokens": 694
+          },
+          "observed_total_tokens": 25259,
+          "reported_reasoning_tokens": 9999,
+          "total_tokens": 25259,
+          "tokens_per_submitted_case": 1485.8235294117646,
+          "tokens_per_successful_case": 1485.8235294117646,
+          "confusion_matrix": [
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 6
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 2
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 9
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 17,
+              "passed": 17,
+              "p95_ms": 17941
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 17,
+              "attempts_with_usage": 17,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 14566,
+                "output_tokens": 694
+              },
+              "observed_total_tokens": 25259,
+              "reported_reasoning_tokens": 9999,
+              "total_tokens": 25259
+            }
+          }
+        },
+        "candidate": {
+          "tested": 17,
+          "passed": 17,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 6054,
+          "p95_ms": 12839,
+          "success_only_p95_ms": 12839,
+          "fallbacks": 14,
+          "model_attempts": 31,
+          "attempts_with_usage": 28,
+          "attempts_missing_usage": 3,
+          "observed_tokens": {
+            "input_tokens": 23744,
+            "output_tokens": 1303
+          },
+          "observed_total_tokens": 33283,
+          "reported_reasoning_tokens": 8236,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 6
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 2
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 9
+            }
+          ],
+          "by_group": {
+            "requires_model": {
+              "tested": 17,
+              "passed": 17,
+              "p95_ms": 12839
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 14,
+              "attempts_with_usage": 14,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 11911,
+                "output_tokens": 607
+              },
+              "observed_total_tokens": 20754,
+              "reported_reasoning_tokens": 8236,
+              "total_tokens": 20754
+            },
+            "input_events_precheck": {
+              "model_attempts": 17,
+              "attempts_with_usage": 14,
+              "attempts_missing_usage": 3,
+              "observed_tokens": {
+                "input_tokens": 11833,
+                "output_tokens": 696
+              },
+              "observed_total_tokens": 12529,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            }
+          }
+        }
+      },
+      "paired_cases": 17,
+      "paired_regressions": [],
+      "p50_reduction": -0.04740484429065739,
+      "p95_reduction": 0.28437656763837016,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    }
+  },
+  "global_manifest": {
+    "scope": "real_model_graph_mcp_storage_paired_pilot",
+    "started_at": "2026-10-29T06:35:02.736219+00:00",
+    "cases": [
+      "multi_completion-04",
+      "jev-four-goals",
+      "single_completion-01",
+      "single_completion-30",
+      "event_completion-01",
+      "single_completion-09",
+      "single_completion-23",
+      "event_completion-02",
+      "multi_completion-01",
+      "single_completion-26",
+      "clarified_completion-01",
+      "clarified_completion-29"
+    ],
+    "candidate": "both",
+    "seed": 20261029,
+    "dataset_sha256": "f578af1fa9aac4be481ba8200c1c5d7ab1e54b567d541514db3de796f48b17f4",
+    "case_budget_seconds": 120.0,
+    "concurrency": 1,
+    "order": "alternating AB/BA by shuffled case",
+    "auto_enable": false,
+    "limitations": "Each case/arm has a fresh process and isolated storage. No browser/TCP cost or real human waiting."
+  },
+  "default_providers_changed": false,
+  "excluded_run": {
+    "directory": "jev-global-20261029-01",
+    "reason": "per-task context omitted domain_router; not a valid both-module experiment"
+  },
+  "global_cases": [
+    {
+      "id": "multi_completion-04",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 39345,
+      "group": "multi_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "multi_completion-04",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 35227,
+      "group": "multi_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "jev-four-goals",
+      "arm": "candidate",
+      "passed": false,
+      "elapsed_ms": 15031,
+      "group": "four_goals",
+      "goals_completed": 0,
+      "goals_total": 4,
+      "failures": [
+        "goal1:wrong_domain",
+        "goal1:leaf_not_completed",
+        "goal1:missing_successful_tool_receipt:maps_weather",
+        "goal2:missing_task",
+        "goal3:missing_task",
+        "goal4:missing_task",
+        "unexpected_task_count"
+      ],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": [
+        {
+          "stage": "plan",
+          "error_type": "OpenAIConnectionError",
+          "elapsed_ms": 14958
+        }
+      ]
+    },
+    {
+      "id": "jev-four-goals",
+      "arm": "baseline",
+      "passed": false,
+      "elapsed_ms": 28453,
+      "group": "four_goals",
+      "goals_completed": 0,
+      "goals_total": 4,
+      "failures": [
+        "goal1:wrong_domain",
+        "goal1:leaf_not_completed",
+        "goal1:missing_successful_tool_receipt:maps_weather",
+        "goal2:missing_task",
+        "goal3:missing_task",
+        "goal4:missing_task",
+        "unexpected_task_count"
+      ],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": [
+        {
+          "stage": "plan",
+          "error_type": "OutputParserException",
+          "elapsed_ms": 13728
+        },
+        {
+          "stage": "plan",
+          "error_type": "OutputParserException",
+          "elapsed_ms": 14598
+        }
+      ]
+    },
+    {
+      "id": "single_completion-01",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 18560,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "single_completion-01",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 12727,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 1,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "single_completion-30",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 14074,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "single_completion-30",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 13281,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "event_completion-01",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 41042,
+      "group": "event_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "event_completion-01",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 29751,
+      "group": "event_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 2,
+        "input.precheck.completed": 1
+      },
+      "model_failures": []
+    },
+    {
+      "id": "single_completion-09",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 14125,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 1,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "single_completion-09",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 18122,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "single_completion-23",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 24353,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "single_completion-23",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 19922,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 1,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "event_completion-02",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 36384,
+      "group": "event_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 1,
+        "input.precheck.completed": 1
+      },
+      "model_failures": [
+        {
+          "stage": "input_events_precheck",
+          "error_type": "TimeoutError",
+          "elapsed_ms": 1502
+        }
+      ]
+    },
+    {
+      "id": "event_completion-02",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 36183,
+      "group": "event_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "multi_completion-01",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 22270,
+      "group": "multi_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "multi_completion-01",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 16953,
+      "group": "multi_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "single_completion-26",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 12676,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "single_completion-26",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 17213,
+      "group": "single_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "clarified_completion-01",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 16495,
+      "group": "clarified_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    },
+    {
+      "id": "clarified_completion-01",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 19777,
+      "group": "clarified_completion",
+      "goals_completed": 1,
+      "goals_total": 1,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 1,
+        "input.precheck.completed": 0
+      },
+      "model_failures": [
+        {
+          "stage": "domain_route_precheck",
+          "error_type": "TimeoutError",
+          "elapsed_ms": 1502
+        }
+      ]
+    },
+    {
+      "id": "clarified_completion-29",
+      "arm": "candidate",
+      "passed": true,
+      "elapsed_ms": 23771,
+      "group": "clarified_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 2,
+        "input.precheck.completed": 0
+      },
+      "model_failures": [
+        {
+          "stage": "domain_route_precheck",
+          "error_type": "TimeoutError",
+          "elapsed_ms": 1503
+        }
+      ]
+    },
+    {
+      "id": "clarified_completion-29",
+      "arm": "baseline",
+      "passed": true,
+      "elapsed_ms": 22600,
+      "group": "clarified_completion",
+      "goals_completed": 2,
+      "goals_total": 2,
+      "failures": [],
+      "error_type": null,
+      "precheck_counts": {
+        "domain.precheck.completed": 0,
+        "input.precheck.completed": 0
+      },
+      "model_failures": []
+    }
+  ]
+}

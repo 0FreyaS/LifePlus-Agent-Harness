@@ -19,6 +19,7 @@ def test_baseline_is_default_and_roles_are_opt_in():
     base, roles = build_models(settings)
     assert roles == {} and base.max_tokens == settings.model_max_output_tokens
     assert base.max_retries == 0
+    assert base.stream_usage is True
 
 
 def test_compact_has_separate_planner_client_but_same_model():

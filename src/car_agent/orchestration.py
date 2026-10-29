@@ -78,10 +78,11 @@ class TaskCoordinator:
             brief += "\n有效会话引用：" + json.dumps(memory["conversation_references"], ensure_ascii=False)
             async with execution_scope(self.db, task_id, self.app.state.context.limits, "planning"):
                 context = self.app.state.context
+                gate_options = {"gate": context.planning_gate} if getattr(context, "planning_gate", None) else {}
                 if context.planner_variant == "compact":
-                    plan = await plan_tasks(query, mode, context.model_for("planner"), brief, variant="compact")
+                    plan = await plan_tasks(query, mode, context.model_for("planner"), brief, variant="compact", **gate_options)
                 else:
-                    plan = await plan_tasks(query, mode, context.model_for("planner"), brief)
+                    plan = await plan_tasks(query, mode, context.model_for("planner"), brief, **gate_options)
             if plan is None or len(plan.tasks) == 1:
                 if plan:
                     await self.db.execute("UPDATE tasks SET plan_json=? WHERE id=?",

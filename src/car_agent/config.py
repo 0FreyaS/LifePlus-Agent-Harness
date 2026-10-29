@@ -36,6 +36,7 @@ class Settings(BaseSettings):
     runtime_retries: int = Field(default=3, ge=1, le=20)
     runtime_graph_steps: int = Field(default=64, ge=8, le=500)
     model_max_output_tokens: int = Field(default=2048, ge=128, le=8192)
+    model_stream_usage: bool = True
     planner_variant: Literal["baseline", "compact"] = "baseline"
     planner_model_name: str | None = None
     intent_model_name: str | None = None
@@ -43,6 +44,15 @@ class Settings(BaseSettings):
     planner_max_output_tokens: int = Field(default=1536, ge=512, le=8192)
     intent_max_output_tokens: int | None = Field(default=None, ge=128, le=8192)
     response_max_output_tokens: int | None = Field(default=None, ge=128, le=8192)
+    domain_route_provider: Literal["llm", "jev_cascade"] = "llm"
+    input_event_provider: Literal["llm", "jev_cascade", "jev_gate"] = "llm"
+    planning_gate_provider: Literal["rules", "jev_cardinality", "jev_front"] = "rules"
+    jev_api_key: SecretStr | None = None
+    jev_base_url: str = "https://api.typesafe.ai/v1"
+    jev_model_name: str = "jev-1.14.0"
+    jev_timeout_seconds: float = Field(default=1.5, gt=0, le=25)
+    jev_min_confidence: float = Field(default=0.8, ge=0, le=1)
+    jev_min_probability: float = Field(default=0.9, ge=0, le=1)
     memory_history_messages: int = 12
     memory_history_characters: int = 12000
     freshness_context_seconds: float = Field(default=1800, gt=0, le=86400)

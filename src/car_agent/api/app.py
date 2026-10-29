@@ -3,6 +3,7 @@ import json
 import re
 import uuid
 from contextlib import asynccontextmanager
+from dataclasses import replace
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -16,6 +17,9 @@ from ..adapters.demo import DemoServices
 from ..adapters.mcp_client import LocalMCPClient
 from ..config import get_settings
 from ..model_roles import build_models
+from ..domain_routing import build_domain_router
+from ..event_routing import build_event_router
+from ..planning_gate import build_planning_gate
 from ..access import ShowcaseAccess, validate_showcase
 from ..conversation import save_reference
 from ..input_events import resolve_input
@@ -45,6 +49,9 @@ frontend_dist = root / "frontend" / "dist"
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     validate_showcase(settings)
+    domain_router = build_domain_router(settings)
+    input_event_router = build_event_router(settings)
+    planning_gate = build_planning_gate(settings)
     freshness = FreshnessPolicy.from_settings(settings)
     limits = RuntimeLimits.from_settings(settings)
     db = Database(str(settings.database_file))
@@ -109,6 +116,9 @@ async def lifespan(app: FastAPI):
         settings.demo_user_id, db, memory, demo, mcp,
         tool_queue, skill_registry, retriever, llm, str(root / "skills"), freshness, limits,
         model_roles=model_roles, planner_variant=settings.planner_variant,
+        domain_router=domain_router,
+        input_event_router=input_event_router,
+        planning_gate=planning_gate,
     )
     app.state.locks = {}
     app.state.runners = {}
@@ -124,6 +134,12 @@ async def lifespan(app: FastAPI):
     await reminder_scheduler.close()
     await memory.close()
     await mcp.close()
+    if domain_router:
+        await domain_router.close()
+    if input_event_router:
+        await input_event_router.close()
+    if planning_gate:
+        await planning_gate.close()
     await saver_context.__aexit__(None, None, None)
     await db.close()
 
@@ -175,6 +191,10 @@ async def health(request: Request):
         "tools_backend": "real_mcp",
         "response_streaming": True,
         "multi_task": True,
+        "domain_route_provider": settings.domain_route_provider,
+        "input_event_provider": settings.input_event_provider,
+        "planning_gate_provider": settings.planning_gate_provider,
+        "jev_configured": bool(settings.jev_api_key and settings.jev_api_key.get_secret_value().strip()),
     }
 
 
@@ -393,15 +413,7 @@ async def run_task(app: FastAPI, task_id: str, session_id: str, owner: str, quer
         config = {**config, "recursion_limit": app.state.context.limits.graph_steps}
         graph = app.state.graph
         base_context = app.state.context
-        context = RunContext(
-            owner, base_context.db, base_context.memory, base_context.demo,
-            base_context.mcp, base_context.tool_queue,
-            base_context.skill_registry, base_context.retriever,
-            base_context.llm, base_context.skills_dir,
-            base_context.freshness,
-            base_context.limits,
-            model_roles=base_context.model_roles, planner_variant=base_context.planner_variant,
-        )
+        context = replace(base_context, user_id=owner)
         if replay_config or continue_from_checkpoint:
             graph_input = None
         elif resume:

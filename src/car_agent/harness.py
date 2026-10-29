@@ -186,6 +186,12 @@ async def resolve_intent(state: AgentState, config: RunnableConfig, runtime: Run
         domain = prepared["domain"]
         source = "prepared_task"
     elif state.get("mode", "demo") == "live":
+        domain_router = getattr(runtime.context, "domain_router", None)
+        candidate = await domain_router.route(state) if domain_router else None
+        if candidate is not None:
+            decision = DomainRoute(domain=candidate)
+            emit("route.completed", domain=decision.domain, source="jev_cascade", phase="domain_only")
+            return {"domain": decision.domain, "prepared_decision": prepared, "resolved_query": query, "status": "running"}
         llm = select_model(runtime.context, "intent")
         if not llm:
             raise RuntimeError("live 模式需要配置真实模型")

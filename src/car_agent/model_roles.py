@@ -16,7 +16,7 @@ def build_models(settings: Any) -> tuple[Any, dict[str, Any]]:
     def create(name: str, tokens: int):
         return ChatOpenAI(base_url=settings.model_base_url, api_key=settings.model_api_key,
                           model=name, temperature=0, timeout=25, max_retries=0,
-                          max_tokens=tokens)
+                          max_tokens=tokens, stream_usage=settings.model_stream_usage)
 
     default = create(settings.model_name, settings.model_max_output_tokens)
     roles = {}

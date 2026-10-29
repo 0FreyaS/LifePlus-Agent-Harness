@@ -3,6 +3,10 @@
 .env.*
 !.env.example
 data/
+!evaluations/data/
+evaluations/data/*
+!evaluations/data/jev-e2e-v1.jsonl
+!evaluations/data/jev-front-boundaries-v1.jsonl
 __pycache__/
 *.py[cod]
 .pytest_cache/

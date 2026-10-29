@@ -70,6 +70,16 @@ HOLDOUT_CASES = [
     case("holdout06", "第一个先别选了", [MUSIC], "clarify"),
 ]
 
+FRONT_HOLDOUT_CASES = HOLDOUT_CASES + [
+    case("front01", "第二个，帮我介绍南京天气", [MUSIC], "resume", "music", 2, ["南京", "天气"]),
+    case("front02", "第二个，帮我介绍南京天气", [MUSIC, PLACE], "clarify"),
+    case("front03", "无锡校区，帮我介绍南京天气", [PLACE], "resume", "place", 2, ["南京", "天气"]),
+    case("front04", "第二首，杭州天气也看看，不要搜索别的歌", [MUSIC], "resume", "music", 2,
+         ["杭州", "天气", "不要搜索别的歌"]),
+    case("front05", "帮我介绍南京天气", [MUSIC], "new", new_terms=["南京", "天气"]),
+    case("front06", "好的，顺便查南京天气", [APPROVAL], "clarify"),
+]
+
 
 def make_waiting(case, now):
     import json

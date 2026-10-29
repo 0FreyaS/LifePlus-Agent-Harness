@@ -102,6 +102,10 @@ GitHub 页面内可直接播放（约 1 分 21 秒，已内嵌中文字幕）。
 
 2026-10-29 的分层实现、兼容边界及真实模型测试限制见 [领域工具选择与参数提取](docs/domain-execution-routing.md)。旧规划评测数字不代表新版的效果；该次真实模型对比受到超时及 HTTP 429 影响，尚未证明准确率或延迟改善。
 
+单任务领域仲裁采用 **Jev 优先、原 LLM 兜底**：配置模板为 `DOMAIN_ROUTE_PROVIDER=jev_cascade`，需要填写独立 `JEV_API_KEY`；不使用 Jev 时设为 `llm`。置信度不足、defer、1.5秒超时或服务异常均回退原模型；规划、领域工具选择、槽位提取及回复不替换。事件解释仍为 `INPUT_EVENT_PROVIDER=llm`。[本次启用范围与回滚](docs/jev-domain-rollout.md) · [真实局部/全局 A/B 结果](docs/jev-front-ab-2026-10-29.md) · [接入与复跑](docs/jev-integration-and-ab.md)。
+
+新增默认关闭的事件明确性审核与合并前序判定实验：`INPUT_EVENT_PROVIDER=jev_gate`、`PLANNING_GATE_PROVIDER=jev_front`。同一Jev请求判断目标数量和单目标领域，复杂规划仍由原模型生成。原数量粗筛默认仍为`rules`；此次并未证明全局稳定提速或总Token降低，不自动启用。[三模块实测与失败归因](docs/jev-front-ab-2026-10-29.md)。
+
 ## 四任务：并行与依赖
 
 在对话中输入：

@@ -29,6 +29,9 @@ class RunContext:
     limits: RuntimeLimits = field(default_factory=RuntimeLimits)
     model_roles: dict[str, Any] = field(default_factory=dict)
     planner_variant: str = "baseline"
+    domain_router: Any = None
+    input_event_router: Any = None
+    planning_gate: Any = None
 
     def model_for(self, role: str):
         return select_model(self, role)

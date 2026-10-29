@@ -1,5 +1,7 @@
 # LifePlus Agent Harness 架构
 
+2026-10-29 架构基线：全局目标规划与领域执行理解分层。[项目架构记录](PROJECT_MEMORY.md)与[领域工具选择和参数提取](domain-execution-routing.md)说明当前契约。
+
 ## 运行边界
 
 LifePlus 将模型推理和业务执行分开管理。模型识别意图、抽取用户明确给出的字段并组织自然语言；LangGraph 决定流程位置；Harness 校验状态、权限、工具参数和回执。MCP 提供工具协议，不负责授权或任务完成判断。
@@ -31,7 +33,7 @@ sequenceDiagram
     U->>A: 提交消息 + request_id
     A->>H: 创建 task / 去重 / 短期准入锁
     H->>G: 启动或恢复 thread
-    G->>G: memory → route → prepare → clarify
+    G->>G: memory → route（领域）→ understand（工具与槽位）→ prepare → clarify
     alt 缺少信息或候选不唯一
         G-->>U: interrupt
         U->>G: resume
@@ -52,7 +54,7 @@ API 请求处理使用后台任务推进 Graph，SSE 从事件表持续读取。
 
 ## 多任务与依赖调度
 
-`task_planning.py` 为带复合表达的 live 请求调用模型，生成最多六个任务的 `TaskPlan`：每项包含领域、动作、槽位、`depends_on` 和 `bind_slots`。Harness 拒绝不存在的依赖、自依赖和环，并按拓扑顺序保存计划。模型负责提出计划，宿主负责验证与执行；并发不是靠提示词约定。
+`task_planning.py` 为带复合表达的 live 请求调用模型，输出最多六个目标的 `GoalPlan`：每项只有完整 Query、领域、`depends_on` 和 `bind_slots`。全局不输出动作、槽位或工具参数；这些在领域子图 `understand` 结合候选工具与 Schema 联合提取。内部 `TaskPlan` 保留旧字段兼容已有结构。Harness 拒绝不存在的依赖、自依赖和环，并按拓扑顺序保存计划。模型负责提出计划，宿主负责验证与执行；并发不是靠提示词约定。
 
 `TaskCoordinator` 维护父任务及独立子任务行。每个子任务有单独的任务 ID、LangGraph thread、槽位、工具结果和 interrupt。准入锁只覆盖请求去重与任务创建，执行锁按任务隔离，不对整个会话加长时间锁。无依赖分支使用异步任务并发推进；工具队列仍按 Worker 数和工具并发限额限制实际外部请求数量。
 
@@ -67,7 +69,9 @@ flowchart TD
 
 上图的天气和音乐没有依赖，同层启动；保存行程必须等待天气任务成功，读取其 Checkpoint 结果后将 `weather.result` 绑定到 `details`，随后独立等待写操作确认。前置失败或取消时，下游不执行，并标明依赖失败。子任务成功、失败或等待输入都会更新父任务：仍有可运行分支时为 `running`，只剩待输入分支时为 `waiting_user`，有成功也有失败时最终为 `partial`。父任务不是必须等全部成功才向用户展示内容。
 
-用户等待旧任务选择时可提交新任务；在中断输入框输入“第二个，同时查杭州天气”，显式命令按分隔符拆成旧任务恢复和新任务创建，两者不会共用 interrupt。当前复合恢复支持逗号/分号后的显式查询、搜索、提醒、行程或导航命令，不宣称覆盖任意含蓄表达。接口恢复须带目标子任务 ID 和当前 `interrupt_id`，重复恢复返回 409。
+用户等待旧任务选择时可提交新任务；“第二个，同时查杭州天气”可拆为旧任务恢复和新任务创建，两者不会共用 interrupt。明确输入由规则处理，复杂表达由受限 LLM 提出事件类型、目标任务和原文片段，宿主再次校验归属、候选及状态。不唯一时澄清，写入仍需专门确认。接口恢复须带目标子任务 ID 和当前 `interrupt_id`，重复恢复返回 409。[事件理解设计](input-event-routing.md)。
+
+单目标领域仲裁经用户确认启用 Jev Choice，配置模板为 `DOMAIN_ROUTE_PROVIDER=jev_cascade`，需填写私有 `JEV_API_KEY`。仅在没有可信领域时请求 Jev，低置信度、defer、超时或服务错误回退原 LLM；全局规划和领域槽位提取不替换。事件解释和单/多目标粗筛不变。[启用范围与回滚](jev-domain-rollout.md) · [接口与局部/全局 A/B](jev-integration-and-ab.md)。
 
 父任务事件流转发子任务事件时附 `child_task_id`；子任务终止事件带 `subtask.` 前缀，防止客户端误把某个分支完成当成整个请求完成。节点运行图直接使用持久化依赖数据绘制分叉、依赖边与汇总节点；领域内部流程单独显示，不能把父级各领域串成一列。
 

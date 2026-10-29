@@ -203,19 +203,23 @@ async def resolve_input(app, query, waiting, cities, *, owner, session_id, mode,
         identifier, owner, session_id, request_id, "running", "{}", utcnow().isoformat(), None))
     from .orchestration import session_messages
     history = await session_messages(db, session_id, completed_only=True, max_age_seconds=context.freshness.context_seconds)
-    limits = replace(context.limits, active_seconds=app.state.input_event_timeout, model_calls=2)
+    event_router = getattr(context, "input_event_router", None)
+    limits = replace(context.limits, active_seconds=app.state.input_event_timeout, model_calls=2 + int(event_router is not None))
     try:
         model = context.model_for("intent")
         if model is None:
             raise RuntimeError("Input event model unavailable")
         audit = InputAudit(db)
         async with execution_scope(audit, identifier, limits, "input_events"):
-            proposal = await invoke_structured(model, InputDecision, event_messages(query, waiting, history, focus), stage="input_events")
-            await audit.publish(identifier, "input.events.proposed", {"decision": proposal.model_dump()})
+            proposal = await event_router.propose(query, waiting, history, focus) if event_router else None
+            source = "jev" if proposal is not None else "llm"
+            if proposal is None:
+                proposal = await invoke_structured(model, InputDecision, event_messages(query, waiting, history, focus), stage="input_events")
+            await audit.publish(identifier, "input.events.proposed", {"decision": proposal.model_dump(), "source": source})
         decision = grounded_decision(proposal, query, waiting, focus)
         await db.execute("UPDATE input_event_decisions SET status='completed',decision_json=? WHERE id=?",
                          (decision.model_dump_json(), identifier))
-        return ResolvedInput(decision, "llm", identifier)
+        return ResolvedInput(decision, source, identifier)
     except asyncio.CancelledError:
         await db.execute("UPDATE input_event_decisions SET status='cancelled',error_type='CancelledError' WHERE id=?", (identifier,))
         raise

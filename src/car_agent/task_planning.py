@@ -130,11 +130,14 @@ def planning_prompt(memory_brief: str = "", *, variant: str = "baseline", now: d
 
 
 async def plan_tasks(query: str, mode: str, llm: Any, memory_brief: str = "", *,
-                     variant: str = "baseline", now: datetime | None = None) -> TaskPlan | None:
+                     variant: str = "baseline", now: datetime | None = None, gate=None) -> TaskPlan | None:
     from .conversation import preference_command, asks_first_input
     if preference_command(query) or asks_first_input(query):
         return None
-    if not may_have_multiple_tasks(query):
+    cardinality, domain = await gate.classify(query, memory_brief) if gate and mode == "live" else (None, None)
+    if cardinality == "single":
+        return TaskPlan(tasks=[PlannedTask(id="t1", query=query, domain=domain)]) if domain else None
+    if cardinality != "multi" and not may_have_multiple_tasks(query):
         return None
     if mode != "live":
         from .harness import infer
