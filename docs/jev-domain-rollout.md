@@ -54,6 +54,19 @@ docker compose up -d --build app
 
 后续监控接受率、回退率、已接受样本人工正确率、领域阶段及端到端P50/P95、全部模型Token与错误类型。事件和多任务分类试验仍仅用于离线对比。
 
+## 本机启用验收
+
+2026-10-29本机Docker已重建容器环境，原数据卷保留，服务`http://127.0.0.1:8088`健康。健康接口确认领域为jev_cascade、事件为llm、规划门控为rules，且Jev配置存在。
+
+| 真实输入 | 最终领域 | 最终状态 | Jev领域耗时 | 整条请求耗时 |
+|---|---|---|---:|---:|
+| 查询无锡今天天气 | weather | completed | 1.270秒 | 13.761秒 |
+| 介绍歌手陶喆 | chat | completed | 0.769秒 | 7.594秒 |
+
+两条实际Trace均有`route.completed.source=jev_cascade`，且无原`domain_route`模型调用。天气的领域参数提取和两条自然语言回复仍调用原模型。这是启用冒烟验证，不是P50/P95测量或新一轮配对试验。完整记录保存在本机忽略目录`data/jev-domain-rollout-smoke-20261029.json`，不含Key。
+
+工程回归700通过、1跳过，记录在`data/jev-domain-rollout-tests-20261029.xml`。本轮全量Docker重建遇到基础镜像下载EOF；本机复用现有依赖镜像，增加当前源码层和`PYTHONPATH=/app/src`完成更新。旧镜像保留为`lifeplus-agent:pre-jev-9745657`。此本机源码层部署不等于验证了公网服务器的全新依赖安装；仓库标准Dockerfile和其他未完成部署修改未混入本次Jev提交。
+
 ## 回滚
 
 将`DOMAIN_ROUTE_PROVIDER=llm`，保持其余两个provider不变，再运行`docker compose up -d app`重建容器环境。代码、会话、数据库和检查点无需回退；不能回滚已经发生的外部操作。

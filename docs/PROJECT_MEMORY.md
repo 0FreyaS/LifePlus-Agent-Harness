@@ -6,6 +6,8 @@
 
 2026-10-29用户明确批准先启用单任务领域仲裁并同步GitHub。本地`.env`和仓库`.env.example`为`DOMAIN_ROUTE_PROVIDER=jev_cascade`、`INPUT_EVENT_PROVIDER=llm`、`PLANNING_GATE_PROVIDER=rules`。需要独立JEV_API_KEY；低分、defer和异常回退原LLM。未显式配置provider时Settings类仍用llm兼容旧部署。仅改变领域分类，其他实验不启用；以下“默认不切换”是此前试验当时的状态，不能用来推翻本次批准。[启用说明](jev-domain-rollout.md)。
 
+本机Docker服务8088已更新，真实天气/歌手介绍两例均completed，Trace确认Jev仲裁且无原domain_route调用；Jev耗时分别1.270/0.769秒，不能当端到端SLA。回归700通过、1跳过。本机基础镜像下载EOF，改用现有依赖加源码层运行，保留旧镜像回滚；未验证全新服务器镜像安装。Jev代码与脱敏实测报告已提交GitHub main，实际Key不提交。
+
 ## 当前事实
 
 - 项目名称为 LifePlus，提供生活健康与出行服务；当前七领域、十一个 MCP 工具，不沿用座舱量产、十二领域、四百工具或日均十万请求的未验证规模。
