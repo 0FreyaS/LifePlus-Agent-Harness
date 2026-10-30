@@ -40,7 +40,7 @@ GitHub 页面内可直接播放（约 1 分 21 秒，已内嵌中文字幕）。
 
 ### 整体流程架构
 
-[![LifePlus 整体流程架构：事件理解、并行与依赖、领域执行、工具治理及状态恢复](docs/assets/lifeplus-architecture-20261030.png)](docs/assets/lifeplus-architecture-20261030.png)
+[![LifePlus 整体流程架构：请求入口、领域执行、运行治理、业务能力与可观测闭环](docs/assets/lifeplus-architecture-layered-v2.png)](docs/assets/lifeplus-architecture-layered-v2.png)
 
 天气、路线与音乐展示独立并行任务，保存行程消费路线任务的真实回执；文字回复恢复原任务，结构化按钮走宿主协议。图为分层总览，不是逐语句执行图：所有工具调用都经队列与权限校验，SSE 可在执行期间持续返回进度。点击图片查看原图。
 
