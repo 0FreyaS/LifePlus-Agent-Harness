@@ -38,6 +38,12 @@ GitHub 页面内可直接播放（约 1 分 21 秒，已内嵌中文字幕）。
 
 覆盖输入、四任务并行与依赖、候选选择、执行 DAG、领域子图、步行/驾车/骑行切换、备选路线及检查点。真实模型与 MCP 实际执行；采用 computer use 低帧率分段采集，无旁白。剪辑版保留真实交互顺序，将纯等待段以 2–3 倍加速，并烧录解释性中文字幕；非原生连续录屏，不用于衡量端到端延迟。
 
+### 整体流程架构
+
+[![LifePlus 整体流程架构：事件理解、并行与依赖、领域执行、工具治理及状态恢复](docs/assets/lifeplus-architecture-20261030.png)](docs/assets/lifeplus-architecture-20261030.png)
+
+天气、路线与音乐展示独立并行任务，保存行程消费路线任务的真实回执；文字回复恢复原任务，结构化按钮走宿主协议。图为分层总览，不是逐语句执行图：所有工具调用都经队列与权限校验，SSE 可在执行期间持续返回进度。点击图片查看原图。
+
 以下为 **2026-10-26 通过 computer use 操作本地应用截取的真实界面**，使用当时的真实模型与 MCP，非设计稿。视频和截图用于展示交互，不代表当前模型、节点结构或性能；以本文架构和源码为准。工具数据、路线和候选随时间变化。
 
 ### 路线与出行方式
@@ -93,38 +99,7 @@ GitHub 页面内可直接播放（约 1 分 21 秒，已内嵌中文字幕）。
 
 ## 整体架构
 
-```mermaid
-flowchart TD
-    UI[Web 对话与任务卡片] --> API[FastAPI：归属与请求去重]
-    API --> EVENT{输入来源}
-    EVENT -->|自由文本| LLM[DeepSeek InputDecision]
-    EVENT -->|结构化按钮| HOST[宿主协议与状态校验]
-    LLM --> HOST
-    HOST -->|新需求| CO[TaskCoordinator：数量门控]
-    HOST -->|恢复或确认| RESUME[校验中断与授权，恢复原 thread]
-    HOST -->|取消或不明确| CONTROL[取消指定任务或要求明确归属]
-    CO -->|普通单目标| ROUTE[Jev 领域仲裁，失败回退 DeepSeek]
-    CO -->|疑似复合需求| PLAN[DeepSeek GoalPlan：目标、领域、依赖、绑定]
-    PLAN --> DAG[校验 DAG，启动就绪任务]
-    DAG --> DOMAIN[各任务独立 LangGraph 领域子图]
-    ROUTE --> DOMAIN
-    DOMAIN --> UNDERSTAND[understand：本域动作、工具、槽位]
-    UNDERSTAND --> BIND[宿主合并真实 bound_slots，准备参数]
-    BIND --> FLOW[澄清、查询、选择、确认与写入流程]
-    RESUME --> FLOW
-    FLOW <--> QUEUE[Tool Queue：权限、预算、并发与有限重试]
-    QUEUE <--> MCP[MCP：高德、音乐、本地行程与提醒]
-    FLOW --> VERIFY[回执核验与逐任务反馈]
-    VERIFY --> SSE[SSE 进度、文字、路线与执行 DAG]
-    FLOW -. 执行中的进度事件 .-> SSE
-    SSE --> UI
-    DOMAIN <--> CP[(Checkpoint)]
-    DOMAIN -. 上下文 .-> MEM[MemoryRepository]
-    DAG <--> DB[(SQLite 业务表 / Trace / 工具账本)]
-    QUEUE -. 作业与回执 .-> DB
-```
-
-上图展示职责，不表示每条请求都经过所有模型调用，也不表示全部工具集中到流程末尾执行；中断恢复继续原节点，不重新规划。多目标的领域来自已校验计划，通常不重复 Jev 分类。
+总览见上方[整体流程架构](#整体流程架构)。中断恢复继续原节点，不重新规划；多目标的领域来自已校验计划，通常不重复 Jev 分类。精确节点与条件边见[架构执行指南](docs/LifePlus-Agent-Harness-架构执行与面试指南.md)。
 
 | 层级 | 当前职责 | 执行边界 |
 |---|---|---|
