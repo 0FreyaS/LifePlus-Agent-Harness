@@ -1,0 +1,35 @@
+{
+  "started_at": "2026-10-30T05:24:19.361409+00:00",
+  "model": "deepseek-flash",
+  "changed_role": "planner_only",
+  "arms": [
+    "disabled",
+    "low",
+    "high"
+  ],
+  "seed": 31030,
+  "repeats": 1,
+  "concurrency": 1,
+  "planned_submissions": 99,
+  "effective_max_tokens": 2048,
+  "original_effective_max_tokens": 2048,
+  "configured_planner_max_tokens": 1536,
+  "request_timeout_seconds": 25,
+  "planning_deadline_seconds": 45.0,
+  "sdk_retries": 0,
+  "structured_attempts_max": 2,
+  "thinking_doc": "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode/",
+  "frozen_now": "2026-10-27T10:00:00+08:00",
+  "planner_variant": "baseline",
+  "scope": "forced_global_planner_no_tools_not_end_to_end; diagnostic3_is_posthoc",
+  "other_roles_thinking": "disabled",
+  "dataset_sha256": "7d70b6827cc06638786a0ed4701193ef3bd2366a539403a9024c651f103c6631",
+  "source_sha256": {
+    "evaluations/planner_thinking_ab.py": "19c47bbd3bbb0145c7a87602aee2d4b0e2b695e2f86af62747aa93457fb61c6f",
+    "src/car_agent/task_planning.py": "2e443b31cd928217fcd4e4cda06e28b435c7399278d9b700f3a3265e75d4c30d",
+    "src/car_agent/structured_output.py": "2bf352a223c88c3f5293638fd543656020f7f6cf35abb40cd783d575d463fdac",
+    "src/car_agent/model_roles.py": "85ad775a5b70f02032b969349dd13383583295be1601b5b827fec57722676803",
+    "evaluations/planner_cases.py": "4e237b5a22ef49e3dd3d6f5938979771a637e58ae3ddc3c682825bdbea2ea5d2"
+  },
+  "auto_enable": false
+}

@@ -1,0 +1,191 @@
+[
+  {
+    "id": "D01",
+    "file": "测试数据集/01-领域划分/领域仲裁21条.jsonl",
+    "cases": 21,
+    "source": "evaluations/jev/2026-10-29-deepseek/v1/datasets/domain.jsonl",
+    "source_group": null,
+    "format": "domain",
+    "measurement_status": "已有DeepSeek局部配对",
+    "sha256": "e63d9383936a12b92bd8488677fe4bd50dc7a9b91cb1429015add9c07828c137",
+    "purpose": "七领域各3条（含上下文表达）；标注expected_domain、memory_brief。测领域分类，不测工具选择或槽位。未覆盖完整拒判/域外分布。"
+  },
+  {
+    "id": "D02",
+    "file": "测试数据集/01-领域划分/单任务域与动作30条.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/lifeplus-v1.jsonl",
+    "source_group": "single_task",
+    "format": "single_task",
+    "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+    "sha256": "ab4a77ea1887d1b0db9be5deea12daf5ae8cf7981465c537a4879d53ebc7722d",
+    "purpose": "标注expected.domain/action；分别算领域准确率、领域与动作联合正确率。不能把联合正确率称为领域准确率。工具专用正确标签仍需独立补标。"
+  },
+  {
+    "id": "D03",
+    "file": "测试数据集/02-槽位与参数/槽位提取30条.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/lifeplus-v1.jsonl",
+    "source_group": "slot_extraction",
+    "format": "slots",
+    "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+    "sha256": "54a5ad2c444dc020d760da8517645103a2bbddb1e2fe3f8324c9c7064fec0b58",
+    "purpose": "30条、44个已标注字段，含3个None约束。标注expected.domain/slots；None表示不得臆造。比较城市、日期、起终点、模式、歌手、商家筛选和提醒时间；只算已标注字段，不称全槽位F1。",
+    "annotated_fields": 44,
+    "must_not_infer_fields": 3
+  },
+  {
+    "id": "D04",
+    "file": "测试数据集/03-规划与依赖/规划与依赖30条.jsonl",
+    "cases": 30,
+    "source": "evaluations/planner_cases.py",
+    "source_group": null,
+    "format": "planner",
+    "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+    "sha256": "2fecfcec949fd93e94a58bf047b7011f53c0ee70453f27f9ad23d8fe07b9a197",
+    "purpose": "来源为planner_cases.CASES；任务语义label不要求与模型ID相同。固定北京时间2026-10-27T10:00:00+08:00解释日期；全局GoalPlan只检查目标、领域、依赖与绑定，工具/参数另在领域层验收。"
+  },
+  {
+    "id": "D05",
+    "file": "测试数据集/04-信息澄清/缺参与完整信息30条.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/lifeplus-v1.jsonl",
+    "source_group": "clarification",
+    "format": "clarification",
+    "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+    "sha256": "2eb282c89303a58d8ff540f30ef8f3e99a3a5f1083f411889943328072136bd7",
+    "purpose": "15个必要澄清正例、15个完整信息负例；expected.missing_field为期望字段或None。旧正例按未提供默认起点/定位的实验条件标注；重跑需固定配置，不能将生产默认地点与实时GPS混同。"
+  },
+  {
+    "id": "D06",
+    "file": "测试数据集/05-端到端任务/完整任务90会话.jsonl",
+    "cases": 90,
+    "source": "evaluations/data/completion-v1.jsonl",
+    "source_group": null,
+    "format": "completion",
+    "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+    "sha256": "8fccee9d18076cbd849dd221c250f16645645df33c1bd9b0bdda0a802216774a",
+    "purpose": "单任务、多任务、澄清后完成各30会话。goals定义独立用户目标，user_policy是预先约定的回复策略；依据工具参数、真实回执、确认顺序和写入证据验收，不只看completed。"
+  },
+  {
+    "id": "D07",
+    "file": "测试数据集/05-端到端任务/无标点复合回复6会话.jsonl",
+    "cases": 6,
+    "source": "evaluations/data/completion-compound-v1.jsonl",
+    "source_group": null,
+    "format": "completion",
+    "measurement_status": "待DeepSeek专项复测",
+    "sha256": "4a3de3bef9f102f2b56eb38d203baf604ca7ef7f4c8a91f428b3a8cde54021b4",
+    "purpose": "验证没有逗号时恢复旧任务并创建新任务，独立于90会话统计。不能因识别到连接词就漏掉原回复或擅自执行否定需求。"
+  },
+  {
+    "id": "D08",
+    "file": "测试数据集/06-文本事件/文本事件36条.jsonl",
+    "cases": 36,
+    "source": "evaluations/jev/2026-10-29-deepseek/v1/datasets/events.jsonl",
+    "source_group": null,
+    "format": "events",
+    "measurement_status": "已有DeepSeek局部配对",
+    "sha256": "dbbc68ae24e71082035e1c154b59d5a9ffc12cd30e597a203a1ed1386a7eb571",
+    "purpose": "纯回复12、恢复加新任务12、边界12。expected包含route、task_id、候选索引及原文片段，expected_filter为Jev二分类标签。局部校区候选是人工快照，不是实时地图回执。"
+  },
+  {
+    "id": "D09",
+    "file": "测试数据集/05-端到端任务/领域开关全链路12会话.jsonl",
+    "cases": 12,
+    "source": "evaluations/jev/2026-10-29-deepseek/v1/datasets/domain-e2e.jsonl",
+    "source_group": null,
+    "format": "completion",
+    "measurement_status": "已有DeepSeek领域开关配对",
+    "sha256": "f578af1fa9aac4be481ba8200c1c5d7ab1e54b567d541514db3de796f48b17f4",
+    "purpose": "仅切换领域llm/jev_cascade；事件为当时的llm规则优先、数量门控rules。5单任务、2多任务、2澄清、2复合事件、1四目标。不是当前llm_direct策略下的12例验收。"
+  },
+  {
+    "id": "D10",
+    "file": "测试数据集/06-文本事件/文本与卡片5会话.jsonl",
+    "cases": 5,
+    "source": "evaluations/jev/2026-10-29-deepseek/v1/datasets/events-e2e.jsonl",
+    "source_group": null,
+    "format": "completion",
+    "measurement_status": "已有DeepSeek配对及当前策略单臂复测",
+    "sha256": "42be2cdd6d57ab06711532e2aa1d8467d432a7b0a4a017bfd4093f7e41199a68",
+    "purpose": "文本选歌曲、补城市、两种恢复加新需求、结构化卡片对照。自由文本从composer提交，不借卡片焦点。A/B与切换后复测复用这5条，不能当成15个独立场景。"
+  },
+  {
+    "id": "D11",
+    "file": "测试数据集/05-端到端任务/基础查询重复8次.jsonl",
+    "cases": 8,
+    "source": "evaluations/model_comparison/2026-10-29-deepseek-flash/v1/cases.jsonl",
+    "source_group": null,
+    "format": "completion",
+    "measurement_status": "已有DeepSeek单组结果",
+    "sha256": "a2e6304927f27e90044d9397f8f298a482daf1b3de896fc59ecf8c0115f67085",
+    "purpose": "天气和歌手介绍各重复3次，多任务及澄清各1次，只有4类Query。只纳入DeepSeek观察，不再展示其他模型对比；当时事件策略为llm，不是当前整系统SLA。"
+  },
+  {
+    "id": "D12",
+    "file": "测试数据集/07-候选选择/候选选择30条.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/lifeplus-v1.jsonl",
+    "source_group": "candidate_selection",
+    "format": "controlled",
+    "measurement_status": "有历史模型无关组件证据",
+    "sha256": "6f746ef21af551f744a24ea08482e2e521df32a89261ab48060b3fe67bd26241",
+    "purpose": "导航、音乐、本地生活各10种选择；固定候选，验证索引、口语序数、非法选择、零/单候选及POI绑定，不调用真实理解模型。"
+  },
+  {
+    "id": "D13",
+    "file": "测试数据集/08-恢复与幂等/恢复与写操作30条.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/lifeplus-v1.jsonl",
+    "source_group": "recovery",
+    "format": "controlled",
+    "measurement_status": "有历史模型无关组件证据",
+    "sha256": "a7f67ab5a64effd4b6d916473720cab0899500b0881ed5e3f7b9e5541d300e3f",
+    "purpose": "三种写动作各10场景：确认、拒绝、未确认、错误凭证、重开检查点、取消、去重、冲突、迟到回执、线程隔离。图和队列真实，写回执受控，不是远端恰好一次保证。"
+  },
+  {
+    "id": "D14",
+    "file": "测试数据集/09-工具容错/故障注入30条.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/lifeplus-v1.jsonl",
+    "source_group": "tool_failure",
+    "format": "controlled",
+    "measurement_status": "有历史模型无关组件证据",
+    "sha256": "be86ce8f765d799d05c1242c0ec3e46d341bc3e328192d76324bce5d6c1a1027",
+    "purpose": "六工具各5种故障：永久错误、超时、瞬态重试、依赖失败、并行进度；注入短超时仅为测试加速，不是生产超时配置。"
+  },
+  {
+    "id": "D15",
+    "file": "测试数据集/10-真实工具/真实MCP工具30条.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/lifeplus-v1.jsonl",
+    "source_group": "real_tools",
+    "format": "real_tools",
+    "measurement_status": "有历史真实工具证据，待当前复验",
+    "sha256": "12e9504c4ff7772f882c33c0b952070d36d8c9896c4ce52f3a9b89001829496c",
+    "purpose": "天气6、POI6、音乐6、附近商家4、路线4、详情1、行程保存2、读取1。真实MCP/外部接口/隔离本地库，不依赖LLM准确率；写操作仅允许专用评测用户和数据库。"
+  },
+  {
+    "id": "D16",
+    "file": "测试数据集/12-RAG时效/RAG历史删除与缩短2条.jsonl",
+    "cases": 2,
+    "source": "data/testing-audit-20261028/summary.json",
+    "source_group": null,
+    "format": "rag_audit",
+    "measurement_status": "历史2例失败，待当前索引复验",
+    "sha256": "20b7948acb58490f630b295024be642d8d20c7bfb145c5b5e8ee6bb1c0e589b2",
+    "purpose": "历史模型无关Chroma审计记录，包含删除/缩短文档前后chunk数量与残留检索结果。每行保留期望与实际，不是相关性标注集，不能计算Recall@K/MRR。"
+  },
+  {
+    "id": "D17",
+    "file": "测试数据集/03-规划与依赖/规划绑定修复37条-v1.jsonl",
+    "cases": 37,
+    "source": "测试回报/测试数据集/03-规划与依赖/规划绑定修复37条-v1.jsonl",
+    "source_group": null,
+    "format": "planner_binding",
+    "measurement_status": "已冻结；修复前后实测状态见第0.1节",
+    "sha256": "a94fa83f6b52787079ec9b37b30ac4d44437e854a085ed5e072813cf8bc212cd",
+    "purpose": "原7失败＋新30长尾分开；五类长尾各6条，总计34条需要绑定、3条禁止保存对照。只评目标/领域/关键词/依赖/绑定，非端到端完成率或生产流量。"
+  }
+]

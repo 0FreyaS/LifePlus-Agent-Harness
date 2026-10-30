@@ -1,0 +1,179 @@
+{
+  "arms": {
+    "baseline": {
+      "scopes": {
+        "failed_seed7": {
+          "expected": 7,
+          "submitted": 7,
+          "passed": 0,
+          "p50_ms": 2110,
+          "p95_ms": 2324,
+          "failed_ids": [
+            "boundary02",
+            "dependency01",
+            "dependency02",
+            "dependency05",
+            "dependency03",
+            "boundary05",
+            "dependency04"
+          ],
+          "model_attempts": 14,
+          "attempts_with_usage": 14,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 10300,
+            "output_tokens": 1284
+          },
+          "observed_total_tokens": 11584,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 11584
+        },
+        "long_tail30": {
+          "expected": 30,
+          "submitted": 30,
+          "passed": 3,
+          "p50_ms": 2081,
+          "p95_ms": 2742,
+          "failed_ids": [
+            "binding-route_save-02",
+            "binding-route_save-03",
+            "binding-compound_binding-04",
+            "binding-compound_binding-02",
+            "binding-search_save-05",
+            "binding-weather_save-04",
+            "binding-weather_save-05",
+            "binding-search_save-03",
+            "binding-binding_boundary-06",
+            "binding-search_save-04",
+            "binding-weather_save-01",
+            "binding-search_save-02",
+            "binding-compound_binding-06",
+            "binding-binding_boundary-03",
+            "binding-compound_binding-05",
+            "binding-weather_save-02",
+            "binding-route_save-04",
+            "binding-weather_save-03",
+            "binding-route_save-05",
+            "binding-compound_binding-01",
+            "binding-route_save-01",
+            "binding-binding_boundary-05",
+            "binding-route_save-06",
+            "binding-compound_binding-03",
+            "binding-search_save-06",
+            "binding-search_save-01",
+            "binding-weather_save-06"
+          ],
+          "model_attempts": 56,
+          "attempts_with_usage": 56,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 41400,
+            "output_tokens": 4977
+          },
+          "observed_total_tokens": 46377,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 46377
+        }
+      },
+      "submitted": 37,
+      "expected": 37,
+      "complete": true,
+      "scope": "planner_contract_not_tool_execution_or_end_to_end_completion"
+    },
+    "candidate": {
+      "scopes": {
+        "failed_seed7": {
+          "expected": 7,
+          "submitted": 7,
+          "passed": 7,
+          "p50_ms": 1099,
+          "p95_ms": 1239,
+          "failed_ids": [],
+          "model_attempts": 7,
+          "attempts_with_usage": 7,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 7586,
+            "output_tokens": 646
+          },
+          "observed_total_tokens": 8232,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 8232
+        },
+        "long_tail30": {
+          "expected": 30,
+          "submitted": 30,
+          "passed": 30,
+          "p50_ms": 1047,
+          "p95_ms": 2291,
+          "failed_ids": [],
+          "model_attempts": 32,
+          "attempts_with_usage": 32,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 35151,
+            "output_tokens": 2719
+          },
+          "observed_total_tokens": 37870,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 37870
+        }
+      },
+      "submitted": 37,
+      "expected": 37,
+      "complete": true,
+      "scope": "planner_contract_not_tool_execution_or_end_to_end_completion"
+    }
+  },
+  "paired": {
+    "failed_seed7": {
+      "pairs": 7,
+      "rescued": [
+        "boundary02",
+        "boundary05",
+        "dependency01",
+        "dependency02",
+        "dependency03",
+        "dependency04",
+        "dependency05"
+      ],
+      "regressed": []
+    },
+    "long_tail30": {
+      "pairs": 30,
+      "rescued": [
+        "binding-binding_boundary-03",
+        "binding-binding_boundary-05",
+        "binding-binding_boundary-06",
+        "binding-compound_binding-01",
+        "binding-compound_binding-02",
+        "binding-compound_binding-03",
+        "binding-compound_binding-04",
+        "binding-compound_binding-05",
+        "binding-compound_binding-06",
+        "binding-route_save-01",
+        "binding-route_save-02",
+        "binding-route_save-03",
+        "binding-route_save-04",
+        "binding-route_save-05",
+        "binding-route_save-06",
+        "binding-search_save-01",
+        "binding-search_save-02",
+        "binding-search_save-03",
+        "binding-search_save-04",
+        "binding-search_save-05",
+        "binding-search_save-06",
+        "binding-weather_save-01",
+        "binding-weather_save-02",
+        "binding-weather_save-03",
+        "binding-weather_save-04",
+        "binding-weather_save-05",
+        "binding-weather_save-06"
+      ],
+      "regressed": []
+    }
+  },
+  "submitted": 74,
+  "complete": true,
+  "scope": "planner_only_not_end_to_end; thinking_disabled_both_arms"
+}

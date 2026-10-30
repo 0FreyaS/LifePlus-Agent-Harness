@@ -1,0 +1,2 @@
+{"id": "rag-delete_document", "case": "delete_document", "backend": "chroma", "before": 2, "expected": 0, "after": 2, "stale_retrievable": true, "passed": false}
+{"id": "rag-shrink_document", "case": "shrink_document", "backend": "chroma", "before": 2, "expected": 1, "after": 2, "stale_retrievable": true, "passed": false}

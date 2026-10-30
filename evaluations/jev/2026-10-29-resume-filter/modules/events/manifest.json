@@ -1,0 +1,1065 @@
+{
+  "scope": "local_full_event_interpretation_no_business_tools",
+  "strategy": "jev_resume_filter",
+  "baseline_policy": "llm_direct",
+  "started_at": "2026-10-29T12:22:55.035178+00:00",
+  "cases": [
+    {
+      "id": "pure01",
+      "query": "无锡校区吧",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 2,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure02",
+      "query": "南京校区吧",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 1,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure03",
+      "query": "第二个吧",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 2,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure04",
+      "query": "第一个",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 1,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure05",
+      "query": "第二首",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "music",
+        "index": 2,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure06",
+      "query": "我选七里香",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "music",
+        "index": 2,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure07",
+      "query": "晴天吧",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "music",
+        "index": 1,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure08",
+      "query": "选南京校区",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 1,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure09",
+      "query": "无锡",
+      "waiting": [
+        {
+          "id": "weather",
+          "domain": "weather",
+          "query": "查询明天天气",
+          "kind": "clarification",
+          "field": "city"
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "weather",
+        "index": null,
+        "new_terms": [],
+        "answer_terms": [
+          "无锡"
+        ]
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure10",
+      "query": "南京",
+      "waiting": [
+        {
+          "id": "weather",
+          "domain": "weather",
+          "query": "查询明天天气",
+          "kind": "clarification",
+          "field": "city"
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "weather",
+        "index": null,
+        "new_terms": [],
+        "answer_terms": [
+          "南京"
+        ]
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure11",
+      "query": "无锡吧",
+      "waiting": [
+        {
+          "id": "weather",
+          "domain": "weather",
+          "query": "查询明天天气",
+          "kind": "clarification",
+          "field": "city"
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "weather",
+        "index": null,
+        "new_terms": [],
+        "answer_terms": [
+          "无锡"
+        ]
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "pure12",
+      "query": "歌曲第二首",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        },
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "music",
+        "index": 2,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "pure_reply",
+      "expected_filter": "resume_only"
+    },
+    {
+      "id": "compound01",
+      "query": "无锡校区吧，顺便查下明天无锡天气",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 2,
+        "new_terms": [
+          "明天",
+          "无锡",
+          "天气"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound02",
+      "query": "第二个，你再帮我查无锡天气",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 2,
+        "new_terms": [
+          "无锡",
+          "天气"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound03",
+      "query": "第一个，同时搜索陶喆的歌曲",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 1,
+        "new_terms": [
+          "陶喆",
+          "歌曲"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound04",
+      "query": "七里香，再看看无锡明天天气",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "music",
+        "index": 2,
+        "new_terms": [
+          "无锡",
+          "明天",
+          "天气"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound05",
+      "query": "无锡，顺便搜索周杰伦歌曲",
+      "waiting": [
+        {
+          "id": "weather",
+          "domain": "weather",
+          "query": "查询明天天气",
+          "kind": "clarification",
+          "field": "city"
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "weather",
+        "index": null,
+        "new_terms": [
+          "周杰伦",
+          "歌曲"
+        ],
+        "answer_terms": [
+          "无锡"
+        ]
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound06",
+      "query": "南京校区，帮我查南京明天天气",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 1,
+        "new_terms": [
+          "南京",
+          "明天",
+          "天气"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound07",
+      "query": "先查无锡天气，歌曲第二首",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "music",
+        "index": 2,
+        "new_terms": [
+          "无锡",
+          "天气"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound08",
+      "query": "第二首，杭州天气也看看，不要搜索别的歌",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "music",
+        "index": 2,
+        "new_terms": [
+          "杭州",
+          "天气",
+          "不要搜索别的歌"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound09",
+      "query": "无锡校区吧，另外帮我查无锡天气并搜索周杰伦歌曲",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 2,
+        "new_terms": [
+          "无锡",
+          "天气",
+          "周杰伦",
+          "歌曲"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound10",
+      "query": "第二个，接着搜索周杰伦的歌",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "place",
+        "index": 2,
+        "new_terms": [
+          "周杰伦",
+          "歌"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound11",
+      "query": "我选晴天，南京那边明天会下雨吗",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "music",
+        "index": 1,
+        "new_terms": [
+          "南京",
+          "明天",
+          "下雨"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "compound12",
+      "query": "第二首，同时列出我的行程",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "resume",
+        "target": "music",
+        "index": 2,
+        "new_terms": [
+          "列出",
+          "行程"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "compound",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary01",
+      "query": "第二个",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        },
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "clarify",
+        "target": null,
+        "index": null,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary02",
+      "query": "无锡校区吧",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        },
+        {
+          "id": "place2",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "clarify",
+        "target": null,
+        "index": null,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary03",
+      "query": "第二个",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "clarify",
+        "target": null,
+        "index": null,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm",
+      "expired": true
+    },
+    {
+      "id": "boundary04",
+      "query": "取消任务",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "cancel",
+        "target": "music",
+        "index": null,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary05",
+      "query": "第一个先别选了",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "clarify",
+        "target": null,
+        "index": null,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary06",
+      "query": "“第二个”是什么意思",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "new",
+        "target": null,
+        "index": null,
+        "new_terms": [
+          "是什么意思"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary07",
+      "query": "好的",
+      "waiting": [
+        {
+          "id": "save",
+          "domain": "planning",
+          "query": "保存行程",
+          "kind": "approval"
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "clarify",
+        "target": null,
+        "index": null,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary08",
+      "query": "好的，顺便查无锡天气",
+      "waiting": [
+        {
+          "id": "save",
+          "domain": "planning",
+          "query": "保存行程",
+          "kind": "approval"
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "clarify",
+        "target": null,
+        "index": null,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary09",
+      "query": "先选歌曲第二首，再选校区第二个",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        },
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "clarify",
+        "target": null,
+        "index": null,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary10",
+      "query": "查无锡天气",
+      "waiting": [
+        {
+          "id": "music",
+          "domain": "music",
+          "query": "搜索周杰伦歌曲",
+          "kind": "selection",
+          "candidates": [
+            "晴天",
+            "七里香"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "new",
+        "target": null,
+        "index": null,
+        "new_terms": [
+          "无锡",
+          "天气"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary11",
+      "query": "你好",
+      "waiting": [],
+      "focus": null,
+      "expected": {
+        "route": "new",
+        "target": null,
+        "index": null,
+        "new_terms": [
+          "你好"
+        ],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    },
+    {
+      "id": "boundary12",
+      "query": "第四个",
+      "waiting": [
+        {
+          "id": "place",
+          "domain": "navigation",
+          "query": "导航到东南大学",
+          "kind": "selection",
+          "candidates": [
+            "南京校区",
+            "无锡校区"
+          ]
+        }
+      ],
+      "focus": null,
+      "expected": {
+        "route": "clarify",
+        "target": null,
+        "index": null,
+        "new_terms": [],
+        "answer_terms": []
+      },
+      "source": "authored_resume_filter_v1",
+      "group": "boundary",
+      "expected_filter": "needs_llm"
+    }
+  ],
+  "split": "development",
+  "repeats": 1,
+  "seed": 20261029,
+  "baseline_model": "grok-4.3",
+  "candidate_model": "jev-1.14.0",
+  "jev_timeout_seconds": 1.5,
+  "event_timeout_seconds": 25.0,
+  "min_confidence": 0.8,
+  "min_probability": 0.9,
+  "dataset_sha256": "e2e3b7e51079cd30af5dbf5d10a71d16a0c9188d53c072612e9071f1f780ccae",
+  "sources": {
+    "src/car_agent/event_routing.py": "85dc2207206b7d1b61eeb38c95987f72a152f9da8dcd6ec2036226a9eb342851",
+    "src/car_agent/event_resume_filter.py": "b2d187f6ab665e8f4983080bd13539e7a8759207fff8f2b83ab17bc7ab61d174",
+    "src/car_agent/input_events.py": "51fa9852dd9892529e502faeee1ede2be777a59cd6b29d485176e98339872c71",
+    "src/car_agent/adapters/jev.py": "b918244f9d6d632aef29b9dd42cbf073d59445000e02e4b56aaa6603503c6df5"
+  },
+  "source_run": "evaluations/runs/jev-resume-filter-local-20261029-01"
+}

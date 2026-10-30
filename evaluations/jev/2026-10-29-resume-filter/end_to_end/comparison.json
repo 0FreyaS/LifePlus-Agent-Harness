@@ -1,0 +1,10 @@
+{
+  "accuracy_change_percentage_points": 0.0,
+  "p50_change_ms": -3130,
+  "p50_change_percent": -10.05073534133967,
+  "p95_change_ms": -9301,
+  "p95_change_percent": -15.885296579050742,
+  "total_tokens_change": null,
+  "total_tokens_change_percent": null,
+  "meaning": "Positive latency/token changes mean more time/consumption; positive accuracy points mean better quality."
+}

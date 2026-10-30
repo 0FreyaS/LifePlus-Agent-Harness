@@ -1,0 +1,27 @@
+{
+  "started_at": "2026-10-30T07:23:38.324314+00:00",
+  "model": "deepseek-flash",
+  "thinking": "disabled",
+  "baseline_ref": "ffb084a5ecbd8a295c7b727c5b54cca666236aa7",
+  "concurrency": 1,
+  "seed": 31031,
+  "repeats": 1,
+  "planned_submissions": 74,
+  "max_tokens": 2048,
+  "request_timeout_seconds": 25,
+  "planning_deadline_seconds": 45.0,
+  "sdk_retries": 0,
+  "structured_attempts_max": 2,
+  "frozen_now": "2026-10-27T10:00:00+08:00",
+  "dataset_sha256": "a94fa83f6b52787079ec9b37b30ac4d44437e854a085ed5e072813cf8bc212cd",
+  "baseline_sources": {
+    "src/car_agent/task_planning.py": "2e443b31cd928217fcd4e4cda06e28b435c7399278d9b700f3a3265e75d4c30d",
+    "src/car_agent/structured_output.py": "2bf352a223c88c3f5293638fd543656020f7f6cf35abb40cd783d575d463fdac"
+  },
+  "candidate_sources": {
+    "src/car_agent/task_planning.py": "dc3ef55292d31b0a5a2914309e61254d4e8a9a3d38b4646223e166a3d3f05fa0",
+    "src/car_agent/structured_output.py": "d4682bae419f6aabce07aa45d083f560296b7ab5de55a43fcd81b1a6ae32eb2b"
+  },
+  "changes": "visible_binding_contract, domain_validation, precise_repair_feedback, atomic_goal_prompt",
+  "scope": "forced_planner_contract_no_tools_or_production_deployment"
+}

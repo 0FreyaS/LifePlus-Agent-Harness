@@ -4,6 +4,7 @@ from collections import Counter
 from pathlib import Path
 
 from .jev_ab import summarize, usage_summary
+from .jev_archive import ARCHIVE, LAYOUT, export_archive
 
 
 ROOT = Path("evaluations/runs")
@@ -19,7 +20,9 @@ RUNS = {
 
 def load(name):
     directory, count = RUNS[name]
-    rows = [json.loads(line) for line in (ROOT / directory / "results.jsonl").read_text().splitlines()]
+    archived = ARCHIVE / LAYOUT[name][0] / "results.jsonl"
+    path = archived if archived.exists() else ROOT / directory / "results.jsonl"
+    rows = [json.loads(line) for line in path.read_text().splitlines()]
     if len(rows) != count * 2 or any(sum(r["arm"] == arm for r in rows) != count for arm in ("baseline", "candidate")):
         raise ValueError("Incomplete evidence: " + name)
     return rows
@@ -33,11 +36,59 @@ def comparison(name, rows):
     arms = summarize(rows)["arms"]
     a, b = arms["baseline"], arms["candidate"]
     return (f"| {name} | {a['passed']}/{a['tested']} → {b['passed']}/{b['tested']} | "
+            f"{a['accuracy_or_completion_rate']*100:.2f}% → {b['accuracy_or_completion_rate']*100:.2f}% | "
             f"{a['p50_ms']/1000:.3f} → {b['p50_ms']/1000:.3f} | {a['p95_ms']/1000:.3f} → {b['p95_ms']/1000:.3f} | "
             f"{amount(a)} → {amount(b)} |")
 
 
+START = "<!-- jev-ab:generated:start -->"
+END = "<!-- jev-ab:generated:end -->"
+
+
+def write_maintained_report(path, lines):
+    text = path.read_text() if path.exists() else ""
+    if "<!-- lifeplus-test-report:redirect -->" in text:
+        raise ValueError("Report migrated; use python -m evaluations.test_report")
+    if START in text or END in text:
+        if text.count(START) != 1 or text.count(END) != 1 or text.index(START) > text.index(END):
+            raise ValueError("Invalid generated section markers; refusing to overwrite maintained notes")
+        prefix, rest = text.split(START, 1)
+        _, suffix = rest.split(END, 1)
+    else:
+        prefix = ""
+        suffix = "\n\n## 后续测试记录（人工维护）\n\n此区保留人工备注；报告重建不会覆盖。新增试验记录日期、范围、数据版本、结论与证据目录，不改写历史实测值。\n"
+    path.write_text(prefix + START + "\n" + "\n".join(lines) + "\n" + END + suffix)
+
+
+def domain_overview(summary):
+    a, b = summary["arms"]["baseline"], summary["arms"]["candidate"]
+    lines = ["## 单任务领域仲裁（已启用）", "",
+        "范围：相同21条冻结领域样本；A为原`grok-4.3`领域分类，B为`jev-1.14.0`高置信度接受、其余回退同一原模型。下面统计B的全部尝试，不只统计Jev接受的快样本。", "",
+        "| 指标 | 原方案A | Jev级联B | 变化 |", "|---|---:|---:|---|"]
+    lines += [f"| 完整通过/提交 | {a['passed']}/{a['tested']} | {b['passed']}/{b['tested']} | 正确数不变 |",
+        f"| 领域准确率 | {a['accuracy_or_completion_rate']*100:.2f}% | {b['accuracy_or_completion_rate']*100:.2f}% | {(b['accuracy_or_completion_rate']-a['accuracy_or_completion_rate'])*100:+.2f}个百分点，持平 |"]
+    for key, label in (("p50_ms", "P50耗时"), ("p95_ms", "P95耗时")):
+        saved = a[key] - b[key]
+        lines.append(f"| {label} | {a[key]/1000:.3f}秒 | {b[key]/1000:.3f}秒 | 减少{saved/1000:.3f}秒，下降{saved/a[key]*100:.2f}% |")
+    before, after = a["total_tokens"], b["total_tokens"]
+    if before is None or after is None:
+        raise ValueError("Domain headline requires complete provider usage")
+    lines += [f"| 总Token | {before:,} | {after:,} | 增加{after-before:,}，上升{(after-before)/before*100:.2f}% |",
+        f"| 平均每提交样本Token | {before/a['tested']:.2f} | {after/b['tested']:.2f} | 增加{after/b['tested']-before/a['tested']:.2f} |", "",
+        "准确率 = 正确领域样本数 / 全部提交样本数；异常和超时计失败，回退后的正确结果计入级联系统准确率。P50/P95按nearest-rank计算，均包含失败与回退耗时。耗时下降率 = (A−B)/A；Token变化率 = (B−A)/A。",
+        "**结论：领域分类更快、准确率持平，但总Token增加，并未节省Token，也没有证明账单费用降低。** 不能把领域阶段84.57%的P50下降当作整条业务请求提速；21/21是此人工样本集结果，不是生产100%准确率。", "",
+        f"B共有{b['model_attempts']}次模型尝试：Jev分类{b['by_stage']['domain_route_precheck']['model_attempts']}次、原领域模型回退{b['by_stage'].get('domain_route', {}).get('model_attempts', 0)}次。总Token包含这些回退。Jev单独接受样本的准确率与本表的最终级联准确率不是同一个分母。", "",
+        "[领域输入与期望](../evaluations/jev/2026-10-29/modules/domain/cases.jsonl) · [逐条CSV](../evaluations/jev/2026-10-29/modules/domain/details.csv) · [逐条JSONL](../evaluations/jev/2026-10-29/modules/domain/results.jsonl) · [汇总](../evaluations/jev/2026-10-29/modules/domain/summary.json)", ""]
+    return lines
+
+
 def main():
+    entry = Path("docs/jev-front-ab-2026-10-29.md")
+    if entry.exists() and "<!-- lifeplus-test-report:redirect -->" in entry.read_text():
+        from .test_report import build
+        build()
+        return
+    export_archive()
     rows = {name: load(name) for name in RUNS}
     event_model = [r for r in rows["events_dev"] if r["group"] == "requires_model"]
     global_rows = rows["global"]
@@ -57,10 +108,20 @@ def main():
         "common_known_global": {"case_ids": [p["baseline"]["id"] for p in common_known], "usage": complete_pair_usage},
         "global_case_results": [{k: r[k] for k in ("id", "arm", "passed", "elapsed_ms", "failures", "precheck_counts")} for r in global_rows],
         "source_runs": {name: str(ROOT / value[0]) for name, value in RUNS.items()}}
-    lines = ["# Jev 三个前序模块：真实局部与全局 A/B", "",
-        "日期：2026-10-29。原模型 `grok-4.3`；决策模型 `jev-1.14.0`。本文是小样本试验记录，不是生产SLA或上线准确率。原系统默认配置未切换，运行中的Docker没有重启。", "",
+    evidence["archive"] = str(ARCHIVE)
+    lines = ["# Jev 优化测试记录（持续维护）", "",
+        "测试基线日期：2026-10-29。原模型 `grok-4.3`；决策模型 `jev-1.14.0`。本文集中记录模块与全链路的正确率、耗时、Token、失败及边界；小样本结果不代表生产SLA。", "",
+        "**当前启用范围：** 经用户确认，仅启用`DOMAIN_ROUTE_PROVIDER=jev_cascade`；事件解释仍为`llm`、单/多任务门控仍为`rules`。[启用与本机验收](jev-domain-rollout.md)。本次维护不重新调用模型；以下仍是当时冻结的实测数据。", ""]
+    lines += domain_overview(summaries["domain"])
+    lines += ["## 统一测试数据目录", "",
+        "所有对应输入、期望、逐条结果、CSV、汇总与变化量整理在[统一归档](../evaluations/jev/2026-10-29/README.md)。原始运行目录、SQLite与完整日志继续保留，不移动、不删除。", "",
+        "| 数据范围 | 文件夹 | 场景数 / A+B观察数 |", "|---|---|---:|"]
+    lines += [f"| {LAYOUT[name][1]} | [{LAYOUT[name][0]}](../evaluations/jev/2026-10-29/{LAYOUT[name][0]}) | {RUNS[name][1]} / {RUNS[name][1]*2} |" for name in RUNS]
+    lines += ["", "新增的[纯回复过滤A/B数据](../evaluations/jev/2026-10-29-resume-filter/README.md)独立保存36条事件与5组全链路，结果追加在本文末尾独立实验区，不与上表旧版事件审核合并统计。", "",
+        "**整体测试范围必须区分：** `front_combined`的12例同时启用事件审核与合并前序判断，`front_boundaries`为另选的4例机制验证；都不是当前仅启用单目标领域Jev版本的全局A/B。该版本目前有2例Docker真实冒烟验收，但没有单独的全局配对统计，不能冒用联合方案数字。", "",
+        "**维护约定：** 每次记录完整通过/提交、准确率或完成率及其分母、P50/P95、全部Token与未知尝试、配置和代码/数据版本。正向与负向结果均保留，不把多个重叠集混算为整体。自动区由脚本复算，人工备注放文末保留区。", "",
         "## 结论", "",
-        "1. **优先候选是单任务领域仲裁。** 它可以替代一次原LLM领域分类，不替代工具选择、槽位提取、澄清或结果校验。速度收益与Token收益必须分别看。",
+        "1. **单任务领域仲裁已经获批启用。** 它可以替代一次原LLM领域分类，不替代工具选择、槽位提取、澄清或结果校验。速度收益与Token收益必须分别看。",
         "2. **单/多任务判断适合继续验证。** 原实现是宽松正则粗筛，不是每次都用大模型分类；Jev增加一次低延迟模型调用，但可减少不必要的规划生成，也能识别规则漏掉的复合请求。",
         "3. **事件明确性审核暂不建议启用。** 判为明确不等于拿到了任务ID、候选和新需求片段。此次使用宿主构造完整方案、Jev审核、不通过则原LLM解释的保守路径；回退过多，不能稳定减负。",
         "4. **单次Jev可同时询问任务数量和单任务领域。** 不串行调用三个分类器；多任务仍必须由原规划器生成目标和依赖。减少原LLM调用不保证总Token下降。", "",
@@ -73,9 +134,10 @@ def main():
         "- 逐例交替AB/BA，真实请求模型；全局还走HTTP处理器、LangGraph、MCP及隔离SQLite。每例每组独立进程；自动回复模拟澄清/确认，不包含真实用户思考时间，不包含浏览器/TCP渲染。",
         "- 此轮局部与全局runner有时间重叠，共享同一供应商配额，并非无干扰性能压测。保留429、超时和修复调用；小样本单次重复容易受网络与模型采样影响，不据此宣布显著提升。",
         "- 领域21条为已有人工留出样本的复测；事件30条开发与12条扩展留出包含既有6条和本次新写6条；目标数量30条为人工编写的边界压力样本，不代表线上类别分布。没有训练或调参。", "",
-        "## 配对结果", "",
+        "## 各模块与整体配对结果", "",
         "耗时单位为秒，均计入失败。每行使用相同配对样本；Token包含Jev、原模型回退及格式修复，不是账单费用。", "",
-        "| 范围 | 完整通过/提交 | P50 | P95 | Token总计 |", "|---|---|---|---|---|"]
+        "质量列对模块表示领域/数量分类正确率或完整事件契约通过率，对全局表示整场景全部目标完成率，不能混称为Jev独立准确率。", "",
+        "| 范围 | 完整通过/提交 | 准确率/完成率 | P50（秒） | P95（秒） | Token总计 |", "|---|---|---|---|---|---|"]
     lines += [comparison("领域仲裁21条", rows["domain"]), comparison("单/多目标判断30条", rows["cardinality"]),
         comparison("事件开发：仅需模型的17条", event_model), comparison("事件扩展留出12条", rows["events_holdout"]),
         comparison("全局完整任务12例", global_rows), comparison("针对性链路验证4例（单独报告）", rows["boundaries"]), "",
@@ -116,12 +178,12 @@ def main():
         for failure in failures[name]:
             lines.append("- `" + name + "/" + failure["id"] + "/" + failure["arm"] + "`：`" + json.dumps(failure, ensure_ascii=False) + "`。")
     lines += ["", "## 下一步与配置边界", "",
-        "- 优先扩大单目标领域路由的独立测试与线上影子流量，验证长尾、过期上下文、服务抖动和错误领域的拒判；目前不切换。",
+        "- 单目标领域路由已启用，继续扩大独立测试，验证长尾、过期上下文、服务抖动和错误领域的拒判；其他Jev试验不启用。",
         "- 合并数量/领域判定值得继续测试；先完善不确定输入送生成式规划器的策略，再评估Token提示词裁剪。多目标生成式规划依旧是必要环节。",
         "- 事件明确性审核的门槛与样本表现尚不支持启用；继续保持规则＋原LLM。含两处原文的新旧复合事件不能退化成只判单/多任务。",
         "- 复合事件已经需要原LLM解释时，不在前面强加必然回退的Jev；全局计划已经分配领域时，不重复做单目标领域分类。下一轮可单独测试缩短分类提示词，但不能删掉跨域和否定约束来换Token节省。",
         "- 规划超时、bind_slots非法等已有失败需单独修复和回归，不能把换分类模型当作解决这些问题。本轮为可归因对照不同时改它们。",
-        "- 当前默认仍为 `INPUT_EVENT_PROVIDER=llm`、`DOMAIN_ROUTE_PROVIDER=llm`、`PLANNING_GATE_PROVIDER=rules`；本地Key不进入报告、Git或Trace。", "",
+        "- 当前本机与配置模板为 `INPUT_EVENT_PROVIDER=llm`、`DOMAIN_ROUTE_PROVIDER=jev_cascade`、`PLANNING_GATE_PROVIDER=rules`；本地Key不进入报告、Git或Trace。", "",
         "工程回归：700通过、1跳过（`data/jev-front-tests-20261029.xml`），覆盖可选前序的单次多问题契约、保留原默认、服务失败回退、完整原文方案及禁止授权绕过。受控测试不用于宣称真实模型准确率。", "",
         "## 可复现命令", "", "```bash",
         ".venv/bin/python -m evaluations.jev_ab --run-live --split holdout --repeats 1 --output evaluations/runs/<new-domain-run>",
@@ -130,10 +192,11 @@ def main():
         ".venv/bin/python -m evaluations.jev_event_ab --strategy jev_gate --front-holdout --output evaluations/runs/<new-event-holdout-run>",
         ".venv/bin/python -m evaluations.jev_global_ab --candidate front --output evaluations/runs/<new-global-run>",
         ".venv/bin/python -m evaluations.jev_global_ab --candidate front --dataset evaluations/data/jev-front-boundaries-v1.jsonl --output evaluations/runs/<new-boundaries-run>",
-        ".venv/bin/python -m evaluations.jev_front_report", "```", "",
-        "以上真实试验会消耗供应商额度，目录必须使用新名称。运行本报告生成器不产生模型费用。原始SQLite、日志和结果在evaluations/runs对应目录；共享脱敏汇总位于[JSON证据](assets/jev-front-ab-20261029.json)。"]
+        "```", "", "仅归档与重建报告，无付费API调用：", "", "```bash",
+        ".venv/bin/python -m evaluations.jev_archive", ".venv/bin/python -m evaluations.jev_front_report", "```", "",
+        "上面真实试验命令会消耗供应商额度，目录必须使用新名称。归档和报告生成器只读既有证据，不产生模型费用；没有私有原run目录时可使用统一归档复算。原始SQLite、日志和结果在evaluations/runs对应目录；共享脱敏汇总位于[JSON证据](assets/jev-front-ab-20261029.json)。"]
     Path("docs/assets/jev-front-ab-20261029.json").write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n")
-    Path("docs/jev-front-ab-2026-10-29.md").write_text("\n".join(lines) + "\n")
+    write_maintained_report(Path("docs/jev-front-ab-2026-10-29.md"), lines)
 
 
 if __name__ == "__main__":

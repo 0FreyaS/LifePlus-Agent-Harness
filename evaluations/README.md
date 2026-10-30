@@ -1,5 +1,55 @@
 # LifePlus 评测集 v1
 
+## 当前唯一汇总入口（2026-10-30）
+
+[测试总文档](../测试回报/测试总文档.md) · [测试数据集及逐文件说明](../测试回报/测试数据集/README.md)。以DeepSeek Flash关闭思考为基准，领域、槽位、工具、规划、澄清、完整任务、容错与工程回归统一列出；实测与待测分开。下文保留旧评测方法和复现背景，不将旧版本成绩迁移为当前模型指标。
+
+测试总文档第5节统一维护Bad Case复盘：按现场、最早偏离点、证据、主因/次生症状、已实施修复、替代方案和验证状态整理10类问题。编辑源为`evaluations/bad-case-review.md`，离线重建时合入总文档；不要只修改生成结果。局部通过、端到端待复验、未修复及测试口径差异分别标识，原始失败不覆盖。
+
+离线维护：`.venv/bin/python -m evaluations.test_report`。旧Jev报告入口已跳转；历史完整文档与原始结果保留，不发起付费API请求。
+
+## 当前配置真实复测
+
+`deepseek_baseline`复用统一模型客户端（thinking disabled、SDK retries=0），不读取标准领域作为输入。领域/动作、槽位、澄清和全局规划各30条；澄清工具回执受控、真实模型及图不受控。规划强制进入模型以隔离数量门控。以下命令会产生真实API费用，输出目录必须全新：
+
+```bash
+.venv/bin/python -m evaluations.deepseek_baseline --output evaluations/runs/new-components
+env DEFAULT_CURRENT_LOCATION= .venv/bin/python -m evaluations.completion --dataset '测试回报/测试数据集/05-端到端任务/完整任务90会话.jsonl' --output evaluations/runs/new-completion --concurrency 1 --case-budget 210
+```
+
+冻结澄清标签假设无默认位置，所以上述完整会话命令只在评测进程禁用配置位置；真实模型、MCP、工具回执及隔离存储不替换。若不传该环境变量，测的是当前默认定位与旧标签的兼容性，不能将差异全归因模型。当前源码不因本轮测试修改；所有失败、修复尝试和未知用量保留。归档结果位于[本轮结果目录](../测试回报/测试数据集/结果记录/2026-10-30-01/README.md)，测试总文档第0节列明实测及剩余边界。
+
+## Jev统一测试记录与数据目录
+
+新增[纯旧任务回复过滤实验](jev/2026-10-29-resume-filter/README.md)：`llm_direct`对自由文本直接使用原事件LLM；`jev_resume_filter`只允许高置信度、宿主可完整唯一绑定的纯回复跳过LLM，复合需求仍由LLM拆分。36条冻结局部场景与5组真实全链路配对独立归档，结构化卡片不经过事件模型；后续已批准本机使用`llm_direct`，过滤候选仍不启用。
+
+## 关闭思考的规划绑定修复
+
+[修复前后逐条证据](../测试回报/测试数据集/结果记录/2026-10-30-planner-binding-fix-01/README.md)与测试总文档第0.1节记录真实配对。原7失败0/7→7/7，新长尾3/30→30/30，原完整D04单臂30/30。这里只验目标、领域、依赖和结果绑定；不是工具执行或端到端完成率。
+
+```bash
+# 只准备冻结37条，不调用模型；已有文件内容不一致则拒绝覆盖
+python -m evaluations.planner_binding_cases
+# 显式付费调用；目录需全新，保持MODEL_THINKING=disabled
+python -m evaluations.planner_binding_ab --run-live --output evaluations/runs/planner-binding-fix-ab-NEW
+# 单臂补充测试（不会自动推送或部署）
+python -m evaluations.planner_binding_eval --run-live --output evaluations/runs/planner-binding-single-NEW
+python -m evaluations.test_report
+```
+
+配对脚本读取与修复前基准hash一致的Git源码快照到独立模块，不切换工作区；两组共享同模型、2048有效输出上限、25秒单次/45秒累计预算及一次结构修复。包含全部失败attempt和用量，7条与30条分开报告；37条专门富集绑定缺陷，不能当一般规划总体准确率。此前思考模式试验已按要求撤出当前总文档，原始记录只在历史归档保留。
+
+后续Jev实验统一维护[测试主文档](../docs/jev-front-ab-2026-10-29.md)。[数据归档](jev/2026-10-29/README.md)集中保存各模块及整体的冻结输入/期望、逐条A/B结果、CSV、准确率/完成率、P50/P95、Token及变化量。领域与联合前序全链路指标分开，未知用量不能当作0。
+
+只整理已有证据、不产生模型调用：
+
+```bash
+.venv/bin/python -m evaluations.jev_archive
+.venv/bin/python -m evaluations.jev_front_report
+```
+
+报告生成会保留文末人工维护区。新数据/新配置建立新日期或版本，不覆盖旧Query和结果；原始SQLite、日志和Trace继续留在`evaluations/runs`。当前已启用领域Jev，事件审核和数量门控仍关闭；下文旧试验的“默认未启用”仅描述当时状态。
+
 ## 2026-10-29 当前架构与 Jev 试验
 
 新增三模块实测：`jev_gate_ab`比较零模型数量粗筛与Jev；`jev_event_ab --strategy jev_gate --front-holdout`验证事件明确性审核；`jev_global_ab --candidate front`验证合并数量/领域判定和事件审核的全局效果。`jev_front_report`从保留原始记录重建[三模块报告](../docs/jev-front-ab-2026-10-29.md)。默认不启用；普通12例与针对性4例分开，不混成总体收益。报告列明429、超时、未知用量和并行试验干扰。

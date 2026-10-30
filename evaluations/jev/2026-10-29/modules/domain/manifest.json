@@ -1,0 +1,30 @@
+{
+  "scope": "local_domain_route_only_no_tools",
+  "started_at": "2026-10-29T07:12:42.812236+00:00",
+  "split": "holdout",
+  "repeats": 1,
+  "seed": 20261029,
+  "baseline_model": "grok-4.3",
+  "candidate_model": "jev-1.14.0",
+  "confidence_threshold": 0.8,
+  "probability_threshold": 0.9,
+  "jev_timeout_seconds": 1.5,
+  "case_timeout_seconds": 60,
+  "dataset_sha256": "21fb90bd6b780212f4537dcbcd4d2224234f16c8d55187253c11f26635d55994",
+  "sources": {
+    "src/car_agent/harness.py": "0c3bfe4ca4a25dcbaf3fdba65353be9cfd760390254ed627389ddc25589b5434",
+    "src/car_agent/domain_routing.py": "32927a12735e8baa69565d2cfe364ec957d05a9b0926b851c0a9a4160baaf5b8",
+    "src/car_agent/adapters/jev.py": "b918244f9d6d632aef29b9dd42cbf073d59445000e02e4b56aaa6603503c6df5"
+  },
+  "auto_enable": false,
+  "source_run": "evaluations/runs/jev-front-domain-20261029-01",
+  "record_scope": "domain",
+  "metric": "领域准确率",
+  "frozen_case_count": 21,
+  "paired_observations": 42,
+  "model_names": [
+    "grok-4.3",
+    "jev-1.14.0"
+  ],
+  "privacy": "Auth, owner, top-level audit/task IDs, trace paths, logs and databases are excluded; synthetic event target IDs and model span IDs are retained."
+}

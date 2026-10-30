@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-30",
+  "condition": "isolated_source_copy_without_private_dotenv_or_api_credentials",
+  "passed": 882,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 2,
+  "seconds": 31.99,
+  "junit_local": "data/planner-binding-fix-isolated-tests-20261030.xml",
+  "scope": "controlled_engineering_tests_not_model_accuracy_or_end_to_end_live_sessions"
+}

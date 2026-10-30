@@ -1,0 +1,22 @@
+{
+  "scope": "real_model_graph_mcp_storage_paired_pilot",
+  "started_at": "2026-10-29T07:31:44.846922+00:00",
+  "candidate": "front",
+  "seed": 20261029,
+  "dataset_sha256": "0f1466e7f8d4b78a13f0326b63994c105bd1309feef9eb2d4a5bece6504b7fcb",
+  "case_budget_seconds": 120,
+  "concurrency": 1,
+  "order": "alternating AB/BA by shuffled case",
+  "auto_enable": false,
+  "limitations": "Each case/arm has a fresh process and isolated storage. No browser/TCP cost or real human waiting.",
+  "source_run": "evaluations/runs/jev-front-boundaries-global-20261029-01",
+  "record_scope": "boundaries",
+  "metric": "会话全部目标完成率",
+  "frozen_case_count": 4,
+  "paired_observations": 8,
+  "model_names": [
+    "grok-4.3",
+    "jev-1.14.0"
+  ],
+  "privacy": "Auth, owner, top-level audit/task IDs, trace paths, logs and databases are excluded; synthetic event target IDs and model span IDs are retained."
+}

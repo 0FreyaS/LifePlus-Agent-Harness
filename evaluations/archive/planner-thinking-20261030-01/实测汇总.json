@@ -1,0 +1,364 @@
+{
+  "manifest": {
+    "started_at": "2026-10-30T05:24:19.361409+00:00",
+    "model": "deepseek-flash",
+    "changed_role": "planner_only",
+    "arms": [
+      "disabled",
+      "low",
+      "high"
+    ],
+    "seed": 31030,
+    "repeats": 1,
+    "concurrency": 1,
+    "planned_submissions": 99,
+    "effective_max_tokens": 2048,
+    "original_effective_max_tokens": 2048,
+    "configured_planner_max_tokens": 1536,
+    "request_timeout_seconds": 25,
+    "planning_deadline_seconds": 45.0,
+    "sdk_retries": 0,
+    "structured_attempts_max": 2,
+    "thinking_doc": "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode/",
+    "frozen_now": "2026-10-27T10:00:00+08:00",
+    "planner_variant": "baseline",
+    "scope": "forced_global_planner_no_tools_not_end_to_end; diagnostic3_is_posthoc",
+    "other_roles_thinking": "disabled",
+    "dataset_sha256": "7d70b6827cc06638786a0ed4701193ef3bd2366a539403a9024c651f103c6631",
+    "source_sha256": {
+      "evaluations/planner_thinking_ab.py": "19c47bbd3bbb0145c7a87602aee2d4b0e2b695e2f86af62747aa93457fb61c6f",
+      "src/car_agent/task_planning.py": "2e443b31cd928217fcd4e4cda06e28b435c7399278d9b700f3a3265e75d4c30d",
+      "src/car_agent/structured_output.py": "2bf352a223c88c3f5293638fd543656020f7f6cf35abb40cd783d575d463fdac",
+      "src/car_agent/model_roles.py": "85ad775a5b70f02032b969349dd13383583295be1601b5b827fec57722676803",
+      "evaluations/planner_cases.py": "4e237b5a22ef49e3dd3d6f5938979771a637e58ae3ddc3c682825bdbea2ea5d2"
+    },
+    "auto_enable": false
+  },
+  "scopes": {
+    "main30": {
+      "arms": {
+        "disabled": {
+          "submitted": 30,
+          "passed": 23,
+          "p50_ms": 882,
+          "p95_ms": 2329,
+          "repairs": 7,
+          "first_attempt_parse_failures": 7,
+          "length_attempts": 0,
+          "runtime_errors": 7,
+          "failed_ids": [
+            "boundary05",
+            "dependency03",
+            "dependency04",
+            "dependency05",
+            "dependency02",
+            "dependency01",
+            "boundary02"
+          ],
+          "groups": {
+            "context_reference": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "dependency": {
+              "submitted": 5,
+              "passed": 0
+            },
+            "missing_information": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "multi_boundary": {
+              "submitted": 5,
+              "passed": 3
+            },
+            "parallel": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "single_punctuation": {
+              "submitted": 5,
+              "passed": 5
+            }
+          },
+          "model_attempts": 37,
+          "attempts_with_usage": 37,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 26540,
+            "output_tokens": 2572
+          },
+          "observed_total_tokens": 29112,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 29112
+        },
+        "low": {
+          "submitted": 30,
+          "passed": 28,
+          "p50_ms": 2215,
+          "p95_ms": 6891,
+          "repairs": 2,
+          "first_attempt_parse_failures": 2,
+          "length_attempts": 0,
+          "runtime_errors": 2,
+          "failed_ids": [
+            "dependency05",
+            "dependency01"
+          ],
+          "groups": {
+            "context_reference": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "dependency": {
+              "submitted": 5,
+              "passed": 3
+            },
+            "missing_information": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "multi_boundary": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "parallel": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "single_punctuation": {
+              "submitted": 5,
+              "passed": 5
+            }
+          },
+          "model_attempts": 32,
+          "attempts_with_usage": 32,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 23515,
+            "output_tokens": 11164
+          },
+          "observed_total_tokens": 34679,
+          "reported_reasoning_tokens": 8753,
+          "total_tokens": 34679
+        },
+        "high": {
+          "submitted": 30,
+          "passed": 25,
+          "p50_ms": 2045,
+          "p95_ms": 7674,
+          "repairs": 5,
+          "first_attempt_parse_failures": 5,
+          "length_attempts": 0,
+          "runtime_errors": 5,
+          "failed_ids": [
+            "dependency03",
+            "dependency04",
+            "dependency05",
+            "dependency01",
+            "boundary02"
+          ],
+          "groups": {
+            "context_reference": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "dependency": {
+              "submitted": 5,
+              "passed": 1
+            },
+            "missing_information": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "multi_boundary": {
+              "submitted": 5,
+              "passed": 4
+            },
+            "parallel": {
+              "submitted": 5,
+              "passed": 5
+            },
+            "single_punctuation": {
+              "submitted": 5,
+              "passed": 5
+            }
+          },
+          "model_attempts": 35,
+          "attempts_with_usage": 35,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 25880,
+            "output_tokens": 11120
+          },
+          "observed_total_tokens": 37000,
+          "reported_reasoning_tokens": 8323,
+          "total_tokens": 37000
+        }
+      },
+      "paired": {
+        "low": {
+          "pairs": 30,
+          "rescued": [
+            "boundary02",
+            "boundary05",
+            "dependency02",
+            "dependency03",
+            "dependency04"
+          ],
+          "regressed": []
+        },
+        "high": {
+          "pairs": 30,
+          "rescued": [
+            "boundary05",
+            "dependency02"
+          ],
+          "regressed": []
+        }
+      }
+    },
+    "diagnostic3": {
+      "arms": {
+        "disabled": {
+          "submitted": 3,
+          "passed": 1,
+          "p50_ms": 807,
+          "p95_ms": 1031,
+          "repairs": 0,
+          "first_attempt_parse_failures": 0,
+          "length_attempts": 0,
+          "runtime_errors": 0,
+          "failed_ids": [
+            "same-domain-3",
+            "same-domain-1"
+          ],
+          "groups": {
+            "same_domain_diagnostic": {
+              "submitted": 3,
+              "passed": 1
+            }
+          },
+          "model_attempts": 3,
+          "attempts_with_usage": 3,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2103,
+            "output_tokens": 176
+          },
+          "observed_total_tokens": 2279,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 2279
+        },
+        "low": {
+          "submitted": 3,
+          "passed": 1,
+          "p50_ms": 2302,
+          "p95_ms": 2852,
+          "repairs": 0,
+          "first_attempt_parse_failures": 0,
+          "length_attempts": 0,
+          "runtime_errors": 0,
+          "failed_ids": [
+            "same-domain-3",
+            "same-domain-2"
+          ],
+          "groups": {
+            "same_domain_diagnostic": {
+              "submitted": 3,
+              "passed": 1
+            }
+          },
+          "model_attempts": 3,
+          "attempts_with_usage": 3,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2178,
+            "output_tokens": 892
+          },
+          "observed_total_tokens": 3070,
+          "reported_reasoning_tokens": 713,
+          "total_tokens": 3070
+        },
+        "high": {
+          "submitted": 3,
+          "passed": 0,
+          "p50_ms": 2037,
+          "p95_ms": 2976,
+          "repairs": 0,
+          "first_attempt_parse_failures": 0,
+          "length_attempts": 0,
+          "runtime_errors": 0,
+          "failed_ids": [
+            "same-domain-3",
+            "same-domain-2",
+            "same-domain-1"
+          ],
+          "groups": {
+            "same_domain_diagnostic": {
+              "submitted": 3,
+              "passed": 0
+            }
+          },
+          "model_attempts": 3,
+          "attempts_with_usage": 3,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2178,
+            "output_tokens": 842
+          },
+          "observed_total_tokens": 3020,
+          "reported_reasoning_tokens": 657,
+          "total_tokens": 3020
+        }
+      },
+      "paired": {
+        "low": {
+          "pairs": 3,
+          "rescued": [
+            "same-domain-1"
+          ],
+          "regressed": [
+            "same-domain-2"
+          ]
+        },
+        "high": {
+          "pairs": 3,
+          "rescued": [],
+          "regressed": [
+            "same-domain-2"
+          ]
+        }
+      }
+    }
+  },
+  "submitted": 99,
+  "complete": true,
+  "auto_enabled": false,
+  "total_usage": {
+    "model_attempts": 113,
+    "attempts_with_usage": 113,
+    "attempts_missing_usage": 0,
+    "observed_tokens": {
+      "input_tokens": 82394,
+      "output_tokens": 26766
+    },
+    "observed_total_tokens": 109160,
+    "reported_reasoning_tokens": 18446,
+    "total_tokens": 109160
+  },
+  "binding_cases": {
+    "disabled": {
+      "submitted": 7,
+      "passed": 0
+    },
+    "low": {
+      "submitted": 7,
+      "passed": 5
+    },
+    "high": {
+      "submitted": 7,
+      "passed": 2
+    }
+  }
+}

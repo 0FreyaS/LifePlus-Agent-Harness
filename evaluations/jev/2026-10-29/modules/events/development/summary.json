@@ -1,0 +1,174 @@
+{
+  "arms": {
+    "baseline": {
+      "tested": 30,
+      "passed": 29,
+      "accuracy_or_completion_rate": 0.9666666666666667,
+      "errors": 1,
+      "p50_ms": 4485,
+      "p95_ms": 17379,
+      "success_only_p95_ms": 17379,
+      "fallbacks": 0,
+      "model_attempts": 17,
+      "attempts_with_usage": 16,
+      "attempts_missing_usage": 1,
+      "observed_tokens": {
+        "input_tokens": 13651,
+        "output_tokens": 681
+      },
+      "observed_total_tokens": 23402,
+      "reported_reasoning_tokens": 9070,
+      "total_tokens": null,
+      "tokens_per_submitted_case": null,
+      "tokens_per_successful_case": null,
+      "confusion_matrix": [
+        {
+          "expected": "cancel",
+          "actual": "cancel",
+          "count": 1
+        },
+        {
+          "expected": "clarify",
+          "actual": "clarify",
+          "count": 9
+        },
+        {
+          "expected": "clarify",
+          "actual": "error",
+          "count": 1
+        },
+        {
+          "expected": "new",
+          "actual": "new",
+          "count": 4
+        },
+        {
+          "expected": "resume",
+          "actual": "resume",
+          "count": 15
+        }
+      ],
+      "by_group": {
+        "requires_model": {
+          "tested": 17,
+          "passed": 16,
+          "p95_ms": 23980
+        },
+        "rules": {
+          "tested": 13,
+          "passed": 13,
+          "p95_ms": 0
+        }
+      },
+      "by_stage": {
+        "input_events": {
+          "model_attempts": 17,
+          "attempts_with_usage": 16,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 13651,
+            "output_tokens": 681
+          },
+          "observed_total_tokens": 23402,
+          "reported_reasoning_tokens": 9070,
+          "total_tokens": null
+        }
+      }
+    },
+    "candidate": {
+      "tested": 30,
+      "passed": 29,
+      "accuracy_or_completion_rate": 0.9666666666666667,
+      "errors": 1,
+      "p50_ms": 782,
+      "p95_ms": 10519,
+      "success_only_p95_ms": 10519,
+      "fallbacks": 16,
+      "model_attempts": 25,
+      "attempts_with_usage": 24,
+      "attempts_missing_usage": 1,
+      "observed_tokens": {
+        "input_tokens": 19056,
+        "output_tokens": 934
+      },
+      "observed_total_tokens": 28430,
+      "reported_reasoning_tokens": 8440,
+      "total_tokens": null,
+      "tokens_per_submitted_case": null,
+      "tokens_per_successful_case": null,
+      "confusion_matrix": [
+        {
+          "expected": "cancel",
+          "actual": "cancel",
+          "count": 1
+        },
+        {
+          "expected": "clarify",
+          "actual": "clarify",
+          "count": 9
+        },
+        {
+          "expected": "clarify",
+          "actual": "error",
+          "count": 1
+        },
+        {
+          "expected": "new",
+          "actual": "new",
+          "count": 4
+        },
+        {
+          "expected": "resume",
+          "actual": "resume",
+          "count": 15
+        }
+      ],
+      "by_group": {
+        "requires_model": {
+          "tested": 17,
+          "passed": 16,
+          "p95_ms": 16666
+        },
+        "rules": {
+          "tested": 13,
+          "passed": 13,
+          "p95_ms": 0
+        }
+      },
+      "by_stage": {
+        "input_events": {
+          "model_attempts": 16,
+          "attempts_with_usage": 15,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 12811,
+            "output_tokens": 633
+          },
+          "observed_total_tokens": 21884,
+          "reported_reasoning_tokens": 8440,
+          "total_tokens": null
+        },
+        "input_events_precheck": {
+          "model_attempts": 9,
+          "attempts_with_usage": 9,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 6245,
+            "output_tokens": 301
+          },
+          "observed_total_tokens": 6546,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 6546
+        }
+      }
+    }
+  },
+  "paired_cases": 30,
+  "paired_regressions": [],
+  "p50_reduction": 0.8256410256410256,
+  "p95_reduction": 0.3947292709592036,
+  "auto_enable": false,
+  "decision": "evidence_only_not_a_rollout",
+  "prices_applied": false,
+  "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+}

@@ -2140,5 +2140,6 @@
     "events_holdout": "evaluations/runs/jev-event-gate-holdout-20261029-01",
     "global": "evaluations/runs/jev-front-global-20261029-01",
     "boundaries": "evaluations/runs/jev-front-boundaries-global-20261029-01"
-  }
+  },
+  "archive": "evaluations/jev/2026-10-29"
 }

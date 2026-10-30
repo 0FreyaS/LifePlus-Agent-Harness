@@ -28,3 +28,24 @@ Read `docs/PROJECT_MEMORY.md` before explaining or changing architecture. It rec
   separately from visible output; never omit it or count it twice.
 - Keep API keys in local environment settings. The `.env.example` contains placeholders.
 - Retain unrelated working-tree changes and historical evaluation artifacts.
+- Maintain `测试回报/测试总文档.md` and its annotated `测试数据集/` folder as the
+  DeepSeek-only test entry. `docs/jev-front-ab-2026-10-29.md` is now a redirect;
+  its full historical content was archived without deleting frozen evidence.
+  Rebuild offline with `python -m evaluations.test_report`. The 2026-10-30 real run
+  measured slots 44/44, plans 23/30 and full completion 82/90 with default location
+  disabled to match gold; the default-location compatibility audit was 70/90.
+  Keep these conditions separate and never carry old model numbers over.
+  The later binding-contract fix was tested with thinking disabled: original
+  seven failures 0/7 -> 7/7; new targeted long tails 3/30 -> 30/30 in paired runs.
+  Original D04 separately passed 30/30. These are planner-only observations,
+  not a new E2E completion rate; see report section 0.1. Keep thinking comparisons
+  withdrawn from the current report while preserving archived raw evidence.
+  Archive original frozen observations under `evaluations/jev/`.
+  Record accuracy denominators, P50/P95 and complete/unknown token usage separately.
+  Do not label combined-front E2E results as domain-only E2E. Regeneration must
+  preserve manual notes outside the generated markers and frozen case/results files.
+- `INPUT_EVENT_PROVIDER=llm_direct` was approved after the text reply A/B;
+  `jev_resume_filter` remains experimental. Structured cards bypass both policies.
+  The filter may skip only pure old-task replies with a full host-owned binding;
+  compound replies still require the original LLM. Keep their versioned datasets
+  and result section separate from the earlier event-proposal audit experiment.

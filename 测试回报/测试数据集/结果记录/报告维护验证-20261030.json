@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-30",
+  "source": "data/test-report-review-tests-20261030.xml",
+  "passed": 808,
+  "skipped": 2,
+  "failed": 0,
+  "scope": "2026-10-30工作区隔离副本工程回归，含报告维护及未提交文档工具；不是模型准确率或部署验收"
+}

@@ -1,0 +1,35 @@
+{
+  "local_config": {
+    "source": "data/deepseek-baseline-tests-20261030.xml",
+    "submitted": 819,
+    "passed": 802,
+    "failed": 16,
+    "skipped": 1,
+    "failed_ids": [
+      "tests.test_conversation_memory::test_explicit_preference_persists_across_sessions_and_reaches_live_chat",
+      "tests.test_multi_task_api::test_per_task_context_preserves_optional_routers_through_actual_graph",
+      "tests.test_multi_task_api::test_role_models_reach_children_and_domains_extract_their_own_slots[baseline]",
+      "tests.test_multi_task_api::test_role_models_reach_children_and_domains_extract_their_own_slots[compact]",
+      "tests.test_multi_task_api::test_goal_only_plan_binds_actual_receipt_after_domain_extraction",
+      "tests.test_multi_task_api::test_invalid_domain_tool_never_reaches_queue",
+      "tests.test_multi_task_api::test_sse_persists_actual_deltas_and_reconnect_honors_last_event_id",
+      "tests.test_multi_task_api::test_completed_live_request_can_be_deduplicated_when_model_is_unavailable",
+      "tests.test_multi_task_api::test_interrupted_response_stream_is_replaced_with_tool_evidence",
+      "tests.test_production_policies::test_cancel_and_retry_share_the_parent_lifecycle_lock",
+      "tests.test_task_retry::test_failed_route_resumes_checkpoint_once_and_preserves_identity",
+      "tests.test_task_retry::test_plan_connection_failure_retries_without_a_checkpoint",
+      "tests.test_task_retry::test_retry_failed_branch_does_not_reexecute_successful_weather",
+      "tests.test_task_retry::test_retry_unblocks_unstarted_dependents_and_still_requires_write_confirmation",
+      "tests.test_task_retry::test_tool_failure_is_not_blindly_retried_even_if_message_mentions_connection",
+      "tests.test_task_retry::test_cancelled_task_is_never_restarted"
+    ]
+  },
+  "isolated": {
+    "source": "data/deepseek-baseline-isolated-tests-20261030.xml",
+    "submitted": 819,
+    "passed": 817,
+    "failed": 0,
+    "skipped": 2,
+    "failed_ids": []
+  }
+}

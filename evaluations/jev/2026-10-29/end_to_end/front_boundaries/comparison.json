@@ -1,0 +1,11 @@
+{
+  "metric": "会话全部目标完成率",
+  "accuracy_change_percentage_points": 25.0,
+  "p50_change_ms": -2082,
+  "p50_change_percent": -11.628036861211951,
+  "p95_change_ms": -2200,
+  "p95_change_percent": -9.104452905148154,
+  "total_tokens_change": 3122,
+  "total_tokens_change_percent": 20.297769975944348,
+  "meaning": "Positive latency/token changes mean more time/consumption; positive accuracy points mean better quality."
+}

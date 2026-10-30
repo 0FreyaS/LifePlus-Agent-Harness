@@ -1,0 +1,22 @@
+{
+  "status": "prepared_not_live_tested",
+  "thinking": "disabled",
+  "paid_calls": 0,
+  "scopes": {
+    "failed_seed7": 7,
+    "long_tail30": 30
+  },
+  "cases": 37,
+  "long_tail_groups": {
+    "weather_save": 6,
+    "route_save": 6,
+    "search_save": 6,
+    "compound_binding": 6,
+    "binding_boundary": 6
+  },
+  "binding_positive_cases": 34,
+  "no_write_control_cases": 3,
+  "dataset": "测试回报/测试数据集/03-规划与依赖/规划绑定修复37条-v1.jsonl",
+  "sha256": "a94fa83f6b52787079ec9b37b30ac4d44437e854a085ed5e072813cf8bc212cd",
+  "frozen_now": "2026-10-27T10:00:00+08:00"
+}

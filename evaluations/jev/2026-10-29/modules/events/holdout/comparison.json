@@ -1,0 +1,11 @@
+{
+  "metric": "完整事件契约通过率",
+  "accuracy_change_percentage_points": -16.666666666666664,
+  "p50_change_ms": 2988,
+  "p50_change_percent": 36.59970602645762,
+  "p95_change_ms": -1382,
+  "p95_change_percent": -7.3816899903856426,
+  "total_tokens_change": 4581,
+  "total_tokens_change_percent": 26.978798586572438,
+  "meaning": "Positive latency/token changes mean more time/consumption; positive accuracy points mean better quality."
+}

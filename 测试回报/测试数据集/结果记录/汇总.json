@@ -1,0 +1,5218 @@
+{
+  "as_of": "2026-10-30",
+  "baseline_model": "deepseek-flash",
+  "thinking": "disabled",
+  "current_policy": {
+    "domain": "jev_cascade",
+    "events": "llm_direct",
+    "planning_gate": "rules"
+  },
+  "datasets": [
+    {
+      "id": "D01",
+      "file": "测试数据集/01-领域划分/领域仲裁21条.jsonl",
+      "cases": 21,
+      "source": "evaluations/jev/2026-10-29-deepseek/v1/datasets/domain.jsonl",
+      "source_group": null,
+      "format": "domain",
+      "measurement_status": "已有DeepSeek局部配对",
+      "sha256": "e63d9383936a12b92bd8488677fe4bd50dc7a9b91cb1429015add9c07828c137",
+      "purpose": "七领域各3条（含上下文表达）；标注expected_domain、memory_brief。测领域分类，不测工具选择或槽位。未覆盖完整拒判/域外分布。"
+    },
+    {
+      "id": "D02",
+      "file": "测试数据集/01-领域划分/单任务域与动作30条.jsonl",
+      "cases": 30,
+      "source": "evaluations/data/lifeplus-v1.jsonl",
+      "source_group": "single_task",
+      "format": "single_task",
+      "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+      "sha256": "ab4a77ea1887d1b0db9be5deea12daf5ae8cf7981465c537a4879d53ebc7722d",
+      "purpose": "标注expected.domain/action；分别算领域准确率、领域与动作联合正确率。不能把联合正确率称为领域准确率。工具专用正确标签仍需独立补标。"
+    },
+    {
+      "id": "D03",
+      "file": "测试数据集/02-槽位与参数/槽位提取30条.jsonl",
+      "cases": 30,
+      "source": "evaluations/data/lifeplus-v1.jsonl",
+      "source_group": "slot_extraction",
+      "format": "slots",
+      "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+      "sha256": "54a5ad2c444dc020d760da8517645103a2bbddb1e2fe3f8324c9c7064fec0b58",
+      "purpose": "30条、44个已标注字段，含3个None约束。标注expected.domain/slots；None表示不得臆造。比较城市、日期、起终点、模式、歌手、商家筛选和提醒时间；只算已标注字段，不称全槽位F1。",
+      "annotated_fields": 44,
+      "must_not_infer_fields": 3
+    },
+    {
+      "id": "D04",
+      "file": "测试数据集/03-规划与依赖/规划与依赖30条.jsonl",
+      "cases": 30,
+      "source": "evaluations/planner_cases.py",
+      "source_group": null,
+      "format": "planner",
+      "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+      "sha256": "2fecfcec949fd93e94a58bf047b7011f53c0ee70453f27f9ad23d8fe07b9a197",
+      "purpose": "来源为planner_cases.CASES；任务语义label不要求与模型ID相同。固定北京时间2026-10-27T10:00:00+08:00解释日期；全局GoalPlan只检查目标、领域、依赖与绑定，工具/参数另在领域层验收。"
+    },
+    {
+      "id": "D05",
+      "file": "测试数据集/04-信息澄清/缺参与完整信息30条.jsonl",
+      "cases": 30,
+      "source": "evaluations/data/lifeplus-v1.jsonl",
+      "source_group": "clarification",
+      "format": "clarification",
+      "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+      "sha256": "2eb282c89303a58d8ff540f30ef8f3e99a3a5f1083f411889943328072136bd7",
+      "purpose": "15个必要澄清正例、15个完整信息负例；expected.missing_field为期望字段或None。旧正例按未提供默认起点/定位的实验条件标注；重跑需固定配置，不能将生产默认地点与实时GPS混同。"
+    },
+    {
+      "id": "D06",
+      "file": "测试数据集/05-端到端任务/完整任务90会话.jsonl",
+      "cases": 90,
+      "source": "evaluations/data/completion-v1.jsonl",
+      "source_group": null,
+      "format": "completion",
+      "measurement_status": "2026-10-30当前配置实测，见本轮结果及条件",
+      "sha256": "8fccee9d18076cbd849dd221c250f16645645df33c1bd9b0bdda0a802216774a",
+      "purpose": "单任务、多任务、澄清后完成各30会话。goals定义独立用户目标，user_policy是预先约定的回复策略；依据工具参数、真实回执、确认顺序和写入证据验收，不只看completed。"
+    },
+    {
+      "id": "D07",
+      "file": "测试数据集/05-端到端任务/无标点复合回复6会话.jsonl",
+      "cases": 6,
+      "source": "evaluations/data/completion-compound-v1.jsonl",
+      "source_group": null,
+      "format": "completion",
+      "measurement_status": "待DeepSeek专项复测",
+      "sha256": "4a3de3bef9f102f2b56eb38d203baf604ca7ef7f4c8a91f428b3a8cde54021b4",
+      "purpose": "验证没有逗号时恢复旧任务并创建新任务，独立于90会话统计。不能因识别到连接词就漏掉原回复或擅自执行否定需求。"
+    },
+    {
+      "id": "D08",
+      "file": "测试数据集/06-文本事件/文本事件36条.jsonl",
+      "cases": 36,
+      "source": "evaluations/jev/2026-10-29-deepseek/v1/datasets/events.jsonl",
+      "source_group": null,
+      "format": "events",
+      "measurement_status": "已有DeepSeek局部配对",
+      "sha256": "dbbc68ae24e71082035e1c154b59d5a9ffc12cd30e597a203a1ed1386a7eb571",
+      "purpose": "纯回复12、恢复加新任务12、边界12。expected包含route、task_id、候选索引及原文片段，expected_filter为Jev二分类标签。局部校区候选是人工快照，不是实时地图回执。"
+    },
+    {
+      "id": "D09",
+      "file": "测试数据集/05-端到端任务/领域开关全链路12会话.jsonl",
+      "cases": 12,
+      "source": "evaluations/jev/2026-10-29-deepseek/v1/datasets/domain-e2e.jsonl",
+      "source_group": null,
+      "format": "completion",
+      "measurement_status": "已有DeepSeek领域开关配对",
+      "sha256": "f578af1fa9aac4be481ba8200c1c5d7ab1e54b567d541514db3de796f48b17f4",
+      "purpose": "仅切换领域llm/jev_cascade；事件为当时的llm规则优先、数量门控rules。5单任务、2多任务、2澄清、2复合事件、1四目标。不是当前llm_direct策略下的12例验收。"
+    },
+    {
+      "id": "D10",
+      "file": "测试数据集/06-文本事件/文本与卡片5会话.jsonl",
+      "cases": 5,
+      "source": "evaluations/jev/2026-10-29-deepseek/v1/datasets/events-e2e.jsonl",
+      "source_group": null,
+      "format": "completion",
+      "measurement_status": "已有DeepSeek配对及当前策略单臂复测",
+      "sha256": "42be2cdd6d57ab06711532e2aa1d8467d432a7b0a4a017bfd4093f7e41199a68",
+      "purpose": "文本选歌曲、补城市、两种恢复加新需求、结构化卡片对照。自由文本从composer提交，不借卡片焦点。A/B与切换后复测复用这5条，不能当成15个独立场景。"
+    },
+    {
+      "id": "D11",
+      "file": "测试数据集/05-端到端任务/基础查询重复8次.jsonl",
+      "cases": 8,
+      "source": "evaluations/model_comparison/2026-10-29-deepseek-flash/v1/cases.jsonl",
+      "source_group": null,
+      "format": "completion",
+      "measurement_status": "已有DeepSeek单组结果",
+      "sha256": "a2e6304927f27e90044d9397f8f298a482daf1b3de896fc59ecf8c0115f67085",
+      "purpose": "天气和歌手介绍各重复3次，多任务及澄清各1次，只有4类Query。只纳入DeepSeek观察，不再展示其他模型对比；当时事件策略为llm，不是当前整系统SLA。"
+    },
+    {
+      "id": "D12",
+      "file": "测试数据集/07-候选选择/候选选择30条.jsonl",
+      "cases": 30,
+      "source": "evaluations/data/lifeplus-v1.jsonl",
+      "source_group": "candidate_selection",
+      "format": "controlled",
+      "measurement_status": "有历史模型无关组件证据",
+      "sha256": "6f746ef21af551f744a24ea08482e2e521df32a89261ab48060b3fe67bd26241",
+      "purpose": "导航、音乐、本地生活各10种选择；固定候选，验证索引、口语序数、非法选择、零/单候选及POI绑定，不调用真实理解模型。"
+    },
+    {
+      "id": "D13",
+      "file": "测试数据集/08-恢复与幂等/恢复与写操作30条.jsonl",
+      "cases": 30,
+      "source": "evaluations/data/lifeplus-v1.jsonl",
+      "source_group": "recovery",
+      "format": "controlled",
+      "measurement_status": "有历史模型无关组件证据",
+      "sha256": "a7f67ab5a64effd4b6d916473720cab0899500b0881ed5e3f7b9e5541d300e3f",
+      "purpose": "三种写动作各10场景：确认、拒绝、未确认、错误凭证、重开检查点、取消、去重、冲突、迟到回执、线程隔离。图和队列真实，写回执受控，不是远端恰好一次保证。"
+    },
+    {
+      "id": "D14",
+      "file": "测试数据集/09-工具容错/故障注入30条.jsonl",
+      "cases": 30,
+      "source": "evaluations/data/lifeplus-v1.jsonl",
+      "source_group": "tool_failure",
+      "format": "controlled",
+      "measurement_status": "有历史模型无关组件证据",
+      "sha256": "be86ce8f765d799d05c1242c0ec3e46d341bc3e328192d76324bce5d6c1a1027",
+      "purpose": "六工具各5种故障：永久错误、超时、瞬态重试、依赖失败、并行进度；注入短超时仅为测试加速，不是生产超时配置。"
+    },
+    {
+      "id": "D15",
+      "file": "测试数据集/10-真实工具/真实MCP工具30条.jsonl",
+      "cases": 30,
+      "source": "evaluations/data/lifeplus-v1.jsonl",
+      "source_group": "real_tools",
+      "format": "real_tools",
+      "measurement_status": "有历史真实工具证据，待当前复验",
+      "sha256": "12e9504c4ff7772f882c33c0b952070d36d8c9896c4ce52f3a9b89001829496c",
+      "purpose": "天气6、POI6、音乐6、附近商家4、路线4、详情1、行程保存2、读取1。真实MCP/外部接口/隔离本地库，不依赖LLM准确率；写操作仅允许专用评测用户和数据库。"
+    },
+    {
+      "id": "D16",
+      "file": "测试数据集/12-RAG时效/RAG历史删除与缩短2条.jsonl",
+      "cases": 2,
+      "source": "data/testing-audit-20261028/summary.json",
+      "source_group": null,
+      "format": "rag_audit",
+      "measurement_status": "历史2例失败，待当前索引复验",
+      "sha256": "20b7948acb58490f630b295024be642d8d20c7bfb145c5b5e8ee6bb1c0e589b2",
+      "purpose": "历史模型无关Chroma审计记录，包含删除/缩短文档前后chunk数量与残留检索结果。每行保留期望与实际，不是相关性标注集，不能计算Recall@K/MRR。"
+    },
+    {
+      "id": "D17",
+      "file": "测试数据集/03-规划与依赖/规划绑定修复37条-v1.jsonl",
+      "cases": 37,
+      "source": "测试回报/测试数据集/03-规划与依赖/规划绑定修复37条-v1.jsonl",
+      "source_group": null,
+      "format": "planner_binding",
+      "measurement_status": "已冻结；修复前后实测状态见第0.1节",
+      "sha256": "a94fa83f6b52787079ec9b37b30ac4d44437e854a085ed5e072813cf8bc212cd",
+      "purpose": "原7失败＋新30长尾分开；五类长尾各6条，总计34条需要绑定、3条禁止保存对照。只评目标/领域/关键词/依赖/绑定，非端到端完成率或生产流量。"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "M01",
+      "name": "领域划分准确率",
+      "definition": "正确领域数 / 全部提交数，异常计错",
+      "dataset": "D01、D02",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径"
+    },
+    {
+      "id": "M02",
+      "name": "领域＋动作联合准确率",
+      "definition": "域与动作都正确的样本 / 全部提交样本",
+      "dataset": "D02",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径"
+    },
+    {
+      "id": "M03",
+      "name": "工具选择正确率",
+      "definition": "选对工具的任务 / 需要选工具的已提交任务",
+      "dataset": "D02补工具标签",
+      "status": "待补独立工具标签并测试"
+    },
+    {
+      "id": "M04",
+      "name": "标注字段槽位准确率",
+      "definition": "正确标注字段 / 全部标注字段；当前44字段，异常全错",
+      "dataset": "D03",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径"
+    },
+    {
+      "id": "M05",
+      "name": "整组标注槽位正确率",
+      "definition": "该条全部标注槽位正确 / 30条；领域另算",
+      "dataset": "D03",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径"
+    },
+    {
+      "id": "M06",
+      "name": "参数合法率／工具参数联合正确率",
+      "definition": "分别验类型与业务约束；联合要求选对工具且全部参数语义正确",
+      "dataset": "D03＋工具专用标签",
+      "status": "待补标签及专项测试"
+    },
+    {
+      "id": "M07",
+      "name": "目标拆分精确率与召回率",
+      "definition": "匹配目标/生成目标；匹配目标/标注目标，重复目标处罚",
+      "dataset": "D04、D06",
+      "status": "待当前完整专项测量"
+    },
+    {
+      "id": "M08",
+      "name": "计划及依赖绑定正确率",
+      "definition": "目标、等价DAG和绑定均正确的计划 / 全部规划请求",
+      "dataset": "D04、D17",
+      "status": "D04修复前基线；D17修复后配对见第0.1节"
+    },
+    {
+      "id": "M09",
+      "name": "必要澄清召回率",
+      "definition": "应澄清且实际触发 / 必要澄清正例15条；字段正确另算",
+      "dataset": "D05",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径"
+    },
+    {
+      "id": "M10",
+      "name": "多余澄清率",
+      "definition": "不需澄清却追问 / 完整输入负例15条；异常另报",
+      "dataset": "D05",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径"
+    },
+    {
+      "id": "M11",
+      "name": "澄清后任务完成率",
+      "definition": "澄清后所有目标完成的会话 / 全部澄清目标会话",
+      "dataset": "D06澄清30条",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径"
+    },
+    {
+      "id": "M12",
+      "name": "完整事件理解准确率",
+      "definition": "route、归属、索引、全部原文片段正确 / 全部36条",
+      "dataset": "D08",
+      "status": "已有配对实测"
+    },
+    {
+      "id": "M13",
+      "name": "复合回复新需求保留率",
+      "definition": "恢复和新增片段完整 / 全部复合回复12条",
+      "dataset": "D08复合组",
+      "status": "已有局部实测12/12"
+    },
+    {
+      "id": "M14",
+      "name": "Jev接管率与不安全捷径率",
+      "definition": "纯回复接管/纯回复12条；误走纯恢复/非纯回复24条",
+      "dataset": "D08",
+      "status": "已有实测，非最终准确率"
+    },
+    {
+      "id": "M15",
+      "name": "会话端到端完成率",
+      "definition": "全部约定目标完成的会话 / 全部提交会话，部分成功不算全成功",
+      "dataset": "D06、D09、D10",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径；规划修复后完整端到端待复测"
+    },
+    {
+      "id": "M16",
+      "name": "目标级完成率",
+      "definition": "已完成子目标 / 所有已标注子目标，未创建也计失败",
+      "dataset": "D06、D09、D10",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径；规划修复后完整端到端待复测"
+    },
+    {
+      "id": "M17",
+      "name": "结构化虚假完成率",
+      "definition": "状态宣称完成但独立目标验收失败 / 状态宣称完成数",
+      "dataset": "端到端原始结果",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径；规划修复后完整端到端待复测"
+    },
+    {
+      "id": "M18",
+      "name": "最终完成P50/P95",
+      "definition": "提交到全部目标终态的nearest-rank分位数；保留失败与超时",
+      "dataset": "各端到端数据集",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径；规划修复后完整端到端待复测"
+    },
+    {
+      "id": "M19",
+      "name": "首增量及阶段延迟",
+      "definition": "首增量分模型级和请求级；排队、工具、人工等待分开",
+      "dataset": "Trace＋时间戳",
+      "status": "模型attempt有记录；全请求TTFT待完整测"
+    },
+    {
+      "id": "M20",
+      "name": "Token总量及单位完成消耗",
+      "definition": "全部attempt的reported total；每提交及每成功目标分别作分母",
+      "dataset": "各实测结果",
+      "status": "2026-10-30当前配置实测，见第0节；保留各专项口径"
+    },
+    {
+      "id": "M21",
+      "name": "恢复／容错场景通过率",
+      "definition": "该场景全部断言满足 / 已提交场景，次数和清理也验收",
+      "dataset": "D12、D13、D14",
+      "status": "历史组件证据＋当前受控回归"
+    },
+    {
+      "id": "M22",
+      "name": "未授权／重复写入／取消后执行",
+      "definition": "分别记录事件次数及实际受测写入/取消次数",
+      "dataset": "D13＋Trace",
+      "status": "有受控门禁；无生产零事件保证"
+    },
+    {
+      "id": "M23",
+      "name": "真实工具证据通过率",
+      "definition": "非模拟且具备独立最低业务证据 / 实际提交工具场景",
+      "dataset": "D15",
+      "status": "历史30条；当前全工具复验待做"
+    },
+    {
+      "id": "M24",
+      "name": "并行与依赖调度正确性",
+      "definition": "在途区间重叠、依赖完成后启动、绑定真实回执分别断言",
+      "dataset": "D04、D06＋工程用例",
+      "status": "受控回归有证据，独立真实依赖仍有失败"
+    },
+    {
+      "id": "M25",
+      "name": "RAG检索与时效",
+      "definition": "有相关性标签才算Recall@K/MRR；删除和缩短后无旧chunk另测",
+      "dataset": "D16时效；相关性标注待补",
+      "status": "历史时效2例失败，当前待复验"
+    },
+    {
+      "id": "M26",
+      "name": "记忆及原文检索正确性",
+      "definition": "原文精确匹配、偏好更新/删除、跨任务隔离分别验收",
+      "dataset": "工程用例索引",
+      "status": "当前受控覆盖；真实长会话专项待测"
+    },
+    {
+      "id": "M27",
+      "name": "人工Rubric与Judge一致性",
+      "definition": "固定维度评分并与人工双标对齐，报告一致率/分歧",
+      "dataset": "人工评测集待补",
+      "status": "未测，不填写4.2/5等目标值"
+    },
+    {
+      "id": "M28",
+      "name": "容量与生产可用性",
+      "definition": "固定并发及请求分布测吞吐、错误、P95、多实例恢复",
+      "dataset": "压测/故障演练待补",
+      "status": "未测，不沿用日均请求或生产QPS"
+    }
+  ],
+  "observations": {
+    "domain": {
+      "baseline": {
+        "submitted": 21,
+        "passed": 21,
+        "p50_ms": 748,
+        "p95_ms": 1316,
+        "goals_completed": 0,
+        "goals_total": 0,
+        "model_attempts": 21,
+        "attempts_with_usage": 21,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 4356,
+          "output_tokens": 138
+        },
+        "observed_total_tokens": 4494,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 4494
+      },
+      "candidate": {
+        "submitted": 21,
+        "passed": 21,
+        "p50_ms": 302,
+        "p95_ms": 1232,
+        "goals_completed": 0,
+        "goals_total": 0,
+        "model_attempts": 23,
+        "attempts_with_usage": 22,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 13798,
+          "output_tokens": 1630
+        },
+        "observed_total_tokens": 15428,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null
+      }
+    },
+    "events": {
+      "baseline": {
+        "submitted": 36,
+        "passed": 34,
+        "p50_ms": 852,
+        "p95_ms": 1655,
+        "goals_completed": 0,
+        "goals_total": 0,
+        "model_attempts": 36,
+        "attempts_with_usage": 36,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 23537,
+          "output_tokens": 1122
+        },
+        "observed_total_tokens": 24659,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 24659
+      },
+      "candidate": {
+        "submitted": 36,
+        "passed": 34,
+        "p50_ms": 1216,
+        "p95_ms": 2004,
+        "goals_completed": 0,
+        "goals_total": 0,
+        "model_attempts": 66,
+        "attempts_with_usage": 65,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 44674,
+          "output_tokens": 2176
+        },
+        "observed_total_tokens": 46850,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null
+      }
+    },
+    "domain_e2e": {
+      "baseline": {
+        "submitted": 12,
+        "passed": 10,
+        "p50_ms": 3731,
+        "p95_ms": 7057,
+        "goals_completed": 14,
+        "goals_total": 20,
+        "model_attempts": 46,
+        "attempts_with_usage": 46,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 27969,
+          "output_tokens": 1996
+        },
+        "observed_total_tokens": 29965,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 29965
+      },
+      "candidate": {
+        "submitted": 12,
+        "passed": 10,
+        "p50_ms": 3265,
+        "p95_ms": 6699,
+        "goals_completed": 14,
+        "goals_total": 20,
+        "model_attempts": 47,
+        "attempts_with_usage": 46,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 31682,
+          "output_tokens": 2611
+        },
+        "observed_total_tokens": 34293,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null
+      }
+    },
+    "events_e2e": {
+      "baseline": {
+        "submitted": 5,
+        "passed": 5,
+        "p50_ms": 5452,
+        "p95_ms": 7918,
+        "goals_completed": 7,
+        "goals_total": 7,
+        "model_attempts": 30,
+        "attempts_with_usage": 30,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 18741,
+          "output_tokens": 1132
+        },
+        "observed_total_tokens": 19873,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 19873
+      },
+      "candidate": {
+        "submitted": 5,
+        "passed": 5,
+        "p50_ms": 7595,
+        "p95_ms": 8699,
+        "goals_completed": 7,
+        "goals_total": 7,
+        "model_attempts": 35,
+        "attempts_with_usage": 34,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 21309,
+          "output_tokens": 1202
+        },
+        "observed_total_tokens": 22511,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null
+      }
+    },
+    "current": {
+      "current": {
+        "submitted": 5,
+        "passed": 5,
+        "p50_ms": 7944,
+        "p95_ms": 8797,
+        "goals_completed": 7,
+        "goals_total": 7,
+        "model_attempts": 31,
+        "attempts_with_usage": 30,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 18265,
+          "output_tokens": 1043
+        },
+        "observed_total_tokens": 19308,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null
+      }
+    },
+    "basic": {
+      "candidate": {
+        "submitted": 8,
+        "passed": 8,
+        "p50_ms": 3434,
+        "p95_ms": 3853,
+        "goals_completed": 9,
+        "goals_total": 9,
+        "model_attempts": 23,
+        "attempts_with_usage": 23,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 12912,
+          "output_tokens": 1648
+        },
+        "observed_total_tokens": 14560,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 14560
+      }
+    },
+    "components": {
+      "current": {
+        "submitted": 120,
+        "passed": 120,
+        "p50_ms": 68,
+        "p95_ms": 398,
+        "goals_completed": 0,
+        "goals_total": 0,
+        "model_attempts": 0,
+        "attempts_with_usage": 0,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "observed_total_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 0
+      }
+    }
+  },
+  "paired": {
+    "domain": {
+      "arms": {
+        "baseline": {
+          "tested": 21,
+          "passed": 21,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 748,
+          "p95_ms": 1316,
+          "success_only_p95_ms": 1316,
+          "fallbacks": 0,
+          "model_attempts": 21,
+          "attempts_with_usage": 21,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 4356,
+            "output_tokens": 138
+          },
+          "observed_total_tokens": 4494,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 4494,
+          "tokens_per_submitted_case": 214.0,
+          "tokens_per_successful_case": 214.0,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 3
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 3
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 3
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 3
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 3
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 3
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 3
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 845
+            },
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 971
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1139
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 686
+            },
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1316
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1194
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 779
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1820
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 21,
+              "attempts_with_usage": 21,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 4356,
+                "output_tokens": 138
+              },
+              "observed_total_tokens": 4494,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 4494
+            }
+          }
+        },
+        "candidate": {
+          "tested": 21,
+          "passed": 21,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 302,
+          "p95_ms": 1232,
+          "success_only_p95_ms": 1232,
+          "fallbacks": 2,
+          "model_attempts": 23,
+          "attempts_with_usage": 22,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 13798,
+            "output_tokens": 1630
+          },
+          "observed_total_tokens": 15428,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "chat",
+              "actual": "chat",
+              "count": 3
+            },
+            {
+              "expected": "local_life",
+              "actual": "local_life",
+              "count": 3
+            },
+            {
+              "expected": "music",
+              "actual": "music",
+              "count": 3
+            },
+            {
+              "expected": "navigation",
+              "actual": "navigation",
+              "count": 3
+            },
+            {
+              "expected": "planning",
+              "actual": "planning",
+              "count": 3
+            },
+            {
+              "expected": "weather",
+              "actual": "weather",
+              "count": 3
+            },
+            {
+              "expected": "wellbeing",
+              "actual": "wellbeing",
+              "count": 3
+            }
+          ],
+          "by_group": {
+            "chat": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1004
+            },
+            "context": {
+              "tested": 7,
+              "passed": 7,
+              "p95_ms": 944
+            },
+            "local_life": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 503
+            },
+            "music": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1071
+            },
+            "navigation": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 2141
+            },
+            "planning": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 265
+            },
+            "weather": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 1087
+            },
+            "wellbeing": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 302
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 409,
+                "output_tokens": 12
+              },
+              "observed_total_tokens": 421,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 421
+            },
+            "domain_route_precheck": {
+              "model_attempts": 21,
+              "attempts_with_usage": 20,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 13389,
+                "output_tokens": 1618
+              },
+              "observed_total_tokens": 15007,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            }
+          }
+        }
+      },
+      "paired_cases": 21,
+      "paired_regressions": [],
+      "p50_reduction": 0.5962566844919786,
+      "p95_reduction": 0.06382978723404253,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "events": {
+      "arms": {
+        "baseline": {
+          "tested": 36,
+          "passed": 34,
+          "accuracy_or_completion_rate": 0.9444444444444444,
+          "errors": 0,
+          "p50_ms": 852,
+          "p95_ms": 1655,
+          "success_only_p95_ms": 1655,
+          "fallbacks": 0,
+          "model_attempts": 36,
+          "attempts_with_usage": 36,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 23537,
+            "output_tokens": 1122
+          },
+          "observed_total_tokens": 24659,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 24659,
+          "tokens_per_submitted_case": 684.9722222222222,
+          "tokens_per_successful_case": 725.2647058823529,
+          "confusion_matrix": [
+            {
+              "expected": "cancel",
+              "actual": "clarify",
+              "count": 1
+            },
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 8
+            },
+            {
+              "expected": "new",
+              "actual": "clarify",
+              "count": 1
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 2
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 24
+            }
+          ],
+          "by_group": {
+            "boundary": {
+              "tested": 12,
+              "passed": 10,
+              "p95_ms": 1748
+            },
+            "compound": {
+              "tested": 12,
+              "passed": 12,
+              "p95_ms": 1050
+            },
+            "pure_reply": {
+              "tested": 12,
+              "passed": 12,
+              "p95_ms": 1655
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 36,
+              "attempts_with_usage": 36,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 23537,
+                "output_tokens": 1122
+              },
+              "observed_total_tokens": 24659,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 24659
+            }
+          }
+        },
+        "candidate": {
+          "tested": 36,
+          "passed": 34,
+          "accuracy_or_completion_rate": 0.9444444444444444,
+          "errors": 0,
+          "p50_ms": 1216,
+          "p95_ms": 2004,
+          "success_only_p95_ms": 2004,
+          "fallbacks": 32,
+          "model_attempts": 66,
+          "attempts_with_usage": 65,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 44674,
+            "output_tokens": 2176
+          },
+          "observed_total_tokens": 46850,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [
+            {
+              "expected": "cancel",
+              "actual": "clarify",
+              "count": 1
+            },
+            {
+              "expected": "clarify",
+              "actual": "clarify",
+              "count": 8
+            },
+            {
+              "expected": "new",
+              "actual": "clarify",
+              "count": 1
+            },
+            {
+              "expected": "new",
+              "actual": "new",
+              "count": 2
+            },
+            {
+              "expected": "resume",
+              "actual": "resume",
+              "count": 24
+            }
+          ],
+          "by_group": {
+            "boundary": {
+              "tested": 12,
+              "passed": 10,
+              "p95_ms": 2004
+            },
+            "compound": {
+              "tested": 12,
+              "passed": 12,
+              "p95_ms": 2199
+            },
+            "pure_reply": {
+              "tested": 12,
+              "passed": 12,
+              "p95_ms": 1816
+            }
+          },
+          "by_stage": {
+            "input_events": {
+              "model_attempts": 32,
+              "attempts_with_usage": 32,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 20922,
+                "output_tokens": 964
+              },
+              "observed_total_tokens": 21886,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 21886
+            },
+            "input_events_precheck": {
+              "model_attempts": 34,
+              "attempts_with_usage": 33,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 23752,
+                "output_tokens": 1212
+              },
+              "observed_total_tokens": 24964,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            }
+          }
+        }
+      },
+      "paired_cases": 36,
+      "paired_regressions": [],
+      "p50_reduction": -0.42723004694835676,
+      "p95_reduction": -0.21087613293051355,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "domain_e2e": {
+      "arms": {
+        "baseline": {
+          "tested": 12,
+          "passed": 10,
+          "accuracy_or_completion_rate": 0.8333333333333334,
+          "errors": 0,
+          "p50_ms": 3731,
+          "p95_ms": 7057,
+          "success_only_p95_ms": 7057,
+          "fallbacks": 0,
+          "model_attempts": 46,
+          "attempts_with_usage": 46,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 27969,
+            "output_tokens": 1996
+          },
+          "observed_total_tokens": 29965,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 29965,
+          "tokens_per_submitted_case": 2497.0833333333335,
+          "tokens_per_successful_case": 2996.5,
+          "confusion_matrix": [],
+          "by_group": {
+            "clarified_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5305
+            },
+            "event_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7057
+            },
+            "four_goals": {
+              "tested": 1,
+              "passed": 0,
+              "p95_ms": 2184
+            },
+            "multi_completion": {
+              "tested": 2,
+              "passed": 1,
+              "p95_ms": 3680
+            },
+            "single_completion": {
+              "tested": 5,
+              "passed": 5,
+              "p95_ms": 4029
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 9,
+              "attempts_with_usage": 9,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1958,
+                "output_tokens": 56
+              },
+              "observed_total_tokens": 2014,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 2014
+            },
+            "domain_understanding": {
+              "model_attempts": 13,
+              "attempts_with_usage": 13,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 11085,
+                "output_tokens": 481
+              },
+              "observed_total_tokens": 11566,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 11566
+            },
+            "input_events": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1419,
+                "output_tokens": 117
+              },
+              "observed_total_tokens": 1536,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1536
+            },
+            "plan": {
+              "model_attempts": 8,
+              "attempts_with_usage": 8,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5909,
+                "output_tokens": 555
+              },
+              "observed_total_tokens": 6464,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 6464
+            },
+            "response": {
+              "model_attempts": 14,
+              "attempts_with_usage": 14,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 7598,
+                "output_tokens": 787
+              },
+              "observed_total_tokens": 8385,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 8385
+            }
+          }
+        },
+        "candidate": {
+          "tested": 12,
+          "passed": 10,
+          "accuracy_or_completion_rate": 0.8333333333333334,
+          "errors": 0,
+          "p50_ms": 3265,
+          "p95_ms": 6699,
+          "success_only_p95_ms": 6699,
+          "fallbacks": 1,
+          "model_attempts": 47,
+          "attempts_with_usage": 46,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 31682,
+            "output_tokens": 2611
+          },
+          "observed_total_tokens": 34293,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [],
+          "by_group": {
+            "clarified_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5622
+            },
+            "event_completion": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 6699
+            },
+            "four_goals": {
+              "tested": 1,
+              "passed": 0,
+              "p95_ms": 2598
+            },
+            "multi_completion": {
+              "tested": 2,
+              "passed": 1,
+              "p95_ms": 3265
+            },
+            "single_completion": {
+              "tested": 5,
+              "passed": 5,
+              "p95_ms": 4304
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 210,
+                "output_tokens": 6
+              },
+              "observed_total_tokens": 216,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 216
+            },
+            "domain_route_precheck": {
+              "model_attempts": 9,
+              "attempts_with_usage": 8,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 5466,
+                "output_tokens": 642
+              },
+              "observed_total_tokens": 6108,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            },
+            "domain_understanding": {
+              "model_attempts": 13,
+              "attempts_with_usage": 13,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 11085,
+                "output_tokens": 481
+              },
+              "observed_total_tokens": 11566,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 11566
+            },
+            "input_events": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1419,
+                "output_tokens": 117
+              },
+              "observed_total_tokens": 1536,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1536
+            },
+            "plan": {
+              "model_attempts": 8,
+              "attempts_with_usage": 8,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5909,
+                "output_tokens": 549
+              },
+              "observed_total_tokens": 6458,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 6458
+            },
+            "response": {
+              "model_attempts": 14,
+              "attempts_with_usage": 14,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 7593,
+                "output_tokens": 816
+              },
+              "observed_total_tokens": 8409,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 8409
+            }
+          }
+        }
+      },
+      "paired_cases": 12,
+      "paired_regressions": [],
+      "p50_reduction": 0.12489949075314932,
+      "p95_reduction": 0.050729771857729866,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    },
+    "events_e2e": {
+      "arms": {
+        "baseline": {
+          "tested": 5,
+          "passed": 5,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 5452,
+          "p95_ms": 7918,
+          "success_only_p95_ms": 7918,
+          "fallbacks": 0,
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 18741,
+            "output_tokens": 1132
+          },
+          "observed_total_tokens": 19873,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 19873,
+          "tokens_per_submitted_case": 3974.6,
+          "tokens_per_successful_case": 3974.6,
+          "confusion_matrix": [],
+          "by_group": {
+            "compound": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7918
+            },
+            "pure_reply": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 5452
+            },
+            "structured_card": {
+              "tested": 1,
+              "passed": 1,
+              "p95_ms": 4327
+            }
+          },
+          "by_stage": {
+            "domain_route_precheck": {
+              "model_attempts": 5,
+              "attempts_with_usage": 5,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3362,
+                "output_tokens": 400
+              },
+              "observed_total_tokens": 3762,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 3762
+            },
+            "domain_understanding": {
+              "model_attempts": 7,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5212,
+                "output_tokens": 215
+              },
+              "observed_total_tokens": 5427,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 5427
+            },
+            "input_events": {
+              "model_attempts": 9,
+              "attempts_with_usage": 9,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5594,
+                "output_tokens": 274
+              },
+              "observed_total_tokens": 5868,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 5868
+            },
+            "plan": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1442,
+                "output_tokens": 67
+              },
+              "observed_total_tokens": 1509,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1509
+            },
+            "response": {
+              "model_attempts": 7,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3131,
+                "output_tokens": 176
+              },
+              "observed_total_tokens": 3307,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 3307
+            }
+          }
+        },
+        "candidate": {
+          "tested": 5,
+          "passed": 5,
+          "accuracy_or_completion_rate": 1.0,
+          "errors": 0,
+          "p50_ms": 7595,
+          "p95_ms": 8699,
+          "success_only_p95_ms": 8699,
+          "fallbacks": 5,
+          "model_attempts": 35,
+          "attempts_with_usage": 34,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 21309,
+            "output_tokens": 1202
+          },
+          "observed_total_tokens": 22511,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null,
+          "tokens_per_submitted_case": null,
+          "tokens_per_successful_case": null,
+          "confusion_matrix": [],
+          "by_group": {
+            "compound": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 8699
+            },
+            "pure_reply": {
+              "tested": 2,
+              "passed": 2,
+              "p95_ms": 7595
+            },
+            "structured_card": {
+              "tested": 1,
+              "passed": 1,
+              "p95_ms": 6220
+            }
+          },
+          "by_stage": {
+            "domain_route": {
+              "model_attempts": 1,
+              "attempts_with_usage": 1,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 214,
+                "output_tokens": 6
+              },
+              "observed_total_tokens": 220,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 220
+            },
+            "domain_route_precheck": {
+              "model_attempts": 5,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 1,
+              "observed_tokens": {
+                "input_tokens": 2688,
+                "output_tokens": 320
+              },
+              "observed_total_tokens": 3008,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": null
+            },
+            "domain_understanding": {
+              "model_attempts": 7,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5209,
+                "output_tokens": 215
+              },
+              "observed_total_tokens": 5424,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 5424
+            },
+            "input_events": {
+              "model_attempts": 9,
+              "attempts_with_usage": 9,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 5592,
+                "output_tokens": 275
+              },
+              "observed_total_tokens": 5867,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 5867
+            },
+            "input_events_precheck": {
+              "model_attempts": 4,
+              "attempts_with_usage": 4,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3035,
+                "output_tokens": 146
+              },
+              "observed_total_tokens": 3181,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 3181
+            },
+            "plan": {
+              "model_attempts": 2,
+              "attempts_with_usage": 2,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 1442,
+                "output_tokens": 61
+              },
+              "observed_total_tokens": 1503,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 1503
+            },
+            "response": {
+              "model_attempts": 7,
+              "attempts_with_usage": 7,
+              "attempts_missing_usage": 0,
+              "observed_tokens": {
+                "input_tokens": 3129,
+                "output_tokens": 179
+              },
+              "observed_total_tokens": 3308,
+              "reported_reasoning_tokens": 0,
+              "total_tokens": 3308
+            }
+          }
+        }
+      },
+      "paired_cases": 5,
+      "paired_regressions": [],
+      "p50_reduction": -0.39306676449009537,
+      "p95_reduction": -0.09863601919676679,
+      "auto_enable": false,
+      "decision": "evidence_only_not_a_rollout",
+      "prices_applied": false,
+      "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+    }
+  },
+  "complete_usage_pairs": {
+    "domain": {
+      "ids": [
+        "chat-3",
+        "chat-4",
+        "context-chat",
+        "context-local_life",
+        "context-music",
+        "context-navigation",
+        "context-planning",
+        "context-weather",
+        "context-wellbeing",
+        "local_life-3",
+        "local_life-4",
+        "music-3",
+        "music-4",
+        "navigation-3",
+        "planning-3",
+        "planning-4",
+        "weather-3",
+        "weather-4",
+        "wellbeing-3",
+        "wellbeing-4"
+      ],
+      "arms": {
+        "baseline": {
+          "model_attempts": 20,
+          "attempts_with_usage": 20,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 4151,
+            "output_tokens": 132
+          },
+          "observed_total_tokens": 4283,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 4283
+        },
+        "candidate": {
+          "model_attempts": 21,
+          "attempts_with_usage": 21,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 13593,
+            "output_tokens": 1624
+          },
+          "observed_total_tokens": 15217,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 15217
+        }
+      }
+    },
+    "events": {
+      "ids": [
+        "boundary01",
+        "boundary02",
+        "boundary03",
+        "boundary04",
+        "boundary05",
+        "boundary06",
+        "boundary07",
+        "boundary08",
+        "boundary09",
+        "boundary10",
+        "boundary11",
+        "boundary12",
+        "compound01",
+        "compound02",
+        "compound03",
+        "compound05",
+        "compound06",
+        "compound07",
+        "compound08",
+        "compound09",
+        "compound10",
+        "compound11",
+        "compound12",
+        "pure01",
+        "pure02",
+        "pure03",
+        "pure04",
+        "pure05",
+        "pure06",
+        "pure07",
+        "pure08",
+        "pure09",
+        "pure10",
+        "pure11",
+        "pure12"
+      ],
+      "arms": {
+        "baseline": {
+          "model_attempts": 35,
+          "attempts_with_usage": 35,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 22878,
+            "output_tokens": 1090
+          },
+          "observed_total_tokens": 23968,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 23968
+        },
+        "candidate": {
+          "model_attempts": 64,
+          "attempts_with_usage": 64,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 44015,
+            "output_tokens": 2151
+          },
+          "observed_total_tokens": 46166,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 46166
+        }
+      }
+    },
+    "domain_e2e": {
+      "ids": [
+        "clarified_completion-29",
+        "event_completion-01",
+        "event_completion-02",
+        "jev-four-goals",
+        "multi_completion-01",
+        "multi_completion-04",
+        "single_completion-01",
+        "single_completion-09",
+        "single_completion-23",
+        "single_completion-26",
+        "single_completion-30"
+      ],
+      "arms": {
+        "baseline": {
+          "model_attempts": 43,
+          "attempts_with_usage": 43,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 26598,
+            "output_tokens": 1918
+          },
+          "observed_total_tokens": 28516,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 28516
+        },
+        "candidate": {
+          "model_attempts": 43,
+          "attempts_with_usage": 43,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 30311,
+            "output_tokens": 2541
+          },
+          "observed_total_tokens": 32852,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 32852
+        }
+      }
+    },
+    "events_e2e": {
+      "ids": [
+        "resume-compound-city",
+        "resume-compound-music",
+        "resume-pure-city",
+        "resume-pure-music"
+      ],
+      "arms": {
+        "baseline": {
+          "model_attempts": 26,
+          "attempts_with_usage": 26,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 16319,
+            "output_tokens": 994
+          },
+          "observed_total_tokens": 17313,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 17313
+        },
+        "candidate": {
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 19348,
+            "output_tokens": 1133
+          },
+          "observed_total_tokens": 20481,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 20481
+        }
+      }
+    }
+  },
+  "engineering": {
+    "source": "data/llm-direct-snapshot-tests-20261029.xml",
+    "date": "2026-10-29",
+    "counts": {
+      "passed": 790,
+      "skipped": 2
+    },
+    "by_module": {
+      "tests.test_agent_flow": {
+        "passed": 17
+      },
+      "tests.test_api_replay": {
+        "passed": 2
+      },
+      "tests.test_completion_evaluation": {
+        "passed": 5
+      },
+      "tests.test_completion_reliability": {
+        "passed": 57
+      },
+      "tests.test_conversation_memory": {
+        "passed": 9
+      },
+      "tests.test_deepseek_ab_reporting": {
+        "passed": 4
+      },
+      "tests.test_deployment_layout": {
+        "passed": 3,
+        "skipped": 1
+      },
+      "tests.test_domain_understanding": {
+        "passed": 14
+      },
+      "tests.test_evaluation": {
+        "passed": 16
+      },
+      "tests.test_industrial_contracts": {
+        "passed": 33
+      },
+      "tests.test_input_events": {
+        "passed": 45
+      },
+      "tests.test_interview_handbook": {
+        "passed": 33
+      },
+      "tests.test_jev_evaluation": {
+        "passed": 9
+      },
+      "tests.test_jev_events": {
+        "passed": 33
+      },
+      "tests.test_jev_front_gate": {
+        "passed": 15
+      },
+      "tests.test_jev_pilot_dataset": {
+        "passed": 1
+      },
+      "tests.test_jev_planner_fallback": {
+        "passed": 11
+      },
+      "tests.test_jev_resume_filter": {
+        "passed": 62
+      },
+      "tests.test_jev_routing": {
+        "passed": 23
+      },
+      "tests.test_live_tools": {
+        "skipped": 1
+      },
+      "tests.test_llm_direct_policy": {
+        "passed": 5
+      },
+      "tests.test_local_life_tools": {
+        "passed": 16
+      },
+      "tests.test_location_defaults": {
+        "passed": 8
+      },
+      "tests.test_map_routes": {
+        "passed": 13
+      },
+      "tests.test_model_thinking": {
+        "passed": 3
+      },
+      "tests.test_multi_task_api": {
+        "passed": 52
+      },
+      "tests.test_planner_profiles": {
+        "passed": 19
+      },
+      "tests.test_production_policies": {
+        "passed": 38
+      },
+      "tests.test_real_tool_storage": {
+        "passed": 8
+      },
+      "tests.test_release_export": {
+        "passed": 17
+      },
+      "tests.test_route_presentation": {
+        "passed": 42
+      },
+      "tests.test_runtime_components": {
+        "passed": 10
+      },
+      "tests.test_runtime_hardening": {
+        "passed": 41
+      },
+      "tests.test_showcase_access": {
+        "passed": 10
+      },
+      "tests.test_showcase_smoke": {
+        "passed": 56
+      },
+      "tests.test_speed_experiments": {
+        "passed": 25
+      },
+      "tests.test_task_retry": {
+        "passed": 6
+      },
+      "tests.test_travel_modes": {
+        "passed": 29
+      }
+    }
+  },
+  "report_maintenance_validation": {
+    "date": "2026-10-30",
+    "source": "data/test-report-review-tests-20261030.xml",
+    "passed": 808,
+    "skipped": 2,
+    "failed": 0,
+    "scope": "2026-10-30工作区隔离副本工程回归，含报告维护及未提交文档工具；不是模型准确率或部署验收"
+  },
+  "historical_special_checks": [
+    {
+      "name": "真实工具集成",
+      "source": "data/tool-integration-latest.json",
+      "date": "2026-10-23",
+      "passed": 19,
+      "submitted": 19,
+      "scope": "历史真实MCP工具，无理解模型；不作为当前模型准确率或当前服务可用率",
+      "cases": [
+        {
+          "id": "mcp_discovery",
+          "passed": true
+        },
+        {
+          "id": "weather_live",
+          "passed": true
+        },
+        {
+          "id": "poi_live",
+          "passed": true
+        },
+        {
+          "id": "route_driving",
+          "passed": true
+        },
+        {
+          "id": "route_walking",
+          "passed": true
+        },
+        {
+          "id": "route_bicycling",
+          "passed": true
+        },
+        {
+          "id": "music_live",
+          "passed": true
+        },
+        {
+          "id": "concurrent_real_mcp_reads",
+          "passed": true
+        },
+        {
+          "id": "itinerary_write",
+          "passed": true
+        },
+        {
+          "id": "itinerary_idempotency",
+          "passed": true
+        },
+        {
+          "id": "itinerary_conflict",
+          "passed": true
+        },
+        {
+          "id": "itinerary_read",
+          "passed": true
+        },
+        {
+          "id": "user_isolation",
+          "passed": true
+        },
+        {
+          "id": "reminder_write",
+          "passed": true
+        },
+        {
+          "id": "reminder_cancel_target",
+          "passed": true
+        },
+        {
+          "id": "reminder_cancel",
+          "passed": true
+        },
+        {
+          "id": "real_due_delivery_once",
+          "passed": true
+        },
+        {
+          "id": "reminder_read",
+          "passed": true
+        },
+        {
+          "id": "reminder_invalid_time",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "本地生活真实工具",
+      "source": "data/local-life-tools-latest.json",
+      "date": "2026-10-23",
+      "passed": 28,
+      "submitted": 28,
+      "scope": "历史真实MCP工具，无理解模型；不作为当前模型准确率或当前服务可用率",
+      "cases": [
+        {
+          "id": "mcp_discovery",
+          "passed": true
+        },
+        {
+          "id": "weather_live",
+          "passed": true
+        },
+        {
+          "id": "poi_live",
+          "passed": true
+        },
+        {
+          "id": "route_driving",
+          "passed": true
+        },
+        {
+          "id": "route_walking",
+          "passed": true
+        },
+        {
+          "id": "route_bicycling",
+          "passed": true
+        },
+        {
+          "id": "route_legacy_30001_cross_city",
+          "passed": true
+        },
+        {
+          "id": "music_live",
+          "passed": true
+        },
+        {
+          "id": "local_restaurant",
+          "passed": true
+        },
+        {
+          "id": "detail_restaurant",
+          "passed": true
+        },
+        {
+          "id": "local_ktv",
+          "passed": true
+        },
+        {
+          "id": "detail_ktv",
+          "passed": true
+        },
+        {
+          "id": "local_cinema",
+          "passed": true
+        },
+        {
+          "id": "detail_cinema",
+          "passed": true
+        },
+        {
+          "id": "local_cafe",
+          "passed": true
+        },
+        {
+          "id": "detail_cafe",
+          "passed": true
+        },
+        {
+          "id": "concurrent_real_mcp_reads",
+          "passed": true
+        },
+        {
+          "id": "itinerary_write",
+          "passed": true
+        },
+        {
+          "id": "itinerary_idempotency",
+          "passed": true
+        },
+        {
+          "id": "itinerary_conflict",
+          "passed": true
+        },
+        {
+          "id": "itinerary_read",
+          "passed": true
+        },
+        {
+          "id": "user_isolation",
+          "passed": true
+        },
+        {
+          "id": "reminder_write",
+          "passed": true
+        },
+        {
+          "id": "reminder_cancel_target",
+          "passed": true
+        },
+        {
+          "id": "reminder_cancel",
+          "passed": true
+        },
+        {
+          "id": "real_due_delivery_once",
+          "passed": true
+        },
+        {
+          "id": "reminder_read",
+          "passed": true
+        },
+        {
+          "id": "reminder_invalid_time",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "容错后真实工具冒烟",
+      "source": "data/runtime-hardening-tool-smoke-20261024.json",
+      "date": "2026-10-24",
+      "passed": 28,
+      "submitted": 28,
+      "scope": "历史真实MCP工具，无理解模型；不作为当前模型准确率或当前服务可用率",
+      "cases": [
+        {
+          "id": "mcp_discovery",
+          "passed": true
+        },
+        {
+          "id": "weather_live",
+          "passed": true
+        },
+        {
+          "id": "poi_live",
+          "passed": true
+        },
+        {
+          "id": "route_driving",
+          "passed": true
+        },
+        {
+          "id": "route_walking",
+          "passed": true
+        },
+        {
+          "id": "route_bicycling",
+          "passed": true
+        },
+        {
+          "id": "route_legacy_30001_cross_city",
+          "passed": true
+        },
+        {
+          "id": "music_live",
+          "passed": true
+        },
+        {
+          "id": "local_restaurant",
+          "passed": true
+        },
+        {
+          "id": "detail_restaurant",
+          "passed": true
+        },
+        {
+          "id": "local_ktv",
+          "passed": true
+        },
+        {
+          "id": "detail_ktv",
+          "passed": true
+        },
+        {
+          "id": "local_cinema",
+          "passed": true
+        },
+        {
+          "id": "detail_cinema",
+          "passed": true
+        },
+        {
+          "id": "local_cafe",
+          "passed": true
+        },
+        {
+          "id": "detail_cafe",
+          "passed": true
+        },
+        {
+          "id": "concurrent_real_mcp_reads",
+          "passed": true
+        },
+        {
+          "id": "itinerary_write",
+          "passed": true
+        },
+        {
+          "id": "itinerary_idempotency",
+          "passed": true
+        },
+        {
+          "id": "itinerary_conflict",
+          "passed": true
+        },
+        {
+          "id": "itinerary_read",
+          "passed": true
+        },
+        {
+          "id": "user_isolation",
+          "passed": true
+        },
+        {
+          "id": "reminder_write",
+          "passed": true
+        },
+        {
+          "id": "reminder_cancel_target",
+          "passed": true
+        },
+        {
+          "id": "reminder_cancel",
+          "passed": true
+        },
+        {
+          "id": "real_due_delivery_once",
+          "passed": true
+        },
+        {
+          "id": "reminder_read",
+          "passed": true
+        },
+        {
+          "id": "reminder_invalid_time",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "隔离容器受控验收",
+      "source": "data/container-check-20261028.json",
+      "date": "2026-10-28",
+      "passed": 15,
+      "submitted": 15,
+      "scope": "历史真实Docker、demo任务；不调用真实模型或业务接口",
+      "cases": [
+        {
+          "id": "unauthenticated_html_denied",
+          "passed": true
+        },
+        {
+          "id": "unauthenticated_api_denied",
+          "passed": true
+        },
+        {
+          "id": "frontend_served",
+          "passed": true
+        },
+        {
+          "id": "spa_deep_link",
+          "passed": true
+        },
+        {
+          "id": "missing_api_is_404",
+          "passed": true
+        },
+        {
+          "id": "missing_asset_is_404",
+          "passed": true
+        },
+        {
+          "id": "showcase_active",
+          "passed": true
+        },
+        {
+          "id": "no_provider_key_baked_in",
+          "passed": true
+        },
+        {
+          "id": "chroma_loaded",
+          "passed": true
+        },
+        {
+          "id": "tool_catalog_loaded",
+          "passed": true
+        },
+        {
+          "id": "isolated_demo_task_completed",
+          "passed": true
+        },
+        {
+          "id": "sse_response",
+          "passed": true
+        },
+        {
+          "id": "packaged_resources",
+          "passed": true
+        },
+        {
+          "id": "non_root",
+          "passed": true
+        },
+        {
+          "id": "no_env_file_in_image",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "paid_calls_during_organization": 0,
+  "current_baseline": {
+    "version": "2026-10-30-01",
+    "model": "deepseek-flash",
+    "thinking": "disabled",
+    "components": {
+      "single_task": {
+        "expected": 30,
+        "submitted": 30,
+        "passed": 30,
+        "p50_ms": 1127,
+        "p95_ms": 1887,
+        "metrics": {
+          "domain_accuracy": {
+            "numerator": 30,
+            "denominator": 30,
+            "value": 1.0
+          },
+          "intent_exact": {
+            "numerator": 30,
+            "denominator": 30,
+            "value": 1.0
+          }
+        },
+        "confusion": [
+          {
+            "expected": "chat",
+            "actual": "chat",
+            "count": 2
+          },
+          {
+            "expected": "local_life",
+            "actual": "local_life",
+            "count": 5
+          },
+          {
+            "expected": "music",
+            "actual": "music",
+            "count": 5
+          },
+          {
+            "expected": "navigation",
+            "actual": "navigation",
+            "count": 6
+          },
+          {
+            "expected": "planning",
+            "actual": "planning",
+            "count": 5
+          },
+          {
+            "expected": "weather",
+            "actual": "weather",
+            "count": 6
+          },
+          {
+            "expected": "wellbeing",
+            "actual": "wellbeing",
+            "count": 1
+          }
+        ],
+        "failed_ids": [],
+        "model_attempts": 57,
+        "attempts_with_usage": 57,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 47393,
+          "output_tokens": 3595
+        },
+        "observed_total_tokens": 50988,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 50988
+      },
+      "slot_extraction": {
+        "expected": 30,
+        "submitted": 30,
+        "passed": 30,
+        "p50_ms": 1242,
+        "p95_ms": 2217,
+        "metrics": {
+          "domain_accuracy": {
+            "numerator": 30,
+            "denominator": 30,
+            "value": 1.0
+          },
+          "annotated_slot_accuracy": {
+            "numerator": 44,
+            "denominator": 44,
+            "value": 1.0
+          },
+          "annotated_slots_exact": {
+            "numerator": 30,
+            "denominator": 30,
+            "value": 1.0
+          }
+        },
+        "confusion": [
+          {
+            "expected": "local_life",
+            "actual": "local_life",
+            "count": 11
+          },
+          {
+            "expected": "music",
+            "actual": "music",
+            "count": 4
+          },
+          {
+            "expected": "navigation",
+            "actual": "navigation",
+            "count": 5
+          },
+          {
+            "expected": "planning",
+            "actual": "planning",
+            "count": 5
+          },
+          {
+            "expected": "weather",
+            "actual": "weather",
+            "count": 5
+          }
+        ],
+        "failed_ids": [],
+        "model_attempts": 60,
+        "attempts_with_usage": 60,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 55735,
+          "output_tokens": 3989
+        },
+        "observed_total_tokens": 59724,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 59724
+      },
+      "clarification": {
+        "expected": 30,
+        "submitted": 30,
+        "passed": 30,
+        "p50_ms": 1285,
+        "p95_ms": 3090,
+        "metrics": {
+          "clarification_field_accuracy": {
+            "numerator": 30,
+            "denominator": 30,
+            "value": 1.0
+          },
+          "clarification_runtime_error": {
+            "numerator": 0,
+            "denominator": 30,
+            "value": 0.0
+          },
+          "necessary_clarification_recall": {
+            "numerator": 15,
+            "denominator": 15,
+            "value": 1.0
+          },
+          "necessary_clarification_correct_field_recall": {
+            "numerator": 15,
+            "denominator": 15,
+            "value": 1.0
+          },
+          "unnecessary_clarification_rate": {
+            "numerator": 0,
+            "denominator": 15,
+            "value": 0.0
+          },
+          "complete_input_runtime_error": {
+            "numerator": 0,
+            "denominator": 15,
+            "value": 0.0
+          }
+        },
+        "confusion": [],
+        "failed_ids": [],
+        "model_attempts": 61,
+        "attempts_with_usage": 60,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 50985,
+          "output_tokens": 3776
+        },
+        "observed_total_tokens": 54761,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null
+      },
+      "planner": {
+        "expected": 30,
+        "submitted": 30,
+        "passed": 23,
+        "p50_ms": 1005,
+        "p95_ms": 2322,
+        "metrics": {
+          "plan_exact": {
+            "numerator": 23,
+            "denominator": 30,
+            "value": 0.7666666666666667
+          }
+        },
+        "confusion": [],
+        "failed_ids": [
+          "dependency01",
+          "dependency02",
+          "dependency03",
+          "dependency04",
+          "dependency05",
+          "boundary02",
+          "boundary05"
+        ],
+        "model_attempts": 37,
+        "attempts_with_usage": 37,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 26540,
+          "output_tokens": 2563
+        },
+        "observed_total_tokens": 29103,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 29103
+      }
+    },
+    "component_total": {
+      "submitted": 120,
+      "passed": 113,
+      "goals_completed": 0,
+      "goals_total": 0,
+      "p50_ms": 1165,
+      "p95_ms": 2236,
+      "model_attempts": 215,
+      "attempts_with_usage": 214,
+      "attempts_missing_usage": 1,
+      "observed_tokens": {
+        "input_tokens": 180653,
+        "output_tokens": 13923
+      },
+      "observed_total_tokens": 194576,
+      "reported_reasoning_tokens": 0,
+      "total_tokens": null,
+      "by_stage": {
+        "domain_route": {
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 208,
+            "output_tokens": 6
+          },
+          "observed_total_tokens": 214,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 214
+        },
+        "domain_route_precheck": {
+          "model_attempts": 90,
+          "attempts_with_usage": 89,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 59053,
+            "output_tokens": 7194
+          },
+          "observed_total_tokens": 66247,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null
+        },
+        "domain_understanding": {
+          "model_attempts": 87,
+          "attempts_with_usage": 87,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 94852,
+            "output_tokens": 4160
+          },
+          "observed_total_tokens": 99012,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 99012
+        },
+        "plan": {
+          "model_attempts": 37,
+          "attempts_with_usage": 37,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 26540,
+            "output_tokens": 2563
+          },
+          "observed_total_tokens": 29103,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 29103
+        }
+      }
+    },
+    "completion": {
+      "clarified_completion": {
+        "submitted": 30,
+        "passed": 30,
+        "goals_completed": 32,
+        "goals_total": 32,
+        "p50_ms": 4555,
+        "p95_ms": 6595,
+        "model_attempts": 157,
+        "attempts_with_usage": 156,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 120960,
+          "output_tokens": 8066
+        },
+        "observed_total_tokens": 129026,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null,
+        "by_stage": {
+          "domain_route": {
+            "model_attempts": 1,
+            "attempts_with_usage": 1,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 214,
+              "output_tokens": 8
+            },
+            "observed_total_tokens": 222,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 222
+          },
+          "domain_route_precheck": {
+            "model_attempts": 30,
+            "attempts_with_usage": 29,
+            "attempts_missing_usage": 1,
+            "observed_tokens": {
+              "input_tokens": 19566,
+              "output_tokens": 2338
+            },
+            "observed_total_tokens": 21904,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": null
+          },
+          "domain_understanding": {
+            "model_attempts": 32,
+            "attempts_with_usage": 32,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 33930,
+              "output_tokens": 1535
+            },
+            "observed_total_tokens": 35465,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 35465
+          },
+          "input_events": {
+            "model_attempts": 60,
+            "attempts_with_usage": 60,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 37808,
+              "output_tokens": 2097
+            },
+            "observed_total_tokens": 39905,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 39905
+          },
+          "plan": {
+            "model_attempts": 2,
+            "attempts_with_usage": 2,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 1442,
+              "output_tokens": 68
+            },
+            "observed_total_tokens": 1510,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 1510
+          },
+          "response": {
+            "model_attempts": 32,
+            "attempts_with_usage": 32,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 28000,
+              "output_tokens": 2020
+            },
+            "observed_total_tokens": 30020,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 30020
+          }
+        }
+      },
+      "multi_completion": {
+        "submitted": 30,
+        "passed": 22,
+        "goals_completed": 55,
+        "goals_total": 68,
+        "p50_ms": 3975,
+        "p95_ms": 5259,
+        "model_attempts": 175,
+        "attempts_with_usage": 175,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 123302,
+          "output_tokens": 7211
+        },
+        "observed_total_tokens": 130513,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 130513,
+        "by_stage": {
+          "domain_understanding": {
+            "model_attempts": 55,
+            "attempts_with_usage": 55,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 50631,
+              "output_tokens": 2149
+            },
+            "observed_total_tokens": 52780,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 52780
+          },
+          "input_events": {
+            "model_attempts": 30,
+            "attempts_with_usage": 30,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 17493,
+              "output_tokens": 979
+            },
+            "observed_total_tokens": 18472,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 18472
+          },
+          "plan": {
+            "model_attempts": 35,
+            "attempts_with_usage": 35,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 25338,
+              "output_tokens": 2183
+            },
+            "observed_total_tokens": 27521,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 27521
+          },
+          "response": {
+            "model_attempts": 55,
+            "attempts_with_usage": 55,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 29840,
+              "output_tokens": 1900
+            },
+            "observed_total_tokens": 31740,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 31740
+          }
+        }
+      },
+      "single_completion": {
+        "submitted": 30,
+        "passed": 30,
+        "goals_completed": 30,
+        "goals_total": 30,
+        "p50_ms": 3929,
+        "p95_ms": 6551,
+        "model_attempts": 120,
+        "attempts_with_usage": 119,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 92207,
+          "output_tokens": 6122
+        },
+        "observed_total_tokens": 98329,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null,
+        "by_stage": {
+          "domain_route": {
+            "model_attempts": 1,
+            "attempts_with_usage": 1,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 218,
+              "output_tokens": 8
+            },
+            "observed_total_tokens": 226,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 226
+          },
+          "domain_route_precheck": {
+            "model_attempts": 28,
+            "attempts_with_usage": 27,
+            "attempts_missing_usage": 1,
+            "observed_tokens": {
+              "input_tokens": 18330,
+              "output_tokens": 2180
+            },
+            "observed_total_tokens": 20510,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": null
+          },
+          "domain_understanding": {
+            "model_attempts": 29,
+            "attempts_with_usage": 29,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 31534,
+              "output_tokens": 1386
+            },
+            "observed_total_tokens": 32920,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 32920
+          },
+          "input_events": {
+            "model_attempts": 30,
+            "attempts_with_usage": 30,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 17248,
+              "output_tokens": 607
+            },
+            "observed_total_tokens": 17855,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 17855
+          },
+          "plan": {
+            "model_attempts": 2,
+            "attempts_with_usage": 2,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 1420,
+              "output_tokens": 67
+            },
+            "observed_total_tokens": 1487,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 1487
+          },
+          "response": {
+            "model_attempts": 30,
+            "attempts_with_usage": 30,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 23457,
+              "output_tokens": 1874
+            },
+            "observed_total_tokens": 25331,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 25331
+          }
+        }
+      }
+    },
+    "completion_total": {
+      "submitted": 90,
+      "passed": 82,
+      "goals_completed": 117,
+      "goals_total": 130,
+      "p50_ms": 4132,
+      "p95_ms": 6551,
+      "model_attempts": 452,
+      "attempts_with_usage": 450,
+      "attempts_missing_usage": 2,
+      "observed_tokens": {
+        "input_tokens": 336469,
+        "output_tokens": 21399
+      },
+      "observed_total_tokens": 357868,
+      "reported_reasoning_tokens": 0,
+      "total_tokens": null,
+      "by_stage": {
+        "domain_route": {
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 432,
+            "output_tokens": 16
+          },
+          "observed_total_tokens": 448,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 448
+        },
+        "domain_route_precheck": {
+          "model_attempts": 58,
+          "attempts_with_usage": 56,
+          "attempts_missing_usage": 2,
+          "observed_tokens": {
+            "input_tokens": 37896,
+            "output_tokens": 4518
+          },
+          "observed_total_tokens": 42414,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null
+        },
+        "domain_understanding": {
+          "model_attempts": 116,
+          "attempts_with_usage": 116,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 116095,
+            "output_tokens": 5070
+          },
+          "observed_total_tokens": 121165,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 121165
+        },
+        "input_events": {
+          "model_attempts": 120,
+          "attempts_with_usage": 120,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 72549,
+            "output_tokens": 3683
+          },
+          "observed_total_tokens": 76232,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 76232
+        },
+        "plan": {
+          "model_attempts": 39,
+          "attempts_with_usage": 39,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 28200,
+            "output_tokens": 2318
+          },
+          "observed_total_tokens": 30518,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 30518
+        },
+        "response": {
+          "model_attempts": 117,
+          "attempts_with_usage": 117,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 81297,
+            "output_tokens": 5794
+          },
+          "observed_total_tokens": 87091,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 87091
+        }
+      }
+    },
+    "default_location_audit": {
+      "submitted": 90,
+      "passed": 70,
+      "goals_completed": 105,
+      "goals_total": 130,
+      "p50_ms": 3877,
+      "p95_ms": 5332,
+      "model_attempts": 440,
+      "attempts_with_usage": 439,
+      "attempts_missing_usage": 1,
+      "observed_tokens": {
+        "input_tokens": 331391,
+        "output_tokens": 20784
+      },
+      "observed_total_tokens": 352175,
+      "reported_reasoning_tokens": 0,
+      "total_tokens": null,
+      "by_stage": {
+        "domain_route": {
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 214,
+            "output_tokens": 8
+          },
+          "observed_total_tokens": 222,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 222
+        },
+        "domain_route_precheck": {
+          "model_attempts": 58,
+          "attempts_with_usage": 57,
+          "attempts_missing_usage": 1,
+          "observed_tokens": {
+            "input_tokens": 38580,
+            "output_tokens": 4600
+          },
+          "observed_total_tokens": 43180,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null
+        },
+        "domain_understanding": {
+          "model_attempts": 117,
+          "attempts_with_usage": 117,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 117304,
+            "output_tokens": 5132
+          },
+          "observed_total_tokens": 122436,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 122436
+        },
+        "input_events": {
+          "model_attempts": 107,
+          "attempts_with_usage": 107,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 63743,
+            "output_tokens": 2888
+          },
+          "observed_total_tokens": 66631,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 66631
+        },
+        "plan": {
+          "model_attempts": 39,
+          "attempts_with_usage": 39,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 28200,
+            "output_tokens": 2332
+          },
+          "observed_total_tokens": 30532,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 30532
+        },
+        "response": {
+          "model_attempts": 118,
+          "attempts_with_usage": 118,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 83350,
+            "output_tokens": 5824
+          },
+          "observed_total_tokens": 89174,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 89174
+        }
+      }
+    },
+    "default_location_audit_groups": {
+      "clarified_completion": {
+        "submitted": 30,
+        "passed": 17,
+        "goals_completed": 19,
+        "goals_total": 32,
+        "p50_ms": 4278,
+        "p95_ms": 5835,
+        "model_attempts": 144,
+        "attempts_with_usage": 143,
+        "attempts_missing_usage": 1,
+        "observed_tokens": {
+          "input_tokens": 113850,
+          "output_tokens": 7357
+        },
+        "observed_total_tokens": 121207,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null,
+        "by_stage": {
+          "domain_route": {
+            "model_attempts": 1,
+            "attempts_with_usage": 1,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 214,
+              "output_tokens": 8
+            },
+            "observed_total_tokens": 222,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 222
+          },
+          "domain_route_precheck": {
+            "model_attempts": 30,
+            "attempts_with_usage": 29,
+            "attempts_missing_usage": 1,
+            "observed_tokens": {
+              "input_tokens": 19570,
+              "output_tokens": 2338
+            },
+            "observed_total_tokens": 21908,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": null
+          },
+          "domain_understanding": {
+            "model_attempts": 32,
+            "attempts_with_usage": 32,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 33930,
+              "output_tokens": 1561
+            },
+            "observed_total_tokens": 35491,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 35491
+          },
+          "input_events": {
+            "model_attempts": 47,
+            "attempts_with_usage": 47,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 29002,
+              "output_tokens": 1346
+            },
+            "observed_total_tokens": 30348,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 30348
+          },
+          "plan": {
+            "model_attempts": 2,
+            "attempts_with_usage": 2,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 1442,
+              "output_tokens": 62
+            },
+            "observed_total_tokens": 1504,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 1504
+          },
+          "response": {
+            "model_attempts": 32,
+            "attempts_with_usage": 32,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 29692,
+              "output_tokens": 2042
+            },
+            "observed_total_tokens": 31734,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 31734
+          }
+        }
+      },
+      "multi_completion": {
+        "submitted": 30,
+        "passed": 23,
+        "goals_completed": 56,
+        "goals_total": 68,
+        "p50_ms": 3777,
+        "p95_ms": 4876,
+        "model_attempts": 177,
+        "attempts_with_usage": 177,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 124873,
+          "output_tokens": 7241
+        },
+        "observed_total_tokens": 132114,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 132114,
+        "by_stage": {
+          "domain_understanding": {
+            "model_attempts": 56,
+            "attempts_with_usage": 56,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 51840,
+              "output_tokens": 2186
+            },
+            "observed_total_tokens": 54026,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 54026
+          },
+          "input_events": {
+            "model_attempts": 30,
+            "attempts_with_usage": 30,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 17493,
+              "output_tokens": 971
+            },
+            "observed_total_tokens": 18464,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 18464
+          },
+          "plan": {
+            "model_attempts": 35,
+            "attempts_with_usage": 35,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 25338,
+              "output_tokens": 2203
+            },
+            "observed_total_tokens": 27541,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 27541
+          },
+          "response": {
+            "model_attempts": 56,
+            "attempts_with_usage": 56,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 30202,
+              "output_tokens": 1881
+            },
+            "observed_total_tokens": 32083,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 32083
+          }
+        }
+      },
+      "single_completion": {
+        "submitted": 30,
+        "passed": 30,
+        "goals_completed": 30,
+        "goals_total": 30,
+        "p50_ms": 3445,
+        "p95_ms": 4355,
+        "model_attempts": 119,
+        "attempts_with_usage": 119,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 92668,
+          "output_tokens": 6186
+        },
+        "observed_total_tokens": 98854,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 98854,
+        "by_stage": {
+          "domain_route_precheck": {
+            "model_attempts": 28,
+            "attempts_with_usage": 28,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 19010,
+              "output_tokens": 2262
+            },
+            "observed_total_tokens": 21272,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 21272
+          },
+          "domain_understanding": {
+            "model_attempts": 29,
+            "attempts_with_usage": 29,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 31534,
+              "output_tokens": 1385
+            },
+            "observed_total_tokens": 32919,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 32919
+          },
+          "input_events": {
+            "model_attempts": 30,
+            "attempts_with_usage": 30,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 17248,
+              "output_tokens": 571
+            },
+            "observed_total_tokens": 17819,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 17819
+          },
+          "plan": {
+            "model_attempts": 2,
+            "attempts_with_usage": 2,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 1420,
+              "output_tokens": 67
+            },
+            "observed_total_tokens": 1487,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 1487
+          },
+          "response": {
+            "model_attempts": 30,
+            "attempts_with_usage": 30,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 23456,
+              "output_tokens": 1901
+            },
+            "observed_total_tokens": 25357,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 25357
+          }
+        }
+      }
+    },
+    "defaulted_ids": [
+      "clarified_completion-16",
+      "clarified_completion-17",
+      "clarified_completion-18",
+      "clarified_completion-19",
+      "clarified_completion-20",
+      "clarified_completion-21",
+      "clarified_completion-22",
+      "clarified_completion-23",
+      "clarified_completion-24",
+      "clarified_completion-25",
+      "clarified_completion-26",
+      "clarified_completion-27",
+      "clarified_completion-28"
+    ],
+    "structured_false_completion": {
+      "numerator": 3,
+      "denominator": 85
+    },
+    "component_failures": [
+      {
+        "id": "dependency01",
+        "group": "planner",
+        "query": "查无锡明天天气，然后把这次天气查询结果保存到行程",
+        "passed": false,
+        "metrics": {
+          "plan_exact": [
+            0,
+            1
+          ]
+        },
+        "error_type": "OutputParserException",
+        "elapsed_ms": 2113,
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 1015,
+            "usage": {
+              "input_tokens": 702,
+              "output_tokens": 68,
+              "total_tokens": 770,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 1077,
+            "usage": {
+              "input_tokens": 758,
+              "output_tokens": 68,
+              "total_tokens": 826,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          }
+        ]
+      },
+      {
+        "id": "dependency02",
+        "group": "planner",
+        "query": "从无锡站步行到东南大学无锡校区，然后把这次路线结果保存到行程",
+        "passed": false,
+        "metrics": {
+          "plan_exact": [
+            0,
+            1
+          ]
+        },
+        "error_type": "OutputParserException",
+        "elapsed_ms": 2236,
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 1212,
+            "usage": {
+              "input_tokens": 706,
+              "output_tokens": 82,
+              "total_tokens": 788,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 1012,
+            "usage": {
+              "input_tokens": 762,
+              "output_tokens": 82,
+              "total_tokens": 844,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          }
+        ]
+      },
+      {
+        "id": "dependency03",
+        "group": "planner",
+        "query": "搜索周杰伦的歌曲，然后把搜索结果保存到行程清单",
+        "passed": false,
+        "metrics": {
+          "plan_exact": [
+            0,
+            1
+          ]
+        },
+        "error_type": "OutputParserException",
+        "elapsed_ms": 1921,
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 917,
+            "usage": {
+              "input_tokens": 702,
+              "output_tokens": 72,
+              "total_tokens": 774,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 987,
+            "usage": {
+              "input_tokens": 758,
+              "output_tokens": 72,
+              "total_tokens": 830,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          }
+        ]
+      },
+      {
+        "id": "dependency04",
+        "group": "planner",
+        "query": "找无锡站附近的饭店，然后把检索结果保存到行程清单",
+        "passed": false,
+        "metrics": {
+          "plan_exact": [
+            0,
+            1
+          ]
+        },
+        "error_type": "OutputParserException",
+        "elapsed_ms": 1910,
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 928,
+            "usage": {
+              "input_tokens": 702,
+              "output_tokens": 75,
+              "total_tokens": 777,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 964,
+            "usage": {
+              "input_tokens": 758,
+              "output_tokens": 75,
+              "total_tokens": 833,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          }
+        ]
+      },
+      {
+        "id": "dependency05",
+        "group": "planner",
+        "query": "查杭州后天天气，然后把天气结果保存到行程，同时搜索陶喆歌曲",
+        "passed": false,
+        "metrics": {
+          "plan_exact": [
+            0,
+            1
+          ]
+        },
+        "error_type": "OutputParserException",
+        "elapsed_ms": 2460,
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 972,
+            "usage": {
+              "input_tokens": 707,
+              "output_tokens": 93,
+              "total_tokens": 800,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 1478,
+            "usage": {
+              "input_tokens": 763,
+              "output_tokens": 93,
+              "total_tokens": 856,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          }
+        ]
+      },
+      {
+        "id": "boundary02",
+        "group": "planner",
+        "query": "查无锡明天天气，搜索周杰伦歌曲，找无锡站附近饭店，列出我的提醒，然后把这次天气查询结果保存到行程",
+        "passed": false,
+        "metrics": {
+          "plan_exact": [
+            0,
+            1
+          ]
+        },
+        "error_type": "OutputParserException",
+        "elapsed_ms": 2322,
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 1139,
+            "usage": {
+              "input_tokens": 718,
+              "output_tokens": 139,
+              "total_tokens": 857,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 1172,
+            "usage": {
+              "input_tokens": 774,
+              "output_tokens": 140,
+              "total_tokens": 914,
+              "input_token_details": {
+                "cache_read": 640
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          }
+        ]
+      },
+      {
+        "id": "boundary05",
+        "group": "planner",
+        "query": "从无锡站走路到东南大学无锡校区，查杭州明天天气，搜索陶喆歌曲，然后把这次路线结果保存到行程",
+        "passed": false,
+        "metrics": {
+          "plan_exact": [
+            0,
+            1
+          ]
+        },
+        "error_type": "OutputParserException",
+        "elapsed_ms": 2198,
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 1186,
+            "usage": {
+              "input_tokens": 717,
+              "output_tokens": 117,
+              "total_tokens": 834,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 998,
+            "usage": {
+              "input_tokens": 773,
+              "output_tokens": 117,
+              "total_tokens": 890,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          }
+        ]
+      }
+    ],
+    "completion_failures": [
+      {
+        "id": "multi_completion-04",
+        "group": "multi_completion",
+        "query": "查无锡今天天气，然后把查到的完整天气结果保存到行程，标题为无锡天气记录",
+        "completed": false,
+        "passed": false,
+        "goals_total": 2,
+        "goals_completed": 0,
+        "all_roots_completed": false,
+        "root_statuses": [
+          {
+            "id": "84e1cb6c-297d-425c-b9a6-f717d49e9af0",
+            "status": "failed"
+          }
+        ],
+        "leaf_statuses": [
+          {
+            "id": "84e1cb6c-297d-425c-b9a6-f717d49e9af0",
+            "status": "failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查无锡今天天气\", \"domain\": \"weather\", \"depends_on\": []}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为无锡天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"result\": \"t1.result\"}}]}. Got: 1 validation error for GoalPlan\n "
+          }
+        ],
+        "goal_checks": [
+          {
+            "goal": {
+              "domain": "weather",
+              "tool": "maps_weather",
+              "arguments": {
+                "city": "无锡",
+                "forecast_date": "$today"
+              }
+            },
+            "leaf_id": "84e1cb6c-297d-425c-b9a6-f717d49e9af0",
+            "failures": [
+              "wrong_domain",
+              "leaf_not_completed",
+              "missing_successful_tool_receipt:maps_weather"
+            ]
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "save_itinerary",
+              "arguments": {
+                "title": "无锡天气记录"
+              },
+              "receipt_from": "maps_weather"
+            },
+            "leaf_id": null,
+            "failures": [
+              "missing_task"
+            ]
+          }
+        ],
+        "failures": [
+          "goal1:wrong_domain",
+          "goal1:leaf_not_completed",
+          "goal1:missing_successful_tool_receipt:maps_weather",
+          "goal2:missing_task",
+          "unexpected_task_count"
+        ],
+        "elapsed_ms": 3638,
+        "diagnostics": [
+          {
+            "type": "task.failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查无锡今天天气\", \"domain\": \"weather\", \"depends_on\": []}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为无锡天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"result\": \"t1.result\"}}]}. Got: 1 validation error for GoalPlan\n ",
+            "error": "OutputParserException"
+          }
+        ],
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 999,
+            "usage": {
+              "input_tokens": 721,
+              "output_tokens": 75,
+              "total_tokens": 796,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 1305,
+            "usage": {
+              "input_tokens": 777,
+              "output_tokens": 75,
+              "total_tokens": 852,
+              "input_token_details": {
+                "cache_read": 640
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "input_events",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 1223,
+            "usage": {
+              "input_tokens": 589,
+              "output_tokens": 48,
+              "total_tokens": 637,
+              "input_token_details": {
+                "cache_read": 384
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          }
+        ]
+      },
+      {
+        "id": "multi_completion-08",
+        "group": "multi_completion",
+        "query": "查杭州今天天气，然后把查到的完整天气结果保存到行程，标题为杭州天气记录",
+        "completed": false,
+        "passed": false,
+        "goals_total": 2,
+        "goals_completed": 0,
+        "all_roots_completed": false,
+        "root_statuses": [
+          {
+            "id": "5a00014c-f973-4ded-a77a-a0eb0998c9eb",
+            "status": "failed"
+          }
+        ],
+        "leaf_statuses": [
+          {
+            "id": "5a00014c-f973-4ded-a77a-a0eb0998c9eb",
+            "status": "failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查杭州今天天气\", \"domain\": \"weather\", \"depends_on\": []}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为杭州天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"content\": \"t1.result\"}}]}. Got: 1 validation error for GoalPlan\n"
+          }
+        ],
+        "goal_checks": [
+          {
+            "goal": {
+              "domain": "weather",
+              "tool": "maps_weather",
+              "arguments": {
+                "city": "杭州",
+                "forecast_date": "$today"
+              }
+            },
+            "leaf_id": "5a00014c-f973-4ded-a77a-a0eb0998c9eb",
+            "failures": [
+              "wrong_domain",
+              "leaf_not_completed",
+              "missing_successful_tool_receipt:maps_weather"
+            ]
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "save_itinerary",
+              "arguments": {
+                "title": "杭州天气记录"
+              },
+              "receipt_from": "maps_weather"
+            },
+            "leaf_id": null,
+            "failures": [
+              "missing_task"
+            ]
+          }
+        ],
+        "failures": [
+          "goal1:wrong_domain",
+          "goal1:leaf_not_completed",
+          "goal1:missing_successful_tool_receipt:maps_weather",
+          "goal2:missing_task",
+          "unexpected_task_count"
+        ],
+        "elapsed_ms": 2916,
+        "diagnostics": [
+          {
+            "type": "task.failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查杭州今天天气\", \"domain\": \"weather\", \"depends_on\": []}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为杭州天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"content\": \"t1.result\"}}]}. Got: 1 validation error for GoalPlan\n",
+            "error": "OutputParserException"
+          }
+        ],
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 946,
+            "usage": {
+              "input_tokens": 721,
+              "output_tokens": 75,
+              "total_tokens": 796,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 958,
+            "usage": {
+              "input_tokens": 777,
+              "output_tokens": 75,
+              "total_tokens": 852,
+              "input_token_details": {
+                "cache_read": 640
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "input_events",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 936,
+            "usage": {
+              "input_tokens": 589,
+              "output_tokens": 42,
+              "total_tokens": 631,
+              "input_token_details": {
+                "cache_read": 384
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          }
+        ]
+      },
+      {
+        "id": "multi_completion-12",
+        "group": "multi_completion",
+        "query": "查南京今天天气，然后把查到的完整天气结果保存到行程，标题为南京天气记录",
+        "completed": false,
+        "passed": false,
+        "goals_total": 2,
+        "goals_completed": 0,
+        "all_roots_completed": false,
+        "root_statuses": [
+          {
+            "id": "075e6b90-aebf-4d1e-85c3-38ab23c648aa",
+            "status": "failed"
+          }
+        ],
+        "leaf_statuses": [
+          {
+            "id": "075e6b90-aebf-4d1e-85c3-38ab23c648aa",
+            "status": "failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查南京今天天气\", \"domain\": \"weather\", \"depends_on\": [], \"bind_slots\": {}}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为南京天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"result\": \"t1.result\"}}]}. Got: 1 validation er"
+          }
+        ],
+        "goal_checks": [
+          {
+            "goal": {
+              "domain": "weather",
+              "tool": "maps_weather",
+              "arguments": {
+                "city": "南京",
+                "forecast_date": "$today"
+              }
+            },
+            "leaf_id": "075e6b90-aebf-4d1e-85c3-38ab23c648aa",
+            "failures": [
+              "wrong_domain",
+              "leaf_not_completed",
+              "missing_successful_tool_receipt:maps_weather"
+            ]
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "save_itinerary",
+              "arguments": {
+                "title": "南京天气记录"
+              },
+              "receipt_from": "maps_weather"
+            },
+            "leaf_id": null,
+            "failures": [
+              "missing_task"
+            ]
+          }
+        ],
+        "failures": [
+          "goal1:wrong_domain",
+          "goal1:leaf_not_completed",
+          "goal1:missing_successful_tool_receipt:maps_weather",
+          "goal2:missing_task",
+          "unexpected_task_count"
+        ],
+        "elapsed_ms": 3005,
+        "diagnostics": [
+          {
+            "type": "task.failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查南京今天天气\", \"domain\": \"weather\", \"depends_on\": [], \"bind_slots\": {}}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为南京天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"result\": \"t1.result\"}}]}. Got: 1 validation er",
+            "error": "OutputParserException"
+          }
+        ],
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 920,
+            "usage": {
+              "input_tokens": 721,
+              "output_tokens": 75,
+              "total_tokens": 796,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 1003,
+            "usage": {
+              "input_tokens": 777,
+              "output_tokens": 82,
+              "total_tokens": 859,
+              "input_token_details": {
+                "cache_read": 640
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "input_events",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 1012,
+            "usage": {
+              "input_tokens": 589,
+              "output_tokens": 29,
+              "total_tokens": 618,
+              "input_token_details": {
+                "cache_read": 384
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          }
+        ]
+      },
+      {
+        "id": "multi_completion-16",
+        "group": "multi_completion",
+        "query": "查上海今天天气，然后把查到的完整天气结果保存到行程，标题为上海天气记录",
+        "completed": false,
+        "passed": false,
+        "goals_total": 2,
+        "goals_completed": 0,
+        "all_roots_completed": false,
+        "root_statuses": [
+          {
+            "id": "219d3b8c-8b76-45ad-913d-05c45471e1e7",
+            "status": "failed"
+          }
+        ],
+        "leaf_statuses": [
+          {
+            "id": "219d3b8c-8b76-45ad-913d-05c45471e1e7",
+            "status": "failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查上海今天天气\", \"domain\": \"weather\", \"depends_on\": []}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为上海天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"result\": \"t1.result\"}}]}. Got: 1 validation error for GoalPlan\n "
+          }
+        ],
+        "goal_checks": [
+          {
+            "goal": {
+              "domain": "weather",
+              "tool": "maps_weather",
+              "arguments": {
+                "city": "上海",
+                "forecast_date": "$today"
+              }
+            },
+            "leaf_id": "219d3b8c-8b76-45ad-913d-05c45471e1e7",
+            "failures": [
+              "wrong_domain",
+              "leaf_not_completed",
+              "missing_successful_tool_receipt:maps_weather"
+            ]
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "save_itinerary",
+              "arguments": {
+                "title": "上海天气记录"
+              },
+              "receipt_from": "maps_weather"
+            },
+            "leaf_id": null,
+            "failures": [
+              "missing_task"
+            ]
+          }
+        ],
+        "failures": [
+          "goal1:wrong_domain",
+          "goal1:leaf_not_completed",
+          "goal1:missing_successful_tool_receipt:maps_weather",
+          "goal2:missing_task",
+          "unexpected_task_count"
+        ],
+        "elapsed_ms": 2894,
+        "diagnostics": [
+          {
+            "type": "task.failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查上海今天天气\", \"domain\": \"weather\", \"depends_on\": []}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为上海天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"result\": \"t1.result\"}}]}. Got: 1 validation error for GoalPlan\n ",
+            "error": "OutputParserException"
+          }
+        ],
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 1119,
+            "usage": {
+              "input_tokens": 721,
+              "output_tokens": 75,
+              "total_tokens": 796,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 1033,
+            "usage": {
+              "input_tokens": 777,
+              "output_tokens": 75,
+              "total_tokens": 852,
+              "input_token_details": {
+                "cache_read": 640
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "input_events",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 705,
+            "usage": {
+              "input_tokens": 589,
+              "output_tokens": 29,
+              "total_tokens": 618,
+              "input_token_details": {
+                "cache_read": 384
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          }
+        ]
+      },
+      {
+        "id": "multi_completion-20",
+        "group": "multi_completion",
+        "query": "查苏州今天天气，然后把查到的完整天气结果保存到行程，标题为苏州天气记录",
+        "completed": false,
+        "passed": false,
+        "goals_total": 2,
+        "goals_completed": 0,
+        "all_roots_completed": false,
+        "root_statuses": [
+          {
+            "id": "6ca550c5-dc8d-4e30-b1bd-5ce78025c68e",
+            "status": "failed"
+          }
+        ],
+        "leaf_statuses": [
+          {
+            "id": "6ca550c5-dc8d-4e30-b1bd-5ce78025c68e",
+            "status": "failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查苏州今天天气\", \"domain\": \"weather\", \"depends_on\": []}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为苏州天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"result\": \"t1.result\"}}]}. Got: 1 validation error for GoalPlan\n "
+          }
+        ],
+        "goal_checks": [
+          {
+            "goal": {
+              "domain": "weather",
+              "tool": "maps_weather",
+              "arguments": {
+                "city": "苏州",
+                "forecast_date": "$today"
+              }
+            },
+            "leaf_id": "6ca550c5-dc8d-4e30-b1bd-5ce78025c68e",
+            "failures": [
+              "wrong_domain",
+              "leaf_not_completed",
+              "missing_successful_tool_receipt:maps_weather"
+            ]
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "save_itinerary",
+              "arguments": {
+                "title": "苏州天气记录"
+              },
+              "receipt_from": "maps_weather"
+            },
+            "leaf_id": null,
+            "failures": [
+              "missing_task"
+            ]
+          }
+        ],
+        "failures": [
+          "goal1:wrong_domain",
+          "goal1:leaf_not_completed",
+          "goal1:missing_successful_tool_receipt:maps_weather",
+          "goal2:missing_task",
+          "unexpected_task_count"
+        ],
+        "elapsed_ms": 2648,
+        "diagnostics": [
+          {
+            "type": "task.failed",
+            "answer": "任务规划没有完成：Failed to parse GoalPlan from completion {\"tasks\": [{\"id\": \"t1\", \"query\": \"查苏州今天天气\", \"domain\": \"weather\", \"depends_on\": []}, {\"id\": \"t2\", \"query\": \"把查到的完整天气结果保存到行程，标题为苏州天气记录\", \"domain\": \"planning\", \"depends_on\": [\"t1\"], \"bind_slots\": {\"result\": \"t1.result\"}}]}. Got: 1 validation error for GoalPlan\n ",
+            "error": "OutputParserException"
+          }
+        ],
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 947,
+            "usage": {
+              "input_tokens": 721,
+              "output_tokens": 75,
+              "total_tokens": 796,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 2,
+            "elapsed_ms": 914,
+            "usage": {
+              "input_tokens": 777,
+              "output_tokens": 75,
+              "total_tokens": 852,
+              "input_token_details": {
+                "cache_read": 640
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "error_type": "OutputParserException",
+            "type": "model.attempt.failed"
+          },
+          {
+            "stage": "input_events",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 758,
+            "usage": {
+              "input_tokens": 589,
+              "output_tokens": 48,
+              "total_tokens": 637,
+              "input_token_details": {
+                "cache_read": 384
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          }
+        ]
+      },
+      {
+        "id": "multi_completion-28",
+        "group": "multi_completion",
+        "query": "查北京今天的天气，同时查看我的提醒和行程清单",
+        "completed": false,
+        "passed": false,
+        "goals_total": 3,
+        "goals_completed": 2,
+        "all_roots_completed": true,
+        "root_statuses": [
+          {
+            "id": "e52c4ad6-c5f7-4bbf-b690-d570e95d7507",
+            "status": "completed"
+          }
+        ],
+        "leaf_statuses": [
+          {
+            "id": "d705e586-add6-47e8-832d-65ae2e89f363",
+            "status": "completed",
+            "answer": "北京今天（2026年10月30日）天气晴，气温4～21℃，北风。数据来源：高德天气。"
+          },
+          {
+            "id": "3dbd8928-7b06-47e7-ba4b-b461de1bbee8",
+            "status": "completed",
+            "answer": "我查了一下，你目前的提醒和行程清单都是空的，没有待办项目。"
+          }
+        ],
+        "goal_checks": [
+          {
+            "goal": {
+              "domain": "weather",
+              "tool": "maps_weather",
+              "arguments": {
+                "city": "北京",
+                "forecast_date": "$today"
+              }
+            },
+            "leaf_id": "d705e586-add6-47e8-832d-65ae2e89f363",
+            "failures": []
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "list_reminders",
+              "arguments": {}
+            },
+            "leaf_id": "3dbd8928-7b06-47e7-ba4b-b461de1bbee8",
+            "failures": []
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "list_itineraries",
+              "arguments": {}
+            },
+            "leaf_id": null,
+            "failures": [
+              "missing_task"
+            ]
+          }
+        ],
+        "failures": [
+          "goal3:missing_task",
+          "unexpected_task_count"
+        ],
+        "elapsed_ms": 3398,
+        "diagnostics": [
+          {
+            "type": "plan.completed",
+            "tasks": [
+              {
+                "id": "t1",
+                "query": "查北京今天的天气",
+                "domain": "weather",
+                "action": "",
+                "slots": {},
+                "depends_on": [],
+                "bind_slots": {}
+              },
+              {
+                "id": "t2",
+                "query": "查看我的提醒和行程清单",
+                "domain": "planning",
+                "action": "",
+                "slots": {},
+                "depends_on": [],
+                "bind_slots": {}
+              }
+            ]
+          }
+        ],
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 664,
+            "usage": {
+              "input_tokens": 713,
+              "output_tokens": 52,
+              "total_tokens": 765,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "domain_understanding",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 604,
+            "usage": {
+              "input_tokens": 724,
+              "output_tokens": 37,
+              "total_tokens": 761,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "domain_understanding",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 725,
+            "usage": {
+              "input_tokens": 1221,
+              "output_tokens": 44,
+              "total_tokens": 1265,
+              "input_token_details": {
+                "cache_read": 896
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "response",
+            "model_name": "deepseek-flash",
+            "elapsed_ms": 1023,
+            "usage": {
+              "input_tokens": 368,
+              "output_tokens": 18,
+              "total_tokens": 386,
+              "input_token_details": {
+                "cache_read": 128
+              },
+              "output_token_details": {}
+            },
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "response",
+            "model_name": "deepseek-flash",
+            "elapsed_ms": 863,
+            "usage": {
+              "input_tokens": 436,
+              "output_tokens": 29,
+              "total_tokens": 465,
+              "input_token_details": {
+                "cache_read": 0
+              },
+              "output_token_details": {}
+            },
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "input_events",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 788,
+            "usage": {
+              "input_tokens": 581,
+              "output_tokens": 24,
+              "total_tokens": 605,
+              "input_token_details": {
+                "cache_read": 384
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          }
+        ]
+      },
+      {
+        "id": "multi_completion-29",
+        "group": "multi_completion",
+        "query": "查成都今天的天气，同时查看我的提醒和行程清单",
+        "completed": false,
+        "passed": false,
+        "goals_total": 3,
+        "goals_completed": 2,
+        "all_roots_completed": true,
+        "root_statuses": [
+          {
+            "id": "e18f0e63-d573-4b16-a9dd-647b80484a82",
+            "status": "completed"
+          }
+        ],
+        "leaf_statuses": [
+          {
+            "id": "a8c9a2af-a77c-4fad-bd48-f83a9920d7bb",
+            "status": "completed",
+            "answer": "成都今天（2026-10-30）白天和夜间都是多云，气温15～22℃，北风。数据来自高德天气。"
+          },
+          {
+            "id": "1d971b70-84be-4391-a90b-1d16917b4608",
+            "status": "completed",
+            "answer": "我查了一下，你目前的提醒和行程清单都是空的，没有待办项目。"
+          }
+        ],
+        "goal_checks": [
+          {
+            "goal": {
+              "domain": "weather",
+              "tool": "maps_weather",
+              "arguments": {
+                "city": "成都",
+                "forecast_date": "$today"
+              }
+            },
+            "leaf_id": "a8c9a2af-a77c-4fad-bd48-f83a9920d7bb",
+            "failures": []
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "list_reminders",
+              "arguments": {}
+            },
+            "leaf_id": "1d971b70-84be-4391-a90b-1d16917b4608",
+            "failures": []
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "list_itineraries",
+              "arguments": {}
+            },
+            "leaf_id": null,
+            "failures": [
+              "missing_task"
+            ]
+          }
+        ],
+        "failures": [
+          "goal3:missing_task",
+          "unexpected_task_count"
+        ],
+        "elapsed_ms": 3354,
+        "diagnostics": [
+          {
+            "type": "plan.completed",
+            "tasks": [
+              {
+                "id": "t1",
+                "query": "查成都今天的天气",
+                "domain": "weather",
+                "action": "",
+                "slots": {},
+                "depends_on": [],
+                "bind_slots": {}
+              },
+              {
+                "id": "t2",
+                "query": "查看我的提醒和行程清单",
+                "domain": "planning",
+                "action": "",
+                "slots": {},
+                "depends_on": [],
+                "bind_slots": {}
+              }
+            ]
+          }
+        ],
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 680,
+            "usage": {
+              "input_tokens": 713,
+              "output_tokens": 52,
+              "total_tokens": 765,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "domain_understanding",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 530,
+            "usage": {
+              "input_tokens": 724,
+              "output_tokens": 37,
+              "total_tokens": 761,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "domain_understanding",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 820,
+            "usage": {
+              "input_tokens": 1221,
+              "output_tokens": 44,
+              "total_tokens": 1265,
+              "input_token_details": {
+                "cache_read": 896
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "response",
+            "model_name": "deepseek-flash",
+            "elapsed_ms": 797,
+            "usage": {
+              "input_tokens": 436,
+              "output_tokens": 30,
+              "total_tokens": 466,
+              "input_token_details": {
+                "cache_read": 0
+              },
+              "output_token_details": {}
+            },
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "response",
+            "model_name": "deepseek-flash",
+            "elapsed_ms": 746,
+            "usage": {
+              "input_tokens": 368,
+              "output_tokens": 18,
+              "total_tokens": 386,
+              "input_token_details": {
+                "cache_read": 128
+              },
+              "output_token_details": {}
+            },
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "input_events",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 928,
+            "usage": {
+              "input_tokens": 581,
+              "output_tokens": 21,
+              "total_tokens": 602,
+              "input_token_details": {
+                "cache_read": 384
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          }
+        ]
+      },
+      {
+        "id": "multi_completion-30",
+        "group": "multi_completion",
+        "query": "查深圳今天的天气，同时查看我的提醒和行程清单",
+        "completed": false,
+        "passed": false,
+        "goals_total": 3,
+        "goals_completed": 2,
+        "all_roots_completed": true,
+        "root_statuses": [
+          {
+            "id": "1214d4c2-43c3-426b-a571-174037335597",
+            "status": "completed"
+          }
+        ],
+        "leaf_statuses": [
+          {
+            "id": "e0b1f14b-23c3-4f21-b058-35f52b113bfa",
+            "status": "completed",
+            "answer": "深圳今天（2026-10-30）白天多云，夜间晴，气温23～31℃，北风。数据来源：高德天气。"
+          },
+          {
+            "id": "77bc61f1-fc68-48ce-8446-19af9a5b3676",
+            "status": "completed",
+            "answer": "我查了一下，你的提醒和行程清单目前是空的，没有已保存的提醒或行程。"
+          }
+        ],
+        "goal_checks": [
+          {
+            "goal": {
+              "domain": "weather",
+              "tool": "maps_weather",
+              "arguments": {
+                "city": "深圳",
+                "forecast_date": "$today"
+              }
+            },
+            "leaf_id": "e0b1f14b-23c3-4f21-b058-35f52b113bfa",
+            "failures": []
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "list_reminders",
+              "arguments": {}
+            },
+            "leaf_id": "77bc61f1-fc68-48ce-8446-19af9a5b3676",
+            "failures": []
+          },
+          {
+            "goal": {
+              "domain": "planning",
+              "tool": "list_itineraries",
+              "arguments": {}
+            },
+            "leaf_id": null,
+            "failures": [
+              "missing_task"
+            ]
+          }
+        ],
+        "failures": [
+          "goal3:missing_task",
+          "unexpected_task_count"
+        ],
+        "elapsed_ms": 3523,
+        "diagnostics": [
+          {
+            "type": "plan.completed",
+            "tasks": [
+              {
+                "id": "t1",
+                "query": "查深圳今天的天气",
+                "domain": "weather",
+                "action": "",
+                "slots": {},
+                "depends_on": [],
+                "bind_slots": {}
+              },
+              {
+                "id": "t2",
+                "query": "查看我的提醒和行程清单",
+                "domain": "planning",
+                "action": "",
+                "slots": {},
+                "depends_on": [],
+                "bind_slots": {}
+              }
+            ]
+          }
+        ],
+        "attempts": [
+          {
+            "stage": "plan",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 1003,
+            "usage": {
+              "input_tokens": 713,
+              "output_tokens": 52,
+              "total_tokens": 765,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "domain_understanding",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 810,
+            "usage": {
+              "input_tokens": 724,
+              "output_tokens": 37,
+              "total_tokens": 761,
+              "input_token_details": {
+                "cache_read": 512
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "domain_understanding",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 811,
+            "usage": {
+              "input_tokens": 1221,
+              "output_tokens": 44,
+              "total_tokens": 1265,
+              "input_token_details": {
+                "cache_read": 896
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "response",
+            "model_name": "deepseek-flash",
+            "elapsed_ms": 705,
+            "usage": {
+              "input_tokens": 368,
+              "output_tokens": 21,
+              "total_tokens": 389,
+              "input_token_details": {
+                "cache_read": 128
+              },
+              "output_token_details": {}
+            },
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "response",
+            "model_name": "deepseek-flash",
+            "elapsed_ms": 651,
+            "usage": {
+              "input_tokens": 436,
+              "output_tokens": 31,
+              "total_tokens": 467,
+              "input_token_details": {
+                "cache_read": 0
+              },
+              "output_token_details": {}
+            },
+            "type": "model.attempt.completed"
+          },
+          {
+            "stage": "input_events",
+            "model_name": "deepseek-flash",
+            "attempt": 1,
+            "elapsed_ms": 707,
+            "usage": {
+              "input_tokens": 581,
+              "output_tokens": 24,
+              "total_tokens": 605,
+              "input_token_details": {
+                "cache_read": 384
+              },
+              "output_token_details": {}
+            },
+            "usage_known": true,
+            "type": "model.attempt.completed"
+          }
+        ]
+      }
+    ],
+    "experiment_consumption": {
+      "model_attempts": 1107,
+      "attempts_with_usage": 1103,
+      "attempts_missing_usage": 4,
+      "observed_tokens": {
+        "input_tokens": 848513,
+        "output_tokens": 56106
+      },
+      "observed_total_tokens": 904619,
+      "reported_reasoning_tokens": 0,
+      "total_tokens": null
+    },
+    "no_inference_constraints": {
+      "numerator": 3,
+      "denominator": 3,
+      "cases": [
+        {
+          "id": "slot_extraction-28",
+          "field": "anchor"
+        },
+        {
+          "id": "slot_extraction-29",
+          "field": "city"
+        },
+        {
+          "id": "slot_extraction-30",
+          "field": "reminder_id"
+        }
+      ]
+    },
+    "engineering_runs": {
+      "local_config": {
+        "source": "data/deepseek-baseline-tests-20261030.xml",
+        "submitted": 819,
+        "passed": 802,
+        "failed": 16,
+        "skipped": 1,
+        "failed_ids": [
+          "tests.test_conversation_memory::test_explicit_preference_persists_across_sessions_and_reaches_live_chat",
+          "tests.test_multi_task_api::test_per_task_context_preserves_optional_routers_through_actual_graph",
+          "tests.test_multi_task_api::test_role_models_reach_children_and_domains_extract_their_own_slots[baseline]",
+          "tests.test_multi_task_api::test_role_models_reach_children_and_domains_extract_their_own_slots[compact]",
+          "tests.test_multi_task_api::test_goal_only_plan_binds_actual_receipt_after_domain_extraction",
+          "tests.test_multi_task_api::test_invalid_domain_tool_never_reaches_queue",
+          "tests.test_multi_task_api::test_sse_persists_actual_deltas_and_reconnect_honors_last_event_id",
+          "tests.test_multi_task_api::test_completed_live_request_can_be_deduplicated_when_model_is_unavailable",
+          "tests.test_multi_task_api::test_interrupted_response_stream_is_replaced_with_tool_evidence",
+          "tests.test_production_policies::test_cancel_and_retry_share_the_parent_lifecycle_lock",
+          "tests.test_task_retry::test_failed_route_resumes_checkpoint_once_and_preserves_identity",
+          "tests.test_task_retry::test_plan_connection_failure_retries_without_a_checkpoint",
+          "tests.test_task_retry::test_retry_failed_branch_does_not_reexecute_successful_weather",
+          "tests.test_task_retry::test_retry_unblocks_unstarted_dependents_and_still_requires_write_confirmation",
+          "tests.test_task_retry::test_tool_failure_is_not_blindly_retried_even_if_message_mentions_connection",
+          "tests.test_task_retry::test_cancelled_task_is_never_restarted"
+        ]
+      },
+      "isolated": {
+        "source": "data/deepseek-baseline-isolated-tests-20261030.xml",
+        "submitted": 819,
+        "passed": 817,
+        "failed": 0,
+        "skipped": 2,
+        "failed_ids": []
+      }
+    }
+  },
+  "planner_binding_preparation": {
+    "status": "prepared_not_live_tested",
+    "thinking": "disabled",
+    "paid_calls": 0,
+    "scopes": {
+      "failed_seed7": 7,
+      "long_tail30": 30
+    },
+    "cases": 37,
+    "long_tail_groups": {
+      "weather_save": 6,
+      "route_save": 6,
+      "search_save": 6,
+      "compound_binding": 6,
+      "binding_boundary": 6
+    },
+    "binding_positive_cases": 34,
+    "no_write_control_cases": 3,
+    "dataset": "测试回报/测试数据集/03-规划与依赖/规划绑定修复37条-v1.jsonl",
+    "sha256": "a94fa83f6b52787079ec9b37b30ac4d44437e854a085ed5e072813cf8bc212cd",
+    "frozen_now": "2026-10-27T10:00:00+08:00"
+  },
+  "planner_binding_fix": {
+    "arms": {
+      "baseline": {
+        "scopes": {
+          "failed_seed7": {
+            "expected": 7,
+            "submitted": 7,
+            "passed": 0,
+            "p50_ms": 2110,
+            "p95_ms": 2324,
+            "failed_ids": [
+              "boundary02",
+              "dependency01",
+              "dependency02",
+              "dependency05",
+              "dependency03",
+              "boundary05",
+              "dependency04"
+            ],
+            "model_attempts": 14,
+            "attempts_with_usage": 14,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 10300,
+              "output_tokens": 1284
+            },
+            "observed_total_tokens": 11584,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 11584
+          },
+          "long_tail30": {
+            "expected": 30,
+            "submitted": 30,
+            "passed": 3,
+            "p50_ms": 2081,
+            "p95_ms": 2742,
+            "failed_ids": [
+              "binding-route_save-02",
+              "binding-route_save-03",
+              "binding-compound_binding-04",
+              "binding-compound_binding-02",
+              "binding-search_save-05",
+              "binding-weather_save-04",
+              "binding-weather_save-05",
+              "binding-search_save-03",
+              "binding-binding_boundary-06",
+              "binding-search_save-04",
+              "binding-weather_save-01",
+              "binding-search_save-02",
+              "binding-compound_binding-06",
+              "binding-binding_boundary-03",
+              "binding-compound_binding-05",
+              "binding-weather_save-02",
+              "binding-route_save-04",
+              "binding-weather_save-03",
+              "binding-route_save-05",
+              "binding-compound_binding-01",
+              "binding-route_save-01",
+              "binding-binding_boundary-05",
+              "binding-route_save-06",
+              "binding-compound_binding-03",
+              "binding-search_save-06",
+              "binding-search_save-01",
+              "binding-weather_save-06"
+            ],
+            "model_attempts": 56,
+            "attempts_with_usage": 56,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 41400,
+              "output_tokens": 4977
+            },
+            "observed_total_tokens": 46377,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 46377
+          }
+        },
+        "submitted": 37,
+        "expected": 37,
+        "complete": true,
+        "scope": "planner_contract_not_tool_execution_or_end_to_end_completion"
+      },
+      "candidate": {
+        "scopes": {
+          "failed_seed7": {
+            "expected": 7,
+            "submitted": 7,
+            "passed": 7,
+            "p50_ms": 1099,
+            "p95_ms": 1239,
+            "failed_ids": [],
+            "model_attempts": 7,
+            "attempts_with_usage": 7,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 7586,
+              "output_tokens": 646
+            },
+            "observed_total_tokens": 8232,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 8232
+          },
+          "long_tail30": {
+            "expected": 30,
+            "submitted": 30,
+            "passed": 30,
+            "p50_ms": 1047,
+            "p95_ms": 2291,
+            "failed_ids": [],
+            "model_attempts": 32,
+            "attempts_with_usage": 32,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 35151,
+              "output_tokens": 2719
+            },
+            "observed_total_tokens": 37870,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 37870
+          }
+        },
+        "submitted": 37,
+        "expected": 37,
+        "complete": true,
+        "scope": "planner_contract_not_tool_execution_or_end_to_end_completion"
+      }
+    },
+    "paired": {
+      "failed_seed7": {
+        "pairs": 7,
+        "rescued": [
+          "boundary02",
+          "boundary05",
+          "dependency01",
+          "dependency02",
+          "dependency03",
+          "dependency04",
+          "dependency05"
+        ],
+        "regressed": []
+      },
+      "long_tail30": {
+        "pairs": 30,
+        "rescued": [
+          "binding-binding_boundary-03",
+          "binding-binding_boundary-05",
+          "binding-binding_boundary-06",
+          "binding-compound_binding-01",
+          "binding-compound_binding-02",
+          "binding-compound_binding-03",
+          "binding-compound_binding-04",
+          "binding-compound_binding-05",
+          "binding-compound_binding-06",
+          "binding-route_save-01",
+          "binding-route_save-02",
+          "binding-route_save-03",
+          "binding-route_save-04",
+          "binding-route_save-05",
+          "binding-route_save-06",
+          "binding-search_save-01",
+          "binding-search_save-02",
+          "binding-search_save-03",
+          "binding-search_save-04",
+          "binding-search_save-05",
+          "binding-search_save-06",
+          "binding-weather_save-01",
+          "binding-weather_save-02",
+          "binding-weather_save-03",
+          "binding-weather_save-04",
+          "binding-weather_save-05",
+          "binding-weather_save-06"
+        ],
+        "regressed": []
+      }
+    },
+    "submitted": 74,
+    "complete": true,
+    "scope": "planner_only_not_end_to_end; thinking_disabled_both_arms",
+    "original30": {
+      "manifest": {
+        "started_at": "2026-10-30T15:27:19.156230+08:00",
+        "model": "deepseek-flash",
+        "model_thinking": "disabled",
+        "domain_route_provider": "jev_cascade",
+        "input_event_provider": "llm_direct",
+        "sdk_retries": 0,
+        "concurrency": 1,
+        "groups": [
+          "planner"
+        ],
+        "case_counts": {
+          "planner": 30
+        },
+        "role_models": {
+          "intent": "deepseek-flash",
+          "planner": "deepseek-flash",
+          "response": "deepseek-flash"
+        },
+        "case_timeout_seconds": 75,
+        "planner_anchor": "2026-10-27T10:00:00+08:00",
+        "clarification_default_location": "disabled_in_this_process_to_match_frozen_gold",
+        "scope": "configured_jev_then_deepseek_understanding_no_gold_domain; controlled_graph_receipts; forced_planner_not_gate",
+        "datasets": {
+          "planner": {
+            "path": "测试回报/测试数据集/03-规划与依赖/规划与依赖30条.jsonl",
+            "sha256": "2fecfcec949fd93e94a58bf047b7011f53c0ee70453f27f9ad23d8fe07b9a197"
+          }
+        },
+        "sources": {
+          "evaluations/deepseek_baseline.py": "f9d39fa7dd4137a4a3eae5a8e7abeb6cbed7c01c9c51dfa94209155427445771",
+          "src/car_agent/__init__.py": "c9dbbd53685eccf16428521b978799c5877f51dbfd9cd790f2db9f593eab7498",
+          "src/car_agent/access.py": "ee0199782422b95930645ea8a1a1dd8009cf7506ae87d35d15fb6233bd7f1805",
+          "src/car_agent/adapters/demo.py": "244a820ba12f66a915ac31b088dbb9c6390fd6b04362c9ffac1f01c875ef5718",
+          "src/car_agent/adapters/jev.py": "b918244f9d6d632aef29b9dd42cbf073d59445000e02e4b56aaa6603503c6df5",
+          "src/car_agent/adapters/mcp_client.py": "5c01c6aac475cd7a8a79e3941417b1b500b282a9c7c55af70aa3e9a6e0fb8d35",
+          "src/car_agent/api/app.py": "651658084d387f04b4a542124e6e8997dde111dd06b45395bd26e573e62d3bc0",
+          "src/car_agent/cli.py": "1355fc962a17bc7caa12eaa0c775023ce71ed7ef516757898b89958e884a645a",
+          "src/car_agent/config.py": "6575e952b7ba8d65bb244fe8c367e1ea25f9b977e544216c79350400f99d1fbb",
+          "src/car_agent/conversation.py": "b23d235716d0459f1ce502edbacc69b5ce4be3ae85a7d5421c9672287e8bfadc",
+          "src/car_agent/diagnostics.py": "e96c34372c60edaee4e24eacb39c5a60bde87da4c2232116e5b478f3048e3dfc",
+          "src/car_agent/domain_routing.py": "32927a12735e8baa69565d2cfe364ec957d05a9b0926b851c0a9a4160baaf5b8",
+          "src/car_agent/domain_understanding.py": "12c3697b9e417ef017eee73b00dda572588880c1910e7a882a3a760e1f2b632b",
+          "src/car_agent/event_resume_filter.py": "b2d187f6ab665e8f4983080bd13539e7a8759207fff8f2b83ab17bc7ab61d174",
+          "src/car_agent/event_routing.py": "85dc2207206b7d1b61eeb38c95987f72a152f9da8dcd6ec2036226a9eb342851",
+          "src/car_agent/execution_verification.py": "9a4ec8b4513012f9eae49aafeb1e97584188419b95889d703f49c1021418a265",
+          "src/car_agent/freshness.py": "d193cc188a2def4983b5bf18a574c3e3f0faf9ac21ec42a5bad0936ff94905c3",
+          "src/car_agent/harness.py": "0c3bfe4ca4a25dcbaf3fdba65353be9cfd760390254ed627389ddc25589b5434",
+          "src/car_agent/http_workflow_smoke.py": "3acd667d1dfe6694b2cb9dc9222dac22736a00717e405dca779b8d32a034037d",
+          "src/car_agent/input_events.py": "809488e672176e9749fc65b4cd2318ba9796f63ce23d5af4d75584f432101254",
+          "src/car_agent/intent_schema.py": "44b9d48b3e943355f2714f3024b791855ecfd7d56b1ddf2efb6e85e6548245cc",
+          "src/car_agent/interactions.py": "72d9d9d224b39ba9e3ea41dd010cf8b17702862f8054c3ac8e42c1f518777d55",
+          "src/car_agent/local_life_smoke.py": "8b840f54b5434852e30a373b99cdfc9f5497d4262a7a9ca50ad756794fab1cfe",
+          "src/car_agent/location_defaults.py": "4d1c34d4e1a463b41760853f87ad3a74be6c21386a466e351133da7bd781264d",
+          "src/car_agent/mcp_server.py": "b404d632f71cf1e7a7c6ebeec81678674159b5dd66f85cfa68d40a2d85a7d69b",
+          "src/car_agent/memory.py": "778cb47fd3171e2ba61c18e85acd8396b27db439ecb63297cc778b9563f06df7",
+          "src/car_agent/model_roles.py": "85ad775a5b70f02032b969349dd13383583295be1601b5b827fec57722676803",
+          "src/car_agent/models.py": "a70bccc1c82d1d4d416c42e5359d3d4ebee1ba8f9c5ddfa1d2c1d09403b05a34",
+          "src/car_agent/orchestration.py": "41462a89190f99a9ba3694bf2f082c821c809f56fedf0a57c574d45612017106",
+          "src/car_agent/persistence.py": "baf4f3c54cb1df37d621286062ff9799e1a935bc47092df0ba90d11283c7a215",
+          "src/car_agent/planning_gate.py": "a72f2e6edca58ddf2855190bd74bd313636288e22877ca2530a92c7af0f0c366",
+          "src/car_agent/rag.py": "b0163d9e14b7c3d0eb97ccba445a45c001b8a27d5848d1bdf84dcb141dcf92da",
+          "src/car_agent/reminders.py": "b149e983e553b5805ba1d57ed0340d410b2a4ee2f83a4a97e87562f87b9f3b27",
+          "src/car_agent/retry.py": "aff1e33fc252b2dbb3d3b1ed143470930560f7d9d805a3aafb3ae3426d81e909",
+          "src/car_agent/route_geometry.py": "f03a5aca8c86442d36e17325503eb5c52f402b9a38e52ab68b65b39d299ddc63",
+          "src/car_agent/route_presentation.py": "8f50a6efa8f54cb11d0c315e40d996a41bba53b0220366524823b37870143f4f",
+          "src/car_agent/route_workflow_smoke.py": "c62ef6a3a3458f2951a45470e228054080548e2b7e6d2153b54695f9fd4ecd6e",
+          "src/car_agent/runtime_context.py": "563b14143e519cbbf44c3297b73a5847f1de40177c7d48669a6e6947505d633e",
+          "src/car_agent/runtime_limits.py": "d812764d754f92dc351c51ec604a2b716ccb41301a2798edc1f04a861e768a47",
+          "src/car_agent/skill_registry.py": "fd4686782ff5aac34e1abef88fa9cee7a2b3a4568a565f071e99e0126612dfb6",
+          "src/car_agent/stream_multi_smoke.py": "a0a2106db8fb37ba8662ae6f415024bbe6935346a6b5a1c53272dcf6b482a8bc",
+          "src/car_agent/streaming.py": "78bed5a919bbac2f15686b848ad6661e78b6301b1a6964bbd498e52b1ae0d675",
+          "src/car_agent/structured_output.py": "d4682bae419f6aabce07aa45d083f560296b7ab5de55a43fcd81b1a6ae32eb2b",
+          "src/car_agent/task_planning.py": "dc3ef55292d31b0a5a2914309e61254d4e8a9a3d38b4646223e166a3d3f05fa0",
+          "src/car_agent/tool_policy.py": "898a15d3f16b9d97c7961e146fe59a7d3f707a44a97634b39bdecb1625f7c614",
+          "src/car_agent/tool_queue.py": "f3ef6b2c19a86193e9474d0d014f092e407eba2c8eacca30de15c066092bd217",
+          "src/car_agent/tool_smoke.py": "fe04c97d31c2b9b1e141e380d89573ec7d53e7948d3ed84f4bb712a50f626eb9",
+          "src/car_agent/tools/__init__.py": "62ba94d60cac16dcf24460f2d6ffcb52527b52f88dc9be5e56b51cf26b94e626",
+          "src/car_agent/tools/service.py": "fa954ab7acb6e2782d48706e6f78da4bdb5f75728661701d6dec0389f7eee2b6",
+          "src/car_agent/travel_modes.py": "bc86039dacec1b1dee514d1d712a47e4c472eda3262ac8ca56555130f9e21062",
+          "src/car_agent/user_events.py": "686f5d34b7d1446837f0b91b558c1d05a04788faea47a0cf9a0ba88b95606bdd"
+        }
+      },
+      "groups": {
+        "planner": {
+          "expected": 30,
+          "submitted": 30,
+          "passed": 30,
+          "p50_ms": 884,
+          "p95_ms": 1156,
+          "metrics": {
+            "plan_exact": {
+              "numerator": 30,
+              "denominator": 30,
+              "value": 1.0
+            }
+          },
+          "confusion": [],
+          "failed_ids": [],
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 32474,
+            "output_tokens": 1911
+          },
+          "observed_total_tokens": 34385,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 34385
+        }
+      },
+      "submitted": 30,
+      "passed": 30
+    },
+    "engineering": {
+      "date": "2026-10-30",
+      "condition": "isolated_source_copy_without_private_dotenv_or_api_credentials",
+      "passed": 882,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 2,
+      "seconds": 31.99,
+      "junit_local": "data/planner-binding-fix-isolated-tests-20261030.xml",
+      "scope": "controlled_engineering_tests_not_model_accuracy_or_end_to_end_live_sessions"
+    }
+  }
+}

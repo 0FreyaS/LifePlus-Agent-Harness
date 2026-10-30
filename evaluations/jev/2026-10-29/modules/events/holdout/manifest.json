@@ -1,0 +1,30 @@
+{
+  "scope": "local_full_event_interpretation_no_business_tools",
+  "strategy": "jev_gate",
+  "started_at": "2026-10-29T07:18:10.679706+00:00",
+  "split": "front_holdout",
+  "repeats": 1,
+  "seed": 20261029,
+  "baseline_model": "grok-4.3",
+  "candidate_model": "jev-1.14.0",
+  "jev_timeout_seconds": 1.5,
+  "event_timeout_seconds": 25.0,
+  "min_confidence": 0.8,
+  "min_probability": 0.9,
+  "dataset_sha256": "ff4b9cc065b0c4a1503f169feefc8a21f21b39f5ae7081cb02148f0961907c63",
+  "sources": {
+    "src/car_agent/event_routing.py": "84043eec98bc74dd30b16301d0b915679220270193e24f1bd0370cc3f0bc4ea8",
+    "src/car_agent/input_events.py": "cf7812b6cdf0d5740ea515affa5685e7deb1dcce32cbeb1bf93e17cf46419d40",
+    "src/car_agent/adapters/jev.py": "b918244f9d6d632aef29b9dd42cbf073d59445000e02e4b56aaa6603503c6df5"
+  },
+  "source_run": "evaluations/runs/jev-event-gate-holdout-20261029-01",
+  "record_scope": "events_holdout",
+  "metric": "完整事件契约通过率",
+  "frozen_case_count": 12,
+  "paired_observations": 24,
+  "model_names": [
+    "grok-4.3",
+    "jev-1.14.0"
+  ],
+  "privacy": "Auth, owner, top-level audit/task IDs, trace paths, logs and databases are excluded; synthetic event target IDs and model span IDs are retained."
+}

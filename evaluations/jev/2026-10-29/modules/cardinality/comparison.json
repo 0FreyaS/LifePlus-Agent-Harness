@@ -1,0 +1,11 @@
+{
+  "metric": "数量分类正确率",
+  "accuracy_change_percentage_points": 30.000000000000004,
+  "p50_change_ms": 252,
+  "p50_change_percent": null,
+  "p95_change_ms": 534,
+  "p95_change_percent": null,
+  "total_tokens_change": 32046,
+  "total_tokens_change_percent": null,
+  "meaning": "Positive latency/token changes mean more time/consumption; positive accuracy points mean better quality."
+}

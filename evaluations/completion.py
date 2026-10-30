@@ -171,6 +171,7 @@ async def run(args):
         "planning_gate_provider": settings.planning_gate_provider,
         "role_models": {role: getattr(settings, role + "_model_name") or settings.model_name for role in ("planner", "intent", "response")},
         "execution_conditions": {name: getattr(settings, name) for name in (
+            "default_current_location", "default_current_city",
             "model_base_url", "model_max_output_tokens", "model_stream_usage", "model_thinking", "planner_variant", "planner_max_output_tokens",
             "intent_max_output_tokens", "response_max_output_tokens", "runtime_active_seconds", "runtime_model_calls",
             "runtime_tool_calls", "runtime_resumes", "runtime_refreshes", "runtime_retries", "runtime_graph_steps",

@@ -1,0 +1,20 @@
+{
+  "scope": "cardinality_only_not_global_plan_generation",
+  "started_at": "2026-10-29T07:14:20.754514+00:00",
+  "seed": 20261029,
+  "model": "jev-1.14.0",
+  "timeout": 1.5,
+  "min_confidence": 0.8,
+  "min_probability": 0.9,
+  "dataset_sha256": "266248fdac6ae2e78ce787b3e2e19052dc68f0c295cdd4df1cb770a5e530631d",
+  "note": "Baseline is a zero-model regex. Domain-only accuracy measured separately. No automatic rollout.",
+  "source_run": "evaluations/runs/jev-cardinality-20261029-01",
+  "record_scope": "cardinality",
+  "metric": "数量分类正确率",
+  "frozen_case_count": 30,
+  "paired_observations": 60,
+  "model_names": [
+    "jev-1.14.0"
+  ],
+  "privacy": "Auth, owner, top-level audit/task IDs, trace paths, logs and databases are excluded; synthetic event target IDs and model span IDs are retained."
+}

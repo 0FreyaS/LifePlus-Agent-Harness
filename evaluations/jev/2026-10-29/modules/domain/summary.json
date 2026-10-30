@@ -1,0 +1,254 @@
+{
+  "arms": {
+    "baseline": {
+      "tested": 21,
+      "passed": 21,
+      "accuracy_or_completion_rate": 1.0,
+      "errors": 0,
+      "p50_ms": 3551,
+      "p95_ms": 5684,
+      "success_only_p95_ms": 5684,
+      "fallbacks": 0,
+      "model_attempts": 21,
+      "attempts_with_usage": 21,
+      "attempts_missing_usage": 0,
+      "observed_tokens": {
+        "input_tokens": 8351,
+        "output_tokens": 135
+      },
+      "observed_total_tokens": 15161,
+      "reported_reasoning_tokens": 6675,
+      "total_tokens": 15161,
+      "tokens_per_submitted_case": 721.952380952381,
+      "tokens_per_successful_case": 721.952380952381,
+      "confusion_matrix": [
+        {
+          "expected": "chat",
+          "actual": "chat",
+          "count": 3
+        },
+        {
+          "expected": "local_life",
+          "actual": "local_life",
+          "count": 3
+        },
+        {
+          "expected": "music",
+          "actual": "music",
+          "count": 3
+        },
+        {
+          "expected": "navigation",
+          "actual": "navigation",
+          "count": 3
+        },
+        {
+          "expected": "planning",
+          "actual": "planning",
+          "count": 3
+        },
+        {
+          "expected": "weather",
+          "actual": "weather",
+          "count": 3
+        },
+        {
+          "expected": "wellbeing",
+          "actual": "wellbeing",
+          "count": 3
+        }
+      ],
+      "by_group": {
+        "chat": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 4214
+        },
+        "context": {
+          "tested": 7,
+          "passed": 7,
+          "p95_ms": 4878
+        },
+        "local_life": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 3360
+        },
+        "music": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 5684
+        },
+        "navigation": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 3551
+        },
+        "planning": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 3759
+        },
+        "weather": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 10184
+        },
+        "wellbeing": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 4263
+        }
+      },
+      "by_stage": {
+        "domain_route": {
+          "model_attempts": 21,
+          "attempts_with_usage": 21,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 8351,
+            "output_tokens": 135
+          },
+          "observed_total_tokens": 15161,
+          "reported_reasoning_tokens": 6675,
+          "total_tokens": 15161
+        }
+      }
+    },
+    "candidate": {
+      "tested": 21,
+      "passed": 21,
+      "accuracy_or_completion_rate": 1.0,
+      "errors": 0,
+      "p50_ms": 548,
+      "p95_ms": 1481,
+      "success_only_p95_ms": 1481,
+      "fallbacks": 1,
+      "model_attempts": 22,
+      "attempts_with_usage": 22,
+      "attempts_missing_usage": 0,
+      "observed_tokens": {
+        "input_tokens": 14447,
+        "output_tokens": 1704
+      },
+      "observed_total_tokens": 16575,
+      "reported_reasoning_tokens": 424,
+      "total_tokens": 16575,
+      "tokens_per_submitted_case": 789.2857142857143,
+      "tokens_per_successful_case": 789.2857142857143,
+      "confusion_matrix": [
+        {
+          "expected": "chat",
+          "actual": "chat",
+          "count": 3
+        },
+        {
+          "expected": "local_life",
+          "actual": "local_life",
+          "count": 3
+        },
+        {
+          "expected": "music",
+          "actual": "music",
+          "count": 3
+        },
+        {
+          "expected": "navigation",
+          "actual": "navigation",
+          "count": 3
+        },
+        {
+          "expected": "planning",
+          "actual": "planning",
+          "count": 3
+        },
+        {
+          "expected": "weather",
+          "actual": "weather",
+          "count": 3
+        },
+        {
+          "expected": "wellbeing",
+          "actual": "wellbeing",
+          "count": 3
+        }
+      ],
+      "by_group": {
+        "chat": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 4916
+        },
+        "context": {
+          "tested": 7,
+          "passed": 7,
+          "p95_ms": 1366
+        },
+        "local_life": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 783
+        },
+        "music": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 1160
+        },
+        "navigation": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 815
+        },
+        "planning": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 1481
+        },
+        "weather": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 456
+        },
+        "wellbeing": {
+          "tested": 2,
+          "passed": 2,
+          "p95_ms": 272
+        }
+      },
+      "by_stage": {
+        "domain_route": {
+          "model_attempts": 1,
+          "attempts_with_usage": 1,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 393,
+            "output_tokens": 6
+          },
+          "observed_total_tokens": 823,
+          "reported_reasoning_tokens": 424,
+          "total_tokens": 823
+        },
+        "domain_route_precheck": {
+          "model_attempts": 21,
+          "attempts_with_usage": 21,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 14054,
+            "output_tokens": 1698
+          },
+          "observed_total_tokens": 15752,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 15752
+        }
+      }
+    }
+  },
+  "paired_cases": 21,
+  "paired_regressions": [],
+  "p50_reduction": 0.8456772740073218,
+  "p95_reduction": 0.7394440534834623,
+  "auto_enable": false,
+  "decision": "evidence_only_not_a_rollout",
+  "prices_applied": false,
+  "token_accounting": "provider total_tokens when present; otherwise input+output; reasoning not added twice"
+}

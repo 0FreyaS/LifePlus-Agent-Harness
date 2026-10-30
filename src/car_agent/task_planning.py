@@ -3,12 +3,31 @@ from __future__ import annotations
 import json
 import re
 from datetime import datetime, timedelta, timezone
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic_core import PydanticCustomError
 
 from .structured_output import invoke_structured
 from .intent_schema import SlotValues
+from .domain_understanding import FIELDS
+
+
+BindingTarget = Literal[tuple(SlotValues.model_fields)]
+# The global planner sees only cross-task input bindings, not all tool parameters.
+GOAL_BINDING_TARGETS = ("details", "origin", "destination", "city", "anchor", "poi_id", "keyword", "title", "reminder_id")
+GoalBindingTarget = Literal[GOAL_BINDING_TARGETS]
+GOAL_BINDING_FIELDS = {domain: sorted(fields & set(GOAL_BINDING_TARGETS))
+    for domain, fields in FIELDS.items()}
+BindingPath = Annotated[str, Field(
+    pattern=r"^[a-zA-Z0-9_-]{1,40}\.(selected|route|result|slots)(\.[a-zA-Z0-9_]+)*$")]
+
+
+def binding_field():
+    return Field(default_factory=dict, description=(
+        "左侧是接收任务的合法业务字段，右侧是直接依赖任务的真实证据路径。"
+        "保存查询结果使用{\"details\":\"t1.result\"}，保存路线使用{\"details\":\"t1.route\"}。"
+        "result、route、content不是接收字段，不得用作左侧key。"))
 
 
 class PlannedTask(BaseModel):
@@ -19,7 +38,7 @@ class PlannedTask(BaseModel):
     action: str = ""
     slots: dict[str, Any] = Field(default_factory=dict, json_schema_extra=SlotValues.model_json_schema())
     depends_on: list[str] = Field(default_factory=list)
-    bind_slots: dict[str, str] = Field(default_factory=dict)
+    bind_slots: dict[BindingTarget, BindingPath] = binding_field()
 
     @field_validator("slots")
     @classmethod
@@ -49,8 +68,13 @@ class TaskPlan(BaseModel):
         ids = {item.id for item in self.tasks}
         if len(ids) != len(self.tasks):
             raise ValueError("子任务ID必须唯一")
-        if any(len(item.depends_on) != len(set(item.depends_on)) for item in self.tasks):
-            raise ValueError("任务依赖不能重复")
+        for item in self.tasks:
+            if len(item.depends_on) != len(set(item.depends_on)):
+                raise PydanticCustomError("plan_duplicate_dependency", "任务依赖不能重复", {"task_id": item.id})
+            for dependency in item.depends_on:
+                if dependency not in ids:
+                    raise PydanticCustomError("plan_unknown_dependency", "任务依赖引用了不存在的任务",
+                                              {"task_id": item.id, "source_task": dependency})
         resolved: set[str] = set()
         ordered: list[PlannedTask] = []
         while len(resolved) < len(ids):
@@ -63,13 +87,14 @@ class TaskPlan(BaseModel):
         self.tasks = ordered
         for item in self.tasks:
             for target, path in item.bind_slots.items():
-                if target not in SlotValues.model_fields:
-                    raise ValueError("槽位绑定目标不属于允许的业务字段")
+                if target not in FIELDS[item.domain]:
+                    raise PydanticCustomError("binding_target_domain", "绑定接收字段不属于当前任务领域",
+                        {"task_id": item.id, "domain": item.domain, "target": target,
+                         "allowed": ",".join(sorted(FIELDS[item.domain]))})
                 parts = path.split(".")
                 if parts[0] not in item.depends_on:
-                    raise ValueError("槽位绑定只能引用直接依赖的任务")
-                if len(parts) < 2 or parts[1] not in {"selected", "route", "result", "slots"}:
-                    raise ValueError("绑定路径必须引用 selected/route/result/slots 中的执行证据")
+                    raise PydanticCustomError("binding_source_dependency", "槽位绑定只能引用直接依赖的任务",
+                        {"task_id": item.id, "target": target, "source_task": parts[0]})
         return self
 
 
@@ -80,7 +105,7 @@ class TaskGoal(BaseModel):
     query: str = Field(min_length=1, max_length=4000)
     domain: Literal["weather", "navigation", "music", "planning", "wellbeing", "local_life", "chat"]
     depends_on: list[str] = Field(default_factory=list)
-    bind_slots: dict[str, str] = Field(default_factory=dict)
+    bind_slots: dict[GoalBindingTarget, BindingPath] = binding_field()
 
 
 class GoalPlan(TaskPlan):
@@ -120,8 +145,14 @@ def planning_prompt(memory_brief: str = "", *, variant: str = "baseline", now: d
         "local_life负责商家检索、详情及商家路线；navigation负责一般地点路线；chat负责闲聊与歌手介绍等知识问答。"
         "query必须保留本项目标、城市、时间、起终点、出行方式、否定及筛选限制。共享城市时间要传递到相关子任务，不增加用户未表达的信息。"
         "每个明确目标恰好覆盖一次；未知地点、时间和ID交给领域澄清，不猜值。"
-        "依赖输出绑定用bind_slots，例如destination='t1.selected.location'，details='t1.route'。"
-        "可引用selected(用户选中的地点/歌曲)、route(路线回执)、result(工具结果)、slots。"
+        "同一领域也可能有不同目标，例如查看提醒和查看行程须分为两个planning任务。"
+        "bind_slots是输入来源映射，不是槽位值：左侧是接收任务的合法字段，右侧是前置任务ID加证据路径。"
+        "左侧按接收领域限制：" + json.dumps(GOAL_BINDING_FIELDS, ensure_ascii=False)
+        + "。保存天气、歌曲或商家检索结果使用{\"details\":\"t1.result\"}；保存路线使用{\"details\":\"t1.route\"}。"
+        "禁止把result、route、content、weather_result用作左侧key，它们不是接收业务字段；右侧t1.result则是合法的结果来源。"
+        "例如查询天气后保存：t1为weather且无依赖；t2为planning，depends_on=[\"t1\"]，bind_slots={\"details\":\"t1.result\"}。"
+        "来源只引用直接depends_on的任务，可引用selected(用户选中项)、route(路线回执)、result(工具结果)、slots及其字段。"
+        "不预先编造这些结果；完整保存用整个result/route对象，不擅自换成其city、摘要或空对象。"
         "用户说先找地点再导航过去：可保留为一个navigation领域目标，由领域子图完成检索选择和路线。"
         "输出只包含符合JSON Schema的JSON：" + contract
         + "\n当前北京时间：" + (now or datetime.now(timezone(timedelta(hours=8)))).isoformat()

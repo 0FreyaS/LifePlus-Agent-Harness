@@ -1,0 +1,7958 @@
+[
+  {
+    "id": "single_task-01",
+    "group": "single_task",
+    "query": "无锡今天的天气怎么样",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "无锡",
+        "forecast_date": "2026-10-30"
+      },
+      "resolved_query": "无锡今天的天气怎么样",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 1808,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1230,
+        "usage": {
+          "input_tokens": 663,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 553,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-02",
+    "group": "single_task",
+    "query": "明天杭州会下雨吗",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "杭州",
+        "forecast_date": "2026-10-31"
+      },
+      "resolved_query": "明天杭州会下雨吗",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 1106,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 225,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 857,
+        "usage": {
+          "input_tokens": 715,
+          "output_tokens": 37,
+          "total_tokens": 752,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-03",
+    "group": "single_task",
+    "query": "后天南京气温多少",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "南京",
+        "forecast_date": "2026-11-01"
+      },
+      "resolved_query": "后天南京气温多少",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 1239,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 644,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 570,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-04",
+    "group": "single_task",
+    "query": "查上海今天的天气",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "上海",
+        "forecast_date": "2026-10-30"
+      },
+      "resolved_query": "查上海今天的天气",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 1927,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1105,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 794,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-05",
+    "group": "single_task",
+    "query": "深圳明天气温",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "深圳",
+        "forecast_date": "2026-10-31"
+      },
+      "resolved_query": "深圳明天气温",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 1036,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 274,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 732,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-06",
+    "group": "single_task",
+    "query": "查一下北京今天会不会下雨",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "北京",
+        "forecast_date": "2026-10-30"
+      },
+      "resolved_query": "查一下北京今天会不会下雨",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 788,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 337,
+        "usage": {
+          "input_tokens": 665,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 421,
+        "usage": {
+          "input_tokens": 716,
+          "output_tokens": 37,
+          "total_tokens": 753,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-07",
+    "group": "single_task",
+    "query": "从无锡站到东南大学无锡校区怎么走",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "无锡",
+        "destination": "东南大学无锡校区",
+        "origin": "无锡站",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "从无锡站到东南大学无锡校区怎么走",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1301,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 265,
+        "usage": {
+          "input_tokens": 669,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1013,
+        "usage": {
+          "input_tokens": 816,
+          "output_tokens": 36,
+          "total_tokens": 852,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-08",
+    "group": "single_task",
+    "query": "从杭州东站步行到西湖规划路线",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "杭州",
+        "destination": "西湖",
+        "origin": "杭州东站",
+        "travel_mode": "walking",
+        "route_requested": true
+      },
+      "resolved_query": "从杭州东站步行到西湖规划路线",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1251,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 278,
+        "usage": {
+          "input_tokens": 667,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 945,
+        "usage": {
+          "input_tokens": 815,
+          "output_tokens": 36,
+          "total_tokens": 851,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-09",
+    "group": "single_task",
+    "query": "导航去南京南站",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "destination": "南京南站",
+        "city": "南京",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "导航去南京南站",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1152,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 413,
+        "usage": {
+          "input_tokens": 660,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 716,
+        "usage": {
+          "input_tokens": 811,
+          "output_tokens": 38,
+          "total_tokens": 849,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-10",
+    "group": "single_task",
+    "query": "从苏州站骑行去拙政园",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "苏州",
+        "destination": "拙政园",
+        "origin": "苏州站",
+        "travel_mode": "bicycling",
+        "route_requested": true
+      },
+      "resolved_query": "从苏州站骑行去拙政园",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1561,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 739,
+        "usage": {
+          "input_tokens": 664,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 800,
+        "usage": {
+          "input_tokens": 814,
+          "output_tokens": 38,
+          "total_tokens": 852,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-11",
+    "group": "single_task",
+    "query": "从上海虹桥站开车去外滩",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "上海",
+        "destination": "外滩",
+        "origin": "上海虹桥站",
+        "travel_mode": "driving",
+        "route_requested": true
+      },
+      "resolved_query": "从上海虹桥站开车去外滩",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1125,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 276,
+        "usage": {
+          "input_tokens": 665,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 822,
+        "usage": {
+          "input_tokens": 815,
+          "output_tokens": 38,
+          "total_tokens": 853,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-12",
+    "group": "single_task",
+    "query": "从北京站到天安门的路线",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "destination": "天安门的",
+        "origin": "北京站",
+        "city": "北京",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "从北京站到天安门的路线",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1114,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 272,
+        "usage": {
+          "input_tokens": 664,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 815,
+        "usage": {
+          "input_tokens": 814,
+          "output_tokens": 34,
+          "total_tokens": 848,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-13",
+    "group": "single_task",
+    "query": "搜索陶喆的歌曲",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "music",
+      "action": "music_search",
+      "tool_name": "search_music",
+      "slots": {
+        "keyword": "陶喆"
+      },
+      "resolved_query": "搜索陶喆的歌曲",
+      "status": "running"
+    },
+    "expected_domain": "music",
+    "elapsed_ms": 1133,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 276,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 838,
+        "usage": {
+          "input_tokens": 710,
+          "output_tokens": 26,
+          "total_tokens": 736,
+          "input_token_details": {
+            "cache_read": 384
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-14",
+    "group": "single_task",
+    "query": "找周杰伦的晴天",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "music",
+      "action": "music_search",
+      "tool_name": "search_music",
+      "slots": {
+        "keyword": "周杰伦 晴天"
+      },
+      "resolved_query": "找周杰伦的晴天",
+      "status": "running"
+    },
+    "expected_domain": "music",
+    "elapsed_ms": 870,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 265,
+        "usage": {
+          "input_tokens": 660,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 591,
+        "usage": {
+          "input_tokens": 710,
+          "output_tokens": 28,
+          "total_tokens": 738,
+          "input_token_details": {
+            "cache_read": 384
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-15",
+    "group": "single_task",
+    "query": "搜索陈奕迅的十年",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "music",
+      "action": "music_search",
+      "tool_name": "search_music",
+      "slots": {
+        "keyword": "陈奕迅 十年"
+      },
+      "resolved_query": "搜索陈奕迅的十年",
+      "status": "running"
+    },
+    "expected_domain": "music",
+    "elapsed_ms": 1046,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 266,
+        "usage": {
+          "input_tokens": 662,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 753,
+        "usage": {
+          "input_tokens": 710,
+          "output_tokens": 28,
+          "total_tokens": 738,
+          "input_token_details": {
+            "cache_read": 384
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-16",
+    "group": "single_task",
+    "query": "搜索孙燕姿的遇见",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "music",
+      "action": "music_search",
+      "tool_name": "search_music",
+      "slots": {
+        "keyword": "孙燕姿 遇见"
+      },
+      "resolved_query": "搜索孙燕姿的遇见",
+      "status": "running"
+    },
+    "expected_domain": "music",
+    "elapsed_ms": 1065,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 309,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 728,
+        "usage": {
+          "input_tokens": 710,
+          "output_tokens": 28,
+          "total_tokens": 738,
+          "input_token_details": {
+            "cache_read": 384
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-17",
+    "group": "single_task",
+    "query": "帮我找林俊杰的江南",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "music",
+      "action": "music_search",
+      "tool_name": "search_music",
+      "slots": {
+        "keyword": "林俊杰 江南"
+      },
+      "resolved_query": "帮我找林俊杰的江南",
+      "status": "running"
+    },
+    "expected_domain": "music",
+    "elapsed_ms": 1127,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 275,
+        "usage": {
+          "input_tokens": 662,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 839,
+        "usage": {
+          "input_tokens": 711,
+          "output_tokens": 28,
+          "total_tokens": 739,
+          "input_token_details": {
+            "cache_read": 384
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-18",
+    "group": "single_task",
+    "query": "在无锡站附近找饭店",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "无锡站",
+        "category": "restaurant",
+        "city": "无锡",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "在无锡站附近找饭店",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1777,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 539,
+        "usage": {
+          "input_tokens": 662,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1212,
+        "usage": {
+          "input_tokens": 1742,
+          "output_tokens": 78,
+          "total_tokens": 1820,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-19",
+    "group": "single_task",
+    "query": "东南大学无锡校区附近有什么KTV",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "东南大学无锡校区",
+        "category": "ktv",
+        "city": "无锡",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "东南大学无锡校区附近有什么KTV",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1887,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 789,
+        "usage": {
+          "input_tokens": 668,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1073,
+        "usage": {
+          "input_tokens": 1744,
+          "output_tokens": 80,
+          "total_tokens": 1824,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-20",
+    "group": "single_task",
+    "query": "找杭州东站附近的电影院",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "杭州东站",
+        "category": "cinema",
+        "city": "杭州",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找杭州东站附近的电影院",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1121,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 258,
+        "usage": {
+          "input_tokens": 664,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 832,
+        "usage": {
+          "input_tokens": 1742,
+          "output_tokens": 79,
+          "total_tokens": 1821,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-21",
+    "group": "single_task",
+    "query": "在南京南站附近推荐咖啡店",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "南京南站",
+        "category": "cafe",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "在南京南站附近推荐咖啡店",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1134,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 271,
+        "usage": {
+          "input_tokens": 666,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 828,
+        "usage": {
+          "input_tokens": 1744,
+          "output_tokens": 79,
+          "total_tokens": 1823,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-22",
+    "group": "single_task",
+    "query": "查商家POI ID B0FFHONRTZ的详情",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_detail",
+      "tool_name": "maps_place_detail",
+      "slots": {
+        "poi_id": "B0FFHONRTZ",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "查商家POI ID B0FFHONRTZ的详情",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1207,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 284,
+        "usage": {
+          "input_tokens": 668,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 902,
+        "usage": {
+          "input_tokens": 1750,
+          "output_tokens": 36,
+          "total_tokens": 1786,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-23",
+    "group": "single_task",
+    "query": "提醒我明天上午九点带伞",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "create_reminder",
+      "tool_name": "create_reminder",
+      "slots": {
+        "remind_at": "2026-10-31T09:00:00+08:00",
+        "title": "带伞"
+      },
+      "resolved_query": "提醒我明天上午九点带伞",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 896,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 275,
+        "usage": {
+          "input_tokens": 665,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 604,
+        "usage": {
+          "input_tokens": 1211,
+          "output_tokens": 60,
+          "total_tokens": 1271,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-24",
+    "group": "single_task",
+    "query": "保存行程：周末去无锡",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "save_itinerary",
+      "tool_name": "save_itinerary",
+      "slots": {
+        "title": "周末去无锡"
+      },
+      "resolved_query": "保存行程：周末去无锡",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 1088,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 267,
+        "usage": {
+          "input_tokens": 663,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 791,
+        "usage": {
+          "input_tokens": 1209,
+          "output_tokens": 46,
+          "total_tokens": 1255,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-25",
+    "group": "single_task",
+    "query": "查看我的提醒",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "list_reminders",
+      "tool_name": "list_reminders",
+      "slots": {},
+      "resolved_query": "查看我的提醒",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 1481,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 555,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 899,
+        "usage": {
+          "input_tokens": 1206,
+          "output_tokens": 44,
+          "total_tokens": 1250,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-26",
+    "group": "single_task",
+    "query": "查看我的行程清单",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "list_itineraries",
+      "tool_name": "list_itineraries",
+      "slots": {},
+      "resolved_query": "查看我的行程清单",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 1281,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 268,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 983,
+        "usage": {
+          "input_tokens": 1207,
+          "output_tokens": 44,
+          "total_tokens": 1251,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-27",
+    "group": "single_task",
+    "query": "取消提醒，提醒ID为reminder-123",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "cancel_reminder",
+      "tool_name": "cancel_reminder",
+      "slots": {
+        "reminder_id": "reminder-123"
+      },
+      "resolved_query": "取消提醒，提醒ID为reminder-123",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 1281,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 270,
+        "usage": {
+          "input_tokens": 668,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 994,
+        "usage": {
+          "input_tokens": 1213,
+          "output_tokens": 47,
+          "total_tokens": 1260,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-28",
+    "group": "single_task",
+    "query": "最近睡不好有什么一般生活建议",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "wellbeing",
+      "action": "knowledge_search",
+      "slots": {},
+      "resolved_query": "最近睡不好有什么一般生活建议",
+      "status": "running"
+    },
+    "expected_domain": "wellbeing",
+    "elapsed_ms": 277,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 270,
+        "usage": {
+          "input_tokens": 667,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-29",
+    "group": "single_task",
+    "query": "你好，介绍一下你自己",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "chat",
+      "action": "chat_answer",
+      "slots": {},
+      "resolved_query": "你好，介绍一下你自己",
+      "status": "running"
+    },
+    "expected_domain": "chat",
+    "elapsed_ms": 279,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 265,
+        "usage": {
+          "input_tokens": 662,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single_task-30",
+    "group": "single_task",
+    "query": "讲一个关于春天的小故事",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "intent_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "chat",
+      "action": "chat_answer",
+      "slots": {},
+      "resolved_query": "讲一个关于春天的小故事",
+      "status": "running"
+    },
+    "expected_domain": "chat",
+    "elapsed_ms": 276,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 263,
+        "usage": {
+          "input_tokens": 664,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-01",
+    "group": "slot_extraction",
+    "query": "查无锡明天天气",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "无锡",
+        "forecast_date": "2026-10-31"
+      },
+      "resolved_query": "查无锡明天天气",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 1020,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 262,
+        "usage": {
+          "input_tokens": 660,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 734,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-02",
+    "group": "slot_extraction",
+    "query": "杭州后天会下雨吗",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "杭州",
+        "forecast_date": "2026-11-01"
+      },
+      "resolved_query": "杭州后天会下雨吗",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 2027,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1194,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 815,
+        "usage": {
+          "input_tokens": 715,
+          "output_tokens": 37,
+          "total_tokens": 752,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-03",
+    "group": "slot_extraction",
+    "query": "今天北京天气",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "北京",
+        "forecast_date": "2026-10-30"
+      },
+      "resolved_query": "今天北京天气",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 1992,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1119,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 854,
+        "usage": {
+          "input_tokens": 713,
+          "output_tokens": 37,
+          "total_tokens": 750,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-04",
+    "group": "slot_extraction",
+    "query": "上海明天的气温",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "上海",
+        "forecast_date": "2026-10-31"
+      },
+      "resolved_query": "上海明天的气温",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 1268,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 272,
+        "usage": {
+          "input_tokens": 660,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 981,
+        "usage": {
+          "input_tokens": 713,
+          "output_tokens": 37,
+          "total_tokens": 750,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-05",
+    "group": "slot_extraction",
+    "query": "从无锡站到东南大学无锡校区怎么走",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "无锡",
+        "destination": "东南大学无锡校区",
+        "origin": "无锡站",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "从无锡站到东南大学无锡校区怎么走",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1242,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 306,
+        "usage": {
+          "input_tokens": 669,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 917,
+        "usage": {
+          "input_tokens": 816,
+          "output_tokens": 40,
+          "total_tokens": 856,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-06",
+    "group": "slot_extraction",
+    "query": "从杭州东站步行到西湖",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        3,
+        3
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "杭州",
+        "destination": "西湖",
+        "origin": "杭州东站",
+        "travel_mode": "walking",
+        "route_requested": true
+      },
+      "resolved_query": "从杭州东站步行到西湖",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 2325,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1459,
+        "usage": {
+          "input_tokens": 663,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 844,
+        "usage": {
+          "input_tokens": 813,
+          "output_tokens": 36,
+          "total_tokens": 849,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-07",
+    "group": "slot_extraction",
+    "query": "从苏州站骑行去拙政园",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "苏州",
+        "destination": "拙政园",
+        "origin": "苏州站",
+        "travel_mode": "bicycling",
+        "route_requested": true
+      },
+      "resolved_query": "从苏州站骑行去拙政园",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1563,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 763,
+        "usage": {
+          "input_tokens": 664,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 773,
+        "usage": {
+          "input_tokens": 814,
+          "output_tokens": 38,
+          "total_tokens": 852,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-08",
+    "group": "slot_extraction",
+    "query": "从上海虹桥站开车到外滩",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "上海",
+        "destination": "外滩",
+        "origin": "上海虹桥站",
+        "travel_mode": "driving",
+        "route_requested": true
+      },
+      "resolved_query": "从上海虹桥站开车到外滩",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1899,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 954,
+        "usage": {
+          "input_tokens": 665,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 923,
+        "usage": {
+          "input_tokens": 815,
+          "output_tokens": 38,
+          "total_tokens": 853,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-09",
+    "group": "slot_extraction",
+    "query": "从120.1482,30.2395到西湖规划路线",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "destination": "西湖",
+        "origin": "120.1482,30.2395",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "从120.1482,30.2395到西湖规划路线",
+      "status": "running"
+    },
+    "expected_domain": "navigation",
+    "elapsed_ms": 1670,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 753,
+        "usage": {
+          "input_tokens": 677,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 888,
+        "usage": {
+          "input_tokens": 820,
+          "output_tokens": 44,
+          "total_tokens": 864,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-10",
+    "group": "slot_extraction",
+    "query": "搜索陶喆的歌曲",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "music",
+      "action": "music_search",
+      "tool_name": "search_music",
+      "slots": {
+        "keyword": "陶喆"
+      },
+      "resolved_query": "搜索陶喆的歌曲",
+      "status": "running"
+    },
+    "expected_domain": "music",
+    "elapsed_ms": 1149,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 265,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 852,
+        "usage": {
+          "input_tokens": 710,
+          "output_tokens": 26,
+          "total_tokens": 736,
+          "input_token_details": {
+            "cache_read": 384
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-11",
+    "group": "slot_extraction",
+    "query": "搜索歌曲晴天",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "music",
+      "action": "music_search",
+      "tool_name": "search_music",
+      "slots": {
+        "keyword": "晴天"
+      },
+      "resolved_query": "搜索歌曲晴天",
+      "status": "running"
+    },
+    "expected_domain": "music",
+    "elapsed_ms": 894,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 259,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 605,
+        "usage": {
+          "input_tokens": 707,
+          "output_tokens": 24,
+          "total_tokens": 731,
+          "input_token_details": {
+            "cache_read": 384
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-12",
+    "group": "slot_extraction",
+    "query": "找歌曲十年",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "music",
+      "action": "music_search",
+      "tool_name": "search_music",
+      "slots": {
+        "keyword": "十年"
+      },
+      "resolved_query": "找歌曲十年",
+      "status": "running"
+    },
+    "expected_domain": "music",
+    "elapsed_ms": 1362,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 534,
+        "usage": {
+          "input_tokens": 658,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 810,
+        "usage": {
+          "input_tokens": 707,
+          "output_tokens": 24,
+          "total_tokens": 731,
+          "input_token_details": {
+            "cache_read": 384
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-13",
+    "group": "slot_extraction",
+    "query": "搜索歌手孙燕姿的作品",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "music",
+      "action": "music_search",
+      "tool_name": "search_music",
+      "slots": {
+        "keyword": "孙燕姿"
+      },
+      "resolved_query": "搜索歌手孙燕姿的作品",
+      "status": "running"
+    },
+    "expected_domain": "music",
+    "elapsed_ms": 2217,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1214,
+        "usage": {
+          "input_tokens": 663,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 984,
+        "usage": {
+          "input_tokens": 710,
+          "output_tokens": 26,
+          "total_tokens": 736,
+          "input_token_details": {
+            "cache_read": 384
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-14",
+    "group": "slot_extraction",
+    "query": "找无锡站附近2公里的饭店",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "无锡站",
+        "category": "restaurant",
+        "city": "无锡",
+        "radius_m": 2000,
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找无锡站附近2公里的饭店",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1107,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 270,
+        "usage": {
+          "input_tokens": 665,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 819,
+        "usage": {
+          "input_tokens": 1743,
+          "output_tokens": 73,
+          "total_tokens": 1816,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-15",
+    "group": "slot_extraction",
+    "query": "找无锡站附近800米的咖啡店",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "无锡站",
+        "category": "cafe",
+        "city": "无锡",
+        "radius_m": 800,
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找无锡站附近800米的咖啡店",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1135,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 267,
+        "usage": {
+          "input_tokens": 668,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 849,
+        "usage": {
+          "input_tokens": 1744,
+          "output_tokens": 78,
+          "total_tokens": 1822,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-16",
+    "group": "slot_extraction",
+    "query": "找无锡站附近1.5公里的KTV",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "无锡站",
+        "category": "ktv",
+        "city": "无锡",
+        "radius_m": 1500,
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找无锡站附近1.5公里的KTV",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1290,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 269,
+        "usage": {
+          "input_tokens": 667,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 993,
+        "usage": {
+          "input_tokens": 1746,
+          "output_tokens": 79,
+          "total_tokens": 1825,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-17",
+    "group": "slot_extraction",
+    "query": "找杭州东站附近3公里的电影院",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "杭州东站",
+        "category": "cinema",
+        "city": "杭州",
+        "radius_m": 3000,
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找杭州东站附近3公里的电影院",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1974,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 926,
+        "usage": {
+          "input_tokens": 667,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1025,
+        "usage": {
+          "input_tokens": 1744,
+          "output_tokens": 80,
+          "total_tokens": 1824,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-18",
+    "group": "slot_extraction",
+    "query": "无锡站附近找饭店，人均不超过80元",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "无锡站",
+        "category": "restaurant",
+        "city": "无锡",
+        "max_cost": 80.0,
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "无锡站附近找饭店，人均不超过80元",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1233,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 237,
+        "usage": {
+          "input_tokens": 670,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 964,
+        "usage": {
+          "input_tokens": 1746,
+          "output_tokens": 78,
+          "total_tokens": 1824,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-19",
+    "group": "slot_extraction",
+    "query": "南京南站附近找咖啡店，评分至少4.5分",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "南京南站",
+        "category": "cafe",
+        "city": "南京",
+        "min_rating": 4.5,
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "南京南站附近找咖啡店，评分至少4.5分",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1087,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 269,
+        "usage": {
+          "input_tokens": 673,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 784,
+        "usage": {
+          "input_tokens": 1750,
+          "output_tokens": 81,
+          "total_tokens": 1831,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-20",
+    "group": "slot_extraction",
+    "query": "苏州站附近找KTV，按评分排序",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "苏州站",
+        "category": "ktv",
+        "city": "苏州",
+        "sort_by": "rating",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "苏州站附近找KTV，按评分排序",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1164,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 255,
+        "usage": {
+          "input_tokens": 667,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 882,
+        "usage": {
+          "input_tokens": 1746,
+          "output_tokens": 78,
+          "total_tokens": 1824,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-21",
+    "group": "slot_extraction",
+    "query": "杭州东站附近找电影院，距离最近的优先",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "杭州东站",
+        "category": "cinema",
+        "city": "杭州",
+        "sort_by": "distance",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "杭州东站附近找电影院，距离最近的优先",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1282,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 496,
+        "usage": {
+          "input_tokens": 671,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 746,
+        "usage": {
+          "input_tokens": 1746,
+          "output_tokens": 79,
+          "total_tokens": 1825,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-22",
+    "group": "slot_extraction",
+    "query": "找无锡站附近2公里内饭店，人均最多100元，评分不低于4分",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        3,
+        3
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "无锡站",
+        "category": "restaurant",
+        "city": "无锡",
+        "max_cost": 100.0,
+        "min_rating": 4.0,
+        "radius_m": 2000,
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找无锡站附近2公里内饭店，人均最多100元，评分不低于4分",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1173,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 257,
+        "usage": {
+          "input_tokens": 682,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 887,
+        "usage": {
+          "input_tokens": 1754,
+          "output_tokens": 73,
+          "total_tokens": 1827,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-23",
+    "group": "slot_extraction",
+    "query": "查POI ID B0FFHONRTZ这家商店详情",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_detail",
+      "tool_name": "maps_place_detail",
+      "slots": {
+        "poi_id": "B0FFHONRTZ",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "查POI ID B0FFHONRTZ这家商店详情",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1317,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 572,
+        "usage": {
+          "input_tokens": 669,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 715,
+        "usage": {
+          "input_tokens": 1750,
+          "output_tokens": 36,
+          "total_tokens": 1786,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-24",
+    "group": "slot_extraction",
+    "query": "取消提醒，ID是reminder-abc",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "cancel_reminder",
+      "tool_name": "cancel_reminder",
+      "slots": {
+        "reminder_id": "reminder-abc"
+      },
+      "resolved_query": "取消提醒，ID是reminder-abc",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 1404,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 499,
+        "usage": {
+          "input_tokens": 664,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 875,
+        "usage": {
+          "input_tokens": 1212,
+          "output_tokens": 47,
+          "total_tokens": 1259,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-25",
+    "group": "slot_extraction",
+    "query": "提醒我明天上午9点带伞",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "create_reminder",
+      "tool_name": "create_reminder",
+      "slots": {
+        "remind_at": "2026-10-31T09:00:00+08:00",
+        "title": "带伞"
+      },
+      "resolved_query": "提醒我明天上午9点带伞",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 1358,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 224,
+        "usage": {
+          "input_tokens": 665,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1105,
+        "usage": {
+          "input_tokens": 1211,
+          "output_tokens": 60,
+          "total_tokens": 1271,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-26",
+    "group": "slot_extraction",
+    "query": "提醒我后天下午3点取快递",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "create_reminder",
+      "tool_name": "create_reminder",
+      "slots": {
+        "remind_at": "2026-11-01T15:00:00+08:00",
+        "title": "取快递"
+      },
+      "resolved_query": "提醒我后天下午3点取快递",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 1019,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 225,
+        "usage": {
+          "input_tokens": 665,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 770,
+        "usage": {
+          "input_tokens": 1211,
+          "output_tokens": 60,
+          "total_tokens": 1271,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-27",
+    "group": "slot_extraction",
+    "query": "提醒我明天晚上8点喝水",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "create_reminder",
+      "tool_name": "create_reminder",
+      "slots": {
+        "remind_at": "2026-10-31T20:00:00+08:00",
+        "title": "喝水"
+      },
+      "resolved_query": "提醒我明天晚上8点喝水",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 1078,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 258,
+        "usage": {
+          "input_tokens": 664,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 791,
+        "usage": {
+          "input_tokens": 1210,
+          "output_tokens": 59,
+          "total_tokens": 1269,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-28",
+    "group": "slot_extraction",
+    "query": "找附近的饭店，我还没告诉你我在哪里",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        2,
+        2
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "category": "restaurant",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找附近的饭店，我还没告诉你我在哪里",
+      "status": "running"
+    },
+    "expected_domain": "local_life",
+    "elapsed_ms": 1165,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 257,
+        "usage": {
+          "input_tokens": 670,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 882,
+        "usage": {
+          "input_tokens": 1745,
+          "output_tokens": 77,
+          "total_tokens": 1822,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-29",
+    "group": "slot_extraction",
+    "query": "帮我看看天气，我没有提供城市",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "forecast_date": "2026-10-30"
+      },
+      "resolved_query": "帮我看看天气，我没有提供城市",
+      "status": "running"
+    },
+    "expected_domain": "weather",
+    "elapsed_ms": 1133,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 250,
+        "usage": {
+          "input_tokens": 667,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 859,
+        "usage": {
+          "input_tokens": 717,
+          "output_tokens": 31,
+          "total_tokens": 748,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "slot_extraction-30",
+    "group": "slot_extraction",
+    "query": "取消一个提醒，但我还不知道提醒ID",
+    "passed": true,
+    "metrics": {
+      "domain_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slot_accuracy": [
+        1,
+        1
+      ],
+      "annotated_slots_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "list_reminders",
+      "tool_name": "list_reminders",
+      "slots": {},
+      "resolved_query": "取消一个提醒，但我还不知道提醒ID",
+      "status": "running"
+    },
+    "expected_domain": "planning",
+    "elapsed_ms": 1226,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 261,
+        "usage": {
+          "input_tokens": 669,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 933,
+        "usage": {
+          "input_tokens": 1211,
+          "output_tokens": 44,
+          "total_tokens": 1255,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-01",
+    "group": "clarification",
+    "query": "查明天天气",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "forecast_date": "2026-10-31"
+      },
+      "resolved_query": "查明天天气",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "city",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "想查询哪个城市的天气？",
+        "field": "city",
+        "domain": "weather"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1154,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 286,
+        "usage": {
+          "input_tokens": 658,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 819,
+        "usage": {
+          "input_tokens": 713,
+          "output_tokens": 37,
+          "total_tokens": 750,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-02",
+    "group": "clarification",
+    "query": "今天会下雨吗",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "forecast_date": "2026-10-30"
+      },
+      "resolved_query": "今天会下雨吗",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "city",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "想查询哪个城市的天气？",
+        "field": "city",
+        "domain": "weather"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 940,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 225,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 676,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-03",
+    "group": "clarification",
+    "query": "明天气温多少",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "forecast_date": "2026-10-31"
+      },
+      "resolved_query": "明天气温多少",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "city",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "想查询哪个城市的天气？",
+        "field": "city",
+        "domain": "weather"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1075,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 270,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 772,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-04",
+    "group": "clarification",
+    "query": "帮我查询天气",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "forecast_date": "2026-10-30"
+      },
+      "resolved_query": "帮我查询天气",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "city",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "想查询哪个城市的天气？",
+        "field": "city",
+        "domain": "weather"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1101,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 254,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 815,
+        "usage": {
+          "input_tokens": 713,
+          "output_tokens": 31,
+          "total_tokens": 744,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-05",
+    "group": "clarification",
+    "query": "后天天气如何",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "forecast_date": "2026-11-01"
+      },
+      "resolved_query": "后天天气如何",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "city",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "想查询哪个城市的天气？",
+        "field": "city",
+        "domain": "weather"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1111,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 269,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 800,
+        "usage": {
+          "input_tokens": 713,
+          "output_tokens": 37,
+          "total_tokens": 750,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-06",
+    "group": "clarification",
+    "query": "导航去东南大学",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "destination": "东南大学",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "导航去东南大学",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "origin",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "请告诉我从哪里出发，可以输入地址或地标。",
+        "field": "origin",
+        "domain": "navigation"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 843,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 279,
+        "usage": {
+          "input_tokens": 660,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 523,
+        "usage": {
+          "input_tokens": 810,
+          "output_tokens": 33,
+          "total_tokens": 843,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-07",
+    "group": "clarification",
+    "query": "带我去无锡站",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "无锡",
+        "destination": "无锡站",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "带我去无锡站",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "origin",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "请告诉我从哪里出发，可以输入地址或地标。",
+        "field": "origin",
+        "domain": "navigation"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1140,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 251,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 855,
+        "usage": {
+          "input_tokens": 810,
+          "output_tokens": 37,
+          "total_tokens": 847,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-08",
+    "group": "clarification",
+    "query": "去南京南站怎么走",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "南京",
+        "destination": "南京南站",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "去南京南站怎么走",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "origin",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "请告诉我从哪里出发，可以输入地址或地标。",
+        "field": "origin",
+        "domain": "navigation"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1431,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 675,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 719,
+        "usage": {
+          "input_tokens": 812,
+          "output_tokens": 38,
+          "total_tokens": 850,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-09",
+    "group": "clarification",
+    "query": "规划去西湖的路线",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "destination": "西湖",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "规划去西湖的路线",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "origin",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "请告诉我从哪里出发，可以输入地址或地标。",
+        "field": "origin",
+        "domain": "navigation"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1095,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 271,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 783,
+        "usage": {
+          "input_tokens": 811,
+          "output_tokens": 32,
+          "total_tokens": 843,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-10",
+    "group": "clarification",
+    "query": "导航到外滩",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "destination": "外滩",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "导航到外滩",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "origin",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "请告诉我从哪里出发，可以输入地址或地标。",
+        "field": "origin",
+        "domain": "navigation"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1170,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 260,
+        "usage": {
+          "input_tokens": 659,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 881,
+        "usage": {
+          "input_tokens": 810,
+          "output_tokens": 33,
+          "total_tokens": 843,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-11",
+    "group": "clarification",
+    "query": "找附近饭店",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "category": "restaurant",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找附近饭店",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "anchor",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "请提供参考地点或地址，例如无锡市东南大学无锡国际校区；当前没有实时定位。",
+        "field": "anchor",
+        "domain": "local_life"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1327,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 260,
+        "usage": {
+          "input_tokens": 658,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1038,
+        "usage": {
+          "input_tokens": 1739,
+          "output_tokens": 71,
+          "total_tokens": 1810,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-12",
+    "group": "clarification",
+    "query": "附近有什么KTV",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "category": "ktv",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "附近有什么KTV",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "anchor",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "请提供参考地点或地址，例如无锡市东南大学无锡国际校区；当前没有实时定位。",
+        "field": "anchor",
+        "domain": "local_life"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 2236,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1119,
+        "usage": {
+          "input_tokens": 660,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1081,
+        "usage": {
+          "input_tokens": 1740,
+          "output_tokens": 77,
+          "total_tokens": 1817,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-13",
+    "group": "clarification",
+    "query": "帮我找附近电影院",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "category": "cinema",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "帮我找附近电影院",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "anchor",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "请提供参考地点或地址，例如无锡市东南大学无锡国际校区；当前没有实时定位。",
+        "field": "anchor",
+        "domain": "local_life"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1285,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 298,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 943,
+        "usage": {
+          "input_tokens": 1740,
+          "output_tokens": 77,
+          "total_tokens": 1817,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-14",
+    "group": "clarification",
+    "query": "推荐附近咖啡店",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "category": "cafe",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "推荐附近咖啡店",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "anchor",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "请提供参考地点或地址，例如无锡市东南大学无锡国际校区；当前没有实时定位。",
+        "field": "anchor",
+        "domain": "local_life"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1721,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 308,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1376,
+        "usage": {
+          "input_tokens": 1740,
+          "output_tokens": 71,
+          "total_tokens": 1811,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-15",
+    "group": "clarification",
+    "query": "提醒我喝水",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "necessary_clarification_recall": [
+        1,
+        1
+      ],
+      "necessary_clarification_correct_field_recall": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "create_reminder",
+      "tool_name": "create_reminder",
+      "slots": {
+        "title": "喝水"
+      },
+      "resolved_query": "提醒我喝水",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": "remind_at",
+      "interrupt": {
+        "kind": "clarification",
+        "question": "希望在什么时间提醒你？请提供未来的明确日期和时间，例如明天上午9点。",
+        "field": "remind_at",
+        "domain": "planning"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 2046,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1022,
+        "usage": {
+          "input_tokens": 658,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 972,
+        "usage": {
+          "input_tokens": 1206,
+          "output_tokens": 44,
+          "total_tokens": 1250,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-16",
+    "group": "clarification",
+    "query": "查无锡今天的天气",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "无锡",
+        "forecast_date": "2026-10-30"
+      },
+      "resolved_query": "查无锡今天的天气",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_weather",
+          "args": {
+            "city": "无锡",
+            "forecast_date": "2026-10-30"
+          },
+          "task_id": "clarification-16"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1109,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 275,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 719,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-17",
+    "group": "clarification",
+    "query": "查杭州明天天气",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "杭州",
+        "forecast_date": "2026-10-31"
+      },
+      "resolved_query": "查杭州明天天气",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_weather",
+          "args": {
+            "city": "杭州",
+            "forecast_date": "2026-10-31"
+          },
+          "task_id": "clarification-17"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 2045,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 948,
+        "usage": {
+          "input_tokens": 660,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1000,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-18",
+    "group": "clarification",
+    "query": "南京后天天气如何",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "南京",
+        "forecast_date": "2026-11-01"
+      },
+      "resolved_query": "南京后天天气如何",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_weather",
+          "args": {
+            "city": "南京",
+            "forecast_date": "2026-11-01"
+          },
+          "task_id": "clarification-18"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 3572,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1468,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 2008,
+        "usage": {
+          "input_tokens": 714,
+          "output_tokens": 37,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-19",
+    "group": "clarification",
+    "query": "北京今天会下雨吗",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "北京",
+        "forecast_date": "2026-10-30"
+      },
+      "resolved_query": "北京今天会下雨吗",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_weather",
+          "args": {
+            "city": "北京",
+            "forecast_date": "2026-10-30"
+          },
+          "task_id": "clarification-19"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1716,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 638,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 973,
+        "usage": {
+          "input_tokens": 715,
+          "output_tokens": 33,
+          "total_tokens": 748,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-20",
+    "group": "clarification",
+    "query": "上海明天的气温",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "weather",
+      "action": "weather_lookup",
+      "tool_name": "maps_weather",
+      "slots": {
+        "city": "上海",
+        "forecast_date": "2026-10-31"
+      },
+      "resolved_query": "上海明天的气温",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_weather",
+          "args": {
+            "city": "上海",
+            "forecast_date": "2026-10-31"
+          },
+          "task_id": "clarification-20"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 2305,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1454,
+        "usage": {
+          "input_tokens": 660,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 750,
+        "usage": {
+          "input_tokens": 713,
+          "output_tokens": 33,
+          "total_tokens": 746,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-21",
+    "group": "clarification",
+    "query": "从无锡站到东南大学无锡校区怎么走",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "无锡",
+        "destination": "东南大学无锡校区",
+        "origin": "无锡站",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "从无锡站到东南大学无锡校区怎么走",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_search",
+          "args": {
+            "keywords": "东南大学无锡校区",
+            "city": "无锡"
+          },
+          "task_id": "clarification-21"
+        },
+        {
+          "tool": "maps_route",
+          "args": {
+            "origin": "无锡站",
+            "destination": "120.301,31.500",
+            "city": "无锡",
+            "travel_mode": "driving"
+          },
+          "task_id": "clarification-21"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 3090,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 1503,
+        "usage": {},
+        "usage_known": false,
+        "error_type": "TimeoutError",
+        "type": "model.attempt.failed"
+      },
+      {
+        "stage": "domain_route",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 505,
+        "usage": {
+          "input_tokens": 208,
+          "output_tokens": 6,
+          "total_tokens": 214,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 899,
+        "usage": {
+          "input_tokens": 816,
+          "output_tokens": 40,
+          "total_tokens": 856,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-22",
+    "group": "clarification",
+    "query": "从杭州东站步行到西湖怎么走",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "杭州",
+        "destination": "西湖",
+        "origin": "杭州东站",
+        "travel_mode": "walking",
+        "route_requested": true
+      },
+      "resolved_query": "从杭州东站步行到西湖怎么走",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_search",
+          "args": {
+            "keywords": "西湖",
+            "city": "杭州"
+          },
+          "task_id": "clarification-22"
+        },
+        {
+          "tool": "maps_route",
+          "args": {
+            "origin": "杭州东站",
+            "destination": "120.301,31.500",
+            "city": "无锡",
+            "travel_mode": "walking"
+          },
+          "task_id": "clarification-22"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1791,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 575,
+        "usage": {
+          "input_tokens": 666,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1062,
+        "usage": {
+          "input_tokens": 815,
+          "output_tokens": 36,
+          "total_tokens": 851,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-23",
+    "group": "clarification",
+    "query": "从南京站到南京南站怎么走",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "南京",
+        "destination": "南京南站",
+        "origin": "南京站",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "从南京站到南京南站怎么走",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_search",
+          "args": {
+            "keywords": "南京南站",
+            "city": "南京"
+          },
+          "task_id": "clarification-23"
+        },
+        {
+          "tool": "maps_route",
+          "args": {
+            "origin": "南京站",
+            "destination": "120.301,31.500",
+            "city": "无锡",
+            "travel_mode": "driving"
+          },
+          "task_id": "clarification-23"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1184,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 335,
+        "usage": {
+          "input_tokens": 665,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 684,
+        "usage": {
+          "input_tokens": 815,
+          "output_tokens": 35,
+          "total_tokens": 850,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-24",
+    "group": "clarification",
+    "query": "从苏州站到拙政园规划路线",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "city": "苏州",
+        "destination": "拙政园",
+        "origin": "苏州站",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "从苏州站到拙政园规划路线",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_search",
+          "args": {
+            "keywords": "拙政园",
+            "city": "苏州"
+          },
+          "task_id": "clarification-24"
+        },
+        {
+          "tool": "maps_route",
+          "args": {
+            "origin": "苏州站",
+            "destination": "120.301,31.500",
+            "city": "无锡",
+            "travel_mode": "driving"
+          },
+          "task_id": "clarification-24"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1534,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 553,
+        "usage": {
+          "input_tokens": 666,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 815,
+        "usage": {
+          "input_tokens": 815,
+          "output_tokens": 39,
+          "total_tokens": 854,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-25",
+    "group": "clarification",
+    "query": "从上海站到外滩怎么走",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "navigation",
+      "action": "navigation_search",
+      "tool_name": "maps_search",
+      "slots": {
+        "destination": "外滩",
+        "origin": "上海站",
+        "city": "上海",
+        "route_requested": true,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "从上海站到外滩怎么走",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_search",
+          "args": {
+            "keywords": "外滩",
+            "city": "上海"
+          },
+          "task_id": "clarification-25"
+        },
+        {
+          "tool": "maps_route",
+          "args": {
+            "origin": "上海站",
+            "destination": "120.301,31.500",
+            "city": "无锡",
+            "travel_mode": "driving"
+          },
+          "task_id": "clarification-25"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1332,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 331,
+        "usage": {
+          "input_tokens": 664,
+          "output_tokens": 80
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 838,
+        "usage": {
+          "input_tokens": 814,
+          "output_tokens": 38,
+          "total_tokens": 852,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-26",
+    "group": "clarification",
+    "query": "找无锡站附近饭店",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "无锡站",
+        "category": "restaurant",
+        "city": "无锡",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找无锡站附近饭店",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_local_search",
+          "args": {
+            "category": "restaurant",
+            "anchor": "无锡站",
+            "city": "无锡"
+          },
+          "task_id": "clarification-26"
+        },
+        {
+          "tool": "maps_place_detail",
+          "args": {
+            "poi_id": "poi-1"
+          },
+          "task_id": "clarification-26"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1580,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 299,
+        "usage": {
+          "input_tokens": 661,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1113,
+        "usage": {
+          "input_tokens": 1741,
+          "output_tokens": 78,
+          "total_tokens": 1819,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-27",
+    "group": "clarification",
+    "query": "找南京南站附近KTV",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "南京南站",
+        "category": "ktv",
+        "city": "南京",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找南京南站附近KTV",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_local_search",
+          "args": {
+            "category": "ktv",
+            "anchor": "南京南站",
+            "city": "南京"
+          },
+          "task_id": "clarification-27"
+        },
+        {
+          "tool": "maps_place_detail",
+          "args": {
+            "poi_id": "poi-1"
+          },
+          "task_id": "clarification-27"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1143,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 223,
+        "usage": {
+          "input_tokens": 662,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 738,
+        "usage": {
+          "input_tokens": 1743,
+          "output_tokens": 79,
+          "total_tokens": 1822,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-28",
+    "group": "clarification",
+    "query": "找杭州东站附近电影院",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "杭州东站",
+        "category": "cinema",
+        "city": "杭州",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找杭州东站附近电影院",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_local_search",
+          "args": {
+            "category": "cinema",
+            "anchor": "杭州东站",
+            "city": "杭州"
+          },
+          "task_id": "clarification-28"
+        },
+        {
+          "tool": "maps_place_detail",
+          "args": {
+            "poi_id": "poi-1"
+          },
+          "task_id": "clarification-28"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1324,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 273,
+        "usage": {
+          "input_tokens": 663,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 849,
+        "usage": {
+          "input_tokens": 1742,
+          "output_tokens": 79,
+          "total_tokens": 1821,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-29",
+    "group": "clarification",
+    "query": "找苏州站附近咖啡店",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "苏州站",
+        "category": "cafe",
+        "city": "苏州",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "找苏州站附近咖啡店",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": null,
+      "tool_calls": [
+        {
+          "tool": "maps_local_search",
+          "args": {
+            "category": "cafe",
+            "anchor": "苏州站",
+            "city": "苏州"
+          },
+          "task_id": "clarification-29"
+        },
+        {
+          "tool": "maps_place_detail",
+          "args": {
+            "poi_id": "poi-1"
+          },
+          "task_id": "clarification-29"
+        }
+      ],
+      "status": "completed"
+    },
+    "elapsed_ms": 1140,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 280,
+        "usage": {
+          "input_tokens": 663,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 712,
+        "usage": {
+          "input_tokens": 1742,
+          "output_tokens": 78,
+          "total_tokens": 1820,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "clarification-30",
+    "group": "clarification",
+    "query": "提醒我明天上午9点喝水",
+    "passed": true,
+    "metrics": {
+      "clarification_field_accuracy": [
+        1,
+        1
+      ],
+      "clarification_runtime_error": [
+        0,
+        1
+      ],
+      "unnecessary_clarification_rate": [
+        0,
+        1
+      ],
+      "complete_input_runtime_error": [
+        0,
+        1
+      ]
+    },
+    "prediction": {
+      "domain": "planning",
+      "action": "create_reminder",
+      "tool_name": "create_reminder",
+      "slots": {
+        "remind_at": "2026-10-31T09:00:00+08:00",
+        "title": "喝水"
+      },
+      "resolved_query": "提醒我明天上午9点喝水",
+      "status": "running"
+    },
+    "graph": {
+      "missing_field": null,
+      "interrupt": {
+        "kind": "approval",
+        "question": "请确认是否执行这项写入操作。",
+        "domain": "planning",
+        "action": "create_reminder",
+        "arguments": {
+          "user_id": "eval",
+          "title": "喝水",
+          "remind_at": "2026-10-31T01:00:00+00:00"
+        },
+        "operation_key": "22c5d20def3762f69df8215d9ce10f7b7102c75513cf387c8f138e7c0e769909"
+      },
+      "tool_calls": [],
+      "status": "running"
+    },
+    "elapsed_ms": 1070,
+    "attempts": [
+      {
+        "stage": "domain_route_precheck",
+        "model_name": "jev-1.14.0",
+        "attempt": 1,
+        "elapsed_ms": 276,
+        "usage": {
+          "input_tokens": 664,
+          "output_tokens": 82
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      },
+      {
+        "stage": "domain_understanding",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 750,
+        "usage": {
+          "input_tokens": 1210,
+          "output_tokens": 59,
+          "total_tokens": 1269,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single01",
+    "group": "planner",
+    "query": "帮我查一下无锡明天的天气，谢谢。",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查一下无锡明天的天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 1022,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1014,
+        "usage": {
+          "input_tokens": 698,
+          "output_tokens": 34,
+          "total_tokens": 732,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single02",
+    "group": "planner",
+    "query": "从120.272791,31.474621步行到东南大学无锡校区",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "从120.272791,31.474621步行到东南大学无锡校区",
+          "domain": "navigation",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 973,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 962,
+        "usage": {
+          "input_tokens": 705,
+          "output_tokens": 45,
+          "total_tokens": 750,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single03",
+    "group": "planner",
+    "query": "帮我找南京新街口附近的咖啡店，人均不超过50元",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "南京新街口附近人均不超过50元的咖啡店",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 918,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 910,
+        "usage": {
+          "input_tokens": 703,
+          "output_tokens": 42,
+          "total_tokens": 745,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single04",
+    "group": "planner",
+    "query": "搜索周杰伦的歌曲，先不播放",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "搜索周杰伦的歌曲，先不播放",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 1069,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1057,
+        "usage": {
+          "input_tokens": 699,
+          "output_tokens": 33,
+          "total_tokens": 732,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "single05",
+    "group": "planner",
+    "query": "讲讲什么是睡眠卫生，别做医学诊断",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "讲讲什么是睡眠卫生（仅健康知识科普，不做医学诊断）",
+          "domain": "wellbeing",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 659,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 644,
+        "usage": {
+          "input_tokens": 698,
+          "output_tokens": 38,
+          "total_tokens": 736,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "parallel01",
+    "group": "planner",
+    "query": "查无锡明天天气，同时搜索周杰伦的歌曲",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查无锡明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索周杰伦的歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 1005,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 997,
+        "usage": {
+          "input_tokens": 701,
+          "output_tokens": 51,
+          "total_tokens": 752,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "parallel02",
+    "group": "planner",
+    "query": "找无锡站附近的饭店，另外查杭州后天天气",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "找无锡站附近的饭店",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "查杭州后天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 1078,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1068,
+        "usage": {
+          "input_tokens": 700,
+          "output_tokens": 52,
+          "total_tokens": 752,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "parallel03",
+    "group": "planner",
+    "query": "从无锡站骑行到东南大学无锡校区，并且搜索陶喆的歌曲",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "从无锡站骑行到东南大学无锡校区",
+          "domain": "navigation",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索陶喆的歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 911,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 903,
+        "usage": {
+          "input_tokens": 706,
+          "output_tokens": 56,
+          "total_tokens": 762,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "parallel04",
+    "group": "planner",
+    "query": "列出我的提醒，以及搜索陈奕迅的歌曲",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "列出我的提醒",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索陈奕迅的歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 974,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 966,
+        "usage": {
+          "input_tokens": 700,
+          "output_tokens": 51,
+          "total_tokens": 751,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "parallel05",
+    "group": "planner",
+    "query": "找南京新街口附近的电影院，同时找杭州东站附近的KTV",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "找南京新街口附近的电影院",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "找杭州东站附近的KTV",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 669,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 657,
+        "usage": {
+          "input_tokens": 705,
+          "output_tokens": 59,
+          "total_tokens": 764,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "dependency01",
+    "group": "planner",
+    "query": "查无锡明天天气，然后把这次天气查询结果保存到行程",
+    "passed": false,
+    "metrics": {
+      "plan_exact": [
+        0,
+        1
+      ]
+    },
+    "error_type": "OutputParserException",
+    "elapsed_ms": 2113,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1015,
+        "usage": {
+          "input_tokens": 702,
+          "output_tokens": 68,
+          "total_tokens": 770,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      },
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 2,
+        "elapsed_ms": 1077,
+        "usage": {
+          "input_tokens": 758,
+          "output_tokens": 68,
+          "total_tokens": 826,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      }
+    ]
+  },
+  {
+    "id": "dependency02",
+    "group": "planner",
+    "query": "从无锡站步行到东南大学无锡校区，然后把这次路线结果保存到行程",
+    "passed": false,
+    "metrics": {
+      "plan_exact": [
+        0,
+        1
+      ]
+    },
+    "error_type": "OutputParserException",
+    "elapsed_ms": 2236,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1212,
+        "usage": {
+          "input_tokens": 706,
+          "output_tokens": 82,
+          "total_tokens": 788,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      },
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 2,
+        "elapsed_ms": 1012,
+        "usage": {
+          "input_tokens": 762,
+          "output_tokens": 82,
+          "total_tokens": 844,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      }
+    ]
+  },
+  {
+    "id": "dependency03",
+    "group": "planner",
+    "query": "搜索周杰伦的歌曲，然后把搜索结果保存到行程清单",
+    "passed": false,
+    "metrics": {
+      "plan_exact": [
+        0,
+        1
+      ]
+    },
+    "error_type": "OutputParserException",
+    "elapsed_ms": 1921,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 917,
+        "usage": {
+          "input_tokens": 702,
+          "output_tokens": 72,
+          "total_tokens": 774,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      },
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 2,
+        "elapsed_ms": 987,
+        "usage": {
+          "input_tokens": 758,
+          "output_tokens": 72,
+          "total_tokens": 830,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      }
+    ]
+  },
+  {
+    "id": "dependency04",
+    "group": "planner",
+    "query": "找无锡站附近的饭店，然后把检索结果保存到行程清单",
+    "passed": false,
+    "metrics": {
+      "plan_exact": [
+        0,
+        1
+      ]
+    },
+    "error_type": "OutputParserException",
+    "elapsed_ms": 1910,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 928,
+        "usage": {
+          "input_tokens": 702,
+          "output_tokens": 75,
+          "total_tokens": 777,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      },
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 2,
+        "elapsed_ms": 964,
+        "usage": {
+          "input_tokens": 758,
+          "output_tokens": 75,
+          "total_tokens": 833,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      }
+    ]
+  },
+  {
+    "id": "dependency05",
+    "group": "planner",
+    "query": "查杭州后天天气，然后把天气结果保存到行程，同时搜索陶喆歌曲",
+    "passed": false,
+    "metrics": {
+      "plan_exact": [
+        0,
+        1
+      ]
+    },
+    "error_type": "OutputParserException",
+    "elapsed_ms": 2460,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 972,
+        "usage": {
+          "input_tokens": 707,
+          "output_tokens": 93,
+          "total_tokens": 800,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      },
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 2,
+        "elapsed_ms": 1478,
+        "usage": {
+          "input_tokens": 763,
+          "output_tokens": 93,
+          "total_tokens": 856,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      }
+    ]
+  },
+  {
+    "id": "missing01",
+    "group": "planner",
+    "query": "查明天天气，同时搜索周杰伦的歌曲",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索周杰伦的歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 936,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 925,
+        "usage": {
+          "input_tokens": 700,
+          "output_tokens": 50,
+          "total_tokens": 750,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "missing02",
+    "group": "planner",
+    "query": "找附近的饭店，同时搜索陶喆的歌曲",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "找附近的饭店",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索陶喆的歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 978,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 972,
+        "usage": {
+          "input_tokens": 700,
+          "output_tokens": 52,
+          "total_tokens": 752,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "missing03",
+    "group": "planner",
+    "query": "导航到东南大学，同时查杭州明天天气",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "导航到东南大学",
+          "domain": "navigation",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "查杭州明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 749,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 740,
+        "usage": {
+          "input_tokens": 699,
+          "output_tokens": 49,
+          "total_tokens": 748,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "missing04",
+    "group": "planner",
+    "query": "帮我创建一个喝水提醒，另外列出我的行程",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "创建一个喝水提醒",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "列出我的行程",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 667,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 652,
+        "usage": {
+          "input_tokens": 698,
+          "output_tokens": 49,
+          "total_tokens": 747,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "missing05",
+    "group": "planner",
+    "query": "取消一个提醒，同时查无锡明天天气",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "取消一个提醒",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "查无锡明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 948,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 938,
+        "usage": {
+          "input_tokens": 698,
+          "output_tokens": 49,
+          "total_tokens": 747,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "context01",
+    "group": "planner",
+    "query": "那明天杭州天气呢，同时搜索周杰伦的歌曲",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "明天杭州天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索周杰伦的歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 921,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 911,
+        "usage": {
+          "input_tokens": 720,
+          "output_tokens": 50,
+          "total_tokens": 770,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "context02",
+    "group": "planner",
+    "query": "从无锡站骑车去东南大学无锡校区，顺便查无锡明天天气",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "从无锡站骑车去东南大学无锡校区",
+          "domain": "navigation",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "查无锡明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 1689,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1677,
+        "usage": {
+          "input_tokens": 715,
+          "output_tokens": 54,
+          "total_tokens": 769,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "context03",
+    "group": "planner",
+    "query": "查南京明天天气，然后搜索陶喆的歌曲",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查南京明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索陶喆的歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 1281,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1272,
+        "usage": {
+          "input_tokens": 712,
+          "output_tokens": 51,
+          "total_tokens": 763,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "context04",
+    "group": "planner",
+    "query": "搜索周杰伦的歌，再帮我列出提醒",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "搜索周杰伦的歌",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "列出提醒",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 867,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 852,
+        "usage": {
+          "input_tokens": 722,
+          "output_tokens": 49,
+          "total_tokens": 771,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "context05",
+    "group": "planner",
+    "query": "查无锡明天天气，同时找无锡站附近的咖啡店",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查无锡明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "找无锡站附近的咖啡店",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 1089,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1080,
+        "usage": {
+          "input_tokens": 720,
+          "output_tokens": 53,
+          "total_tokens": 773,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "boundary01",
+    "group": "planner",
+    "query": "查无锡明天天气，同时搜索周杰伦歌曲，找无锡站附近饭店，列出我的提醒",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查无锡明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索周杰伦歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t3",
+          "query": "找无锡站附近饭店",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t4",
+          "query": "列出我的提醒",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 1355,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1346,
+        "usage": {
+          "input_tokens": 710,
+          "output_tokens": 97,
+          "total_tokens": 807,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "boundary02",
+    "group": "planner",
+    "query": "查无锡明天天气，搜索周杰伦歌曲，找无锡站附近饭店，列出我的提醒，然后把这次天气查询结果保存到行程",
+    "passed": false,
+    "metrics": {
+      "plan_exact": [
+        0,
+        1
+      ]
+    },
+    "error_type": "OutputParserException",
+    "elapsed_ms": 2322,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1139,
+        "usage": {
+          "input_tokens": 718,
+          "output_tokens": 139,
+          "total_tokens": 857,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      },
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 2,
+        "elapsed_ms": 1172,
+        "usage": {
+          "input_tokens": 774,
+          "output_tokens": 140,
+          "total_tokens": 914,
+          "input_token_details": {
+            "cache_read": 640
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      }
+    ]
+  },
+  {
+    "id": "boundary03",
+    "group": "planner",
+    "query": "查无锡明天天气，搜索周杰伦歌曲，找无锡站附近饭店，列出提醒，列出行程，从无锡站步行到东南大学无锡校区",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查无锡明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索周杰伦歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t3",
+          "query": "找无锡站附近饭店",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t4",
+          "query": "列出提醒",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t5",
+          "query": "列出行程",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t6",
+          "query": "从无锡站步行到东南大学无锡校区",
+          "domain": "navigation",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 992,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 978,
+        "usage": {
+          "input_tokens": 722,
+          "output_tokens": 145,
+          "total_tokens": 867,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "boundary04",
+    "group": "planner",
+    "query": "找无锡站附近评分至少4分、人均不超过100元的饭店，同时查无锡明天天气",
+    "passed": true,
+    "metrics": {
+      "plan_exact": [
+        1,
+        1
+      ]
+    },
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "找无锡站附近评分至少4分、人均不超过100元的饭店",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "查无锡明天天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "grade": {
+      "passed": true,
+      "errors": []
+    },
+    "elapsed_ms": 1224,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1210,
+        "usage": {
+          "input_tokens": 709,
+          "output_tokens": 61,
+          "total_tokens": 770,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "type": "model.attempt.completed"
+      }
+    ]
+  },
+  {
+    "id": "boundary05",
+    "group": "planner",
+    "query": "从无锡站走路到东南大学无锡校区，查杭州明天天气，搜索陶喆歌曲，然后把这次路线结果保存到行程",
+    "passed": false,
+    "metrics": {
+      "plan_exact": [
+        0,
+        1
+      ]
+    },
+    "error_type": "OutputParserException",
+    "elapsed_ms": 2198,
+    "attempts": [
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 1,
+        "elapsed_ms": 1186,
+        "usage": {
+          "input_tokens": 717,
+          "output_tokens": 117,
+          "total_tokens": 834,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      },
+      {
+        "stage": "plan",
+        "model_name": "deepseek-flash",
+        "attempt": 2,
+        "elapsed_ms": 998,
+        "usage": {
+          "input_tokens": 773,
+          "output_tokens": 117,
+          "total_tokens": 890,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true,
+        "error_type": "OutputParserException",
+        "type": "model.attempt.failed"
+      }
+    ]
+  }
+]

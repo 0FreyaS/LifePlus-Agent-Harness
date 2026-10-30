@@ -1,0 +1,402 @@
+[
+  {
+    "name": "真实工具集成",
+    "source": "data/tool-integration-latest.json",
+    "date": "2026-10-23",
+    "passed": 19,
+    "submitted": 19,
+    "scope": "历史真实MCP工具，无理解模型；不作为当前模型准确率或当前服务可用率",
+    "cases": [
+      {
+        "id": "mcp_discovery",
+        "passed": true
+      },
+      {
+        "id": "weather_live",
+        "passed": true
+      },
+      {
+        "id": "poi_live",
+        "passed": true
+      },
+      {
+        "id": "route_driving",
+        "passed": true
+      },
+      {
+        "id": "route_walking",
+        "passed": true
+      },
+      {
+        "id": "route_bicycling",
+        "passed": true
+      },
+      {
+        "id": "music_live",
+        "passed": true
+      },
+      {
+        "id": "concurrent_real_mcp_reads",
+        "passed": true
+      },
+      {
+        "id": "itinerary_write",
+        "passed": true
+      },
+      {
+        "id": "itinerary_idempotency",
+        "passed": true
+      },
+      {
+        "id": "itinerary_conflict",
+        "passed": true
+      },
+      {
+        "id": "itinerary_read",
+        "passed": true
+      },
+      {
+        "id": "user_isolation",
+        "passed": true
+      },
+      {
+        "id": "reminder_write",
+        "passed": true
+      },
+      {
+        "id": "reminder_cancel_target",
+        "passed": true
+      },
+      {
+        "id": "reminder_cancel",
+        "passed": true
+      },
+      {
+        "id": "real_due_delivery_once",
+        "passed": true
+      },
+      {
+        "id": "reminder_read",
+        "passed": true
+      },
+      {
+        "id": "reminder_invalid_time",
+        "passed": true
+      }
+    ]
+  },
+  {
+    "name": "本地生活真实工具",
+    "source": "data/local-life-tools-latest.json",
+    "date": "2026-10-23",
+    "passed": 28,
+    "submitted": 28,
+    "scope": "历史真实MCP工具，无理解模型；不作为当前模型准确率或当前服务可用率",
+    "cases": [
+      {
+        "id": "mcp_discovery",
+        "passed": true
+      },
+      {
+        "id": "weather_live",
+        "passed": true
+      },
+      {
+        "id": "poi_live",
+        "passed": true
+      },
+      {
+        "id": "route_driving",
+        "passed": true
+      },
+      {
+        "id": "route_walking",
+        "passed": true
+      },
+      {
+        "id": "route_bicycling",
+        "passed": true
+      },
+      {
+        "id": "route_legacy_30001_cross_city",
+        "passed": true
+      },
+      {
+        "id": "music_live",
+        "passed": true
+      },
+      {
+        "id": "local_restaurant",
+        "passed": true
+      },
+      {
+        "id": "detail_restaurant",
+        "passed": true
+      },
+      {
+        "id": "local_ktv",
+        "passed": true
+      },
+      {
+        "id": "detail_ktv",
+        "passed": true
+      },
+      {
+        "id": "local_cinema",
+        "passed": true
+      },
+      {
+        "id": "detail_cinema",
+        "passed": true
+      },
+      {
+        "id": "local_cafe",
+        "passed": true
+      },
+      {
+        "id": "detail_cafe",
+        "passed": true
+      },
+      {
+        "id": "concurrent_real_mcp_reads",
+        "passed": true
+      },
+      {
+        "id": "itinerary_write",
+        "passed": true
+      },
+      {
+        "id": "itinerary_idempotency",
+        "passed": true
+      },
+      {
+        "id": "itinerary_conflict",
+        "passed": true
+      },
+      {
+        "id": "itinerary_read",
+        "passed": true
+      },
+      {
+        "id": "user_isolation",
+        "passed": true
+      },
+      {
+        "id": "reminder_write",
+        "passed": true
+      },
+      {
+        "id": "reminder_cancel_target",
+        "passed": true
+      },
+      {
+        "id": "reminder_cancel",
+        "passed": true
+      },
+      {
+        "id": "real_due_delivery_once",
+        "passed": true
+      },
+      {
+        "id": "reminder_read",
+        "passed": true
+      },
+      {
+        "id": "reminder_invalid_time",
+        "passed": true
+      }
+    ]
+  },
+  {
+    "name": "容错后真实工具冒烟",
+    "source": "data/runtime-hardening-tool-smoke-20261024.json",
+    "date": "2026-10-24",
+    "passed": 28,
+    "submitted": 28,
+    "scope": "历史真实MCP工具，无理解模型；不作为当前模型准确率或当前服务可用率",
+    "cases": [
+      {
+        "id": "mcp_discovery",
+        "passed": true
+      },
+      {
+        "id": "weather_live",
+        "passed": true
+      },
+      {
+        "id": "poi_live",
+        "passed": true
+      },
+      {
+        "id": "route_driving",
+        "passed": true
+      },
+      {
+        "id": "route_walking",
+        "passed": true
+      },
+      {
+        "id": "route_bicycling",
+        "passed": true
+      },
+      {
+        "id": "route_legacy_30001_cross_city",
+        "passed": true
+      },
+      {
+        "id": "music_live",
+        "passed": true
+      },
+      {
+        "id": "local_restaurant",
+        "passed": true
+      },
+      {
+        "id": "detail_restaurant",
+        "passed": true
+      },
+      {
+        "id": "local_ktv",
+        "passed": true
+      },
+      {
+        "id": "detail_ktv",
+        "passed": true
+      },
+      {
+        "id": "local_cinema",
+        "passed": true
+      },
+      {
+        "id": "detail_cinema",
+        "passed": true
+      },
+      {
+        "id": "local_cafe",
+        "passed": true
+      },
+      {
+        "id": "detail_cafe",
+        "passed": true
+      },
+      {
+        "id": "concurrent_real_mcp_reads",
+        "passed": true
+      },
+      {
+        "id": "itinerary_write",
+        "passed": true
+      },
+      {
+        "id": "itinerary_idempotency",
+        "passed": true
+      },
+      {
+        "id": "itinerary_conflict",
+        "passed": true
+      },
+      {
+        "id": "itinerary_read",
+        "passed": true
+      },
+      {
+        "id": "user_isolation",
+        "passed": true
+      },
+      {
+        "id": "reminder_write",
+        "passed": true
+      },
+      {
+        "id": "reminder_cancel_target",
+        "passed": true
+      },
+      {
+        "id": "reminder_cancel",
+        "passed": true
+      },
+      {
+        "id": "real_due_delivery_once",
+        "passed": true
+      },
+      {
+        "id": "reminder_read",
+        "passed": true
+      },
+      {
+        "id": "reminder_invalid_time",
+        "passed": true
+      }
+    ]
+  },
+  {
+    "name": "隔离容器受控验收",
+    "source": "data/container-check-20261028.json",
+    "date": "2026-10-28",
+    "passed": 15,
+    "submitted": 15,
+    "scope": "历史真实Docker、demo任务；不调用真实模型或业务接口",
+    "cases": [
+      {
+        "id": "unauthenticated_html_denied",
+        "passed": true
+      },
+      {
+        "id": "unauthenticated_api_denied",
+        "passed": true
+      },
+      {
+        "id": "frontend_served",
+        "passed": true
+      },
+      {
+        "id": "spa_deep_link",
+        "passed": true
+      },
+      {
+        "id": "missing_api_is_404",
+        "passed": true
+      },
+      {
+        "id": "missing_asset_is_404",
+        "passed": true
+      },
+      {
+        "id": "showcase_active",
+        "passed": true
+      },
+      {
+        "id": "no_provider_key_baked_in",
+        "passed": true
+      },
+      {
+        "id": "chroma_loaded",
+        "passed": true
+      },
+      {
+        "id": "tool_catalog_loaded",
+        "passed": true
+      },
+      {
+        "id": "isolated_demo_task_completed",
+        "passed": true
+      },
+      {
+        "id": "sse_response",
+        "passed": true
+      },
+      {
+        "id": "packaged_resources",
+        "passed": true
+      },
+      {
+        "id": "non_root",
+        "passed": true
+      },
+      {
+        "id": "no_env_file_in_image",
+        "passed": true
+      }
+    ]
+  }
+]
