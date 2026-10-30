@@ -47,7 +47,8 @@ class Settings(BaseSettings):
     response_max_output_tokens: int | None = Field(default=None, ge=128, le=8192)
     domain_route_provider: Literal["llm", "jev_cascade"] = "llm"
     input_event_provider: Literal["llm", "jev_cascade", "jev_gate", "llm_direct", "jev_resume_filter"] = "llm"
-    planning_gate_provider: Literal["rules", "jev_cardinality", "jev_front"] = "rules"
+    # `llm` sends every live request to the planner; the planner owns cardinality.
+    planning_gate_provider: Literal["llm", "rules", "jev_cardinality", "jev_front"] = "llm"
     jev_api_key: SecretStr | None = None
     jev_base_url: str = "https://api.typesafe.ai/v1"
     jev_model_name: str = "jev-1.14.0"

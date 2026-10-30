@@ -70,7 +70,9 @@ async def db(tmp_path):
 @pytest.fixture
 async def client(tmp_path):
     old = settings.database_path
+    old_input_event_provider = settings.input_event_provider
     settings.database_path = str(tmp_path / "api-policy.sqlite3")
+    settings.input_event_provider = "llm"
     try:
         async with app.router.lifespan_context(app):
             async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://policy",
@@ -78,6 +80,7 @@ async def client(tmp_path):
                 yield client
     finally:
         settings.database_path = old
+        settings.input_event_provider = old_input_event_provider
 
 
 async def submit(client, query, session=None, request_id=None):

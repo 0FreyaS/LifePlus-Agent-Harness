@@ -85,7 +85,7 @@ async def test_binary_event_gate_preserves_selection_and_full_new_task(choice):
 
 def test_defaults_keep_original_system():
     settings = Settings(_env_file=None)
-    assert settings.planning_gate_provider == "rules"
+    assert settings.planning_gate_provider == "llm"
     assert settings.domain_route_provider == settings.input_event_provider == "llm"
 
 

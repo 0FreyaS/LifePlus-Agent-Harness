@@ -6,19 +6,22 @@ from langchain_core.messages import AIMessageChunk
 from openai import APIConnectionError
 
 from car_agent.api.app import app, settings
-from car_agent.task_planning import TaskPlan
+from car_agent.task_planning import GoalPlan, TaskPlan
 
 
 @pytest.fixture
 async def client(tmp_path):
     old = settings.database_path
+    old_input_event_provider = settings.input_event_provider
     settings.database_path = str(tmp_path / "retry.sqlite3")
+    settings.input_event_provider = "llm"
     try:
         async with app.router.lifespan_context(app):
             async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://retry-test", headers={"X-Demo-User": "retry-user"}) as client:
                 yield client
     finally:
         settings.database_path = old
+        settings.input_event_provider = old_input_event_provider
 
 
 class Provider:
@@ -33,6 +36,8 @@ class Provider:
             async def ainvoke(self, _):
                 if parent.fail_route and not parent.online:
                     raise APIConnectionError(request=httpx.Request("POST", "https://model.invalid"))
+                if schema is GoalPlan:
+                    return {"tasks": [{"id": "chat", "query": "你好", "domain": "chat"}]}
                 return schema.model_validate({"domain": "chat"})
         return Model()
 

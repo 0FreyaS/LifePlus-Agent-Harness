@@ -11,15 +11,19 @@ from car_agent.conversation import followup_decision, load_references, preferenc
 from car_agent.freshness import FreshnessPolicy
 from car_agent.memory import MemoryRepository
 from car_agent.persistence import Database
+from car_agent.task_planning import GoalPlan
 
 
 @pytest.fixture
 async def client(tmp_path, monkeypatch):
+    original_input_event_provider = settings.input_event_provider
     monkeypatch.setattr(settings, "database_path", str(tmp_path / "conversation.sqlite3"))
     monkeypatch.setattr(settings, "chroma_path", str(tmp_path / "chroma"))
+    settings.input_event_provider = "llm"
     async with app.router.lifespan_context(app):
         async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://test", headers={"X-Demo-User": "conversation-test"}) as client:
             yield client
+    settings.input_event_provider = original_input_event_provider
 
 
 async def send(client, message, session=None, **values):
@@ -131,6 +135,8 @@ async def test_explicit_preference_persists_across_sessions_and_reaches_live_cha
             class Router:
                 async def ainvoke(self, messages):
                     captured.append(messages)
+                    if schema is GoalPlan:
+                        return {"tasks": [{"id": "chat", "query": "我的出行偏好是什么", "domain": "chat"}]}
                     return schema.model_validate({"domain": "chat"})
             return Router()
 

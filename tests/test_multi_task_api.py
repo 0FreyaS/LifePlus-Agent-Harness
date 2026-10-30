@@ -14,7 +14,9 @@ from car_agent.task_planning import GoalPlan, TaskPlan
 @pytest.fixture
 async def api_client(tmp_path):
     original = settings.database_path
+    original_input_event_provider = settings.input_event_provider
     settings.database_path = str(tmp_path / "multi.sqlite3")
+    settings.input_event_provider = "llm"
     try:
         async with app.router.lifespan_context(app):
             async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://test",
@@ -22,6 +24,7 @@ async def api_client(tmp_path):
                 yield client
     finally:
         settings.database_path = original
+        settings.input_event_provider = original_input_event_provider
 
 
 async def submit(client, query, mode="demo", session_id=None):
@@ -104,6 +107,11 @@ async def test_per_task_context_preserves_optional_routers_through_actual_graph(
 
     class Model:
         def with_structured_output(self, schema, **kwargs):
+            if schema is GoalPlan:
+                class PlannerCall:
+                    async def ainvoke(self, messages):
+                        return {"tasks": [{"id": "weather", "query": "查无锡天气", "domain": "weather"}]}
+                return PlannerCall()
             assert schema.__name__ == "WeatherExecutionDecision", "Domain LLM must be replaced in the real task context"
 
             class Call:
@@ -125,9 +133,11 @@ async def test_per_task_context_preserves_optional_routers_through_actual_graph(
     task_id, _ = await submit(api_client, "查无锡天气", mode="live")
     done = await wait_for(api_client, task_id, lambda task: task["status"] in {"completed", "failed"})
     assert done["status"] == "completed", done
-    assert calls == ["multi-test"]
+    # The pure DeepSeek planner has already supplied the single-task domain;
+    # the optional Jev/domain router is therefore not invoked a second time.
+    assert calls == []
     trace = (await api_client.get(f"/api/tasks/{task_id}/trace")).json()
-    assert any(event["type"] == "route.completed" and event.get("source") == "jev_cascade" for event in trace)
+    assert any(event["type"] == "route.completed" and event.get("source") == "prepared_task" for event in trace)
 
 
 @pytest.mark.parametrize("variant", ["baseline", "compact"])
@@ -342,6 +352,8 @@ class StreamingModel:
     def with_structured_output(self, schema, **_kwargs):
         class Router:
             async def ainvoke(self, _messages):
+                if schema is GoalPlan:
+                    return {"tasks": [{"id": "chat", "query": "你好", "domain": "chat"}]}
                 return schema.model_validate({"domain": "chat"})
         return Router()
 
@@ -579,6 +591,8 @@ async def test_interrupted_response_stream_is_replaced_with_tool_evidence(api_cl
         def with_structured_output(self, schema, **kwargs):
             class Router:
                 async def ainvoke(self, messages):
+                    if schema is GoalPlan:
+                        return {"tasks": [{"id": "weather", "query": "杭州天气怎么样", "domain": "weather"}]}
                     if schema.__name__ == "DomainRoute":
                         return schema.model_validate({"domain": "weather"})
                     return schema.model_validate({"domain": "weather", "action": "weather_lookup", "tool_name": "maps_weather", "slots": {"city": "杭州"}})

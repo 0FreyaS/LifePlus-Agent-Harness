@@ -4,6 +4,8 @@
 
 ## 当前启用决策
 
+2026-10-30根据同一30条单/多任务数据完成对比：纯DeepSeek Planner与Jev置信度0.6、低分回退DeepSeek均为30/30；纯DeepSeek P50/P95为0.757/1.254秒、Token 36324，Jev方案P50/P95为1.017/1.735秒、Token至少42442。已将规划入口切换为`PLANNING_GATE_PROVIDER=llm`，live请求不再经过规则预筛；Jev单/多任务门控保留为实验，领域Jev不变。此次只更新配置与入口代码，未把实验数据宣称为端到端生产SLA。
+
 2026-10-30用户要求把本轮问题补到bad case章节并解决，已集中写入测试文档5.11，架构指南13.7及18问附录C.4加索引，每模块附约三分钟回答。修改事件LLM提示区分唯一取消/引用解释；计划校验标量不能绑定整个证据对象，slots来源属于前置领域；_bind验证根/嵌套路线期限、真实字段及严格SlotValues类型；RAG在目录可用且upsert完成后清理旧ID。复测：新增事件5/5、规划11/11、参数1/1、受控13/13，旧36事件36/36，完整90会话90/90、130/130目标；当前RAG源码在容器独立模块/临时真实Chroma删除缩短2/2，不替换正常服务文件。修复前观察不覆盖；顺序回归不是新随机A/B，无模型权重更新。绑定后长等待时效、无元数据兼容快照和多进程原子索引切换仍有边界；未部署、重启服务或推送GitHub。
 
 2026-10-30后续用户授权真实长尾及故障测试：修复后完整D06为90/90、130/130目标，原8失败全部通过；P50/P95 4.380/5.810秒，Token已知下界388122、2次未知。这是冻结集历史回归，不是新随机A/B或生产SLA。新增D18共30条：真实事件3/5、真实规划10/11、领域参数1/1、受控契约12/13；17条模型观察只执行一次，夹具修正复跑不计新样本。仍有唯一取消/引用解释误判、多级selected对象类型和不存在来源绑定、_bind读取过期回执的问题；最后一项仅证实绑定层缺口，未证明实际过期落库。现有容器临时索引真实Chroma删除/缩短0/2，rag.py源码hash匹配；SSE游标/分页/等待分支重启3项受控通过。首轮夹具列名、图层和缺少task行的错误完整保留，不算业务修复。报告第0.2节与第5节、18组数据同步维护。本轮未改业务代码/提示词/正常配置，未重启服务或推送GitHub。
@@ -20,9 +22,9 @@
 
 2026-10-29后续用户批准自由文本直接交给DeepSeek：本机与模板使用`INPUT_EVENT_PROVIDER=llm_direct`，不先走事件规则或Jev过滤；卡片索引、确认、拒绝、取消仍走宿主结构化协议，模型输出仍需原文、任务、有效期与权限校验。领域Jev和门控rules不变。此批准覆盖下面历史记录中的“事件仍用llm”；只证明比Jev过滤更快，不声称优于零模型规则。12例全局的两条失败为依赖结果保存的GoalPlan绑定目标非法，详见[启用与失败分析](llm-direct-rollout.md)。
 
-2026-10-29后续用户批准基础LLM切为`deepseek-flash`，`MODEL_THINKING=disabled`通过HTTP参数关闭思考；planner/intent/response继承同一模型，不留Grok角色覆盖。保留`DOMAIN_ROUTE_PROVIDER=jev_cascade`、`INPUT_EVENT_PROVIDER=llm`、`PLANNING_GATE_PROVIDER=rules`，事件纯回复过滤仍仅实验。此前Grok测试属于历史基准，不能外推为DeepSeek上的Jev收益。[切换、复现与回滚](deepseek-rollout.md)及[DeepSeek基准配对证据](../evaluations/jev/2026-10-29-deepseek/v1/README.md)分别记录。真实Key不进入Git。
+2026-10-29后续用户批准基础LLM切为`deepseek-flash`，`MODEL_THINKING=disabled`通过HTTP参数关闭思考；planner/intent/response继承同一模型，不留Grok角色覆盖。该历史记录中的`PLANNING_GATE_PROVIDER=rules`已由后续实测决策改为`llm`；事件纯回复过滤仍仅实验。此前Grok测试属于历史基准，不能外推为DeepSeek上的Jev收益。[切换、复现与回滚](deepseek-rollout.md)及[DeepSeek基准配对证据](../evaluations/jev/2026-10-29-deepseek/v1/README.md)分别记录。真实Key不进入Git。
 
-2026-10-29用户明确批准先启用单任务领域仲裁并同步GitHub。本地`.env`和仓库`.env.example`为`DOMAIN_ROUTE_PROVIDER=jev_cascade`、`INPUT_EVENT_PROVIDER=llm`、`PLANNING_GATE_PROVIDER=rules`。需要独立JEV_API_KEY；低分、defer和异常回退原LLM。未显式配置provider时Settings类仍用llm兼容旧部署。仅改变领域分类，其他实验不启用；以下“默认不切换”是此前试验当时的状态，不能用来推翻本次批准。[启用说明](jev-domain-rollout.md)。
+2026-10-29用户明确批准先启用单任务领域仲裁并同步GitHub；当时本地`.env`和仓库`.env.example`为`DOMAIN_ROUTE_PROVIDER=jev_cascade`、`INPUT_EVENT_PROVIDER=llm`、`PLANNING_GATE_PROVIDER=rules`。2026-10-30在同一30条数据上比较后，规划入口已切换为`PLANNING_GATE_PROVIDER=llm`；需要独立JEV_API_KEY的领域仲裁仍保留。以下旧段落中的“默认不切换”仅指当时试验状态，不能覆盖最新配置。[启用说明](jev-domain-rollout.md)。
 
 本机Docker服务8088已更新，真实天气/歌手介绍两例均completed，Trace确认Jev仲裁且无原domain_route调用；Jev耗时分别1.270/0.769秒，不能当端到端SLA。回归700通过、1跳过。本机基础镜像下载EOF，改用现有依赖加源码层运行，保留旧镜像回滚；未验证全新服务器镜像安装。Jev代码与脱敏实测报告已提交GitHub main，实际Key不提交。
 

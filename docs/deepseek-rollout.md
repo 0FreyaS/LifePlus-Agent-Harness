@@ -14,7 +14,7 @@ INTENT_MODEL_NAME=
 RESPONSE_MODEL_NAME=
 DOMAIN_ROUTE_PROVIDER=jev_cascade
 INPUT_EVENT_PROVIDER=llm_direct
-PLANNING_GATE_PROVIDER=rules
+PLANNING_GATE_PROVIDER=llm
 ```
 
 三个角色不再保留旧模型覆盖值，统一继承`MODEL_NAME`；单任务领域仲裁仍由此前已获批的Jev级联负责，低分或失败回退DeepSeek。领域工具选择、参数提取、规划和回复仍由各自LLM角色处理，不把Jev描述为可执行工具的生成式Agent。

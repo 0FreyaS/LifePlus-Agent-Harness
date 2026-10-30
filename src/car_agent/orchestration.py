@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import inspect
 import json
 import uuid
 from datetime import datetime, timezone
@@ -79,11 +80,24 @@ class TaskCoordinator:
             brief += "\n有效会话引用：" + json.dumps(memory["conversation_references"], ensure_ascii=False)
             async with execution_scope(self.db, task_id, self.app.state.context.limits, "planning"):
                 context = self.app.state.context
-                gate_options = {"gate": context.planning_gate} if getattr(context, "planning_gate", None) else {}
+                # Demo keeps its deterministic splitter. The LLM planning
+                # marker is only meaningful for live requests and should not
+                # leak into test doubles or demo execution.
+                gate_options = {"gate": context.planning_gate} if mode == "live" and getattr(context, "planning_gate", None) else {}
+                # Keep the planner injection point compatible with lightweight
+                # test/plugin callables that predate the optional gate keyword.
+                planner_signature = inspect.signature(plan_tasks)
+                accepts_gate = "gate" in planner_signature.parameters or any(
+                    parameter.kind == inspect.Parameter.VAR_KEYWORD
+                    for parameter in planner_signature.parameters.values())
+                if gate_options and not accepts_gate:
+                    gate_options = {}
                 if context.planner_variant == "compact":
-                    plan = await plan_tasks(query, mode, context.model_for("planner"), brief, variant="compact", **gate_options)
+                    plan = await plan_tasks(query, mode, context.model_for("planner"), brief,
+                                            variant="compact", **gate_options)
                 else:
-                    plan = await plan_tasks(query, mode, context.model_for("planner"), brief, **gate_options)
+                    plan = await plan_tasks(query, mode, context.model_for("planner"), brief,
+                                            **gate_options)
             if plan is None or len(plan.tasks) == 1:
                 if plan:
                     await self.db.execute("UPDATE tasks SET plan_json=? WHERE id=?",

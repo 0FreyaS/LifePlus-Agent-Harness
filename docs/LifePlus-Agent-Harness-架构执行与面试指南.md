@@ -10,7 +10,7 @@
 |---|---|---|
 | 基础模型 | `deepseek-flash`，`MODEL_THINKING=disabled`；planner/intent/response 角色继承基础模型 | 角色分离不等于部署三个不同模型；Key 不进入文档 |
 | 文本事件 | `INPUT_EVENT_PROVIDER=llm_direct`：先由 DeepSeek 提出 `InputDecision`，再由宿主核对 | 卡片选择、确认、拒绝和取消按钮仍走结构化协议；自由文本失败不猜测执行 |
-| 任务数量门控 | `PLANNING_GATE_PROVIDER=rules`；疑似复合需求再调用全局规划 | 启发式会漏召回；规则只决定是否送规划，不直接按标点拆任务 |
+| 任务数量判断 | `PLANNING_GATE_PROVIDER=llm`；live 请求直接交给全局 Planner | DeepSeek 统一判断单/多任务并输出目标关系；规则和 Jev 门控仅作实验 |
 | 全局规划 | `GoalPlan` 仅输出目标 Query、领域、依赖和结果绑定 | 不输出 `action/slots/tool_name`；内部 `TaskPlan` 兼容旧字段不是当前模型契约 |
 | 绑定与输出校验 | 合法接收字段、来源路径、直接依赖和领域归属；一次有界修复附脱敏诊断 | 不静默改错字段、不删除依赖绕过校验；源路径实际存在性在运行时核验 |
 | 单任务领域 | `DOMAIN_ROUTE_PROVIDER=jev_cascade`，Jev 高分接管，否则回退 DeepSeek | Jev 只分领域，不提槽位、不授权、不生成执行计划 |
@@ -713,7 +713,7 @@ Schema 能限定字段和路径形式，不能证明 `t_route.route` 当时真�
 ### 5.6 多任务规划有哪些边界
 
 - 候选检测使用连接词、标点等启发式，不是完整语法解析器。
-- 当前 rules 不调用 Jev 做单多目标判断；`jev_cardinality/jev_front` 属于可选实验。误判为单目标会漏过 Planner，误判为复合则可能增加一次模型调用，但 Planner 可以返回单项。
+- 当前 `PLANNING_GATE_PROVIDER=llm` 不调用规则或 Jev 做单多目标前置判断，live 请求直接交给 DeepSeek Planner；`rules`、`jev_cardinality/jev_front` 属于可选实验。代价是每个 live 请求增加一次规划模型调用，但避免了规则漏召回。
 - 提示词要求不能因为逗号或地名中的“和”就拆成多任务，但仍需测试。
 - 当前最多六个计划任务。
 - 任务 ID 必须唯一，依赖不能成环，也不能引用不存在的任务。

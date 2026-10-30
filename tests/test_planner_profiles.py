@@ -119,6 +119,15 @@ async def test_fast_path_does_not_call_planner(variant, query):
     assert model.calls == []
 
 
+async def test_llm_planning_mode_checks_single_task_without_rule_prefilter():
+    from car_agent.planning_gate import LLMPlanningGate
+
+    model = Model([{"tasks": [{"id": "weather", "query": "查无锡天气", "domain": "weather"}]}])
+    plan = await plan_tasks("查无锡天气，谢谢", "live", model, gate=LLMPlanningGate())
+    assert plan is not None and len(plan.tasks) == 1
+    assert len(model.calls) == 1
+
+
 def test_grading_ignores_task_ids_and_order_but_not_dependencies():
     case = next(case for case in CASES if case["id"] == "dependency01")
     plan = TaskPlan.model_validate({"tasks": [

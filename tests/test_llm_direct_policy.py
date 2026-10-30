@@ -18,7 +18,7 @@ from evaluations.resume_filter_cases import CASES
 def test_configuration_template_selects_direct_text_policy():
     settings = Settings(_env_file=Path(__file__).resolve().parents[1] / ".env.example")
     assert settings.input_event_provider == "llm_direct"
-    assert settings.planning_gate_provider == "rules"
+    assert settings.planning_gate_provider == "llm"
     assert settings.domain_route_provider == "jev_cascade"
 
 

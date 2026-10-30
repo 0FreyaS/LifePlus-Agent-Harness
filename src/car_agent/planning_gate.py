@@ -49,7 +49,24 @@ class JevPlanningGate:
         return cardinality, domain
 
 
+class LLMPlanningGate:
+    """Marker gate for the direct planner path.
+
+    It deliberately makes no model call and returns no cardinality. The
+    planner then receives every live request, so the LLM owns single/multi
+    judgment without a rule or Jev pre-filter.
+    """
+
+    async def classify(self, query, memory_brief=""):
+        return None, None
+
+    async def close(self):
+        return None
+
+
 def build_planning_gate(settings):
+    if settings.planning_gate_provider == "llm":
+        return LLMPlanningGate()
     if settings.planning_gate_provider == "rules":
         return None
     if not settings.jev_api_key or not settings.jev_api_key.get_secret_value().strip():

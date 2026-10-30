@@ -104,7 +104,7 @@ GitHub 页面内可直接播放（约 1 分 21 秒，已内嵌中文字幕）。
 | 层级 | 当前职责 | 执行边界 |
 |---|---|---|
 | 事件解释 | 判断 `new/resume/cancel/clarify`，保留旧回复与新需求原文 | 宿主再核对归属、片段和候选；一次最多作用于一个旧任务 |
-| 全局 Planner | 输出 `GoalPlan`：`id/query/domain/depends_on/bind_slots` | 不输出 action、slots 或工具参数；当前规则只决定是否送入规划 |
+| 全局 Planner | 输出 `GoalPlan`：`id/query/domain/depends_on/bind_slots` | live 默认由 DeepSeek 判断单/多任务；不输出 action、slots 或工具参数 |
 | TaskCoordinator | 校验与调度 DAG，独立目标并发，依赖完成后绑定真实证据 | `depends_on` 管先后，`bind_slots` 管数据来源 |
 | 领域子图 | `understand` 联合选择本域动作、工具和槽位，再准备、澄清与执行 | 候选与字段由宿主限制；chat/wellbeing 固定内部动作，可信表单与恢复有独立路径 |
 | Harness / Tool Queue | 管理模型、上下文、权限、预算、持久化作业、取消和 Trace | 工具 Schema 合法不等于用户目标完成，写入需要绑定参数的确认 |
@@ -118,9 +118,9 @@ GitHub 页面内可直接播放（约 1 分 21 秒，已内嵌中文字幕）。
 | `MODEL_NAME` / `MODEL_THINKING` | `deepseek-flash` / `disabled` | 事件、规划、领域提参与回复角色默认继承基础模型 |
 | `DOMAIN_ROUTE_PROVIDER` | `jev_cascade` | Jev 只分类单目标领域；低分、defer、超时或异常回退 DeepSeek |
 | `INPUT_EVENT_PROVIDER` | `llm_direct` | live 文本直接解释；按钮仍走宿主协议，不叠加事件 Jev |
-| `PLANNING_GATE_PROVIDER` | `rules` | 启发式筛选疑似复合需求，具体拆分仍由 Planner 完成 |
+| `PLANNING_GATE_PROVIDER` | `llm` | 所有 live 请求由 DeepSeek Planner 判断单/多任务并输出目标关系；`rules`、Jev 门控仅保留为实验 |
 
-Jev 默认超时 1.5 秒，接管要求置信度至少 0.8、所选概率至少 0.9；这是可配置工程门槛，不是准确率保证。事件 Jev 过滤和 Jev 单多目标门控保留为实验，不自动启用。裸 `Settings` 的领域/事件默认保留 `llm` 兼容旧部署，使用时以实际环境配置为准。
+Jev 默认超时 1.5 秒，接管要求置信度至少 0.8、所选概率至少 0.9；这是可配置工程门槛，不是准确率保证。当前只启用单目标领域 Jev；事件 Jev 与单多目标 Jev 门控保留为实验。`PLANNING_GATE_PROVIDER=llm` 表示 live 请求直接交给 DeepSeek Planner，不经过规则预筛。
 
 [架构、执行链路与面试指南](docs/LifePlus-Agent-Harness-架构执行与面试指南.md) · [文本事件策略](docs/llm-direct-rollout.md) · [模型配置与回滚](docs/deepseek-rollout.md)
 
