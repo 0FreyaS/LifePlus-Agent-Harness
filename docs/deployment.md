@@ -6,7 +6,7 @@
 
 2026-10-29起配置模板与本机基础LLM采用`deepseek-flash`，通过`MODEL_THINKING=disabled`关闭思考；三个模型角色继承同一配置。仍只启用领域Jev，事件纯回复过滤为独立实验，不随模型切换启用。[配置、实测与回滚说明](deepseek-rollout.md)。真实Key仅写私有`.env`，修改后须重建容器，不能仅restart。
 
-需要 Docker Engine 与 Compose 插件。镜像构建使用 Node.js 22 编译前端，Python 3.12 安装 `uv.lock` 中的依赖，包含 music / production extras；最终镜像不需要 Vite、Node.js 或开发依赖。
+需要 Docker Engine 与 Compose 插件。镜像构建使用 Node.js 22 编译前端，Python 3.12 安装 `uv.lock` 中的基础依赖和 production extra；最终镜像不需要 Vite、Node.js 或开发依赖。音乐检索通过已有 httpx 适配器访问真实 QQ 音乐接口，不安装未使用的 music extra SDK；该 SDK 间接引入的 `urllib3-future` 与基础依赖中的 `urllib3` 在干净容器内发生模块覆盖，曾导致入口导入失败。构建阶段额外导入 API 和 MCP 入口，启动类依赖错误会直接令镜像构建失败。
 
 ```bash
 cp .env.example .env
@@ -27,6 +27,36 @@ docker compose logs --tail=100 app
 默认数据保存于命名卷，容器使用 UID 10001。使用只读根文件系统和受限 `/tmp`，所有可写业务状态放在 `/app/data`。代码包安装在虚拟环境，`LIFEPLUS_ROOT=/app` 显式定位前端、领域规则和知识目录，不能按 site-packages 路径猜项目根目录。
 
 `docker compose down` 停止服务但保留卷。不要对有价值数据执行 `down -v`；这会删除数据。更新时先备份，再 `docker compose up -d --build`。当前没有数据库版本回滚系统，旧镜像不一定能读取未来修改过的 Schema。
+
+### 本机后台常驻（2026-10-28）
+
+本机使用上述单容器 Compose 配置，访问 `http://127.0.0.1:8088`。账号及随机生成的访问密码保存在本地 `data/local-docker-access.txt`（权限 600），同一份凭据写入私有 `.env`；不要上传这两个文件。镜像不包含真实 Key，运行时由 `.env` 注入，模型选择沿用现有配置。
+
+- 容器以 detached 模式运行，不依赖终端窗口；`restart: unless-stopped` 在容器异常退出、Docker 引擎恢复后自动拉起服务。主动 `stop` / `down` 后不会自动恢复，需再次执行 `docker compose up -d`。
+- 本机已安装 `~/Library/LaunchAgents/com.lifeplus.docker-start.plist`，当前用户登录 macOS 时启动 Docker Desktop。这是本机配置，不包含在仓库或服务器部署中；未登录、睡眠、关机或主动退出 Docker 时服务不可用。本次不修改系统睡眠设置。
+- 数据保存到 `lifeplus_lifeplus-data` 命名卷，不自动导入开发环境的聊天库。关闭终端或重启容器不会清空数据，`docker compose down -v` 则会删除数据卷。
+- 容器健康检查每 30 秒执行一次。`unhealthy` 只标记状态，不会单凭健康失败自动重启；如进程未退出但不响应，应检查日志后手动重启，而不是声明已经具备自动故障修复。
+- 默认只绑定本机 loopback 地址，不开放局域网或公网。对外访问仍需按下一节配置 HTTPS、认证和访问边界。
+
+在项目根目录管理服务：
+
+```bash
+docker compose ps
+docker compose logs --tail=100 app
+docker compose restart app
+# 暂停 / 恢复（不删除数据卷）
+docker compose stop
+docker compose up -d
+```
+
+若不再需要登录后启动 Docker，在当前用户终端执行：
+
+```bash
+launchctl bootout "gui/$(id -u)/com.lifeplus.docker-start"
+# 另外移走 ~/Library/LaunchAgents/com.lifeplus.docker-start.plist，避免下次登录再次加载。
+```
+
+本机本次验收：完整回归 **563 通过、1 跳过**；隔离镜像验收 **15/15**，见本地 `data/container-check-20261028.json`。常驻容器中的真实模型天气请求完成，SSE 返回正常；另直接验证真实音乐工具返回候选。向空闲应用主进程发送退出信号后，Docker 自动拉起容器，重启次数增至 1，原会话和已完成任务仍可读取。完整摘要保存在本地 `data/local-docker-acceptance-20261028.json`。这不包含整机重启、断电恢复或公网访问测试；一次真实请求的耗时不能作为 P95 或容量结论。
 
 ## 2. HTTPS 与面试官访问
 

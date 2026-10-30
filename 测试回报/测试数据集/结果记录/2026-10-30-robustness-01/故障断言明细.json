@@ -1,0 +1,172 @@
+[
+  {
+    "id": "evaluations.adversarial_contract_checks::test_changed_arguments_reject_old_approval",
+    "status": "passed",
+    "elapsed_ms": 9
+  },
+  {
+    "id": "evaluations.adversarial_contract_checks::test_rag_reopen_removes_deleted_or_shortened_chunks[delete-0]",
+    "status": "blocked",
+    "elapsed_ms": 4
+  },
+  {
+    "id": "evaluations.adversarial_contract_checks::test_rag_reopen_removes_deleted_or_shortened_chunks[shrink-1]",
+    "status": "blocked",
+    "elapsed_ms": 1
+  },
+  {
+    "id": "evaluations.adversarial_contract_checks::test_real_write_lost_receipt_is_not_duplicated",
+    "status": "passed",
+    "elapsed_ms": 80
+  },
+  {
+    "id": "evaluations.adversarial_contract_checks::test_stale_dependency_is_not_silently_forwarded",
+    "status": "failed",
+    "elapsed_ms": 1
+  },
+  {
+    "id": "evaluations.adversarial_contract_checks::test_transient_rate_limit_retries_then_succeeds",
+    "status": "passed",
+    "elapsed_ms": 1043
+  },
+  {
+    "id": "evaluations.adversarial_contract_checks::test_two_approvals_create_one_real_write",
+    "status": "passed",
+    "elapsed_ms": 229
+  },
+  {
+    "id": "tests.test_conversation_memory::test_first_input_is_exact_after_window_trim_and_context_expiry",
+    "status": "passed",
+    "elapsed_ms": 901
+  },
+  {
+    "id": "tests.test_conversation_memory::test_navigation_followup_binds_real_selected_coordinate",
+    "status": "passed",
+    "elapsed_ms": 423
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[save_itinerary]",
+    "status": "passed",
+    "elapsed_ms": 63
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[create_reminder]",
+    "status": "passed",
+    "elapsed_ms": 68
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[cancel_reminder]",
+    "status": "passed",
+    "elapsed_ms": 64
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[business-false-without-error]",
+    "status": "passed",
+    "elapsed_ms": 66
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[business-false-message]",
+    "status": "passed",
+    "elapsed_ms": 66
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-false]",
+    "status": "passed",
+    "elapsed_ms": 71
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-success]",
+    "status": "passed",
+    "elapsed_ms": 64
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[integer-success-flag]",
+    "status": "passed",
+    "elapsed_ms": 65
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[contradictory-flags]",
+    "status": "passed",
+    "elapsed_ms": 68
+  },
+  {
+    "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-clarification]",
+    "status": "passed",
+    "elapsed_ms": 64
+  },
+  {
+    "id": "tests.test_multi_task_api::test_cancelling_group_prevents_late_resume_and_new_tools",
+    "status": "passed",
+    "elapsed_ms": 211
+  },
+  {
+    "id": "tests.test_multi_task_api::test_concurrent_duplicate_requests_create_one_task_and_one_tool_job",
+    "status": "passed",
+    "elapsed_ms": 182
+  },
+  {
+    "id": "tests.test_multi_task_api::test_independent_weather_finishes_while_music_waits_and_resumes_once",
+    "status": "passed",
+    "elapsed_ms": 246
+  },
+  {
+    "id": "tests.test_multi_task_api::test_one_failed_branch_produces_partial_success",
+    "status": "passed",
+    "elapsed_ms": 212
+  },
+  {
+    "id": "tests.test_multi_task_api::test_reusing_request_id_with_different_content_is_rejected[changed0]",
+    "status": "passed",
+    "elapsed_ms": 175
+  },
+  {
+    "id": "tests.test_multi_task_api::test_reusing_request_id_with_different_content_is_rejected[changed1]",
+    "status": "passed",
+    "elapsed_ms": 174
+  },
+  {
+    "id": "tests.test_multi_task_api::test_sse_persists_actual_deltas_and_reconnect_honors_last_event_id",
+    "status": "passed",
+    "elapsed_ms": 139
+  },
+  {
+    "id": "tests.test_multi_task_api::test_sse_replays_more_than_one_database_page_and_uses_highest_cursor",
+    "status": "passed",
+    "elapsed_ms": 223
+  },
+  {
+    "id": "tests.test_multi_task_api::test_task_trace_graph_resume_and_cancel_are_isolated_by_user",
+    "status": "passed",
+    "elapsed_ms": 171
+  },
+  {
+    "id": "tests.test_multi_task_api::test_waiting_group_restores_independent_interrupt_after_restart",
+    "status": "passed",
+    "elapsed_ms": 299
+  },
+  {
+    "id": "tests.test_production_policies::test_cross_day_relative_query_requires_new_explicit_request",
+    "status": "passed",
+    "elapsed_ms": 94
+  },
+  {
+    "id": "tests.test_production_policies::test_expired_selection_is_blocked_then_explicit_refresh_requeries",
+    "status": "passed",
+    "elapsed_ms": 275
+  },
+  {
+    "id": "tests.test_runtime_components::test_late_tool_response_cannot_overwrite_cancellation",
+    "status": "passed",
+    "elapsed_ms": 34
+  },
+  {
+    "id": "tests.test_runtime_components::test_tool_timeout_does_not_block_unrelated_branch",
+    "status": "passed",
+    "elapsed_ms": 343
+  },
+  {
+    "id": "tests.test_runtime_hardening::test_retry_after_cannot_overrun_budget",
+    "status": "passed",
+    "elapsed_ms": 92
+  }
+]

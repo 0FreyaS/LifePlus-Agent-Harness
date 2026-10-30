@@ -30,6 +30,8 @@ class KnowledgeRetriever:
         self._documents: list[dict[str, Any]] = []
 
     def open(self) -> None:
+        if not self.knowledge_dir.is_dir():
+            raise FileNotFoundError("Knowledge directory unavailable; refusing to clear the existing index")
         documents: list[str] = []
         ids: list[str] = []
         metadatas: list[dict[str, str]] = []
@@ -56,6 +58,11 @@ class KnowledgeRetriever:
         if documents:
             self.collection.upsert(ids=ids, documents=documents, metadatas=metadatas,
                                    embeddings=[_embedding(document) for document in documents])
+        # Replace this index's configured document set only after new content is stored.
+        previous = set(self.collection.get(include=["metadatas"])["ids"])
+        removed = sorted(previous - set(ids))
+        if removed:
+            self.collection.delete(ids=removed)
         self.backend = "chroma"
 
     def search(self, query: str, limit: int = 3) -> list[dict[str, Any]]:

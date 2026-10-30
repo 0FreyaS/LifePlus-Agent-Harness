@@ -1,0 +1,26 @@
+{
+  "source_sha256": "b0163d9e14b7c3d0eb97ccba445a45c001b8a27d5848d1bdf84dcb141dcf92da",
+  "cases": [
+    {
+      "id": "rag-current-delete",
+      "backend": "chroma",
+      "before": 2,
+      "expected": 0,
+      "after": 2,
+      "stale_retrievable": true,
+      "passed": false
+    },
+    {
+      "id": "rag-current-shrink",
+      "backend": "chroma",
+      "before": 2,
+      "expected": 1,
+      "after": 2,
+      "stale_retrievable": true,
+      "passed": false
+    }
+  ],
+  "scope": "existing_container_code_temporary_storage_no_model_no_service_restart_no_production_index_changes",
+  "container": "lifeplus-app-1",
+  "current_source_matches": true
+}

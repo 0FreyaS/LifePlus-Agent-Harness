@@ -13,6 +13,12 @@ Read `docs/PROJECT_MEMORY.md` before explaining or changing architecture. It rec
   do not describe these as fields produced by the current global planner.
 - `depends_on` controls readiness; `bind_slots` carries actual predecessor evidence
   into host-owned `bound_slots`, merged after domain understanding.
+- The 2026-10-30 bad-case fixes add scalar/export-shape and source-domain checks,
+  strict actual-value validation and expiry rejection at dependency binding.
+  Event text stays llm_direct; clarify unique cancel versus quoted explanations.
+  RAG synchronizes removed IDs on explicit open, refusing missing directories.
+  No atomic multi-writer index switching or universal post-binding freshness is claimed.
+  Current-source container tests use isolated modules and temporary indexes, not deployment.
 - The user approved single-goal Jev routing on 2026-10-29. Local settings and
   `.env.example` use `DOMAIN_ROUTE_PROVIDER=jev_cascade`, with the original LLM
   fallback. Bare Settings retains llm for backwards compatibility. Keep

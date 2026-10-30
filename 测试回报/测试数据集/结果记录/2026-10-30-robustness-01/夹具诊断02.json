@@ -1,0 +1,1244 @@
+{
+  "manifest": {
+    "started_at": "2026-10-30T12:34:53.274084+00:00",
+    "thinking": "disabled",
+    "model": "deepseek-flash",
+    "dataset_sha256": "9b753e3eddf49d2dc44ee156d76ff9c8376f79c2363b7e507dcd21cfcebe4330",
+    "counts_by_layer": {
+      "event_live": 5,
+      "planner_live": 11,
+      "controlled_contract": 13,
+      "domain_live": 1
+    },
+    "source_sha256": {
+      "src/car_agent/__init__.py": "c9dbbd53685eccf16428521b978799c5877f51dbfd9cd790f2db9f593eab7498",
+      "src/car_agent/access.py": "ee0199782422b95930645ea8a1a1dd8009cf7506ae87d35d15fb6233bd7f1805",
+      "src/car_agent/adapters/demo.py": "244a820ba12f66a915ac31b088dbb9c6390fd6b04362c9ffac1f01c875ef5718",
+      "src/car_agent/adapters/jev.py": "b918244f9d6d632aef29b9dd42cbf073d59445000e02e4b56aaa6603503c6df5",
+      "src/car_agent/adapters/mcp_client.py": "5c01c6aac475cd7a8a79e3941417b1b500b282a9c7c55af70aa3e9a6e0fb8d35",
+      "src/car_agent/api/app.py": "651658084d387f04b4a542124e6e8997dde111dd06b45395bd26e573e62d3bc0",
+      "src/car_agent/cli.py": "1355fc962a17bc7caa12eaa0c775023ce71ed7ef516757898b89958e884a645a",
+      "src/car_agent/config.py": "6575e952b7ba8d65bb244fe8c367e1ea25f9b977e544216c79350400f99d1fbb",
+      "src/car_agent/conversation.py": "b23d235716d0459f1ce502edbacc69b5ce4be3ae85a7d5421c9672287e8bfadc",
+      "src/car_agent/diagnostics.py": "e96c34372c60edaee4e24eacb39c5a60bde87da4c2232116e5b478f3048e3dfc",
+      "src/car_agent/domain_routing.py": "32927a12735e8baa69565d2cfe364ec957d05a9b0926b851c0a9a4160baaf5b8",
+      "src/car_agent/domain_understanding.py": "12c3697b9e417ef017eee73b00dda572588880c1910e7a882a3a760e1f2b632b",
+      "src/car_agent/event_resume_filter.py": "b2d187f6ab665e8f4983080bd13539e7a8759207fff8f2b83ab17bc7ab61d174",
+      "src/car_agent/event_routing.py": "85dc2207206b7d1b61eeb38c95987f72a152f9da8dcd6ec2036226a9eb342851",
+      "src/car_agent/execution_verification.py": "9a4ec8b4513012f9eae49aafeb1e97584188419b95889d703f49c1021418a265",
+      "src/car_agent/freshness.py": "d193cc188a2def4983b5bf18a574c3e3f0faf9ac21ec42a5bad0936ff94905c3",
+      "src/car_agent/harness.py": "0c3bfe4ca4a25dcbaf3fdba65353be9cfd760390254ed627389ddc25589b5434",
+      "src/car_agent/http_workflow_smoke.py": "3acd667d1dfe6694b2cb9dc9222dac22736a00717e405dca779b8d32a034037d",
+      "src/car_agent/input_events.py": "809488e672176e9749fc65b4cd2318ba9796f63ce23d5af4d75584f432101254",
+      "src/car_agent/intent_schema.py": "44b9d48b3e943355f2714f3024b791855ecfd7d56b1ddf2efb6e85e6548245cc",
+      "src/car_agent/interactions.py": "72d9d9d224b39ba9e3ea41dd010cf8b17702862f8054c3ac8e42c1f518777d55",
+      "src/car_agent/local_life_smoke.py": "8b840f54b5434852e30a373b99cdfc9f5497d4262a7a9ca50ad756794fab1cfe",
+      "src/car_agent/location_defaults.py": "4d1c34d4e1a463b41760853f87ad3a74be6c21386a466e351133da7bd781264d",
+      "src/car_agent/mcp_server.py": "b404d632f71cf1e7a7c6ebeec81678674159b5dd66f85cfa68d40a2d85a7d69b",
+      "src/car_agent/memory.py": "778cb47fd3171e2ba61c18e85acd8396b27db439ecb63297cc778b9563f06df7",
+      "src/car_agent/model_roles.py": "85ad775a5b70f02032b969349dd13383583295be1601b5b827fec57722676803",
+      "src/car_agent/models.py": "a70bccc1c82d1d4d416c42e5359d3d4ebee1ba8f9c5ddfa1d2c1d09403b05a34",
+      "src/car_agent/orchestration.py": "41462a89190f99a9ba3694bf2f082c821c809f56fedf0a57c574d45612017106",
+      "src/car_agent/persistence.py": "baf4f3c54cb1df37d621286062ff9799e1a935bc47092df0ba90d11283c7a215",
+      "src/car_agent/planning_gate.py": "a72f2e6edca58ddf2855190bd74bd313636288e22877ca2530a92c7af0f0c366",
+      "src/car_agent/rag.py": "b0163d9e14b7c3d0eb97ccba445a45c001b8a27d5848d1bdf84dcb141dcf92da",
+      "src/car_agent/reminders.py": "b149e983e553b5805ba1d57ed0340d410b2a4ee2f83a4a97e87562f87b9f3b27",
+      "src/car_agent/retry.py": "aff1e33fc252b2dbb3d3b1ed143470930560f7d9d805a3aafb3ae3426d81e909",
+      "src/car_agent/route_geometry.py": "f03a5aca8c86442d36e17325503eb5c52f402b9a38e52ab68b65b39d299ddc63",
+      "src/car_agent/route_presentation.py": "8f50a6efa8f54cb11d0c315e40d996a41bba53b0220366524823b37870143f4f",
+      "src/car_agent/route_workflow_smoke.py": "c62ef6a3a3458f2951a45470e228054080548e2b7e6d2153b54695f9fd4ecd6e",
+      "src/car_agent/runtime_context.py": "563b14143e519cbbf44c3297b73a5847f1de40177c7d48669a6e6947505d633e",
+      "src/car_agent/runtime_limits.py": "d812764d754f92dc351c51ec604a2b716ccb41301a2798edc1f04a861e768a47",
+      "src/car_agent/skill_registry.py": "fd4686782ff5aac34e1abef88fa9cee7a2b3a4568a565f071e99e0126612dfb6",
+      "src/car_agent/stream_multi_smoke.py": "a0a2106db8fb37ba8662ae6f415024bbe6935346a6b5a1c53272dcf6b482a8bc",
+      "src/car_agent/streaming.py": "78bed5a919bbac2f15686b848ad6661e78b6301b1a6964bbd498e52b1ae0d675",
+      "src/car_agent/structured_output.py": "d4682bae419f6aabce07aa45d083f560296b7ab5de55a43fcd81b1a6ae32eb2b",
+      "src/car_agent/task_planning.py": "dc3ef55292d31b0a5a2914309e61254d4e8a9a3d38b4646223e166a3d3f05fa0",
+      "src/car_agent/tool_policy.py": "898a15d3f16b9d97c7961e146fe59a7d3f707a44a97634b39bdecb1625f7c614",
+      "src/car_agent/tool_queue.py": "f3ef6b2c19a86193e9474d0d014f092e407eba2c8eacca30de15c066092bd217",
+      "src/car_agent/tool_smoke.py": "fe04c97d31c2b9b1e141e380d89573ec7d53e7948d3ed84f4bb712a50f626eb9",
+      "src/car_agent/tools/__init__.py": "62ba94d60cac16dcf24460f2d6ffcb52527b52f88dc9be5e56b51cf26b94e626",
+      "src/car_agent/tools/service.py": "fa954ab7acb6e2782d48706e6f78da4bdb5f75728661701d6dec0389f7eee2b6",
+      "src/car_agent/travel_modes.py": "bc86039dacec1b1dee514d1d712a47e4c472eda3262ac8ca56555130f9e21062",
+      "src/car_agent/user_events.py": "686f5d34b7d1446837f0b91b558c1d05a04788faea47a0cf9a0ba88b95606bdd",
+      "evaluations/adversarial_eval.py": "d51b52d6eb56bdebf3e10865b7ec2d0bb5f1e10ba2219e1000534430851c35ce",
+      "evaluations/adversarial_cases.py": "eb70587fe9c8ae4fadcbd54da4d2f98e928ddb5124054427195d4d9c7c2e6218",
+      "evaluations/adversarial_contract_checks.py": "c5627e15ea73165281d9f441d91fa94c2177f4c517e6be1e4dc0c5e4d0d64016"
+    },
+    "scope": "single_arm_components_and_separate_controlled_fault_tests; no_prompt_or_business_changes; no_production_deployment",
+    "live_observations_reused_from": "robustness30-20261030-01",
+    "paid_calls_in_this_run": 0,
+    "contract_rerun_reason": "Fix audit fixture: attempt column name; authorize at actual domain node, not parent checkpoint"
+  },
+  "results": [
+    {
+      "id": "tail-A01",
+      "query": "取消任务",
+      "layer": "event_live",
+      "group": "A-事件归属",
+      "passed": false,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "input_events",
+          "attempt": 1,
+          "span_id": "8637f76f-93ea-425a-a331-2ff714f7d8ad",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 1690,
+          "usage": {
+            "input_tokens": 653,
+            "output_tokens": 29,
+            "total_tokens": 682,
+            "input_token_details": {
+              "cache_read": 512
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+      "prediction": {
+        "route": "clarify",
+        "task_id": null,
+        "answer": null,
+        "new_query": null,
+        "question": "请问要取消哪个任务？目前待处理的是“搜索周杰伦歌曲”。"
+      },
+      "errors": [
+        "route",
+        "target"
+      ],
+      "elapsed_ms": 1700
+    },
+    {
+      "id": "tail-A02",
+      "query": "第二个吧",
+      "layer": "event_live",
+      "group": "A-事件归属",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "input_events",
+          "attempt": 1,
+          "span_id": "6aaabf77-ec80-4bea-a943-b9524606927b",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 907,
+          "usage": {
+            "input_tokens": 733,
+            "output_tokens": 31,
+            "total_tokens": 764,
+            "input_token_details": {
+              "cache_read": 512
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+      "prediction": {
+        "route": "clarify",
+        "task_id": null,
+        "answer": null,
+        "new_query": null,
+        "question": "你指的是哪个任务的第二个？歌曲《七里香》，还是东南大学的无锡校区？"
+      },
+      "errors": [],
+      "elapsed_ms": 920
+    },
+    {
+      "id": "tail-A03",
+      "query": "“第二个”是什么意思？",
+      "layer": "event_live",
+      "group": "A-事件归属",
+      "passed": false,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "input_events",
+          "attempt": 1,
+          "span_id": "1892ebeb-cc87-440e-92d0-c50d2097438f",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 640,
+          "usage": {
+            "input_tokens": 656,
+            "output_tokens": 25,
+            "total_tokens": 681,
+            "input_token_details": {
+              "cache_read": 512
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+      "prediction": {
+        "route": "clarify",
+        "task_id": null,
+        "answer": null,
+        "new_query": null,
+        "question": "你是指周杰伦歌曲候选中的第二个“七里香”吗？"
+      },
+      "errors": [
+        "route",
+        "new_task_presence",
+        "new_task_content"
+      ],
+      "elapsed_ms": 650
+    },
+    {
+      "id": "tail-A04",
+      "query": "无锡校区，顺便查南京明天天气",
+      "layer": "event_live",
+      "group": "A-事件归属",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "input_events",
+          "attempt": 1,
+          "span_id": "22eef1aa-0946-4d39-8170-43e0c0177f56",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 1254,
+          "usage": {
+            "input_tokens": 658,
+            "output_tokens": 25,
+            "total_tokens": 683,
+            "input_token_details": {
+              "cache_read": 512
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+      "prediction": {
+        "route": "resume",
+        "task_id": "place",
+        "answer": "无锡校区",
+        "new_query": "顺便查南京明天天气",
+        "question": null
+      },
+      "errors": [],
+      "elapsed_ms": 1269
+    },
+    {
+      "id": "tail-A05",
+      "query": "不是第二个，第二个先别选，查一下无锡天气",
+      "layer": "event_live",
+      "group": "A-事件归属",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "input_events",
+          "attempt": 1,
+          "span_id": "b95e790f-f4fe-4322-95df-32625c7dd67e",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 793,
+          "usage": {
+            "input_tokens": 663,
+            "output_tokens": 24,
+            "total_tokens": 687,
+            "input_token_details": {
+              "cache_read": 512
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+      "prediction": {
+        "route": "new",
+        "task_id": null,
+        "answer": null,
+        "new_query": "不是第二个，第二个先别选，查一下无锡天气",
+        "question": null
+      },
+      "errors": [],
+      "elapsed_ms": 805
+    },
+    {
+      "id": "tail-B01",
+      "query": "查看我的提醒和行程清单",
+      "layer": "planner_live",
+      "group": "B-同域与纠正",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "08e575e7-38ef-4494-9688-5883d65e3319",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 659,
+          "usage": {
+            "input_tokens": 1071,
+            "output_tokens": 50,
+            "total_tokens": 1121,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "查看我的提醒",
+            "domain": "planning",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t2",
+            "query": "查看我的行程清单",
+            "domain": "planning",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 672
+    },
+    {
+      "id": "tail-B02",
+      "query": "查提醒，不用查行程",
+      "layer": "planner_live",
+      "group": "B-同域与纠正",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "e45a4ddb-9af9-4225-af10-f419229b9185",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 606,
+          "usage": {
+            "input_tokens": 1071,
+            "output_tokens": 26,
+            "total_tokens": 1097,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "查提醒",
+            "domain": "planning",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 617
+    },
+    {
+      "id": "tail-B03",
+      "query": "查无锡天气，南京天气也查一下",
+      "layer": "planner_live",
+      "group": "B-同域与纠正",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "72f9ab92-2b37-418f-87ff-9cdb209be07c",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 757,
+          "usage": {
+            "input_tokens": 1074,
+            "output_tokens": 47,
+            "total_tokens": 1121,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "查无锡天气",
+            "domain": "weather",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t2",
+            "query": "查南京天气",
+            "domain": "weather",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 769
+    },
+    {
+      "id": "tail-B04",
+      "query": "查无锡天气，不对，是苏州天气",
+      "layer": "planner_live",
+      "group": "B-同域与纠正",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "e18003cd-5fa1-4538-bf83-8755e8767074",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 940,
+          "usage": {
+            "input_tokens": 1074,
+            "output_tokens": 26,
+            "total_tokens": 1100,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "查苏州天气",
+            "domain": "weather",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 950
+    },
+    {
+      "id": "tail-B05",
+      "query": "查无锡天气，然后搜索周杰伦的歌，二者没有先后要求",
+      "layer": "planner_live",
+      "group": "B-同域与纠正",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "2e4ae509-9cb0-4305-b630-45fd53aba1cd",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 785,
+          "usage": {
+            "input_tokens": 1080,
+            "output_tokens": 49,
+            "total_tokens": 1129,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "查无锡天气",
+            "domain": "weather",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t2",
+            "query": "搜索周杰伦的歌",
+            "domain": "music",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 794
+    },
+    {
+      "id": "tail-C01",
+      "query": "查无锡天气，把完整结果保存到行程",
+      "layer": "planner_live",
+      "group": "C-结果依赖",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "0d945d18-9286-4e92-81e8-4416cc54fa6a",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 898,
+          "usage": {
+            "input_tokens": 1075,
+            "output_tokens": 68,
+            "total_tokens": 1143,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "查无锡天气",
+            "domain": "weather",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t2",
+            "query": "把无锡天气的完整结果保存到行程",
+            "domain": "planning",
+            "action": "",
+            "slots": {},
+            "depends_on": [
+              "t1"
+            ],
+            "bind_slots": {
+              "details": "t1.result"
+            }
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 917
+    },
+    {
+      "id": "tail-C02",
+      "query": "查无锡和南京天气，只保存南京的完整查询回执",
+      "layer": "planner_live",
+      "group": "C-结果依赖",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "6be0646d-bc44-44d7-939c-e9aa87ca9eb4",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 1185,
+          "usage": {
+            "input_tokens": 1079,
+            "output_tokens": 88,
+            "total_tokens": 1167,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "查询无锡天气",
+            "domain": "weather",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t2",
+            "query": "查询南京天气",
+            "domain": "weather",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t3",
+            "query": "保存南京的完整天气查询回执",
+            "domain": "planning",
+            "action": "",
+            "slots": {},
+            "depends_on": [
+              "t2"
+            ],
+            "bind_slots": {
+              "details": "t2.result"
+            }
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 1192
+    },
+    {
+      "id": "tail-C03",
+      "query": "找无锡站附近的饭店，选定一家后从无锡站规划到它的路线，再保存完整路线",
+      "layer": "planner_live",
+      "group": "C-结果依赖",
+      "passed": false,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "13104d28-ec25-470a-a9e5-4f32d937fa43",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 1015,
+          "usage": {
+            "input_tokens": 1086,
+            "output_tokens": 125,
+            "total_tokens": 1211,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "找无锡站附近的饭店",
+            "domain": "local_life",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t2",
+            "query": "从无锡站规划到选定饭店的路线",
+            "domain": "navigation",
+            "action": "",
+            "slots": {},
+            "depends_on": [
+              "t1"
+            ],
+            "bind_slots": {
+              "destination": "t1.selected",
+              "origin": "t1.slots.origin",
+              "city": "t1.slots.city"
+            }
+          },
+          {
+            "id": "t3",
+            "query": "保存完整路线",
+            "domain": "planning",
+            "action": "",
+            "slots": {},
+            "depends_on": [
+              "t2"
+            ],
+            "bind_slots": {
+              "details": "t2.route"
+            }
+          }
+        ]
+      },
+      "errors": [
+        "r:bindings"
+      ],
+      "elapsed_ms": 1022
+    },
+    {
+      "id": "tail-C04",
+      "query": "查无锡天气并搜索周杰伦歌曲，歌曲失败也要把天气完整回执保存到行程",
+      "layer": "planner_live",
+      "group": "C-结果依赖",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "7d86b3fe-7423-4489-9336-34c5cb8aa3bd",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 799,
+          "usage": {
+            "input_tokens": 1086,
+            "output_tokens": 91,
+            "total_tokens": 1177,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "查询无锡天气",
+            "domain": "weather",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t2",
+            "query": "搜索周杰伦歌曲",
+            "domain": "music",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t3",
+            "query": "把无锡天气完整回执保存到行程",
+            "domain": "planning",
+            "action": "",
+            "slots": {},
+            "depends_on": [
+              "t1"
+            ],
+            "bind_slots": {
+              "details": "t1.result"
+            }
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 810
+    },
+    {
+      "id": "tail-C05",
+      "query": "从无锡站步行到东南大学无锡校区，把完整路线保存为周末出行，标题不要用地址",
+      "layer": "planner_live",
+      "group": "C-结果依赖",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "83c36b43-a45a-4a64-8bb6-9527ceb83a2a",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 1273,
+          "usage": {
+            "input_tokens": 1087,
+            "output_tokens": 90,
+            "total_tokens": 1177,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "从无锡站步行到东南大学无锡校区的完整路线",
+            "domain": "navigation",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          },
+          {
+            "id": "t2",
+            "query": "把从无锡站步行到东南大学无锡校区的完整路线保存为周末出行，标题不要用地址",
+            "domain": "planning",
+            "action": "",
+            "slots": {},
+            "depends_on": [
+              "t1"
+            ],
+            "bind_slots": {
+              "details": "t1.route"
+            }
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 1286
+    },
+    {
+      "id": "tail-D03",
+      "query": "我现在在杭州，找附近电影院",
+      "layer": "domain_live",
+      "group": "D-信息时效",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "domain_understanding",
+          "attempt": 1,
+          "span_id": "3a49de52-ef52-4478-b232-5978853a35a0",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 1371,
+          "usage": {
+            "input_tokens": 1753,
+            "output_tokens": 77,
+            "total_tokens": 1830,
+            "input_token_details": {
+              "cache_read": 1536
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "真实本域理解，不做位置/GPS验证或商家检索",
+      "prediction": {
+        "domain": "local_life",
+        "action": "local_search",
+        "tool_name": "maps_local_search",
+        "slots": {
+          "anchor": "杭州",
+          "category": "cinema",
+          "city": "杭州",
+          "route_requested": false,
+          "travel_mode": "driving"
+        },
+        "resolved_query": "我现在在杭州，找附近电影院",
+        "status": "running"
+      },
+      "errors": [],
+      "elapsed_ms": 1389
+    },
+    {
+      "id": "tail-F05",
+      "query": "找无锡站附近的饭店",
+      "layer": "planner_live",
+      "group": "F-并发与记忆",
+      "passed": true,
+      "attempts": [
+        {
+          "type": "model.attempt.completed",
+          "stage": "plan",
+          "attempt": 1,
+          "span_id": "0b6f672f-e5cc-4e75-92e9-f449b44f19fd",
+          "model_name": "deepseek-flash",
+          "elapsed_ms": 647,
+          "usage": {
+            "input_tokens": 1093,
+            "output_tokens": 36,
+            "total_tokens": 1129,
+            "input_token_details": {
+              "cache_read": 896
+            },
+            "output_token_details": {}
+          },
+          "usage_known": true
+        }
+      ],
+      "coverage_limit": "真实规划模型读不可信历史数据；不等于完整RAG提示注入或宿主权限验收",
+      "prediction": {
+        "tasks": [
+          {
+            "id": "t1",
+            "query": "找无锡站附近的饭店",
+            "domain": "local_life",
+            "action": "",
+            "slots": {},
+            "depends_on": [],
+            "bind_slots": {}
+          }
+        ]
+      },
+      "errors": [],
+      "elapsed_ms": 662
+    },
+    {
+      "id": "tail-D01",
+      "layer": "controlled_contract",
+      "group": "D-信息时效",
+      "query": "候选已过期，用户回复第二个",
+      "passed": true,
+      "assertion_cases": 1,
+      "elapsed_ms": 290,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-D02",
+      "layer": "controlled_contract",
+      "group": "D-信息时效",
+      "query": "待保存的驾车路线改为骑行，旧确认不能授权新参数",
+      "passed": true,
+      "assertion_cases": 1,
+      "elapsed_ms": 9,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-D04",
+      "layer": "controlled_contract",
+      "group": "D-信息时效",
+      "query": "过了午夜再回复昨日暂停的明天天气任务",
+      "passed": true,
+      "assertion_cases": 1,
+      "elapsed_ms": 96,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-D05",
+      "layer": "controlled_contract",
+      "group": "D-信息时效",
+      "query": "天气回执已过期，用户要求把刚才天气存一下",
+      "passed": false,
+      "assertion_cases": 1,
+      "elapsed_ms": 1,
+      "errors": [
+        "evaluations.adversarial_contract_checks::test_stale_dependency_is_not_silently_forwarded"
+      ],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-E01",
+      "layer": "controlled_contract",
+      "group": "E-执行故障",
+      "query": "行程写入成功但回执丢失，再次提交",
+      "passed": true,
+      "assertion_cases": 1,
+      "elapsed_ms": 71,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-E02",
+      "layer": "controlled_contract",
+      "group": "E-执行故障",
+      "query": "读取工具首次429后恢复",
+      "passed": false,
+      "assertion_cases": 2,
+      "elapsed_ms": 1103,
+      "errors": [
+        "evaluations.adversarial_contract_checks::test_transient_rate_limit_retries_then_succeeds"
+      ],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-E03",
+      "layer": "controlled_contract",
+      "group": "E-执行故障",
+      "query": "HTTP正常但业务回执success=false",
+      "passed": true,
+      "assertion_cases": 10,
+      "elapsed_ms": 657,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-E04",
+      "layer": "controlled_contract",
+      "group": "E-执行故障",
+      "query": "天气成功，音乐超时，路线等待选择",
+      "passed": true,
+      "assertion_cases": 3,
+      "elapsed_ms": 513,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-E05",
+      "layer": "controlled_contract",
+      "group": "E-执行故障",
+      "query": "用户取消时工具在运行，随后迟到回执到达",
+      "passed": true,
+      "assertion_cases": 2,
+      "elapsed_ms": 247,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-F01",
+      "layer": "controlled_contract",
+      "group": "F-并发与记忆",
+      "query": "同一request_id同时重复提交两次",
+      "passed": true,
+      "assertion_cases": 3,
+      "elapsed_ms": 581,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-F02",
+      "layer": "controlled_contract",
+      "group": "F-并发与记忆",
+      "query": "两个客户端同时确认同一写入任务",
+      "passed": true,
+      "assertion_cases": 1,
+      "elapsed_ms": 186,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-F03",
+      "layer": "controlled_contract",
+      "group": "F-并发与记忆",
+      "query": "新会话说导航过去，另一个会话有地点候选",
+      "passed": true,
+      "assertion_cases": 2,
+      "elapsed_ms": 564,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    },
+    {
+      "id": "tail-F04",
+      "layer": "controlled_contract",
+      "group": "F-并发与记忆",
+      "query": "长对话和上下文过期后原样返回第一次输入",
+      "passed": true,
+      "assertion_cases": 1,
+      "elapsed_ms": 830,
+      "errors": [],
+      "attempts": [],
+      "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+    }
+  ],
+  "assertions": [
+    {
+      "id": "evaluations.adversarial_contract_checks::test_changed_arguments_reject_old_approval",
+      "status": "passed",
+      "elapsed_ms": 9
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_rag_reopen_removes_deleted_or_shortened_chunks[delete-0]",
+      "status": "failed",
+      "elapsed_ms": 4
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_rag_reopen_removes_deleted_or_shortened_chunks[shrink-1]",
+      "status": "failed",
+      "elapsed_ms": 1
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_real_write_lost_receipt_is_not_duplicated",
+      "status": "passed",
+      "elapsed_ms": 71
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_stale_dependency_is_not_silently_forwarded",
+      "status": "failed",
+      "elapsed_ms": 1
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_transient_rate_limit_retries_then_succeeds",
+      "status": "failed",
+      "elapsed_ms": 1040
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_two_approvals_create_one_real_write",
+      "status": "passed",
+      "elapsed_ms": 186
+    },
+    {
+      "id": "tests.test_conversation_memory::test_first_input_is_exact_after_window_trim_and_context_expiry",
+      "status": "passed",
+      "elapsed_ms": 830
+    },
+    {
+      "id": "tests.test_conversation_memory::test_navigation_followup_binds_real_selected_coordinate",
+      "status": "passed",
+      "elapsed_ms": 394
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[save_itinerary]",
+      "status": "passed",
+      "elapsed_ms": 63
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[create_reminder]",
+      "status": "passed",
+      "elapsed_ms": 66
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[cancel_reminder]",
+      "status": "passed",
+      "elapsed_ms": 66
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[business-false-without-error]",
+      "status": "passed",
+      "elapsed_ms": 65
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[business-false-message]",
+      "status": "passed",
+      "elapsed_ms": 66
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-false]",
+      "status": "passed",
+      "elapsed_ms": 67
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-success]",
+      "status": "passed",
+      "elapsed_ms": 67
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[integer-success-flag]",
+      "status": "passed",
+      "elapsed_ms": 66
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[contradictory-flags]",
+      "status": "passed",
+      "elapsed_ms": 66
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-clarification]",
+      "status": "passed",
+      "elapsed_ms": 65
+    },
+    {
+      "id": "tests.test_multi_task_api::test_cancelling_group_prevents_late_resume_and_new_tools",
+      "status": "passed",
+      "elapsed_ms": 225
+    },
+    {
+      "id": "tests.test_multi_task_api::test_concurrent_duplicate_requests_create_one_task_and_one_tool_job",
+      "status": "passed",
+      "elapsed_ms": 245
+    },
+    {
+      "id": "tests.test_multi_task_api::test_independent_weather_finishes_while_music_waits_and_resumes_once",
+      "status": "passed",
+      "elapsed_ms": 249
+    },
+    {
+      "id": "tests.test_multi_task_api::test_one_failed_branch_produces_partial_success",
+      "status": "passed",
+      "elapsed_ms": 201
+    },
+    {
+      "id": "tests.test_multi_task_api::test_reusing_request_id_with_different_content_is_rejected[changed0]",
+      "status": "passed",
+      "elapsed_ms": 168
+    },
+    {
+      "id": "tests.test_multi_task_api::test_reusing_request_id_with_different_content_is_rejected[changed1]",
+      "status": "passed",
+      "elapsed_ms": 168
+    },
+    {
+      "id": "tests.test_multi_task_api::test_sse_persists_actual_deltas_and_reconnect_honors_last_event_id",
+      "status": "passed",
+      "elapsed_ms": 137
+    },
+    {
+      "id": "tests.test_multi_task_api::test_sse_replays_more_than_one_database_page_and_uses_highest_cursor",
+      "status": "passed",
+      "elapsed_ms": 219
+    },
+    {
+      "id": "tests.test_multi_task_api::test_task_trace_graph_resume_and_cancel_are_isolated_by_user",
+      "status": "passed",
+      "elapsed_ms": 170
+    },
+    {
+      "id": "tests.test_multi_task_api::test_waiting_group_restores_independent_interrupt_after_restart",
+      "status": "passed",
+      "elapsed_ms": 297
+    },
+    {
+      "id": "tests.test_production_policies::test_cross_day_relative_query_requires_new_explicit_request",
+      "status": "passed",
+      "elapsed_ms": 96
+    },
+    {
+      "id": "tests.test_production_policies::test_expired_selection_is_blocked_then_explicit_refresh_requeries",
+      "status": "passed",
+      "elapsed_ms": 290
+    },
+    {
+      "id": "tests.test_runtime_components::test_late_tool_response_cannot_overwrite_cancellation",
+      "status": "passed",
+      "elapsed_ms": 22
+    },
+    {
+      "id": "tests.test_runtime_components::test_tool_timeout_does_not_block_unrelated_branch",
+      "status": "passed",
+      "elapsed_ms": 63
+    },
+    {
+      "id": "tests.test_runtime_hardening::test_retry_after_cannot_overrun_budget",
+      "status": "passed",
+      "elapsed_ms": 63
+    }
+  ],
+  "note": "attempt列名、父图/领域状态及缺任务行属于测试夹具问题；本机Chroma不可用另作容器复验；模型17条复用未重跑"
+}

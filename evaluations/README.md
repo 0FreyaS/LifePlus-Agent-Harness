@@ -4,7 +4,26 @@
 
 [测试总文档](../测试回报/测试总文档.md) · [测试数据集及逐文件说明](../测试回报/测试数据集/README.md)。以DeepSeek Flash关闭思考为基准，领域、槽位、工具、规划、澄清、完整任务、容错与工程回归统一列出；实测与待测分开。下文保留旧评测方法和复现背景，不将旧版本成绩迁移为当前模型指标。
 
-测试总文档第5节统一维护Bad Case复盘：按现场、最早偏离点、证据、主因/次生症状、已实施修复、替代方案和验证状态整理10类问题。编辑源为`evaluations/bad-case-review.md`，离线重建时合入总文档；不要只修改生成结果。局部通过、端到端待复验、未修复及测试口径差异分别标识，原始失败不覆盖。
+测试总文档第5节统一维护Bad Case复盘：按现场、最早偏离点、证据、主因/次生症状、已实施修复、替代方案和验证状态整理12类问题。编辑源为`evaluations/bad-case-review.md`，离线重建时合入总文档；不要只修改生成结果。局部通过、端到端冻结集通过、未修复及测试口径差异分别标识，原始失败不覆盖。
+
+## 后续完整会话与长尾复验
+
+总文档第0.2节保留上轮绑定修复后的90会话、原8失败及本轮针对性修复前的长尾审计：17条真实模型组件与13条受控场景，并单列SSE/重启和真实Chroma生命周期。原8包含于90；该轮17条模型观察只请求一次，修正审计夹具后的复跑不算新模型试验。该轮审计未修改业务实现。第0.3节另列当前事件语义、绑定类型/时效和索引清理的修改及复测，不覆盖旧失败；正常服务未重启或部署。
+
+```bash
+python -m evaluations.adversarial_cases
+# 以下显式请求真实模型，目录必须全新
+python -m evaluations.adversarial_eval --run-live --output evaluations/runs/robustness-NEW
+# 仅复跑受控断言：验证输入和运行源码hash后复用旧模型观察，不新增模型费用
+python -m evaluations.adversarial_eval --reuse-live evaluations/runs/robustness-NEW --output evaluations/runs/contracts-NEW
+# 当前工作区源码在现有容器独立进程、临时目录审计，不替换服务源码或正常索引
+python -m evaluations.rag_lifecycle_audit --container <existing-container> --source-current --output evaluations/runs/rag-NEW.json
+# 冻结36条自由文本事件回归，显式请求真实模型
+python -m evaluations.event_regression --run-live --output evaluations/runs/events-NEW
+python -m evaluations.test_report
+```
+
+`evaluations/adversarial_contract_checks.py`为显式审计，不包含在常规testpaths中。修复前的过期依赖失败、真实Chroma删除/缩短失败均保留；当前受控场景13/13、真实Chroma生命周期2/2通过。宿主缺Chroma记为阻塞，不通过skip产品缺陷伪装修复。当前真实模型长尾为事件5/5、规划11/11、领域1/1，另有旧事件36/36及完整90会话90/90；这些分母不可混为一个准确率。详见第0.3节及第5节bad case复盘。
 
 离线维护：`.venv/bin/python -m evaluations.test_report`。旧Jev报告入口已跳转；历史完整文档与原始结果保留，不发起付费API请求。
 
@@ -17,7 +36,7 @@
 env DEFAULT_CURRENT_LOCATION= .venv/bin/python -m evaluations.completion --dataset '测试回报/测试数据集/05-端到端任务/完整任务90会话.jsonl' --output evaluations/runs/new-completion --concurrency 1 --case-budget 210
 ```
 
-冻结澄清标签假设无默认位置，所以上述完整会话命令只在评测进程禁用配置位置；真实模型、MCP、工具回执及隔离存储不替换。若不传该环境变量，测的是当前默认定位与旧标签的兼容性，不能将差异全归因模型。当前源码不因本轮测试修改；所有失败、修复尝试和未知用量保留。归档结果位于[本轮结果目录](../测试回报/测试数据集/结果记录/2026-10-30-01/README.md)，测试总文档第0节列明实测及剩余边界。
+冻结澄清标签假设无默认位置，所以上述完整会话命令只在评测进程禁用配置位置；真实模型、MCP、工具回执及隔离存储不替换。若不传该环境变量，测的是当前默认定位与旧标签的兼容性，不能将差异全归因模型。该基准测试当时未修改源码；后续针对性修复见第0.3节，所有失败、修复尝试和未知用量保留。归档结果位于[基准结果目录](../测试回报/测试数据集/结果记录/2026-10-30-01/README.md)，测试总文档第0节列明实测及剩余边界。
 
 ## Jev统一测试记录与数据目录
 

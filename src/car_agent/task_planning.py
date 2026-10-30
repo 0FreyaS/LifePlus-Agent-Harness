@@ -30,6 +30,22 @@ def binding_field():
         "result、route、content不是接收字段，不得用作左侧key。"))
 
 
+def validate_binding_source(target: str, path: str, source_domain: str) -> None:
+    """Reject impossible export shapes before dispatch; actual values are checked later."""
+    parts = path.split(".")
+    root = parts[1]
+    if len(parts) == 2 and target != "details":
+        raise PydanticCustomError("binding_source_shape", "标量接收字段不能绑定整个证据对象",
+            {"target": target, "source_task": parts[0], "allowed": "selected.location/name/id或实际标量字段；完整对象仅接收至details"})
+    if root == "slots" and len(parts) > 2 and parts[2] not in FIELDS[source_domain]:
+        raise PydanticCustomError("binding_source_field", "前置领域不产生此槽位字段",
+            {"source_task": parts[0], "target": target, "domain": source_domain, "allowed": ",".join(sorted(FIELDS[source_domain]))})
+    if root == "selected" and source_domain not in {"navigation", "local_life", "music"}:
+        raise PydanticCustomError("binding_source_export", "前置领域不提供候选选择对象", {"source_task": parts[0], "domain": source_domain})
+    if root == "route" and source_domain not in {"navigation", "local_life"}:
+        raise PydanticCustomError("binding_source_export", "前置领域不提供路线回执", {"source_task": parts[0], "domain": source_domain})
+
+
 class PlannedTask(BaseModel):
     model_config = ConfigDict(extra="forbid")
     id: str = Field(pattern=r"^[a-zA-Z0-9_-]{1,40}$")
@@ -85,6 +101,7 @@ class TaskPlan(BaseModel):
             ordered.extend(item for item in self.tasks if item.id in ready)
             resolved.update(ready)
         self.tasks = ordered
+        sources = {item.id: item for item in self.tasks}
         for item in self.tasks:
             for target, path in item.bind_slots.items():
                 if target not in FIELDS[item.domain]:
@@ -95,6 +112,7 @@ class TaskPlan(BaseModel):
                 if parts[0] not in item.depends_on:
                     raise PydanticCustomError("binding_source_dependency", "槽位绑定只能引用直接依赖的任务",
                         {"task_id": item.id, "target": target, "source_task": parts[0]})
+                validate_binding_source(target, path, sources[parts[0]].domain)
         return self
 
 
@@ -152,6 +170,9 @@ def planning_prompt(memory_brief: str = "", *, variant: str = "baseline", now: d
         "禁止把result、route、content、weather_result用作左侧key，它们不是接收业务字段；右侧t1.result则是合法的结果来源。"
         "例如查询天气后保存：t1为weather且无依赖；t2为planning，depends_on=[\"t1\"]，bind_slots={\"details\":\"t1.result\"}。"
         "来源只引用直接depends_on的任务，可引用selected(用户选中项)、route(路线回执)、result(工具结果)、slots及其字段。"
+        "origin/destination/city等标量字段不能绑定整个selected/result/route对象；选中地点坐标用t1.selected.location。"
+        "slots字段必须确实属于前置领域，local_life只有anchor等字段，没有origin；当前请求已明确的无锡站等起点保留在后继query，"
+        "不要为了建立依赖额外绑定origin/city或猜不存在的路径。selected只来自地点/商家/歌曲，route只来自导航/商家路线。"
         "不预先编造这些结果；完整保存用整个result/route对象，不擅自换成其city、摘要或空对象。"
         "用户说先找地点再导航过去：可保留为一个navigation领域目标，由领域子图完成检索选择和路线。"
         "输出只包含符合JSON Schema的JSON：" + contract

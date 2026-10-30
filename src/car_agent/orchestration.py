@@ -7,7 +7,8 @@ from datetime import datetime, timezone
 from typing import Any, Awaitable, Callable
 
 from .task_planning import plan_tasks
-from .freshness import recent, expired
+from .freshness import recent, expired, stale_receipt
+from .intent_schema import SlotValues
 from .runtime_limits import execution_scope
 
 TERMINAL = {"completed", "partial", "failed", "cancelled", "interrupted"}
@@ -123,7 +124,15 @@ class TaskCoordinator:
             child = children[source]
             snapshot = await self.app.state.graph.aget_state({"configurable": {"thread_id": child["thread_id"]}})
             state = snapshot.values
-            items = state.get("tool_result", {}).get("items") or []
+            receipt = state.get("tool_result", {})
+            if not isinstance(receipt, dict):
+                raise ValueError("前置工具回执格式不合法，未执行依赖任务")
+            route_receipt = receipt.get("route_result") or {}
+            if not isinstance(route_receipt, dict):
+                raise ValueError("前置路线回执格式不合法，未执行依赖任务")
+            if stale_receipt(receipt) or stale_receipt(route_receipt):
+                raise ValueError("前置证据已过期，未执行依赖任务；请重新查询或规划后再确认。")
+            items = receipt.get("items") or []
             index = int(state.get("slots", {}).get("selection", 1)) - 1
             value = {"selected": items[index] if 0 <= index < len(items) else {},
                      "route": state.get("tool_result", {}).get("route_result", {}),
@@ -132,6 +141,12 @@ class TaskCoordinator:
                 if not isinstance(value, dict) or key not in value:
                     raise ValueError(f"前置任务未提供绑定字段：{path}")
                 value = value[key]
+            if value is None or value == "" or value == {}:
+                raise ValueError(f"前置任务未提供有效绑定证据：{path}")
+            try:
+                value = SlotValues.model_validate({slot: value}, strict=True).model_dump(exclude_none=True)[slot]
+            except (ValueError, KeyError) as exc:
+                raise ValueError(f"绑定接收字段{slot}与来源{path}的类型不兼容") from exc
             decision["bound_slots"][slot] = value
             if "slots" in decision:
                 decision["slots"][slot] = value

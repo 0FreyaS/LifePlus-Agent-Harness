@@ -30,7 +30,7 @@ def snapshot(directory):
 
 def test_current_baseline_metrics_and_unmeasured_slots_are_separated(report):
     output, value = report
-    assert len(value["datasets"]) == 17 and len(value["metrics"]) == 28
+    assert len(value["datasets"]) == 18 and len(value["metrics"]) == 28
     assert value["paid_calls_during_organization"] == 0
     slots = next(dataset for dataset in value["datasets"] if dataset["id"] == "D03")
     assert (slots["cases"], slots["annotated_fields"], slots["must_not_infer_fields"]) == (30, 44, 3)
@@ -126,9 +126,9 @@ def test_bad_case_review_is_preserved_by_offline_rebuild(report):
     rendered = (output / "测试总文档.md").read_text()
     assert source.strip() in rendered
     assert {f"BC{i:02d}" for i in range(1, 11)} <= set(re.findall(r"BC\d{2}", source))
-    assert "本次整理不发起模型请求、不修改业务逻辑" in source
+    assert "报告整理本身不请求模型" in source
     assert "前置计划失败引发后续missing_task，只记为传播症状" in source
-    assert "原3条天气＋提醒＋行程会话的专项关闭证据" in source
+    assert "原3条天气＋提醒＋行程会话复测" in source
 
 
 def test_bad_case_evidence_links_resolve_in_portable_report(report):

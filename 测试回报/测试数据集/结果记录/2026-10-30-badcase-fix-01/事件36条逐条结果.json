@@ -1,0 +1,1334 @@
+[
+  {
+    "id": "pure01",
+    "query": "无锡校区吧",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "6c5e2804-5d43-4c49-9418-df5f2cbbc521",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 977,
+        "usage": {
+          "input_tokens": 757,
+          "output_tokens": 33,
+          "total_tokens": 790,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "无锡校区吧",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 993
+  },
+  {
+    "id": "pure02",
+    "query": "南京校区吧",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "194e7909-c751-4727-b385-96b493d73ff7",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 591,
+        "usage": {
+          "input_tokens": 757,
+          "output_tokens": 22,
+          "total_tokens": 779,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "南京校区吧",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 603
+  },
+  {
+    "id": "pure03",
+    "query": "第二个吧",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "112c7afa-9d0e-42c2-a276-e905294bf3bf",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 890,
+        "usage": {
+          "input_tokens": 756,
+          "output_tokens": 21,
+          "total_tokens": 777,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "第二个吧",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 909
+  },
+  {
+    "id": "pure04",
+    "query": "第一个",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "25fd66e6-57ce-4f34-b935-1df395bd9a19",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 920,
+        "usage": {
+          "input_tokens": 755,
+          "output_tokens": 20,
+          "total_tokens": 775,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "第一个",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 931
+  },
+  {
+    "id": "pure05",
+    "query": "第二首",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "d7d4b381-85d8-408b-8b6b-3831652548c6",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 1266,
+        "usage": {
+          "input_tokens": 757,
+          "output_tokens": 27,
+          "total_tokens": 784,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "music",
+      "answer": "第二首",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 1277
+  },
+  {
+    "id": "pure06",
+    "query": "我选七里香",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "3d8870b4-91ff-4052-ae45-c5a7d31b5609",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 789,
+        "usage": {
+          "input_tokens": 760,
+          "output_tokens": 22,
+          "total_tokens": 782,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "music",
+      "answer": "七里香",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 807
+  },
+  {
+    "id": "pure07",
+    "query": "晴天吧",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "392fc965-7eaf-415a-b14a-7886ac580c3a",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 515,
+        "usage": {
+          "input_tokens": 757,
+          "output_tokens": 32,
+          "total_tokens": 789,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "music",
+      "answer": "晴天吧",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 530
+  },
+  {
+    "id": "pure08",
+    "query": "选南京校区",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "1c245328-369f-4bed-8e4d-34b802e26e0c",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 569,
+        "usage": {
+          "input_tokens": 757,
+          "output_tokens": 22,
+          "total_tokens": 779,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "选南京校区",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 589
+  },
+  {
+    "id": "pure09",
+    "query": "无锡",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "662a1451-19dd-4fa3-b14f-32fb7c8e17b2",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 659,
+        "usage": {
+          "input_tokens": 720,
+          "output_tokens": 26,
+          "total_tokens": 746,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "weather",
+      "answer": "无锡",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 673
+  },
+  {
+    "id": "pure10",
+    "query": "南京",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "84d303b6-2770-465e-916f-ad996d511329",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 608,
+        "usage": {
+          "input_tokens": 720,
+          "output_tokens": 20,
+          "total_tokens": 740,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "weather",
+      "answer": "南京",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 626
+  },
+  {
+    "id": "pure11",
+    "query": "无锡吧",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "03e76d98-3586-4cea-b122-9586045992a2",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 875,
+        "usage": {
+          "input_tokens": 721,
+          "output_tokens": 21,
+          "total_tokens": 742,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "weather",
+      "answer": "无锡吧",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 892
+  },
+  {
+    "id": "pure12",
+    "query": "歌曲第二首",
+    "layer": "event_live",
+    "group": "pure_reply",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "31287133-3b5e-433a-925f-8f518ab78a39",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 951,
+        "usage": {
+          "input_tokens": 838,
+          "output_tokens": 28,
+          "total_tokens": 866,
+          "input_token_details": {
+            "cache_read": 640
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "music",
+      "answer": "第二首",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 968
+  },
+  {
+    "id": "compound01",
+    "query": "无锡校区吧，顺便查下明天无锡天气",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "61a1ba77-49f7-4dde-872d-fba29e843594",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 655,
+        "usage": {
+          "input_tokens": 764,
+          "output_tokens": 27,
+          "total_tokens": 791,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "无锡校区吧",
+      "new_query": "顺便查下明天无锡天气",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 669
+  },
+  {
+    "id": "compound02",
+    "query": "第二个，你再帮我查无锡天气",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "76c369e4-0ab2-44e8-8427-77571b8d057b",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 648,
+        "usage": {
+          "input_tokens": 761,
+          "output_tokens": 24,
+          "total_tokens": 785,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "第二个",
+      "new_query": "你再帮我查无锡天气",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 663
+  },
+  {
+    "id": "compound03",
+    "query": "第一个，同时搜索陶喆的歌曲",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "543e55e2-c9e1-4ee4-a5d4-7fafdea1244e",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 640,
+        "usage": {
+          "input_tokens": 763,
+          "output_tokens": 26,
+          "total_tokens": 789,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "第一个",
+      "new_query": "同时搜索陶喆的歌曲",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 665
+  },
+  {
+    "id": "compound04",
+    "query": "七里香，再看看无锡明天天气",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "978ad4f7-b7b6-4c76-bc4a-0c2c9ba4f745",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 1134,
+        "usage": {
+          "input_tokens": 763,
+          "output_tokens": 25,
+          "total_tokens": 788,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "music",
+      "answer": "七里香",
+      "new_query": "再看看无锡明天天气",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 1145
+  },
+  {
+    "id": "compound05",
+    "query": "无锡，顺便搜索周杰伦歌曲",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "03cdbec6-37ab-49c4-9e53-01b2ffe4b2d4",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 824,
+        "usage": {
+          "input_tokens": 727,
+          "output_tokens": 25,
+          "total_tokens": 752,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "weather",
+      "answer": "无锡",
+      "new_query": "顺便搜索周杰伦歌曲",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 839
+  },
+  {
+    "id": "compound06",
+    "query": "南京校区，帮我查南京明天天气",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "1543e879-18cd-4323-aab4-e8e877393ea0",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 660,
+        "usage": {
+          "input_tokens": 762,
+          "output_tokens": 25,
+          "total_tokens": 787,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "南京校区",
+      "new_query": "帮我查南京明天天气",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 678
+  },
+  {
+    "id": "compound07",
+    "query": "先查无锡天气，歌曲第二首",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "428bc543-4bf7-4832-bea0-47fbb6efb528",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 600,
+        "usage": {
+          "input_tokens": 763,
+          "output_tokens": 25,
+          "total_tokens": 788,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "music",
+      "answer": "第二首",
+      "new_query": "先查无锡天气",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 616
+  },
+  {
+    "id": "compound08",
+    "query": "第二首，杭州天气也看看，不要搜索别的歌",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "7e1332b3-8c6d-4259-bc8d-978d8e7a76fd",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 702,
+        "usage": {
+          "input_tokens": 767,
+          "output_tokens": 29,
+          "total_tokens": 796,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "music",
+      "answer": "第二首",
+      "new_query": "杭州天气也看看，不要搜索别的歌",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 718
+  },
+  {
+    "id": "compound09",
+    "query": "无锡校区吧，另外帮我查无锡天气并搜索周杰伦歌曲",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "9d4e4d6d-eb60-477d-b218-65c3c47e6ad2",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 544,
+        "usage": {
+          "input_tokens": 769,
+          "output_tokens": 32,
+          "total_tokens": 801,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "无锡校区吧",
+      "new_query": "另外帮我查无锡天气并搜索周杰伦歌曲",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 558
+  },
+  {
+    "id": "compound10",
+    "query": "第二个，接着搜索周杰伦的歌",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "812d2aeb-bb60-4fd4-9985-f2ce3e319c82",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 741,
+        "usage": {
+          "input_tokens": 762,
+          "output_tokens": 25,
+          "total_tokens": 787,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "第二个",
+      "new_query": "接着搜索周杰伦的歌",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 752
+  },
+  {
+    "id": "compound11",
+    "query": "我选晴天，南京那边明天会下雨吗",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "4a3cc9bd-9710-44de-81a6-82da3d4dcf2b",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 828,
+        "usage": {
+          "input_tokens": 765,
+          "output_tokens": 27,
+          "total_tokens": 792,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "music",
+      "answer": "我选晴天",
+      "new_query": "南京那边明天会下雨吗",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 840
+  },
+  {
+    "id": "compound12",
+    "query": "第二首，同时列出我的行程",
+    "layer": "event_live",
+    "group": "compound",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "891acfdf-3de1-423f-a073-87e0907fb694",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 698,
+        "usage": {
+          "input_tokens": 762,
+          "output_tokens": 24,
+          "total_tokens": 786,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "resume",
+      "task_id": "music",
+      "answer": "第二首",
+      "new_query": "同时列出我的行程",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 709
+  },
+  {
+    "id": "boundary01",
+    "query": "第二个",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "f0ee5d94-1405-46be-b370-7efe2a4aa24b",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 767,
+        "usage": {
+          "input_tokens": 836,
+          "output_tokens": 34,
+          "total_tokens": 870,
+          "input_token_details": {
+            "cache_read": 640
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "请问“第二个”是指周杰伦歌曲中的《七里香》，还是导航目的地中的无锡校区？"
+    },
+    "errors": [],
+    "elapsed_ms": 784
+  },
+  {
+    "id": "boundary02",
+    "query": "无锡校区吧",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "27cc612e-f55d-4532-84bc-24be7d6d4a48",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 666,
+        "usage": {
+          "input_tokens": 838,
+          "output_tokens": 29,
+          "total_tokens": 867,
+          "input_token_details": {
+            "cache_read": 640
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "有两个导航任务都包含“无锡校区”选项，请确认要回复哪一个？"
+    },
+    "errors": [],
+    "elapsed_ms": 677
+  },
+  {
+    "id": "boundary03",
+    "query": "第二个",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "8fe5e8c5-123a-4144-80a9-11d4ff8c9534",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 689,
+        "usage": {
+          "input_tokens": 674,
+          "output_tokens": 24,
+          "total_tokens": 698,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "你想选择哪个任务的第二个选项？目前没有可用的待回复任务。"
+    },
+    "errors": [],
+    "elapsed_ms": 704
+  },
+  {
+    "id": "boundary04",
+    "query": "取消任务",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "65256242-2125-4605-8dda-6444e91024e0",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 676,
+        "usage": {
+          "input_tokens": 757,
+          "output_tokens": 31,
+          "total_tokens": 788,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "cancel",
+      "task_id": "music",
+      "answer": "取消任务",
+      "new_query": null,
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 692
+  },
+  {
+    "id": "boundary05",
+    "query": "第一个先别选了",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "375c590a-f0d6-4de0-9219-1d9d05b324b7",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 869,
+        "usage": {
+          "input_tokens": 759,
+          "output_tokens": 33,
+          "total_tokens": 792,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "请明确说明要取消的任务。"
+    },
+    "errors": [],
+    "elapsed_ms": 886
+  },
+  {
+    "id": "boundary06",
+    "query": "“第二个”是什么意思",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "55f29eaf-dda6-471a-b1a2-72b78320a374",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 812,
+        "usage": {
+          "input_tokens": 759,
+          "output_tokens": 13,
+          "total_tokens": 772,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "new",
+      "task_id": null,
+      "answer": null,
+      "new_query": "“第二个”是什么意思",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 830
+  },
+  {
+    "id": "boundary07",
+    "query": "好的",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "3f1634fb-84e4-4d5f-96e1-fc9f5b0646ca",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 750,
+        "usage": {
+          "input_tokens": 719,
+          "output_tokens": 20,
+          "total_tokens": 739,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "请使用确认按钮完成保存操作。"
+    },
+    "errors": [],
+    "elapsed_ms": 762
+  },
+  {
+    "id": "boundary08",
+    "query": "好的，顺便查无锡天气",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "793fc925-9a12-498c-99d1-9a14e69987b2",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 941,
+        "usage": {
+          "input_tokens": 724,
+          "output_tokens": 26,
+          "total_tokens": 750,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "请使用确认按钮确认保存行程；同时请说明是否要查询无锡天气。"
+    },
+    "errors": [],
+    "elapsed_ms": 962
+  },
+  {
+    "id": "boundary09",
+    "query": "先选歌曲第二首，再选校区第二个",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "ba301016-f32a-45b4-ab8c-e40461872ad5",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 711,
+        "usage": {
+          "input_tokens": 845,
+          "output_tokens": 32,
+          "total_tokens": 877,
+          "input_token_details": {
+            "cache_read": 640
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "这句话还有未确认的需求，请分别说明原任务回复和新增任务。"
+    },
+    "errors": [],
+    "elapsed_ms": 725
+  },
+  {
+    "id": "boundary10",
+    "query": "查无锡天气",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "5d3b52da-4e87-4850-9200-f6ffc5ed028c",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 589,
+        "usage": {
+          "input_tokens": 758,
+          "output_tokens": 15,
+          "total_tokens": 773,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "new",
+      "task_id": null,
+      "answer": null,
+      "new_query": "查无锡天气",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 603
+  },
+  {
+    "id": "boundary11",
+    "query": "你好",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "26d58ce9-d283-4d88-b8c5-d52bc2f0b8ab",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 794,
+        "usage": {
+          "input_tokens": 674,
+          "output_tokens": 10,
+          "total_tokens": 684,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "new",
+      "task_id": null,
+      "answer": null,
+      "new_query": "你好",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 802
+  },
+  {
+    "id": "boundary12",
+    "query": "第四个",
+    "layer": "event_live",
+    "group": "boundary",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "ae744969-6cc8-4721-ac1d-ec1f4c004664",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 986,
+        "usage": {
+          "input_tokens": 755,
+          "output_tokens": 27,
+          "total_tokens": 782,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "real_llm_direct_event_and_grounding; no_business_tools",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "请问“第四个”是指哪个任务或候选？当前只有导航任务的两个校区选项。"
+    },
+    "errors": [],
+    "elapsed_ms": 1000
+  }
+]

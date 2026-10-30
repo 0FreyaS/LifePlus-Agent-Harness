@@ -1,0 +1,810 @@
+{
+  "model": "deepseek-flash",
+  "thinking": "disabled",
+  "full90": {
+    "submitted": 90,
+    "passed": 90,
+    "goals_completed": 130,
+    "goals_total": 130,
+    "p50_ms": 4380,
+    "p95_ms": 5810,
+    "model_attempts": 473,
+    "attempts_with_usage": 471,
+    "attempts_missing_usage": 2,
+    "observed_tokens": {
+      "input_tokens": 366184,
+      "output_tokens": 21938
+    },
+    "observed_total_tokens": 388122,
+    "reported_reasoning_tokens": 0,
+    "total_tokens": null,
+    "by_stage": {
+      "domain_route": {
+        "model_attempts": 2,
+        "attempts_with_usage": 2,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 424,
+          "output_tokens": 12
+        },
+        "observed_total_tokens": 436,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 436
+      },
+      "domain_route_precheck": {
+        "model_attempts": 58,
+        "attempts_with_usage": 56,
+        "attempts_missing_usage": 2,
+        "observed_tokens": {
+          "input_tokens": 37904,
+          "output_tokens": 4522
+        },
+        "observed_total_tokens": 42426,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": null
+      },
+      "domain_understanding": {
+        "model_attempts": 129,
+        "attempts_with_usage": 129,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 130664,
+          "output_tokens": 5638
+        },
+        "observed_total_tokens": 136302,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 136302
+      },
+      "input_events": {
+        "model_attempts": 120,
+        "attempts_with_usage": 120,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 72585,
+          "output_tokens": 3521
+        },
+        "observed_total_tokens": 76106,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 76106
+      },
+      "plan": {
+        "model_attempts": 34,
+        "attempts_with_usage": 34,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 37099,
+          "output_tokens": 1963
+        },
+        "observed_total_tokens": 39062,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 39062
+      },
+      "response": {
+        "model_attempts": 130,
+        "attempts_with_usage": 130,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 87508,
+          "output_tokens": 6282
+        },
+        "observed_total_tokens": 93790,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 93790
+      }
+    }
+  },
+  "full90_groups": {
+    "clarified_completion": {
+      "submitted": 30,
+      "passed": 30,
+      "goals_completed": 32,
+      "goals_total": 32,
+      "p50_ms": 4695,
+      "p95_ms": 6350,
+      "model_attempts": 156,
+      "attempts_with_usage": 156,
+      "attempts_missing_usage": 0,
+      "observed_tokens": {
+        "input_tokens": 122213,
+        "output_tokens": 8130
+      },
+      "observed_total_tokens": 130343,
+      "reported_reasoning_tokens": 0,
+      "total_tokens": 130343,
+      "by_stage": {
+        "domain_route_precheck": {
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 20246,
+            "output_tokens": 2420
+          },
+          "observed_total_tokens": 22666,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 22666
+        },
+        "domain_understanding": {
+          "model_attempts": 32,
+          "attempts_with_usage": 32,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 33930,
+            "output_tokens": 1557
+          },
+          "observed_total_tokens": 35487,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 35487
+        },
+        "input_events": {
+          "model_attempts": 60,
+          "attempts_with_usage": 60,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 37844,
+            "output_tokens": 2031
+          },
+          "observed_total_tokens": 39875,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 39875
+        },
+        "plan": {
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2194,
+            "output_tokens": 62
+          },
+          "observed_total_tokens": 2256,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 2256
+        },
+        "response": {
+          "model_attempts": 32,
+          "attempts_with_usage": 32,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 27999,
+            "output_tokens": 2060
+          },
+          "observed_total_tokens": 30059,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 30059
+        }
+      }
+    },
+    "multi_completion": {
+      "submitted": 30,
+      "passed": 30,
+      "goals_completed": 68,
+      "goals_total": 68,
+      "p50_ms": 3805,
+      "p95_ms": 5797,
+      "model_attempts": 196,
+      "attempts_with_usage": 196,
+      "attempts_missing_usage": 0,
+      "observed_tokens": {
+        "input_tokens": 151595,
+        "output_tokens": 7738
+      },
+      "observed_total_tokens": 159333,
+      "reported_reasoning_tokens": 0,
+      "total_tokens": 159333,
+      "by_stage": {
+        "domain_understanding": {
+          "model_attempts": 68,
+          "attempts_with_usage": 68,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 65200,
+            "output_tokens": 2690
+          },
+          "observed_total_tokens": 67890,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 67890
+        },
+        "input_events": {
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 17493,
+            "output_tokens": 958
+          },
+          "observed_total_tokens": 18451,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 18451
+        },
+        "plan": {
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 32733,
+            "output_tokens": 1834
+          },
+          "observed_total_tokens": 34567,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 34567
+        },
+        "response": {
+          "model_attempts": 68,
+          "attempts_with_usage": 68,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 36169,
+            "output_tokens": 2256
+          },
+          "observed_total_tokens": 38425,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 38425
+        }
+      }
+    },
+    "single_completion": {
+      "submitted": 30,
+      "passed": 30,
+      "goals_completed": 30,
+      "goals_total": 30,
+      "p50_ms": 3997,
+      "p95_ms": 5189,
+      "model_attempts": 121,
+      "attempts_with_usage": 119,
+      "attempts_missing_usage": 2,
+      "observed_tokens": {
+        "input_tokens": 92376,
+        "output_tokens": 6070
+      },
+      "observed_total_tokens": 98446,
+      "reported_reasoning_tokens": 0,
+      "total_tokens": null,
+      "by_stage": {
+        "domain_route": {
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 424,
+            "output_tokens": 12
+          },
+          "observed_total_tokens": 436,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 436
+        },
+        "domain_route_precheck": {
+          "model_attempts": 28,
+          "attempts_with_usage": 26,
+          "attempts_missing_usage": 2,
+          "observed_tokens": {
+            "input_tokens": 17658,
+            "output_tokens": 2102
+          },
+          "observed_total_tokens": 19760,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": null
+        },
+        "domain_understanding": {
+          "model_attempts": 29,
+          "attempts_with_usage": 29,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 31534,
+            "output_tokens": 1391
+          },
+          "observed_total_tokens": 32925,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 32925
+        },
+        "input_events": {
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 17248,
+            "output_tokens": 532
+          },
+          "observed_total_tokens": 17780,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 17780
+        },
+        "plan": {
+          "model_attempts": 2,
+          "attempts_with_usage": 2,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 2172,
+            "output_tokens": 67
+          },
+          "observed_total_tokens": 2239,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 2239
+        },
+        "response": {
+          "model_attempts": 30,
+          "attempts_with_usage": 30,
+          "attempts_missing_usage": 0,
+          "observed_tokens": {
+            "input_tokens": 23340,
+            "output_tokens": 1966
+          },
+          "observed_total_tokens": 25306,
+          "reported_reasoning_tokens": 0,
+          "total_tokens": 25306
+        }
+      }
+    }
+  },
+  "old8": {
+    "submitted": 8,
+    "passed": 8,
+    "goals_completed": 19,
+    "goals_total": 19,
+    "p50_ms": 5343,
+    "p95_ms": 5810,
+    "model_attempts": 54,
+    "attempts_with_usage": 54,
+    "attempts_missing_usage": 0,
+    "observed_tokens": {
+      "input_tokens": 42586,
+      "output_tokens": 2161
+    },
+    "observed_total_tokens": 44747,
+    "reported_reasoning_tokens": 0,
+    "total_tokens": 44747,
+    "by_stage": {
+      "domain_understanding": {
+        "model_attempts": 19,
+        "attempts_with_usage": 19,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 20406,
+          "output_tokens": 782
+        },
+        "observed_total_tokens": 21188,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 21188
+      },
+      "input_events": {
+        "model_attempts": 8,
+        "attempts_with_usage": 8,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 4688,
+          "output_tokens": 253
+        },
+        "observed_total_tokens": 4941,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 4941
+      },
+      "plan": {
+        "model_attempts": 8,
+        "attempts_with_usage": 8,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 8752,
+          "output_tokens": 591
+        },
+        "observed_total_tokens": 9343,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 9343
+      },
+      "response": {
+        "model_attempts": 19,
+        "attempts_with_usage": 19,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 8740,
+          "output_tokens": 535
+        },
+        "observed_total_tokens": 9275,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 9275
+      }
+    }
+  },
+  "old8_ids": [
+    "multi_completion-04",
+    "multi_completion-08",
+    "multi_completion-12",
+    "multi_completion-16",
+    "multi_completion-20",
+    "multi_completion-28",
+    "multi_completion-29",
+    "multi_completion-30"
+  ],
+  "tail30": {
+    "submitted": 30,
+    "expected": 30,
+    "complete": true,
+    "by_layer": {
+      "controlled_contract": {
+        "submitted": 13,
+        "passed": 12,
+        "goals_completed": 0,
+        "goals_total": 0,
+        "p50_ms": 275,
+        "p95_ms": 1135,
+        "model_attempts": 0,
+        "attempts_with_usage": 0,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "observed_total_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 0,
+        "by_stage": {}
+      },
+      "domain_live": {
+        "submitted": 1,
+        "passed": 1,
+        "goals_completed": 0,
+        "goals_total": 0,
+        "p50_ms": 1389,
+        "p95_ms": 1389,
+        "model_attempts": 1,
+        "attempts_with_usage": 1,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 1753,
+          "output_tokens": 77
+        },
+        "observed_total_tokens": 1830,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 1830,
+        "by_stage": {
+          "domain_understanding": {
+            "model_attempts": 1,
+            "attempts_with_usage": 1,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 1753,
+              "output_tokens": 77
+            },
+            "observed_total_tokens": 1830,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 1830
+          }
+        }
+      },
+      "event_live": {
+        "submitted": 5,
+        "passed": 3,
+        "goals_completed": 0,
+        "goals_total": 0,
+        "p50_ms": 920,
+        "p95_ms": 1700,
+        "model_attempts": 5,
+        "attempts_with_usage": 5,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 3363,
+          "output_tokens": 134
+        },
+        "observed_total_tokens": 3497,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 3497,
+        "by_stage": {
+          "input_events": {
+            "model_attempts": 5,
+            "attempts_with_usage": 5,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 3363,
+              "output_tokens": 134
+            },
+            "observed_total_tokens": 3497,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 3497
+          }
+        }
+      },
+      "planner_live": {
+        "submitted": 11,
+        "passed": 10,
+        "goals_completed": 0,
+        "goals_total": 0,
+        "p50_ms": 810,
+        "p95_ms": 1286,
+        "model_attempts": 11,
+        "attempts_with_usage": 11,
+        "attempts_missing_usage": 0,
+        "observed_tokens": {
+          "input_tokens": 11876,
+          "output_tokens": 696
+        },
+        "observed_total_tokens": 12572,
+        "reported_reasoning_tokens": 0,
+        "total_tokens": 12572,
+        "by_stage": {
+          "plan": {
+            "model_attempts": 11,
+            "attempts_with_usage": 11,
+            "attempts_missing_usage": 0,
+            "observed_tokens": {
+              "input_tokens": 11876,
+              "output_tokens": 696
+            },
+            "observed_total_tokens": 12572,
+            "reported_reasoning_tokens": 0,
+            "total_tokens": 12572
+          }
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "tail-A01",
+        "layer": "event_live",
+        "errors": [
+          "route",
+          "target"
+        ]
+      },
+      {
+        "id": "tail-A03",
+        "layer": "event_live",
+        "errors": [
+          "route",
+          "new_task_presence",
+          "new_task_content"
+        ]
+      },
+      {
+        "id": "tail-C03",
+        "layer": "planner_live",
+        "errors": [
+          "r:bindings"
+        ]
+      },
+      {
+        "id": "tail-D05",
+        "layer": "controlled_contract",
+        "errors": [
+          "evaluations.adversarial_contract_checks::test_stale_dependency_is_not_silently_forwarded"
+        ]
+      }
+    ],
+    "scope": "different_layers_not_an_end_to_end_completion_rate"
+  },
+  "structured_false_completion": {
+    "numerator": 0,
+    "denominator": 90
+  },
+  "rag": {
+    "source_sha256": "b0163d9e14b7c3d0eb97ccba445a45c001b8a27d5848d1bdf84dcb141dcf92da",
+    "cases": [
+      {
+        "id": "rag-current-delete",
+        "backend": "chroma",
+        "before": 2,
+        "expected": 0,
+        "after": 2,
+        "stale_retrievable": true,
+        "passed": false
+      },
+      {
+        "id": "rag-current-shrink",
+        "backend": "chroma",
+        "before": 2,
+        "expected": 1,
+        "after": 2,
+        "stale_retrievable": true,
+        "passed": false
+      }
+    ],
+    "scope": "existing_container_code_temporary_storage_no_model_no_service_restart_no_production_index_changes",
+    "container": "lifeplus-app-1",
+    "current_source_matches": true
+  },
+  "supplemental": {
+    "rag_lifecycle": [
+      {
+        "id": "test_rag_reopen_removes_deleted_or_shortened_chunks[delete-0]",
+        "passed": false,
+        "blocked": true,
+        "elapsed_ms": 4
+      },
+      {
+        "id": "test_rag_reopen_removes_deleted_or_shortened_chunks[shrink-1]",
+        "passed": false,
+        "blocked": true,
+        "elapsed_ms": 1
+      }
+    ],
+    "sse_restart": [
+      {
+        "id": "test_sse_persists_actual_deltas_and_reconnect_honors_last_event_id",
+        "passed": true,
+        "blocked": false,
+        "elapsed_ms": 139
+      },
+      {
+        "id": "test_sse_replays_more_than_one_database_page_and_uses_highest_cursor",
+        "passed": true,
+        "blocked": false,
+        "elapsed_ms": 223
+      },
+      {
+        "id": "test_waiting_group_restores_independent_interrupt_after_restart",
+        "passed": true,
+        "blocked": false,
+        "elapsed_ms": 299
+      }
+    ]
+  },
+  "contract_assertions": [
+    {
+      "id": "evaluations.adversarial_contract_checks::test_changed_arguments_reject_old_approval",
+      "status": "passed",
+      "elapsed_ms": 9
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_rag_reopen_removes_deleted_or_shortened_chunks[delete-0]",
+      "status": "blocked",
+      "elapsed_ms": 4
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_rag_reopen_removes_deleted_or_shortened_chunks[shrink-1]",
+      "status": "blocked",
+      "elapsed_ms": 1
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_real_write_lost_receipt_is_not_duplicated",
+      "status": "passed",
+      "elapsed_ms": 80
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_stale_dependency_is_not_silently_forwarded",
+      "status": "failed",
+      "elapsed_ms": 1
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_transient_rate_limit_retries_then_succeeds",
+      "status": "passed",
+      "elapsed_ms": 1043
+    },
+    {
+      "id": "evaluations.adversarial_contract_checks::test_two_approvals_create_one_real_write",
+      "status": "passed",
+      "elapsed_ms": 229
+    },
+    {
+      "id": "tests.test_conversation_memory::test_first_input_is_exact_after_window_trim_and_context_expiry",
+      "status": "passed",
+      "elapsed_ms": 901
+    },
+    {
+      "id": "tests.test_conversation_memory::test_navigation_followup_binds_real_selected_coordinate",
+      "status": "passed",
+      "elapsed_ms": 423
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[save_itinerary]",
+      "status": "passed",
+      "elapsed_ms": 63
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[create_reminder]",
+      "status": "passed",
+      "elapsed_ms": 68
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_explicit_business_rejection_of_writes_is_never_retried[cancel_reminder]",
+      "status": "passed",
+      "elapsed_ms": 64
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[business-false-without-error]",
+      "status": "passed",
+      "elapsed_ms": 66
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[business-false-message]",
+      "status": "passed",
+      "elapsed_ms": 66
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-false]",
+      "status": "passed",
+      "elapsed_ms": 71
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-success]",
+      "status": "passed",
+      "elapsed_ms": 64
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[integer-success-flag]",
+      "status": "passed",
+      "elapsed_ms": 65
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[contradictory-flags]",
+      "status": "passed",
+      "elapsed_ms": 68
+    },
+    {
+      "id": "tests.test_industrial_contracts::test_failed_or_invalid_receipts_never_complete_the_job[string-clarification]",
+      "status": "passed",
+      "elapsed_ms": 64
+    },
+    {
+      "id": "tests.test_multi_task_api::test_cancelling_group_prevents_late_resume_and_new_tools",
+      "status": "passed",
+      "elapsed_ms": 211
+    },
+    {
+      "id": "tests.test_multi_task_api::test_concurrent_duplicate_requests_create_one_task_and_one_tool_job",
+      "status": "passed",
+      "elapsed_ms": 182
+    },
+    {
+      "id": "tests.test_multi_task_api::test_independent_weather_finishes_while_music_waits_and_resumes_once",
+      "status": "passed",
+      "elapsed_ms": 246
+    },
+    {
+      "id": "tests.test_multi_task_api::test_one_failed_branch_produces_partial_success",
+      "status": "passed",
+      "elapsed_ms": 212
+    },
+    {
+      "id": "tests.test_multi_task_api::test_reusing_request_id_with_different_content_is_rejected[changed0]",
+      "status": "passed",
+      "elapsed_ms": 175
+    },
+    {
+      "id": "tests.test_multi_task_api::test_reusing_request_id_with_different_content_is_rejected[changed1]",
+      "status": "passed",
+      "elapsed_ms": 174
+    },
+    {
+      "id": "tests.test_multi_task_api::test_sse_persists_actual_deltas_and_reconnect_honors_last_event_id",
+      "status": "passed",
+      "elapsed_ms": 139
+    },
+    {
+      "id": "tests.test_multi_task_api::test_sse_replays_more_than_one_database_page_and_uses_highest_cursor",
+      "status": "passed",
+      "elapsed_ms": 223
+    },
+    {
+      "id": "tests.test_multi_task_api::test_task_trace_graph_resume_and_cancel_are_isolated_by_user",
+      "status": "passed",
+      "elapsed_ms": 171
+    },
+    {
+      "id": "tests.test_multi_task_api::test_waiting_group_restores_independent_interrupt_after_restart",
+      "status": "passed",
+      "elapsed_ms": 299
+    },
+    {
+      "id": "tests.test_production_policies::test_cross_day_relative_query_requires_new_explicit_request",
+      "status": "passed",
+      "elapsed_ms": 94
+    },
+    {
+      "id": "tests.test_production_policies::test_expired_selection_is_blocked_then_explicit_refresh_requeries",
+      "status": "passed",
+      "elapsed_ms": 275
+    },
+    {
+      "id": "tests.test_runtime_components::test_late_tool_response_cannot_overwrite_cancellation",
+      "status": "passed",
+      "elapsed_ms": 34
+    },
+    {
+      "id": "tests.test_runtime_components::test_tool_timeout_does_not_block_unrelated_branch",
+      "status": "passed",
+      "elapsed_ms": 343
+    },
+    {
+      "id": "tests.test_runtime_hardening::test_retry_after_cannot_overrun_budget",
+      "status": "passed",
+      "elapsed_ms": 92
+    }
+  ]
+}

@@ -187,5 +187,16 @@
     "measurement_status": "已冻结；修复前后实测状态见第0.1节",
     "sha256": "a94fa83f6b52787079ec9b37b30ac4d44437e854a085ed5e072813cf8bc212cd",
     "purpose": "原7失败＋新30长尾分开；五类长尾各6条，总计34条需要绑定、3条禁止保存对照。只评目标/领域/关键词/依赖/绑定，非端到端完成率或生产流量。"
+  },
+  {
+    "id": "D18",
+    "file": "测试数据集/13-长尾与故障/长尾与故障30条-v1.jsonl",
+    "cases": 30,
+    "source": "测试回报/测试数据集/13-长尾与故障/长尾与故障30条-v1.jsonl",
+    "source_group": null,
+    "format": "adversarial",
+    "measurement_status": "分层实测见第0.2节，不合成端到端完成率",
+    "sha256": "9b753e3eddf49d2dc44ee156d76ff9c8376f79c2363b7e507dcd21cfcebe4330",
+    "purpose": "六类各5条，17条真实模型组件＋13条受控协议/故障场景。每条标明前提、oracle、checks和coverage_limit；受控不是原句的完整模型会话。C03允许等价两/三目标方案；模型观察只请求一次，测试夹具复跑不重复计样本。"
   }
 ]

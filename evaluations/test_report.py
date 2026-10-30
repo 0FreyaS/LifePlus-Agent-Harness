@@ -89,6 +89,9 @@ SPECS = [
     ("D17", "03-规划与依赖", "规划绑定修复37条-v1", 37, "planner_binding", "已冻结；修复前后实测状态见第0.1节",
         Path("测试回报/测试数据集/03-规划与依赖/规划绑定修复37条-v1.jsonl"), None,
         "原7失败＋新30长尾分开；五类长尾各6条，总计34条需要绑定、3条禁止保存对照。只评目标/领域/关键词/依赖/绑定，非端到端完成率或生产流量。"),
+    ("D18", "13-长尾与故障", "长尾与故障30条-v1", 30, "adversarial", "分层实测见第0.2节，不合成端到端完成率",
+        Path("测试回报/测试数据集/13-长尾与故障/长尾与故障30条-v1.jsonl"), None,
+        "六类各5条，17条真实模型组件＋13条受控协议/故障场景。每条标明前提、oracle、checks和coverage_limit；受控不是原句的完整模型会话。C03允许等价两/三目标方案；模型观察只请求一次，测试夹具复跑不重复计样本。"),
 ]
 
 
@@ -245,6 +248,8 @@ def build(output=OUTPUT):
     from .current_measurements import load as load_current
     from .planner_binding_cases import DATASET, PREPARATION, preparation_record
     from .planner_binding_report import load as load_binding
+    from .robustness_report import load as load_robustness
+    from .bad_case_fix_report import load as load_bad_case_fix
 
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -256,6 +261,8 @@ def build(output=OUTPUT):
     preparation = preparation_record(read_rows(binding_path), binding_path.read_bytes())
     write_frozen(output / PREPARATION.relative_to("测试回报"), json_text(preparation).encode())
     binding = load_binding(output, ROOT)
+    robustness = load_robustness(output, ROOT)
+    bad_case_fix = load_bad_case_fix(output, ROOT)
     results = {}
     for name, relative in (("domain", "modules/domain"), ("events", "modules/events"),
         ("domain_e2e", "end_to_end/domain"), ("events_e2e", "end_to_end/events"), ("current", "rollout/llm-direct")):
@@ -336,7 +343,13 @@ def build(output=OUTPUT):
         if metric["id"] == "M08":
             metric["status"] = "D04修复前基线；D17修复后配对见第0.1节" if binding else "契约已修复，真实模型测量待完成"
         elif metric["id"] in {"M15", "M16", "M17", "M18"}:
-            metric["status"] += "；规划修复后完整端到端待复测"
+            metric["status"] += "；规划修复后完整端到端见第0.2节" if robustness else "；规划修复后完整端到端待复测"
+        if robustness and metric["id"] == "M25":
+            metric["status"] = "当前源码匹配的真实Chroma删除/缩短2例仍失败，见第0.2节；无Recall/MRR标签"
+        if robustness and metric["id"] == "M24":
+            metric["status"] = "D06本轮130/130目标通过；新长尾仍有多级绑定来源错误，受控并发/恢复另测"
+        if bad_case_fix and metric["id"] in {"M08", "M12", "M15", "M16", "M18", "M21", "M24", "M25"}:
+            metric["status"] += "；本轮针对性修复及分层复测见第0.3节，不覆盖旧值"
     result_dir = output / "测试数据集/结果记录"
     (result_dir / "README.md").write_text(
         "# 结果文件用途\n\n- domain.jsonl：D01，DeepSeek领域分类与Jev级联配对。\n- events.jsonl：D08，直接DeepSeek与Jev纯回复过滤配对。\n"
@@ -356,6 +369,10 @@ def build(output=OUTPUT):
     evidence["planner_binding_preparation"] = preparation
     if binding:
         evidence["planner_binding_fix"] = binding
+    if robustness:
+        evidence["robustness_retest"] = robustness
+    if bad_case_fix:
+        evidence["bad_case_fix"] = bad_case_fix
     (result_dir / "汇总.json").write_text(json_text(evidence))
     (output / "测试数据集/数据集目录.json").write_text(json_text(datasets))
     dataset_lines = ["# 测试数据集目录", "", "每个JSONL都有同名`.说明.md`，写明用途、规模、标签、来源、运行边界与实测状态。JSONL本身不插入注释。", "",
@@ -488,6 +505,20 @@ def render(output, evidence, results):
             "1. P0：规划绑定与原子目标提示已完成局部修复和实测，见第0.1节；仍需当前配置D06完整90会话复验实际绑定、工具写入和遗漏目标，不覆盖修复前失败。")
     marker = "## 1. 此前证据与选型结论" if evidence.get("current_baseline") else "## 1. 先看结论"
     text = text.replace(marker, binding_section(evidence["planner_binding_preparation"], evidence.get("planner_binding_fix")) + "\n" + marker, 1)
+    if evidence.get("robustness_retest"):
+        from .robustness_report import section as robustness_section
+
+        text = text.replace(marker, robustness_section(evidence["robustness_retest"]) + "\n" + marker, 1)
+        text = text.replace(
+            "1. P0：规划绑定与原子目标提示已完成局部修复和实测，见第0.1节；仍需当前配置D06完整90会话复验实际绑定、工具写入和遗漏目标，不覆盖修复前失败。",
+            "1. P0：原完整90会话及原8失败已复验，见第0.2节；下一步处理引用/取消事件误判、selected对象类型与来源存在性、过期依赖绑定和RAG残留。保留当前失败，修改后另建版本复测。")
+    if evidence.get("bad_case_fix"):
+        from .bad_case_fix_report import section as bad_case_section
+
+        text = text.replace(marker, bad_case_section(evidence["bad_case_fix"], evidence.get("robustness_retest")) + "\n" + marker, 1)
+        text = text.replace(
+            "1. P0：原完整90会话及原8失败已复验，见第0.2节；下一步处理引用/取消事件误判、selected对象类型与来源存在性、过期依赖绑定和RAG残留。保留当前失败，修改后另建版本复测。",
+            "1. P0：上述受测事件、绑定门禁和RAG残留已针对性修改并复测，见第0.3节；下一步补绑定后长等待、未知/缺失时效及多写者索引同步，先明确产品策略再扩集。")
     (output / "测试总文档.md").write_text(text)
 
 

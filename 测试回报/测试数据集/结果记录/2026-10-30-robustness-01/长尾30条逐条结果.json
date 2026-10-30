@@ -1,0 +1,996 @@
+[
+  {
+    "id": "tail-A01",
+    "query": "取消任务",
+    "layer": "event_live",
+    "group": "A-事件归属",
+    "passed": false,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "8637f76f-93ea-425a-a331-2ff714f7d8ad",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 1690,
+        "usage": {
+          "input_tokens": 653,
+          "output_tokens": 29,
+          "total_tokens": 682,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "请问要取消哪个任务？目前待处理的是“搜索周杰伦歌曲”。"
+    },
+    "errors": [
+      "route",
+      "target"
+    ],
+    "elapsed_ms": 1700
+  },
+  {
+    "id": "tail-A02",
+    "query": "第二个吧",
+    "layer": "event_live",
+    "group": "A-事件归属",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "6aaabf77-ec80-4bea-a943-b9524606927b",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 907,
+        "usage": {
+          "input_tokens": 733,
+          "output_tokens": 31,
+          "total_tokens": 764,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "你指的是哪个任务的第二个？歌曲《七里香》，还是东南大学的无锡校区？"
+    },
+    "errors": [],
+    "elapsed_ms": 920
+  },
+  {
+    "id": "tail-A03",
+    "query": "“第二个”是什么意思？",
+    "layer": "event_live",
+    "group": "A-事件归属",
+    "passed": false,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "1892ebeb-cc87-440e-92d0-c50d2097438f",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 640,
+        "usage": {
+          "input_tokens": 656,
+          "output_tokens": 25,
+          "total_tokens": 681,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+    "prediction": {
+      "route": "clarify",
+      "task_id": null,
+      "answer": null,
+      "new_query": null,
+      "question": "你是指周杰伦歌曲候选中的第二个“七里香”吗？"
+    },
+    "errors": [
+      "route",
+      "new_task_presence",
+      "new_task_content"
+    ],
+    "elapsed_ms": 650
+  },
+  {
+    "id": "tail-A04",
+    "query": "无锡校区，顺便查南京明天天气",
+    "layer": "event_live",
+    "group": "A-事件归属",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "22eef1aa-0946-4d39-8170-43e0c0177f56",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 1254,
+        "usage": {
+          "input_tokens": 658,
+          "output_tokens": 25,
+          "total_tokens": 683,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+    "prediction": {
+      "route": "resume",
+      "task_id": "place",
+      "answer": "无锡校区",
+      "new_query": "顺便查南京明天天气",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 1269
+  },
+  {
+    "id": "tail-A05",
+    "query": "不是第二个，第二个先别选，查一下无锡天气",
+    "layer": "event_live",
+    "group": "A-事件归属",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "input_events",
+        "attempt": 1,
+        "span_id": "b95e790f-f4fe-4322-95df-32625c7dd67e",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 793,
+        "usage": {
+          "input_tokens": 663,
+          "output_tokens": 24,
+          "total_tokens": 687,
+          "input_token_details": {
+            "cache_read": 512
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "真实事件模型及宿主校验；候选是固定快照，不执行业务工具",
+    "prediction": {
+      "route": "new",
+      "task_id": null,
+      "answer": null,
+      "new_query": "不是第二个，第二个先别选，查一下无锡天气",
+      "question": null
+    },
+    "errors": [],
+    "elapsed_ms": 805
+  },
+  {
+    "id": "tail-B01",
+    "query": "查看我的提醒和行程清单",
+    "layer": "planner_live",
+    "group": "B-同域与纠正",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "08e575e7-38ef-4494-9688-5883d65e3319",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 659,
+        "usage": {
+          "input_tokens": 1071,
+          "output_tokens": 50,
+          "total_tokens": 1121,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查看我的提醒",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "查看我的行程清单",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 672
+  },
+  {
+    "id": "tail-B02",
+    "query": "查提醒，不用查行程",
+    "layer": "planner_live",
+    "group": "B-同域与纠正",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "e45a4ddb-9af9-4225-af10-f419229b9185",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 606,
+        "usage": {
+          "input_tokens": 1071,
+          "output_tokens": 26,
+          "total_tokens": 1097,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查提醒",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 617
+  },
+  {
+    "id": "tail-B03",
+    "query": "查无锡天气，南京天气也查一下",
+    "layer": "planner_live",
+    "group": "B-同域与纠正",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "72f9ab92-2b37-418f-87ff-9cdb209be07c",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 757,
+        "usage": {
+          "input_tokens": 1074,
+          "output_tokens": 47,
+          "total_tokens": 1121,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查无锡天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "查南京天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 769
+  },
+  {
+    "id": "tail-B04",
+    "query": "查无锡天气，不对，是苏州天气",
+    "layer": "planner_live",
+    "group": "B-同域与纠正",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "e18003cd-5fa1-4538-bf83-8755e8767074",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 940,
+        "usage": {
+          "input_tokens": 1074,
+          "output_tokens": 26,
+          "total_tokens": 1100,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查苏州天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 950
+  },
+  {
+    "id": "tail-B05",
+    "query": "查无锡天气，然后搜索周杰伦的歌，二者没有先后要求",
+    "layer": "planner_live",
+    "group": "B-同域与纠正",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "2e4ae509-9cb0-4305-b630-45fd53aba1cd",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 785,
+        "usage": {
+          "input_tokens": 1080,
+          "output_tokens": 49,
+          "total_tokens": 1129,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查无锡天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索周杰伦的歌",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 794
+  },
+  {
+    "id": "tail-C01",
+    "query": "查无锡天气，把完整结果保存到行程",
+    "layer": "planner_live",
+    "group": "C-结果依赖",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "0d945d18-9286-4e92-81e8-4416cc54fa6a",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 898,
+        "usage": {
+          "input_tokens": 1075,
+          "output_tokens": 68,
+          "total_tokens": 1143,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查无锡天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "把无锡天气的完整结果保存到行程",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [
+            "t1"
+          ],
+          "bind_slots": {
+            "details": "t1.result"
+          }
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 917
+  },
+  {
+    "id": "tail-C02",
+    "query": "查无锡和南京天气，只保存南京的完整查询回执",
+    "layer": "planner_live",
+    "group": "C-结果依赖",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "6be0646d-bc44-44d7-939c-e9aa87ca9eb4",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 1185,
+        "usage": {
+          "input_tokens": 1079,
+          "output_tokens": 88,
+          "total_tokens": 1167,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查询无锡天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "查询南京天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t3",
+          "query": "保存南京的完整天气查询回执",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [
+            "t2"
+          ],
+          "bind_slots": {
+            "details": "t2.result"
+          }
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 1192
+  },
+  {
+    "id": "tail-C03",
+    "query": "找无锡站附近的饭店，选定一家后从无锡站规划到它的路线，再保存完整路线",
+    "layer": "planner_live",
+    "group": "C-结果依赖",
+    "passed": false,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "13104d28-ec25-470a-a9e5-4f32d937fa43",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 1015,
+        "usage": {
+          "input_tokens": 1086,
+          "output_tokens": 125,
+          "total_tokens": 1211,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "找无锡站附近的饭店",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "从无锡站规划到选定饭店的路线",
+          "domain": "navigation",
+          "action": "",
+          "slots": {},
+          "depends_on": [
+            "t1"
+          ],
+          "bind_slots": {
+            "destination": "t1.selected",
+            "origin": "t1.slots.origin",
+            "city": "t1.slots.city"
+          }
+        },
+        {
+          "id": "t3",
+          "query": "保存完整路线",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [
+            "t2"
+          ],
+          "bind_slots": {
+            "details": "t2.route"
+          }
+        }
+      ]
+    },
+    "errors": [
+      "r:bindings"
+    ],
+    "elapsed_ms": 1022
+  },
+  {
+    "id": "tail-C04",
+    "query": "查无锡天气并搜索周杰伦歌曲，歌曲失败也要把天气完整回执保存到行程",
+    "layer": "planner_live",
+    "group": "C-结果依赖",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "7d86b3fe-7423-4489-9336-34c5cb8aa3bd",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 799,
+        "usage": {
+          "input_tokens": 1086,
+          "output_tokens": 91,
+          "total_tokens": 1177,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "查询无锡天气",
+          "domain": "weather",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "搜索周杰伦歌曲",
+          "domain": "music",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t3",
+          "query": "把无锡天气完整回执保存到行程",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [
+            "t1"
+          ],
+          "bind_slots": {
+            "details": "t1.result"
+          }
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 810
+  },
+  {
+    "id": "tail-C05",
+    "query": "从无锡站步行到东南大学无锡校区，把完整路线保存为周末出行，标题不要用地址",
+    "layer": "planner_live",
+    "group": "C-结果依赖",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "83c36b43-a45a-4a64-8bb6-9527ceb83a2a",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 1273,
+        "usage": {
+          "input_tokens": 1087,
+          "output_tokens": 90,
+          "total_tokens": 1177,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "强制进入真实全局规划；不测试数量门控、选点、写入或自然语言回复",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "从无锡站步行到东南大学无锡校区的完整路线",
+          "domain": "navigation",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        },
+        {
+          "id": "t2",
+          "query": "把从无锡站步行到东南大学无锡校区的完整路线保存为周末出行，标题不要用地址",
+          "domain": "planning",
+          "action": "",
+          "slots": {},
+          "depends_on": [
+            "t1"
+          ],
+          "bind_slots": {
+            "details": "t1.route"
+          }
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 1286
+  },
+  {
+    "id": "tail-D03",
+    "query": "我现在在杭州，找附近电影院",
+    "layer": "domain_live",
+    "group": "D-信息时效",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "domain_understanding",
+        "attempt": 1,
+        "span_id": "3a49de52-ef52-4478-b232-5978853a35a0",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 1371,
+        "usage": {
+          "input_tokens": 1753,
+          "output_tokens": 77,
+          "total_tokens": 1830,
+          "input_token_details": {
+            "cache_read": 1536
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "真实本域理解，不做位置/GPS验证或商家检索",
+    "prediction": {
+      "domain": "local_life",
+      "action": "local_search",
+      "tool_name": "maps_local_search",
+      "slots": {
+        "anchor": "杭州",
+        "category": "cinema",
+        "city": "杭州",
+        "route_requested": false,
+        "travel_mode": "driving"
+      },
+      "resolved_query": "我现在在杭州，找附近电影院",
+      "status": "running"
+    },
+    "errors": [],
+    "elapsed_ms": 1389
+  },
+  {
+    "id": "tail-F05",
+    "query": "找无锡站附近的饭店",
+    "layer": "planner_live",
+    "group": "F-并发与记忆",
+    "passed": true,
+    "attempts": [
+      {
+        "type": "model.attempt.completed",
+        "stage": "plan",
+        "attempt": 1,
+        "span_id": "0b6f672f-e5cc-4e75-92e9-f449b44f19fd",
+        "model_name": "deepseek-flash",
+        "elapsed_ms": 647,
+        "usage": {
+          "input_tokens": 1093,
+          "output_tokens": 36,
+          "total_tokens": 1129,
+          "input_token_details": {
+            "cache_read": 896
+          },
+          "output_token_details": {}
+        },
+        "usage_known": true
+      }
+    ],
+    "coverage_limit": "真实规划模型读不可信历史数据；不等于完整RAG提示注入或宿主权限验收",
+    "prediction": {
+      "tasks": [
+        {
+          "id": "t1",
+          "query": "找无锡站附近的饭店",
+          "domain": "local_life",
+          "action": "",
+          "slots": {},
+          "depends_on": [],
+          "bind_slots": {}
+        }
+      ]
+    },
+    "errors": [],
+    "elapsed_ms": 662
+  },
+  {
+    "id": "tail-D01",
+    "layer": "controlled_contract",
+    "group": "D-信息时效",
+    "query": "候选已过期，用户回复第二个",
+    "passed": true,
+    "assertion_cases": 1,
+    "elapsed_ms": 275,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-D02",
+    "layer": "controlled_contract",
+    "group": "D-信息时效",
+    "query": "待保存的驾车路线改为骑行，旧确认不能授权新参数",
+    "passed": true,
+    "assertion_cases": 1,
+    "elapsed_ms": 9,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-D04",
+    "layer": "controlled_contract",
+    "group": "D-信息时效",
+    "query": "过了午夜再回复昨日暂停的明天天气任务",
+    "passed": true,
+    "assertion_cases": 1,
+    "elapsed_ms": 94,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-D05",
+    "layer": "controlled_contract",
+    "group": "D-信息时效",
+    "query": "天气回执已过期，用户要求把刚才天气存一下",
+    "passed": false,
+    "assertion_cases": 1,
+    "elapsed_ms": 1,
+    "errors": [
+      "evaluations.adversarial_contract_checks::test_stale_dependency_is_not_silently_forwarded"
+    ],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-E01",
+    "layer": "controlled_contract",
+    "group": "E-执行故障",
+    "query": "行程写入成功但回执丢失，再次提交",
+    "passed": true,
+    "assertion_cases": 1,
+    "elapsed_ms": 80,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-E02",
+    "layer": "controlled_contract",
+    "group": "E-执行故障",
+    "query": "读取工具首次429后恢复",
+    "passed": true,
+    "assertion_cases": 2,
+    "elapsed_ms": 1135,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-E03",
+    "layer": "controlled_contract",
+    "group": "E-执行故障",
+    "query": "HTTP正常但业务回执success=false",
+    "passed": true,
+    "assertion_cases": 10,
+    "elapsed_ms": 659,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-E04",
+    "layer": "controlled_contract",
+    "group": "E-执行故障",
+    "query": "天气成功，音乐超时，路线等待选择",
+    "passed": true,
+    "assertion_cases": 3,
+    "elapsed_ms": 801,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-E05",
+    "layer": "controlled_contract",
+    "group": "E-执行故障",
+    "query": "用户取消时工具在运行，随后迟到回执到达",
+    "passed": true,
+    "assertion_cases": 2,
+    "elapsed_ms": 245,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-F01",
+    "layer": "controlled_contract",
+    "group": "F-并发与记忆",
+    "query": "同一request_id同时重复提交两次",
+    "passed": true,
+    "assertion_cases": 3,
+    "elapsed_ms": 531,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-F02",
+    "layer": "controlled_contract",
+    "group": "F-并发与记忆",
+    "query": "两个客户端同时确认同一写入任务",
+    "passed": true,
+    "assertion_cases": 1,
+    "elapsed_ms": 229,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-F03",
+    "layer": "controlled_contract",
+    "group": "F-并发与记忆",
+    "query": "新会话说导航过去，另一个会话有地点候选",
+    "passed": true,
+    "assertion_cases": 2,
+    "elapsed_ms": 594,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  },
+  {
+    "id": "tail-F04",
+    "layer": "controlled_contract",
+    "group": "F-并发与记忆",
+    "query": "长对话和上下文过期后原样返回第一次输入",
+    "passed": true,
+    "assertion_cases": 1,
+    "elapsed_ms": 901,
+    "errors": [],
+    "attempts": [],
+    "coverage_limit": "用受控图/协议/故障及实际本地存储验证底线；复用工程测试，不是该句Query的真实模型端到端通过率"
+  }
+]

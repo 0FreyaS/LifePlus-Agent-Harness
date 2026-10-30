@@ -1,0 +1,26 @@
+{
+  "paid_model_calls": 0,
+  "scope": "isolated_engineering_snapshot_not_model_or_business_accuracy",
+  "reason": "First regression exposed report-only fallback trusting a changed destination; prefer retained canonical evidence and rerun without private dotenv",
+  "runs": [
+    {
+      "source": "data/robustness-report-tests-20261030.xml",
+      "counts": {
+        "passed": 892,
+        "blocked": 2,
+        "failed": 1
+      },
+      "failed_ids": [
+        "tests.test_robustness_report::test_robustness_evidence_never_overwrites_changed_results"
+      ]
+    },
+    {
+      "source": "data/robustness-report-tests-20261030-02.xml",
+      "counts": {
+        "passed": 893,
+        "blocked": 2
+      },
+      "failed_ids": []
+    }
+  ]
+}
