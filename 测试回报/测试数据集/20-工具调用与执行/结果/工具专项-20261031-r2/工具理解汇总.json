@@ -1,0 +1,25 @@
+{
+  "model": "deepseek-flash",
+  "thinking": "disabled",
+  "tested": 30,
+  "passed": 30,
+  "tool_selection_accuracy": [
+    30,
+    30
+  ],
+  "parameter_exact": [
+    30,
+    30
+  ],
+  "p50_ms": 1543.134,
+  "p95_ms": 1914.374,
+  "usage": {
+    "attempts": 60,
+    "attempts_with_usage": 60,
+    "attempts_missing_usage": 0,
+    "total_tokens": 48994,
+    "input_tokens": 47159,
+    "output_tokens": 1835
+  },
+  "failures": []
+}

@@ -198,5 +198,82 @@
     "measurement_status": "分层实测见第0.2节，不合成端到端完成率",
     "sha256": "9b753e3eddf49d2dc44ee156d76ff9c8376f79c2363b7e507dcd21cfcebe4330",
     "purpose": "六类各5条，17条真实模型组件＋13条受控协议/故障场景。每条标明前提、oracle、checks和coverage_limit；受控不是原句的完整模型会话。C03允许等价两/三目标方案；模型观察只请求一次，测试夹具复跑不重复计样本。"
+  },
+  {
+    "id": "D19",
+    "file": "测试数据集/14-端到端完成率/单任务完成率30条-20261030-r2.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/completion-v1.jsonl",
+    "source_group": "single_completion",
+    "format": "completion",
+    "measurement_status": "2026-10-30 DeepSeek真实端到端实测",
+    "sha256": "47877cb96edd0297a334c57a7edddf6705d342090b9838a9ab521d0b9becc1c1",
+    "purpose": "单目标任务端到端完成率，包含真实模型、LangGraph、MCP、工具队列和存储链路；完整通过30/30，目标完成30/30，P50 4102ms，P95 4914ms。"
+  },
+  {
+    "id": "D20",
+    "file": "测试数据集/14-端到端完成率/多任务完成率30条-20261030-r2.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/completion-v1.jsonl",
+    "source_group": "multi_completion",
+    "format": "completion",
+    "measurement_status": "2026-10-30 DeepSeek真实端到端实测",
+    "sha256": "d71c9d1fc6351d65115ecf0bcf312a9f396cec73772b87601273e94f4712c7ed",
+    "purpose": "多目标任务端到端完成率，合计68个目标；完整通过30/30，目标完成68/68，P50 4342ms，P95 6257ms。"
+  },
+  {
+    "id": "D21",
+    "file": "测试数据集/14-端到端完成率/信息澄清端到端30条-20261030-r2.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/completion-v1.jsonl",
+    "source_group": "clarified_completion+single_completion",
+    "format": "clarification_completion",
+    "measurement_status": "2026-10-30 DeepSeek真实端到端实测",
+    "sha256": "e34d01ed0533c979af7c03952e00d4a869be5273f58bf865fba48310762d5d25",
+    "purpose": "15条必要澄清正例和15条完整信息控制样本；计算澄清后完成率、恢复成功率、澄清轮数、无效澄清率、目标保持率与澄清后延迟；不覆盖补充仍不完整时的错误执行率。"
+  },
+  {
+    "id": "D22",
+    "file": "测试数据集/15-事件分类/事件分类36条-20261030-r1.jsonl",
+    "cases": 36,
+    "source": "测试数据集/06-文本事件/文本事件36条.jsonl",
+    "source_group": "pure_reply+compound+boundary",
+    "format": "event_classification",
+    "measurement_status": "2026-10-30 DeepSeek真实事件解析组件实测",
+    "sha256": "dbbc68ae24e71082035e1c154b59d5a9ffc12cd30e597a203a1ed1386a7eb571",
+    "purpose": "验证事件路由、旧任务归属、候选选择、取消目标、新任务识别、复合事件、否定表达和词义提问；不执行业务工具，不等同于端到端任务完成率。"
+  },
+  {
+    "id": "D23",
+    "file": "测试数据集/16-信息澄清判断/信息澄清判断30条-20261031-r1.jsonl",
+    "cases": 30,
+    "source": "测试数据集/04-信息澄清/缺参与完整信息30条.jsonl",
+    "source_group": "clarification",
+    "format": "clarification_judgment",
+    "measurement_status": "2026-10-31 DeepSeek真实模型组件实测；当前默认值与关闭默认值双条件",
+    "sha256": "2eb282c89303a58d8ff540f30ef8f3e99a3a5f1083f411889943328072136bd7",
+    "purpose": "评估必要澄清、无需澄清、字段、问题有效性、默认值使用和误用；严格旧标签与生产默认策略分开统计，不混算。"
+  },
+  {
+    "id": "D24",
+    "file": "测试数据集/17-单任务多任务判断/单任务多任务判断60条-20261031-r3.jsonl",
+    "cases": 60,
+    "source": "evaluations/data/lifeplus-v1.jsonl",
+    "source_group": "single_task+multi_task",
+    "format": "planning_cardinality",
+    "measurement_status": "2026-10-31 DeepSeek真实模型组件实测；单任务走领域路由，多任务走GoalPlan",
+    "sha256": "54ef08b2fbfcf0e824f5d84b6fdcdf2d9ba3a52a81144c8805230df9e2d894a8",
+    "purpose": "评估单任务判断、多任务判断、目标拆分、依赖/绑定策略和规划延迟Token。普通单任务30条，多任务25条，另含5条不应过度拆分对照；不测领域子图槽位、工具调用和端到端完成率。"
+  },
+  {
+    "id": "D25",
+    "file": "测试数据集/20-工具调用与执行/工具选择与参数30条-20261031-r1.jsonl",
+    "cases": 30,
+    "source": "evaluations/data/lifeplus-v1.jsonl",
+    "source_group": "slot_extraction",
+    "format": "tool_selection_and_parameters",
+    "measurement_status": "2026-10-31 DeepSeek真实模型、真实MCP和工程回归联合验收；工具选择修复前29/30，LLM动作优先修复后30/30",
+    "sha256": "3bca8017748846cd5ae7ed64e2d9937ac62e5427676b00926ab1e8badf6ac8aa",
+    "purpose": "模型层评估工具选择和参数，真实MCP评估返回成功、结果契约和并发读取，工程回归评估错误重试、不可恢复错误、结果绑定、执行顺序和并行执行。三类证据分开统计，不混称端到端成功率。"
   }
 ]

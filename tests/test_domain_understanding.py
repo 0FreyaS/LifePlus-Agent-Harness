@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
 
-from car_agent.domain_understanding import candidates, decision_schema
+from car_agent.domain_understanding import candidates, decision_schema, messages
 from car_agent.harness import resolve_domain_intent, resolve_intent
 from car_agent.task_planning import GoalPlan, may_have_multiple_tasks, planning_prompt
 
@@ -36,6 +36,15 @@ def test_domain_candidates_hide_host_fields_and_unrelated_tools():
     schema = decision_schema("planning")
     with pytest.raises(ValidationError):
         schema.model_validate({"action": "list_reminders", "tool_name": "cancel_reminder", "slots": {}})
+
+
+def test_planning_prompt_preserves_cancel_action_when_reminder_id_is_missing():
+    schema = decision_schema("planning")
+    prompt = messages("planning", {"original_query": "取消一个提醒，但我还不知道提醒ID"}, schema,
+                      "2026-10-31T10:00:00+08:00")[0]["content"]
+    assert "缺少参数不能改变用户动作" in prompt
+    assert "不能改选list_reminders" in prompt
+    assert "reminder_id留空" in prompt
 
 
 class Model:

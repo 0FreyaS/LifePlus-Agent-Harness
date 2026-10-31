@@ -1,0 +1,44 @@
+{
+  "model": "deepseek-flash",
+  "thinking": "disabled",
+  "tested": 30,
+  "passed": 29,
+  "tool_selection": {
+    "numerator": 29,
+    "denominator": 30
+  },
+  "parameter_fields": {
+    "numerator": 44,
+    "denominator": 44
+  },
+  "parameter_exact": {
+    "numerator": 30,
+    "denominator": 30
+  },
+  "p50_ms": 1575.552,
+  "p95_ms": 1879.66,
+  "usage": {
+    "attempts": 60,
+    "attempts_with_usage": 60,
+    "attempts_missing_usage": 0,
+    "input_tokens": 41939,
+    "output_tokens": 1774,
+    "total_tokens": 43713
+  },
+  "failures": [
+    {
+      "id": "slot_extraction-30",
+      "query": "取消一个提醒，但我还不知道提醒ID",
+      "errors": [
+        "tool_selection"
+      ],
+      "actual": {
+        "domain": "planning",
+        "action": "list_reminders",
+        "tool_name": "list_reminders",
+        "slots": {}
+      }
+    }
+  ],
+  "scope": "真实模型领域路由+领域工具决策；不执行真实工具，不验证工具回执。"
+}
