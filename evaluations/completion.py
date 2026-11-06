@@ -18,6 +18,13 @@ import httpx
 from .run import TZ, expected_slots, normalize, percentile, wilson
 
 
+def resolve_policy_answer(value, anchor):
+    """Resolve dataset-relative date aliases so the simulator never sends placeholders literally."""
+    if not isinstance(value, str):
+        return value
+    return expected_slots({"value": value}, anchor)["value"]
+
+
 def check_goal(goal, leaf, trace, state, all_traces, anchor):
     """The oracle never trusts completed alone or asks the serving LLM to grade itself."""
     failures = []
@@ -45,11 +52,29 @@ def check_goal(goal, leaf, trace, state, all_traces, anchor):
         failures.append("invalid_or_simulated_receipt")
     started = [item for item in trace if item["type"] == "tool.started" and item.get("job_id") == event.get("job_id")]
     arguments = started[-1].get("arguments", {}) if started else {}
-    for key, value in expected_slots(goal.get("arguments", {}), anchor).items():
+    expected_arguments = expected_slots(goal.get("arguments", {}), anchor)
+    for key, value in expected_arguments.items():
+        # Map routing consumes resolved coordinates; POI text is checked at search/selection time.
+        if tool == "maps_route" and key in {"origin", "destination"}:
+            continue
         if normalize(arguments.get(key), key) != normalize(value, key):
             failures.append("argument_mismatch:" + key)
-    if goal.get("origin_contains") and goal["origin_contains"] not in arguments.get("origin", ""):
-        failures.append("origin_not_preserved")
+    if tool == "maps_route":
+        if not arguments.get("origin") or not arguments.get("destination"):
+            failures.append("route_endpoint_missing")
+        expected_destination = goal.get("destination_contains") or expected_arguments.get("destination")
+        if expected_destination and not str(expected_destination).startswith("$"):
+            searches = [item.get("arguments", {}).get("keywords", "") for item in trace
+                        if item["type"] == "tool.started" and item.get("tool_name") == "maps_search"]
+            if searches and not any(normalize(expected_destination) in normalize(query) for query in searches):
+                failures.append("route_destination_search_mismatch")
+        expected_origin = goal.get("origin_contains") or expected_arguments.get("origin")
+        actual_origin = state.get("slots", {}).get("origin", "")
+        if expected_origin and actual_origin and not str(actual_origin).startswith("$"):
+            # Coordinates are acceptable after explicit map disambiguation; textual inputs must agree.
+            coordinate = re.fullmatch(r"\s*-?\d+(?:\.\d+)?\s*,\s*-?\d+(?:\.\d+)?\s*", str(actual_origin))
+            if not coordinate and normalize(expected_origin) not in normalize(actual_origin):
+                failures.append("route_origin_semantic_mismatch")
     if tool == "maps_weather":
         if not result.get("day_weather") or not result.get("source"):
             failures.append("weather_evidence_missing")
@@ -232,7 +257,7 @@ async def run(args):
                                         if len(interactions) >= 14:
                                             raise RuntimeError("interaction_budget_exhausted")
                                         if kind == "clarification":
-                                            text = policy.get("answers", {}).get(field)
+                                            text = resolve_policy_answer(policy.get("answers", {}).get(field), anchor)
                                             if text is None:
                                                 raise RuntimeError("unexpected_clarification:" + str(field))
                                             answered[field] += 1
@@ -246,8 +271,12 @@ async def run(args):
                                             candidates = pending.get("candidates") or []
                                             if not candidates:
                                                 raise RuntimeError("selection_without_candidates")
-                                            action, value = "answer", {"index": min(2, len(candidates))}
-                                            if policy.get("selection_text"):
+                                            selection_answer = resolve_policy_answer(policy.get("answers", {}).get(field), anchor)
+                                            if selection_answer is not None:
+                                                action, value = "answer", {"text": selection_answer}
+                                            else:
+                                                action, value = "answer", {"index": min(2, len(candidates))}
+                                            if policy.get("selection_text") and selection_answer is None:
                                                 value = {"text": "第二个" if len(candidates) >= 2 else "第一个"}
                                             if policy.get("compound") and not policy.get("compound_on_field") and not compound_sent:
                                                 value = {"text": ("第二个" if len(candidates) >= 2 else "第一个") + policy.get("compound_separator", "，") + policy["compound"]}
@@ -300,6 +329,15 @@ async def run(args):
                             for field in policy.get("require_fields", []):
                                 if not any(item["kind"] == "clarification" and item["field"] == field for item in interactions):
                                     row["failures"].append("missing_required_clarification:" + field)
+                            if policy.get("forbid_clarification") and any(
+                                item["kind"] == "clarification" for item in interactions
+                            ):
+                                row["failures"].append("unexpected_clarification")
+                            forbidden_fields = set(policy.get("forbid_clarification_fields", []))
+                            if forbidden_fields.intersection(
+                                item.get("field") for item in interactions if item["kind"] == "clarification"
+                            ):
+                                row["failures"].append("unexpected_location_clarification")
                             if policy.get("require_compound") and not compound_sent:
                                 row["failures"].append("compound_reply_not_exercised")
                             row["completed"] = row["all_roots_completed"] and not row["failures"]

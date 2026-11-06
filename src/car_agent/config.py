@@ -6,6 +6,10 @@ from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+DEFAULT_CURRENT_LOCATION = "江苏省无锡市滨湖区雪浪街道大学城状元道5号东南大学无锡国际校区"
+DEFAULT_CURRENT_CITY = "无锡市"
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
@@ -15,8 +19,8 @@ class Settings(BaseSettings):
     showcase_password: SecretStr | None = None
     showcase_allow_http: bool = False
     public_origin: str = ""
-    default_current_location: str = "江苏省无锡市滨湖区东南大学无锡校区"
-    default_current_city: str = "无锡市"
+    default_current_location: str = DEFAULT_CURRENT_LOCATION
+    default_current_city: str = DEFAULT_CURRENT_CITY
     database_path: str = "./data/lifeplus.sqlite3"
     checkpoint_postgres_dsn: str | None = None
     redis_url: str | None = None

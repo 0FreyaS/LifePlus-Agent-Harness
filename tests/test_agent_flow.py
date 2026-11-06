@@ -135,16 +135,18 @@ def test_relative_reminder_time_is_normalized_for_tool_schema():
 
 
 @pytest.mark.asyncio
-async def test_navigation_without_origin_waits_when_default_location_disabled(runtime, monkeypatch):
+async def test_navigation_without_origin_uses_product_default_when_config_is_empty(runtime, monkeypatch):
     from car_agent.config import get_settings
+    from car_agent.location_defaults import DEFAULT_CURRENT_LOCATION
     monkeypatch.setattr(get_settings(), "default_current_location", "")
     graph, context, _, _ = runtime
     config = {"configurable": {"thread_id": "navigation-clarify"}}
-    await graph.ainvoke(graph_input("导航去西湖", "navigation-clarify-task"), config=config, context=context)
-    snapshot = await graph.aget_state(config)
+    result = await graph.ainvoke(graph_input("导航去西湖", "navigation-clarify-task"), config=config, context=context)
+    snapshot = await graph.aget_state(config, subgraphs=True)
     value = next(interrupt.value for task in snapshot.tasks for interrupt in task.interrupts)
-    assert value["kind"] == "clarification"
-    assert value["field"] == "origin"
+    assert value["kind"] != "clarification" or value.get("field") != "origin"
+    assert any(getattr(task.state, "values", {}).get("slots", {}).get("origin") == DEFAULT_CURRENT_LOCATION
+               for task in snapshot.tasks)
 
 
 @pytest.mark.asyncio
@@ -156,7 +158,8 @@ async def test_navigation_default_origin_reaches_route_tool_without_origin_promp
     pending = next(intr.value for task in snapshot.tasks for intr in task.interrupts)
     assert pending["kind"] == "selection"
     result = await graph.ainvoke(Command(resume={"index": 1}), config=config, context=context)
-    assert result["slots"]["origin"] == "江苏省无锡市滨湖区东南大学无锡校区"
+    from car_agent.location_defaults import DEFAULT_CURRENT_LOCATION
+    assert result["slots"]["origin"] == DEFAULT_CURRENT_LOCATION
     job = await db.fetchone("SELECT args_json FROM tool_jobs WHERE task_id=? AND tool_name='maps_route'",
                             ("configured-origin-task",))
     assert json.loads(job["args_json"])["origin"] == result["slots"]["origin"]
@@ -164,13 +167,14 @@ async def test_navigation_default_origin_reaches_route_tool_without_origin_promp
 
 @pytest.mark.asyncio
 async def test_local_search_uses_default_reference_point_in_actual_tool_arguments(runtime):
+    from car_agent.location_defaults import DEFAULT_CURRENT_LOCATION
     graph, context, db, _ = runtime
     await graph.ainvoke(graph_input("找附近的电影院", "configured-anchor-task"),
                        config={"configurable": {"thread_id": "configured-anchor"}}, context=context)
     job = await db.fetchone("SELECT args_json FROM tool_jobs WHERE task_id=? AND tool_name='maps_local_search'",
                             ("configured-anchor-task",))
     arguments = json.loads(job["args_json"])
-    assert arguments["anchor"] == "江苏省无锡市滨湖区东南大学无锡校区"
+    assert arguments["anchor"] == DEFAULT_CURRENT_LOCATION
     assert arguments["city"] == "无锡市"
 
 

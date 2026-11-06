@@ -1,7 +1,7 @@
 from collections import Counter
 from datetime import datetime
 
-from evaluations.completion import check_goal, report_rows
+from evaluations.completion import check_goal, report_rows, resolve_policy_answer
 from evaluations.completion_dataset import build_cases
 
 
@@ -38,7 +38,7 @@ def test_completed_status_without_business_receipt_does_not_pass():
 def test_route_requires_selected_poi_binding_and_real_receipt():
     goal = {"domain": "navigation", "tool": "maps_route", "arguments": {"travel_mode": "walking"}}
     leaf = {"status": "completed", "domain": "navigation", "answer": "路线已生成"}
-    trace = [{"type": "tool.started", "job_id": "job", "arguments": {"travel_mode": "walking", "destination": "120.3,31.5"}},
+    trace = [{"type": "tool.started", "job_id": "job", "arguments": {"travel_mode": "walking", "origin": "120.2,31.5", "destination": "120.3,31.5"}},
         {"type": "tool.completed", "job_id": "job", "tool_name": "maps_route", "result": {"ok": True, "distance_m": 10, "duration_s": 30, "navigation_url": "https://example.org/route"}}]
     state = {"slots": {"selection": 1}, "tool_result": {"items": [{"location": "120.4,31.5"}]}}
     assert "route_not_bound_to_selected_poi" in check_goal(goal, leaf, trace, state, [trace], ANCHOR)
@@ -46,6 +46,22 @@ def test_route_requires_selected_poi_binding_and_real_receipt():
     assert not check_goal(goal, leaf, trace, state, [trace], ANCHOR)
     trace[-1]["result"]["simulated"] = True
     assert "invalid_or_simulated_receipt" in check_goal(goal, leaf, trace, state, [trace], ANCHOR)
+
+
+def test_route_names_are_checked_semantically_not_against_resolved_coordinates():
+    goal = {"domain": "navigation", "tool": "maps_route",
+            "arguments": {"origin": "东南大学无锡国际校区", "destination": "西湖", "travel_mode": "walking"}}
+    leaf = {"status": "completed", "domain": "navigation", "answer": "已规划路线"}
+    trace = [
+        {"type": "tool.started", "tool_name": "maps_search", "arguments": {"keywords": "西湖", "city": "杭州"}},
+        {"type": "tool.started", "job_id": "route", "tool_name": "maps_route",
+         "arguments": {"origin": "120.271,31.472", "destination": "120.148,30.239", "travel_mode": "walking"}},
+        {"type": "tool.completed", "job_id": "route", "tool_name": "maps_route",
+         "result": {"ok": True, "distance_m": 100, "duration_s": 60, "navigation_url": "https://example.org/route"}},
+    ]
+    state = {"slots": {"origin": "江苏省无锡市滨湖区雪浪街道大学城状元道5号东南大学无锡国际校区"},
+             "tool_result": {"items": [{"location": "120.148,30.239"}]}}
+    assert not check_goal(goal, leaf, trace, state, [trace], ANCHOR)
 
 
 def test_save_weather_requires_approval_and_actual_upstream_fields():
@@ -70,3 +86,9 @@ def test_partial_failure_and_timeout_stay_in_completion_denominator():
     assert report["goals_total"] == 4 and report["goals_completed"] == 1
     assert report["structured_false_completion"] == {"numerator": 1, "denominator": 1}
     assert report["p95_ms"] == 210000
+
+
+def test_relative_time_answers_are_resolved_against_the_same_run_anchor():
+    assert resolve_policy_answer("$tomorrow9", ANCHOR) == "2026-10-24T09:00:00+08:00"
+    assert resolve_policy_answer("$day_after15", ANCHOR) == "2026-10-25T15:00:00+08:00"
+    assert resolve_policy_answer("明天上午9点", ANCHOR) == "明天上午9点"

@@ -631,14 +631,15 @@ async def test_health_rag_emits_retrieval_and_safety_handoff_events(api_client):
 
 
 @pytest.mark.asyncio
-async def test_local_search_clarifies_anchor_selects_bound_poi_and_loads_detail(api_client, monkeypatch):
+async def test_local_search_uses_default_anchor_then_selects_bound_poi(api_client, monkeypatch):
+    from car_agent.location_defaults import DEFAULT_CURRENT_LOCATION
     monkeypatch.setattr(settings, "default_current_location", "")
     task_id, _ = await submit(api_client, "找附近的电影院")
-    task = await wait_for(api_client, task_id, lambda task: task["status"] == "waiting_user")
-    assert task["interrupt"]["field"] == "anchor"
-    await api_client.post(f"/api/tasks/{task_id}/resume", json={"interrupt_id": task["interrupt"]["id"],
-        "action": "answer", "value": {"text": "东南大学无锡国际校区"}})
     task = await wait_for(api_client, task_id, lambda task: task["status"] == "waiting_user" and task["interrupt"]["kind"] == "selection")
+    assert task["interrupt"]["kind"] == "selection"
+    search = await app.state.db.fetchone(
+        "SELECT args_json FROM tool_jobs WHERE task_id=? AND tool_name='maps_local_search'", (task_id,))
+    assert json.loads(search["args_json"])["anchor"] == DEFAULT_CURRENT_LOCATION
     await api_client.post(f"/api/tasks/{task_id}/resume", json={"interrupt_id": task["interrupt"]["id"],
         "action": "answer", "value": {"index": 2}})
     task = await wait_for(api_client, task_id, lambda task: task["status"] == "completed")

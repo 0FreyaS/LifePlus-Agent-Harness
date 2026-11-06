@@ -1,16 +1,14 @@
 """Configured location fallback, never a GPS fix or a selected destination."""
-from .config import get_settings
+from .config import DEFAULT_CURRENT_CITY, DEFAULT_CURRENT_LOCATION, get_settings
 
 
 RELATIVE_LOCATIONS = {"这里", "这儿", "我这里", "当前位置", "我的位置", "当前所在地", "我所在的位置", "附近"}
-
-
 def with_default_location(domain: str, action: str, values: dict) -> dict:
     slots = dict(values)
     settings = get_settings()
-    location = settings.default_current_location.strip()
-    if not location:
-        return slots
+    # Empty deployment config must not silently change the product policy to ask for an origin.
+    location = settings.default_current_location.strip() or DEFAULT_CURRENT_LOCATION
+    default_city = settings.default_current_city.strip() or DEFAULT_CURRENT_CITY
 
     def unspecified(field):
         return not str(slots.get(field) or "").strip() or str(slots[field]).strip() in RELATIVE_LOCATIONS
@@ -19,7 +17,10 @@ def with_default_location(domain: str, action: str, values: dict) -> dict:
         slots["origin"] = location
     if domain == "local_life" and action in {"local_search", "local_route"} and unspecified("anchor"):
         city = str(slots.get("city") or "").strip()
-        if not city or city.removesuffix("市") == settings.default_current_city.removesuffix("市"):
+        if not city or city.removesuffix("市") == default_city.removesuffix("市"):
             slots["anchor"] = location
-            slots["city"] = settings.default_current_city
+            slots["city"] = default_city
+        else:
+            city_name = city if city.endswith("市") else city + "市"
+            slots["anchor"] = city_name + "中心"
     return slots

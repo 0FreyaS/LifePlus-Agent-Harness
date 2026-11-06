@@ -167,21 +167,24 @@ async def test_expired_approval_can_be_rejected_without_refresh(client):
 
 
 @pytest.mark.asyncio
-async def test_refresh_preserves_previously_clarified_origin(client, monkeypatch):
+async def test_refresh_preserves_default_origin_without_asking_user(client, monkeypatch):
     from car_agent.config import get_settings
+    from car_agent.location_defaults import DEFAULT_CURRENT_LOCATION
     monkeypatch.setattr(get_settings(), "default_current_location", "")
-    task_id, _ = await submit(client, "导航到东南大学")
+    task_id, _ = await submit(client, "导航到西湖")
     first = await wait(client, task_id)
-    assert first["interrupt"]["field"] == "origin"
-    await client.post(f"/api/tasks/{task_id}/resume", json={"interrupt_id": first["interrupt"]["id"], "action": "answer", "value": {"text": "无锡站"}})
-    choices = await wait(client, task_id, old_interrupt=first["interrupt"]["id"])
-    assert choices["interrupt"]["kind"] == "selection"
-    response = await client.post(f"/api/tasks/{task_id}/refresh", json={"interrupt_id": choices["interrupt"]["id"]})
+    assert first["interrupt"]["kind"] == "selection"
+    assert first["interrupt"].get("field") != "origin"
+    trace = (await client.get(f"/api/tasks/{task_id}/trace")).json()
+    default_event = next(event for event in trace if event["type"] == "context.location_defaulted")
+    assert default_event["values"]["origin"] == DEFAULT_CURRENT_LOCATION
+    response = await client.post(f"/api/tasks/{task_id}/refresh", json={"interrupt_id": first["interrupt"]["id"]})
     assert response.status_code == 200, response.text
-    refreshed = await wait(client, task_id, old_interrupt=choices["interrupt"]["id"])
+    refreshed = await wait(client, task_id, old_interrupt=first["interrupt"]["id"])
     assert refreshed["interrupt"]["kind"] == "selection"
-    state = await app.state.graph.aget_state({"configurable": {"thread_id": refreshed["thread_id"]}})
-    assert state.values["slots"]["origin"] == "无锡站"
+    trace = (await client.get(f"/api/tasks/{task_id}/trace")).json()
+    assert any(event["type"] == "context.location_defaulted" and
+               event["values"].get("origin") == DEFAULT_CURRENT_LOCATION for event in trace)
 
 
 @pytest.mark.asyncio

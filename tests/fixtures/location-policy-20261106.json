@@ -1,0 +1,64 @@
+[
+  {
+    "id": "navigation-missing-origin",
+    "domain": "navigation",
+    "action": "navigation_search",
+    "slots": {"destination": "西湖", "route_requested": true},
+    "expected": {"origin": "江苏省无锡市滨湖区雪浪街道大学城状元道5号东南大学无锡国际校区"}
+  },
+  {
+    "id": "navigation-relative-origin",
+    "domain": "navigation",
+    "action": "navigation_search",
+    "slots": {"origin": "当前位置", "destination": "鼋头渚", "route_requested": true},
+    "expected": {"origin": "江苏省无锡市滨湖区雪浪街道大学城状元道5号东南大学无锡国际校区"}
+  },
+  {
+    "id": "navigation-explicit-origin-wins",
+    "domain": "navigation",
+    "action": "navigation_search",
+    "slots": {"origin": "无锡站", "destination": "鼋头渚", "route_requested": true},
+    "expected": {"origin": "无锡站"}
+  },
+  {
+    "id": "navigation-search-only-does-not-add-origin",
+    "domain": "navigation",
+    "action": "navigation_search",
+    "slots": {"destination": "西湖", "route_requested": false},
+    "expected_absent": ["origin"]
+  },
+  {
+    "id": "local-life-no-location-uses-default",
+    "domain": "local_life",
+    "action": "local_search",
+    "slots": {"category": "cinema"},
+    "expected": {
+      "anchor": "江苏省无锡市滨湖区雪浪街道大学城状元道5号东南大学无锡国际校区",
+      "city": "无锡市"
+    }
+  },
+  {
+    "id": "local-life-default-city-uses-campus",
+    "domain": "local_life",
+    "action": "local_search",
+    "slots": {"category": "restaurant", "city": "无锡市"},
+    "expected": {
+      "anchor": "江苏省无锡市滨湖区雪浪街道大学城状元道5号东南大学无锡国际校区",
+      "city": "无锡市"
+    }
+  },
+  {
+    "id": "local-life-other-city-uses-city-center",
+    "domain": "local_life",
+    "action": "local_search",
+    "slots": {"category": "ktv", "city": "南京"},
+    "expected": {"anchor": "南京市中心", "city": "南京"}
+  },
+  {
+    "id": "local-life-explicit-anchor-wins",
+    "domain": "local_life",
+    "action": "local_search",
+    "slots": {"category": "cafe", "city": "杭州", "anchor": "杭州东站"},
+    "expected": {"anchor": "杭州东站", "city": "杭州"}
+  }
+]

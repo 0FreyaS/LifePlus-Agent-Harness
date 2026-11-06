@@ -224,7 +224,7 @@ uv run --frozen --extra dev uvicorn car_agent.api.app:app --host 127.0.0.1 --por
 
 打开 [LifePlus](http://127.0.0.1:8000)。模板已设置 DeepSeek URL、模型名及关闭思考；切换供应商时需同步 URL/模型/Key，并移除不兼容的 `MODEL_THINKING`。模板启用领域 Jev，缺少独立 Key 会启动失败；不使用时明确选择 `llm`，不要只留空 Key。
 
-音乐检索直接使用 HTTP，无需安装可选 `music` SDK。默认 SQLite 无额外数据库依赖；Redis、MySQL、PostgreSQL Checkpointer 和 Chroma 可按需安装 `production` extra 并配置。默认参考位置是配置的无锡校区，不是 GPS；如需体验缺起点澄清，可清空 `DEFAULT_CURRENT_LOCATION` 后重启。
+音乐检索直接使用 HTTP，无需安装可选 `music` SDK。默认 SQLite 无额外数据库依赖；Redis、MySQL、PostgreSQL Checkpointer 和 Chroma 可按需安装 `production` extra 并配置。默认参考位置为“东南大学无锡国际校区”，是固定配置值，不是实时 GPS；导航未提供起点时系统统一从该位置规划，不追问起点，用户明确提供的起点优先。附近生活服务未提供地点时使用同一参考位置；若用户只指定其他城市，则以该城市中心作为搜索锚点。
 
 ### Docker 部署
 
