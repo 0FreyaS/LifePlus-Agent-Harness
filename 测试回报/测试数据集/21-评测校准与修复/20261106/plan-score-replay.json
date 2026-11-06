@@ -1,0 +1,358 @@
+{
+  "scope": "same_recorded_plans_corrected_scoring_not_new_inference",
+  "tested": 70,
+  "before": 52,
+  "after": 69,
+  "rows": [
+    {
+      "id": "multi_task-01",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-02",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-03",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-04",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-05",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-06",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-07",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-08",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-09",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-10",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-11",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-12",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-13",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-14",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-15",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-16",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-17",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-18",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-19",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-20",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-21",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-22",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-23",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-24",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-25",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-26",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-27",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-28",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-29",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "multi_task-30",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-061",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-062",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-063",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-064",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-065",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-066",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-067",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-068",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-069",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-070",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-071",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-072",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-073",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-074",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-075",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-076",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-077",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-078",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-079",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-080",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-081",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-082",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-083",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-084",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-085",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-086",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-087",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-088",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-089",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-090",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-091",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-092",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-093",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-094",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-095",
+      "original": false,
+      "rescored": true
+    },
+    {
+      "id": "plan-096",
+      "original": false,
+      "rescored": false
+    },
+    {
+      "id": "plan-097",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-098",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-099",
+      "original": true,
+      "rescored": true
+    },
+    {
+      "id": "plan-100",
+      "original": true,
+      "rescored": true
+    }
+  ]
+}

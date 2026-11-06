@@ -1,0 +1,83 @@
+{
+  "version": 2,
+  "dataset_sha256": "60b918c303a10eb0ef0a5716d6c34265dd4da3984faf256c454c18cff4d31695",
+  "started_at": "2026-11-06T17:18:04.239339+08:00",
+  "model": "deepseek-flash",
+  "concurrency": 1,
+  "selected_groups": [
+    "multi_task"
+  ],
+  "real_tool_min_interval_seconds": 0.4,
+  "source_sha256": {
+    "src/car_agent/harness.py": "c58669807e41f141c2dc8169c90470f33d916092c08c2a10e457451408425744",
+    "src/car_agent/task_planning.py": "95fc7cd2fa82b178c657451016445596740199fcf86eab5872ba1dcaccc78374",
+    "src/car_agent/tool_queue.py": "f3ef6b2c19a86193e9474d0d014f092e407eba2c8eacca30de15c066092bd217",
+    "evaluations/dataset.py": "a9e3d76c1def97e1ca379d5398a507a057aa386cbf8acc406ecfb2664acedd6d",
+    "evaluations/runtime.py": "9acf8d639572348997d995e284db8e2f468bfad3a839cb042bbd273193a38e8d",
+    "evaluations/run.py": "6a690aaf690343b76feaf0703eb82a62580dba4de6760541a5e4537452e91daa"
+  },
+  "scope": "component_evaluation_not_end_to_end_sla",
+  "execution_conditions": {
+    "input_event_provider": "llm_direct",
+    "planning_gate_provider": "llm",
+    "domain_route_provider": "jev_cascade",
+    "model_thinking": "disabled",
+    "default_current_location": "江苏省无锡市滨湖区雪浪街道大学城状元道5号东南大学无锡国际校区",
+    "default_current_city": "无锡市"
+  },
+  "groups": {
+    "multi_task": {
+      "expected_cases": 8,
+      "executed": 8,
+      "passed": 8,
+      "pass_rate": 1.0,
+      "approx_case_pass_wilson95": [
+        0.6756,
+        1.0
+      ],
+      "p50_ms": 867,
+      "p95_ms": 1273,
+      "metrics": {
+        "task_domain_multiset_exact": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0
+        },
+        "task_domain_precision": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "task_domain_recall": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "dependency_policy_accuracy": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0
+        },
+        "annotated_goal_coverage": {
+          "numerator": 2,
+          "denominator": 2,
+          "value": 1.0
+        }
+      },
+      "failed_ids": []
+    }
+  },
+  "executed": 8,
+  "passed": 8,
+  "usage": {
+    "responses": 8,
+    "input_tokens": 10577,
+    "output_tokens": 474,
+    "responses_missing_usage": 0
+  },
+  "portable_usage": {
+    "known_total_tokens": 11051,
+    "attempts_missing_usage": 0,
+    "total_tokens": 11051
+  }
+}

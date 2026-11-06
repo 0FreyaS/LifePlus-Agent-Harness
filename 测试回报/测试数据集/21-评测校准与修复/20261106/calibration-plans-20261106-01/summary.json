@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "dataset_sha256": "5bffa08832b57486d9f165fa3d84bbf7d157b3127a43971677f82d20ef249850",
+  "started_at": "2026-11-06T17:12:19.433383+08:00",
+  "model": "deepseek-flash",
+  "concurrency": 1,
+  "selected_groups": [
+    "multi_task"
+  ],
+  "real_tool_min_interval_seconds": 0.4,
+  "source_sha256": {
+    "src/car_agent/harness.py": "c58669807e41f141c2dc8169c90470f33d916092c08c2a10e457451408425744",
+    "src/car_agent/task_planning.py": "4e500af98a359ed79e214c12aa8ae28e60af1603722f712d2140480444ebd65d",
+    "src/car_agent/tool_queue.py": "f3ef6b2c19a86193e9474d0d014f092e407eba2c8eacca30de15c066092bd217",
+    "evaluations/dataset.py": "a9e3d76c1def97e1ca379d5398a507a057aa386cbf8acc406ecfb2664acedd6d",
+    "evaluations/runtime.py": "9acf8d639572348997d995e284db8e2f468bfad3a839cb042bbd273193a38e8d",
+    "evaluations/run.py": "3065f15d5ec6d5764d04982472e2ff7f03cc6184bbbfa43c347731ebf26bab85"
+  },
+  "scope": "component_evaluation_not_end_to_end_sla",
+  "execution_conditions": {
+    "input_event_provider": "llm_direct",
+    "planning_gate_provider": "llm",
+    "domain_route_provider": "jev_cascade",
+    "model_thinking": "disabled",
+    "default_current_location": "江苏省无锡市滨湖区雪浪街道大学城状元道5号东南大学无锡国际校区",
+    "default_current_city": "无锡市"
+  },
+  "groups": {
+    "multi_task": {
+      "expected_cases": 70,
+      "executed": 70,
+      "passed": 52,
+      "pass_rate": 0.7428571428571429,
+      "approx_case_pass_wilson95": [
+        0.6297,
+        0.8307
+      ],
+      "p50_ms": 910,
+      "p95_ms": 1220,
+      "metrics": {
+        "task_domain_multiset_exact": {
+          "numerator": 67,
+          "denominator": 70,
+          "value": 0.9571428571428572
+        },
+        "task_domain_precision": {
+          "numerator": 123,
+          "denominator": 125,
+          "value": 0.984
+        },
+        "task_domain_recall": {
+          "numerator": 123,
+          "denominator": 125,
+          "value": 0.984
+        },
+        "dependency_policy_accuracy": {
+          "numerator": 52,
+          "denominator": 70,
+          "value": 0.7428571428571429
+        },
+        "annotated_goal_coverage": {
+          "numerator": 4,
+          "denominator": 4,
+          "value": 1.0
+        }
+      },
+      "failed_ids": [
+        "plan-061",
+        "plan-062",
+        "plan-063",
+        "plan-064",
+        "plan-065",
+        "plan-066",
+        "plan-067",
+        "plan-068",
+        "plan-069",
+        "plan-070",
+        "plan-071",
+        "plan-072",
+        "plan-073",
+        "plan-074",
+        "plan-075",
+        "plan-094",
+        "plan-095",
+        "plan-096"
+      ]
+    }
+  },
+  "executed": 70,
+  "passed": 52,
+  "usage": {
+    "responses": 71,
+    "input_tokens": 90492,
+    "output_tokens": 3551,
+    "responses_missing_usage": 0
+  },
+  "portable_usage": {
+    "known_total_tokens": 94043,
+    "attempts_missing_usage": 0,
+    "total_tokens": 94043
+  }
+}

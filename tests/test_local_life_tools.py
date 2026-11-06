@@ -58,6 +58,10 @@ def test_missing_metadata_and_untrusted_photo_schemes_are_not_invented():
 @pytest.mark.asyncio
 async def test_ambiguous_anchor_returns_candidates_before_search(tmp_path):
     def handler(request):
+        if request.url.path == "/v3/place/text":
+            return httpx.Response(200, json={"status": "1", "pois": [
+                {"id": "campus-one", "name": "东南大学校区一", "location": "120.26,31.47"},
+                {"id": "campus-two", "name": "东南大学校区二", "location": "120.3,31.5"}]})
         assert request.url.path == "/v3/geocode/geo"
         return httpx.Response(200, json={"status": "1", "geocodes": [
             {"formatted_address": "校区一", "location": "120.26,31.47"},

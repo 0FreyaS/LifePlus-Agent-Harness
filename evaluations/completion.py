@@ -25,6 +25,33 @@ def resolve_policy_answer(value, anchor):
     return expected_slots({"value": value}, anchor)["value"]
 
 
+class EvaluationHTTPError(RuntimeError):
+    def __init__(self, response):
+        self.status_code = response.status_code
+        try:
+            self.detail = response.json().get("detail", {})
+        except (ValueError, AttributeError):
+            self.detail = response.text[:500]
+        self.code = self.detail.get("code", "HTTP_ERROR") if isinstance(self.detail, dict) else "HTTP_ERROR"
+        super().__init__(f"HTTP {self.status_code} {self.code}: {str(self.detail)[:500]}")
+
+
+def location_identity(expected, value, candidates, aliases=()):
+    names = [normalize(name) for name in (expected, *aliases) if name]
+    if not names or not value:
+        return False
+    if not re.fullmatch(r"\s*-?\d+(?:\.\d+)?\s*,\s*-?\d+(?:\.\d+)?\s*", str(value)):
+        return any(name in normalize(value) for name in names)
+    return any(same_coordinate(item.get("location"), value) and any(
+        name in normalize(item.get("name", "") + item.get("address", "")) for name in names) for item in candidates)
+
+
+def same_coordinate(left, right):
+    from car_agent.route_geometry import point
+    a, b = point(left), point(right)
+    return a is not None and b is not None and all(abs(x - y) <= 0.000001 for x, y in zip(a, b))
+
+
 def check_goal(goal, leaf, trace, state, all_traces, anchor):
     """The oracle never trusts completed alone or asks the serving LLM to grade itself."""
     failures = []
@@ -75,6 +102,16 @@ def check_goal(goal, leaf, trace, state, all_traces, anchor):
             coordinate = re.fullmatch(r"\s*-?\d+(?:\.\d+)?\s*,\s*-?\d+(?:\.\d+)?\s*", str(actual_origin))
             if not coordinate and normalize(expected_origin) not in normalize(actual_origin):
                 failures.append("route_origin_semantic_mismatch")
+        if goal.get("evidence_contract") == "v2":
+            candidates = [item for entry in trace for item in (entry.get("result", {}).get("items") or entry.get("result", {}).get("candidates") or [])]
+            if expected_origin and not location_identity(expected_origin, arguments.get("origin"), candidates, goal.get("origin_aliases", [])):
+                failures.append("route_origin_identity_unproven")
+            if expected_destination:
+                destination_items = state.get("tool_result", {}).get("items") or []
+                if not location_identity(expected_destination, arguments.get("destination"), destination_items, goal.get("destination_aliases", [])):
+                    failures.append("route_destination_identity_unproven")
+            if not same_coordinate(result.get("destination"), arguments.get("destination")):
+                failures.append("route_receipt_destination_mismatch")
     if tool == "maps_weather":
         if not result.get("day_weather") or not result.get("source"):
             failures.append("weather_evidence_missing")
@@ -118,7 +155,8 @@ def check_goal(goal, leaf, trace, state, all_traces, anchor):
             upstream = [item["result"] for events in all_traces for item in events
                         if item["type"] == "tool.completed" and item.get("tool_name") == goal["receipt_from"]]
             details = result.get("details", {})
-            if not upstream or not isinstance(details, dict) or any(details.get(key) != upstream[0].get(key) for key in ("city", "date", "day_weather")):
+            keys = ("origin", "destination", "travel_mode", "distance_m", "duration_s") if goal["receipt_from"] == "maps_route" else ("city", "date", "day_weather")
+            if not isinstance(details, dict) or not any(all(source.get(key) is not None and details.get(key) == source[key] for key in keys) for source in upstream):
                 failures.append("upstream_evidence_not_saved")
     return failures
 
@@ -190,7 +228,7 @@ async def run(args):
         raise ValueError("Use a new run directory; previous evidence must not be overwritten")
     output.mkdir(parents=True)
     anchor = datetime.now(TZ)
-    metadata = {"started_at": anchor.isoformat(), "model": settings.model_name,
+    metadata = {"started_at": anchor.isoformat(), "dataset": str(dataset), "model": settings.model_name,
         "domain_route_provider": settings.domain_route_provider,
         "input_event_provider": settings.input_event_provider,
         "planning_gate_provider": settings.planning_gate_provider,
@@ -234,11 +272,31 @@ async def run(args):
 
                         async def request(method, url, **kwargs):
                             result = await client.request(method, url, headers=headers, **kwargs)
-                            result.raise_for_status()
+                            if result.is_error:
+                                raise EvaluationHTTPError(result)
                             return result.json()
 
                         async def workflow():
                             session = (await request("POST", "/api/sessions"))["id"]
+                            setup_started = perf_counter()
+                            for query in case.get("setup_queries", []):
+                                seed = await request("POST", f"/api/sessions/{session}/messages", json={"message": query, "mode": "live"})
+                                seed_id = seed["task_id"]
+                                row.setdefault("setup_task_ids", []).append(seed_id)
+                                while True:
+                                    task = await request("GET", f"/api/tasks/{seed_id}")
+                                    if task["status"] in TERMINAL:
+                                        if task["status"] != "completed":
+                                            raise RuntimeError("setup_task_failed")
+                                        break
+                                    for child in task.get("children") or [task]:
+                                        pending = child.get("interrupt")
+                                        if child["status"] == "waiting_user" and pending:
+                                            if pending["kind"] != "selection":
+                                                raise RuntimeError("unexpected_setup_clarification")
+                                            await request("POST", f"/api/tasks/{child['id']}/resume", json={"interrupt_id": pending["id"], "action": "answer", "value": {"index": 1}})
+                                    await asyncio.sleep(.1)
+                            row["setup_elapsed_ms"] = round((perf_counter() - setup_started) * 1000)
                             submitted = await request("POST", f"/api/sessions/{session}/messages", json={"message": case["query"], "mode": "live", "request_id": case["id"]})
                             root_ids.append(submitted["task_id"])
                             policy = case["user_policy"]
@@ -297,6 +355,7 @@ async def run(args):
                                 await asyncio.sleep(.1)
                             leaves = [leaf for root in roots for leaf in (root.get("children") or [root])]
                             traces = [await request("GET", f"/api/tasks/{leaf['id']}/trace") for leaf in leaves]
+                            setup_traces = [await request("GET", f"/api/tasks/{tid}/trace") for tid in row.get("setup_task_ids", [])]
                             states = []
                             for leaf in leaves:
                                 snapshot = await app.state.graph.aget_state({"configurable": {"thread_id": leaf["thread_id"]}})
@@ -304,7 +363,7 @@ async def run(args):
                             row["all_roots_completed"] = all(root["status"] == "completed" for root in roots)
                             row["root_statuses"] = [{"id": root["id"], "status": root["status"]} for root in roots]
                             row["leaf_statuses"] = [{"id": leaf["id"], "status": leaf["status"], "answer": leaf.get("answer")} for leaf in leaves]
-                            matrix = [[check_goal(goal, leaf, trace, state, traces, anchor) for leaf, trace, state in zip(leaves, traces, states)] for goal in case["goals"]]
+                            matrix = [[check_goal(goal, leaf, trace, state, [*traces, *setup_traces], anchor) for leaf, trace, state in zip(leaves, traces, states)] for goal in case["goals"]]
                             assignments = itertools.permutations(range(max(len(leaves), len(case["goals"]))), len(case["goals"]))
                             choices = min(assignments, key=lambda indexes: sum(len(matrix[i][j]) if j < len(leaves) else 100 for i, j in enumerate(indexes)))
                             checks = [{"goal": goal, "leaf_id": leaves[j]["id"] if j < len(leaves) else None,
@@ -348,11 +407,13 @@ async def run(args):
                             error = str(exc).replace(settings.model_api_key or "__unset__", "[REDACTED]")
                             row.update(error_type=type(exc).__name__, error=error[:1200], completed=False)
                             row["failures"].append(type(exc).__name__ + ":" + error[:300])
+                            if isinstance(exc, EvaluationHTTPError):
+                                row["http_failure"] = {"status": exc.status_code, "code": exc.code, "detail": exc.detail}
                         finally:
                             row["task_ids"] = list(root_ids)
                             row["elapsed_ms"] = round((perf_counter() - started) * 1000)
                             row["trace_files"] = []
-                            for root_id in root_ids:
+                            for root_id in [*root_ids, *row.get("setup_task_ids", [])]:
                                 task = await request("GET", f"/api/tasks/{root_id}")
                                 if task["status"] not in TERMINAL:
                                     await request("POST", f"/api/tasks/{root_id}/cancel")

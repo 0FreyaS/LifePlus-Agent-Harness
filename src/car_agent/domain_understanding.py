@@ -10,6 +10,7 @@ from pydantic import BaseModel, ConfigDict, create_model, model_validator
 from .intent_schema import SlotValues
 from .tools import TOOL_CATALOG
 from .tool_policy import DOMAIN_TOOLS
+from .conversation import model_references
 
 
 class DomainRoute(BaseModel):
@@ -106,7 +107,7 @@ def messages(domain: str, state: dict, schema, now: str) -> list[dict]:
     )
     context = {"domain": domain, "query": state["original_query"],
                "memory_brief": state.get("memory_brief", ""), "preferences": state.get("memory", {}),
-               "references": state.get("conversation_references", []),
+               "references": model_references(state.get("conversation_references", [])),
                "bound_slots": state.get("prepared_decision", {}).get("bound_slots", {})}
     return [{"role": "system", "content": prompt},
             {"role": "user", "content": json.dumps(context, ensure_ascii=False)}]

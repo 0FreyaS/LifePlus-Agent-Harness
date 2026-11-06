@@ -1,0 +1,513 @@
+{
+  "scope": "same_real_proposals_and_corrected_state_host_replay_not_model_or_e2e_AB",
+  "baseline": "eab3c41",
+  "baseline_sources": {
+    "user_events": "686f5d34b7d1446837f0b91b558c1d05a04788faea47a0cf9a0ba88b95606bdd",
+    "input_events": "7d10f93fd370cf9bf4f5959ff7fdca70952b30b92ba6341d2a9b4bc85cd83a48"
+  },
+  "tested": 100,
+  "before": 82,
+  "after": 98,
+  "rows": [
+    {
+      "id": "pure01",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure02",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure03",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure04",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure05",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure06",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure07",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure08",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure09",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure10",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure11",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "pure12",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound01",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound02",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound03",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound04",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound05",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound06",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound07",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound08",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound09",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound10",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound11",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "compound12",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary01",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary02",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary03",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary04",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary05",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary06",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary07",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary08",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary09",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary10",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary11",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "boundary12",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-037",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-038",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-039",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-040",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-041",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-042",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-043",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-044",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-045",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-046",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-047",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-048",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-049",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-050",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-051",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-052",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-053",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-054",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-055",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-056",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-057",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-058",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-059",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-060",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-061",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-062",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-063",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-064",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-065",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-066",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-067",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-068",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-069",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-070",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-071",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-072",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-073",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-074",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-075",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-076",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-077",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-078",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-079",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-080",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-081",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-082",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-083",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-084",
+      "before": false,
+      "after": false
+    },
+    {
+      "id": "event-085",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-086",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-087",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-088",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-089",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-090",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-091",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-092",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-093",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-094",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-095",
+      "before": false,
+      "after": true
+    },
+    {
+      "id": "event-096",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-097",
+      "before": false,
+      "after": false
+    },
+    {
+      "id": "event-098",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-099",
+      "before": true,
+      "after": true
+    },
+    {
+      "id": "event-100",
+      "before": false,
+      "after": true
+    }
+  ]
+}

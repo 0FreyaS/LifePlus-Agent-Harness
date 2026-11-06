@@ -1,0 +1,43 @@
+{
+  "started_at": "2026-11-06T08:52:10.215590+00:00",
+  "model": "deepseek-flash",
+  "cases": 100,
+  "dataset": "evaluations/data/calibrated-20261106-v2/events.jsonl",
+  "input_event_provider": "llm_direct",
+  "concurrency": 1,
+  "timeout_seconds": 25.0,
+  "scope": "real configured model and production resolver; no business tools, HTTP, or browser execution",
+  "cases_sha256": "4a8147540cd63d3920806c808a075d24d9a15b5684bc1bcbabc9776530f32f2e",
+  "source_sha256": {
+    "src/car_agent/input_events.py": "5d9ecd3d11e5691b354f0ece5e27c494631d779131d6444fb31ac5e3dbedd70f",
+    "src/car_agent/user_events.py": "76c497aa495b8457ed292749ced4d563fefe4a60e9b6b6672c944c14a971dfd0",
+    "evaluations/input_event_cases.py": "3e0aafd3cfc834d97c622d23f58e09f52a133a56ef68c58dc6f4d604145aa37f"
+  },
+  "passed": 99,
+  "tested": 100,
+  "by_source": {
+    "llm": {
+      "tested": 100,
+      "passed": 99
+    }
+  },
+  "failures": [
+    {
+      "id": "event-093",
+      "errors": [
+        "route",
+        "target",
+        "new_task_presence"
+      ]
+    }
+  ],
+  "p50_ms": 886,
+  "p95_ms": 1214,
+  "known_total_tokens": 84610,
+  "responses_missing_usage": 0,
+  "portable_usage": {
+    "known_total_tokens": 84610,
+    "attempts_missing_usage": 0,
+    "total_tokens": 84610
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "started_at": "2026-11-06T08:47:03.048283+00:00",
+  "model": "deepseek-flash",
+  "cases": 100,
+  "dataset": "evaluations/data/calibrated-20261106/events.jsonl",
+  "input_event_provider": "llm_direct",
+  "concurrency": 1,
+  "timeout_seconds": 25.0,
+  "scope": "real configured model and production resolver; no business tools, HTTP, or browser execution",
+  "cases_sha256": "9a123c32c05b4b398f695342c5d2abbe179c4288500888636f9c7e76d1f1c253",
+  "source_sha256": {
+    "src/car_agent/input_events.py": "0001a83009354cfb22483a29394d2420040423720f3ded61b4b2484465368573",
+    "src/car_agent/user_events.py": "76c497aa495b8457ed292749ced4d563fefe4a60e9b6b6672c944c14a971dfd0",
+    "evaluations/input_event_cases.py": "3ed517968a3acbe46d7564fbae3ed8d888913afe4e1b398a9da73ff57799c66e"
+  },
+  "passed": 93,
+  "tested": 100,
+  "by_source": {
+    "llm": {
+      "tested": 100,
+      "passed": 93
+    }
+  },
+  "failures": [
+    {
+      "id": "boundary03",
+      "errors": [
+        "route",
+        "target"
+      ]
+    },
+    {
+      "id": "event-066",
+      "errors": [
+        "route",
+        "target",
+        "selection",
+        "new_task_presence",
+        "new_task_content"
+      ]
+    },
+    {
+      "id": "event-093",
+      "errors": [
+        "route",
+        "target",
+        "selection",
+        "new_task_presence",
+        "new_task_content"
+      ]
+    },
+    {
+      "id": "event-094",
+      "errors": [
+        "route",
+        "target",
+        "selection",
+        "new_task_presence",
+        "new_task_content"
+      ]
+    },
+    {
+      "id": "event-095",
+      "errors": [
+        "route",
+        "target",
+        "selection",
+        "new_task_presence",
+        "new_task_content"
+      ]
+    },
+    {
+      "id": "event-096",
+      "errors": [
+        "route",
+        "target",
+        "selection",
+        "new_task_presence",
+        "new_task_content"
+      ]
+    },
+    {
+      "id": "event-097",
+      "errors": [
+        "route",
+        "target",
+        "selection",
+        "new_task_content"
+      ]
+    }
+  ],
+  "p50_ms": 904,
+  "p95_ms": 1317,
+  "known_total_tokens": 81170,
+  "responses_missing_usage": 0,
+  "portable_usage": {
+    "known_total_tokens": 81170,
+    "attempts_missing_usage": 0,
+    "total_tokens": 81170
+  }
+}

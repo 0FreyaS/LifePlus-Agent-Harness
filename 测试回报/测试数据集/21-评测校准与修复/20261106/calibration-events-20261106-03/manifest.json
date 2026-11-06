@@ -1,0 +1,16 @@
+{
+  "started_at": "2026-11-06T09:07:17.116591+00:00",
+  "model": "deepseek-flash",
+  "cases": 100,
+  "dataset": "evaluations/data/calibrated-20261106-v3/events.jsonl",
+  "input_event_provider": "llm_direct",
+  "concurrency": 1,
+  "timeout_seconds": 25.0,
+  "scope": "real configured model and production resolver; no business tools, HTTP, or browser execution",
+  "cases_sha256": "54bdcfb8bac84432c909bad0ec20f6025ea3f1dbb5020e16d5db1a877fd88cef",
+  "source_sha256": {
+    "src/car_agent/input_events.py": "f91a5b8421a1b68b0755d5cc59e3c03df8b9745e5ee235403ca27ab9cacf6708",
+    "src/car_agent/user_events.py": "76c497aa495b8457ed292749ced4d563fefe4a60e9b6b6672c944c14a971dfd0",
+    "evaluations/input_event_cases.py": "3e0aafd3cfc834d97c622d23f58e09f52a133a56ef68c58dc6f4d604145aa37f"
+  }
+}

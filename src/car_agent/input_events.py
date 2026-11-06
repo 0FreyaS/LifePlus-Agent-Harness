@@ -15,7 +15,7 @@ from .conversation import city_reply, selection_reply
 from .freshness import expired, utcnow
 from .runtime_limits import execution_scope
 from .structured_output import invoke_structured
-from .user_events import ORDINAL_REPLY, selection_index, split_resume_message
+from .user_events import ORDINAL_REPLY, strict_selection_index, split_resume_message
 
 
 class InputDecision(BaseModel):
@@ -58,7 +58,28 @@ class InputAudit:
 
 
 NEW_COMMAND = re.compile(r"^(?:请|帮我)?(?:查询|查看|查|搜索|搜|播放|导航|找|推荐|提醒我|创建提醒|保存行程|介绍|解释)")
-CANCEL = re.compile(r"^(?:请|帮我)?(?:取消|停止)(?:这个|当前|刚才的)?(?:任务|查询|搜索|导航)?[吧。！!]*$")
+CANCEL = re.compile(
+    r"^(?:请|帮我)?(?:(?:取消|停止|终止)(?:这个|当前|刚才的?|刚才那个)?"
+    r"(?:任务|查询|搜索|导航(?:任务)?|路线|歌曲搜索|音乐搜索|歌曲|音乐|保存行程|保存路线|提醒|天气查询)?"
+    r"|把(?:这个|当前|刚才的?)?(?:导航|路线|歌曲搜索|音乐|保存行程|提醒|任务)(?:取消掉|取消|停止)"
+    r"|(?:歌曲|音乐|导航|路线)(?:不用搜了|不用查了|不用了)|不要(?:这个)?路线了|别继续了|不想选了[，,]?取消)[吧。！!]*$")
+
+
+def cancel_matches(text, task):
+    if not CANCEL.fullmatch(text):
+        return False
+    domain, query = task.get("domain"), task.get("query", "")
+    if "提醒" in text:
+        return domain == "planning" and "提醒" in query
+    if "保存" in text or "行程" in text:
+        return domain == "planning" and bool(re.search(r"保存|行程", query))
+    if re.search(r"歌曲|音乐", text):
+        return domain == "music"
+    if "天气" in text:
+        return domain == "weather"
+    if re.search(r"导航|路线", text):
+        return domain == "navigation" or (domain == "local_life" and bool(re.search(r"导航|路线|怎么走", query)))
+    return True
 
 
 def unclear(message="这条回复的任务归属或需求不够明确，请在对应任务卡片中补充或说明。"):
@@ -70,12 +91,7 @@ def active_waiting(waiting):
 
 
 def exact_selection(text, candidates):
-    if ORDINAL_REPLY.fullmatch(text):
-        return selection_index({"text": text}, candidates)
-    matched = [i for i, item in enumerate(candidates, 1) if item.get("name") and re.fullmatch(
-        r"(?:我选|选择|先选|选|我想要|我要|就要|给我|要)?" + re.escape(item["name"])
-        + r"(?:那首|这首|那家|这家|那条|这条)?[吧。！!]*", text)]
-    return matched[0] if len(matched) == 1 else None
+    return strict_selection_index(text, candidates)
 
 
 def rule_decision(query, waiting, cities, focus=None):
@@ -98,8 +114,9 @@ def rule_decision(query, waiting, cities, focus=None):
     if ORDINAL_REPLY.fullmatch(text):
         return unclear("当前候选不明确、已过期或多个任务同时等待，请在对应任务卡片中选择。")
     if CANCEL.fullmatch(text):
-        if len(targets) == 1:
-            return InputDecision(route="cancel", task_id=targets[0]["id"], answer=text)
+        matching = [task for task in targets if cancel_matches(text, task)]
+        if len(matching) == 1:
+            return InputDecision(route="cancel", task_id=matching[0]["id"], answer=text)
         return unclear("请说明要取消哪个任务，或使用对应任务卡片的取消按钮。")
     if any(json.loads(t["interrupt_json"]).get("kind") == "approval" for t in targets) and re.fullmatch(
         r"(?:好的?|可以的?|同意|确认)[，,\s]*(?:直接)?(?:帮我)?(?:保存|执行|确认)?吧?[。！!]*", text
@@ -119,15 +136,32 @@ def grounded_decision(decision, query, waiting, focus=None):
     if decision.route == "clarify":
         return decision
     if decision.route == "new":
-        if ORDINAL_REPLY.match(query) and any(json.loads(t["interrupt_json"]).get("kind") == "selection" for t in active_waiting(waiting)):
+        if CANCEL.fullmatch(query.strip()) and active_waiting(waiting):
+            return unclear("这是一条取消已有任务的请求，请明确取消目标或使用对应任务卡片。")
+        discussion = not re.search(r"[，,；;]", query) and re.search(r"是什么意思|什么意思|是什么歌|如何理解|怎么理解", query)
+        if not discussion and ORDINAL_REPLY.match(query) and any(json.loads(t["interrupt_json"]).get("kind") == "selection" for t in active_waiting(waiting)):
             return unclear("这条输入可能还包含候选选择，请明确原任务回复与新增需求。")
+        parts = re.split(r"[，,；;]", query, maxsplit=1)
+        if len(parts) == 2 and any(exact_selection(parts[0], json.loads(task["interrupt_json"]).get("candidates", [])) is not None
+                                  for task in active_waiting(waiting) if json.loads(task["interrupt_json"]).get("kind") == "selection"):
+            return unclear("这条输入包含候选回复，请分别确认原任务选择与新增需求。")
         return decision if decision.new_query == query.strip() else unclear()
     target = next((t for t in active_waiting(waiting) if t["id"] == decision.task_id), None)
     if target is None or (focus and target["id"] != focus):
         return unclear("任务归属不明确或候选已过期，请使用对应任务卡片。")
     answer, new_query = decision.answer or "", decision.new_query or ""
+    pending = json.loads(target["interrupt_json"])
+    if pending.get("kind") == "selection" and not new_query:
+        complete = exact_selection(query, pending.get("candidates", []))
+        if complete is not None and complete == exact_selection(answer, pending.get("candidates", [])):
+            answer = query.strip()
+            decision = decision.model_copy(update={"answer": answer})
     if new_query and re.match(r"^(?:不要|别|不用|不需要)", new_query):
         return unclear("请明确说明原任务选择及需要执行的新需求；否定要求不会自动创建任务。")
+    control = re.sub(r"^(?:同时|顺便|另外|再|然后)", "", new_query).strip()
+    if control and (re.search(r"^(?:请|帮我)?(?:取消|停止|终止).*(?:任务|导航|路线|歌曲搜索|音乐搜索)", control)
+                    or (CANCEL.fullmatch(control) and "提醒" not in control)):
+        return unclear("这条回复还包含取消已有任务的操作，请使用对应任务卡片，或分别说明选择与取消目标。")
     start, new_start = query.find(answer), query.find(new_query) if new_query else -1
     if start < 0 or (new_query and (new_start < 0 or not (new_start + len(new_query) <= start or start + len(answer) <= new_start))):
         return unclear("无法可靠拆分原回复与新增需求，请分别说明。")
@@ -136,14 +170,14 @@ def grounded_decision(decision, query, waiting, focus=None):
         remainder = remainder.replace(new_query, "", 1)
     # Only discourse markers and the selected task's domain label may remain.
     labels = {"music": "音乐|歌曲|歌", "navigation": "地点|地址|路线|校区", "local_life": "地点|商家|饭店|餐厅", "weather": "天气"}
-    filler = r"同时|顺便|另外|并且|然后|还要|还有|再|也|请|帮我|我想要|我要|就要|给我|那首|这首|那家|这家|那条|这条|我选|选择|选|吧"
+    filler = r"同时|顺便|另外|并且|并|然后|还要|还有|再|也|请|帮我|我想要|我要|就要|给我|那首|这首|那家|这家|那条|这条|我选|选择|选|吧"
     domain = labels.get(target.get("domain"), "(?!)")
     remainder = re.sub(rf"{filler}|{domain}|[\s，,；;。！!？?：:]", "", remainder)
     if remainder:
         return unclear("这句话还有未确认的需求，请分别说明原任务回复和新增任务。")
-    pending = json.loads(target["interrupt_json"])
     if decision.route == "cancel":
-        return decision if CANCEL.fullmatch(answer) else unclear("请明确说明要取消的任务。")
+        matching = [task for task in active_waiting(waiting) if (not focus or task["id"] == focus) and cancel_matches(answer, task)]
+        return decision if len(matching) == 1 and matching[0]["id"] == target["id"] else unclear("请明确说明要取消的任务。")
     if pending.get("kind") == "approval":
         return unclear("该操作需要明确授权，请使用任务卡片中的确认或拒绝按钮。")
     if pending.get("kind") == "selection":
@@ -151,6 +185,13 @@ def grounded_decision(decision, query, waiting, focus=None):
         normalized = re.sub(rf"^(?:{domain})(?:列表)?", "", answer)
         if exact_selection(normalized, pending.get("candidates", [])) is None:
             return unclear("没有找到唯一有效的候选，请在原任务卡片中选择。")
+        selection_span = query.replace(new_query, "", 1) if new_query else query
+        if not focus and not re.search(domain, selection_span):
+            compatible = [task for task in active_waiting(waiting)
+                          if json.loads(task["interrupt_json"]).get("kind") == "selection"
+                          and exact_selection(normalized, json.loads(task["interrupt_json"]).get("candidates", [])) is not None]
+            if len(compatible) > 1:
+                return unclear("多个任务都能接收这个选择，请说明歌曲、地点或使用对应卡片。")
         decision = decision.model_copy(update={"answer": normalized})
     if pending.get("kind") not in {"selection", "clarification"}:
         return unclear()
@@ -172,7 +213,10 @@ def event_messages(query, waiting, history, focus=None):
         "一次最多恢复或取消一个旧任务，并可附带一个新增需求片段；新增片段内部可包含多个业务任务。"
         "route取new/resume/cancel/clarify。resume/cancel的task_id只能来自提供的任务；焦点任务存在时只能回复该任务。"
         "answer和new_query必须逐字截取当前用户原文，不改写，不增加动作，保留否定与约束。"
+        "澄清字段remind_at表示提醒时间；用户提供带时区ISO-8601时间或明确的自然语言日期时间时，应resume并保留完整原文，不能再次要求用户提供同样的信息。"
         "选择类answer尽量只取序数或候选名；歌曲/地点等标签只用于定位任务。新需求也可以出现在选择之前。"
+        "明确候选名之后附带解释或查询也要拆开：候选名用于恢复，后面的完整原文作为new_query，不能整句都作为new而遗失选择。"
+        "纠正表达如'不是第二个，是第一个'的answer保留完整纠正句，不丢掉被否定项。"
         "只回复旧任务时new_query=null；纯新任务时new_query为完整用户原文。不得遗漏附带需求。"
         "例如'第二个吧，杭州那边的天气也帮我看看'，answer='第二个吧'，new_query='杭州那边的天气也帮我看看'。"
         "多个候选列表都可能接收'第二个'时必须clarify，不能凭最近一个猜测；'歌曲第二首'可按明确领域匹配。"
@@ -186,7 +230,7 @@ def event_messages(query, waiting, history, focus=None):
         + json.dumps(InputDecision.model_json_schema(), ensure_ascii=False)
     )
     return [{"role": "system", "content": prompt}, {"role": "user", "content": json.dumps({
-        "input": query, "focus_task_id": focus, "waiting": snapshots,
+        "input": query, "current_time": utcnow().isoformat(), "focus_task_id": focus, "waiting": snapshots,
         "recent_history": [{"role": m["role"], "content": m["content"][:500]} for m in history[-6:]],
     }, ensure_ascii=False)}]
 

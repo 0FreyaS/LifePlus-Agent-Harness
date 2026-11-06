@@ -76,8 +76,16 @@ class TaskCoordinator:
             history = await session_messages(self.db, session_id, completed_only=True,
                                              max_age_seconds=self.app.state.context.freshness.context_seconds)
             memory = await self.app.state.context.memory.build_context(owner, session_id, history)
+            from .conversation import followup_decision, model_references
+
+            followup = followup_decision(query, memory["conversation_references"])
+            if followup and followup.get("domain") == "planning":
+                await self.db.execute("UPDATE tasks SET plan_json=? WHERE id=?", (json.dumps(followup, ensure_ascii=False), task_id))
+                await self.db.publish(task_id, "plan.completed", {"source": "conversation_reference", "tasks": [followup]})
+                await self.run_task(self.app, task_id, session_id, owner, query, mode)
+                return
             brief = memory["memory_brief"] + "\n用户偏好：" + json.dumps(memory["preferences"], ensure_ascii=False)
-            brief += "\n有效会话引用：" + json.dumps(memory["conversation_references"], ensure_ascii=False)
+            brief += "\n有效会话引用：" + json.dumps(model_references(memory["conversation_references"]), ensure_ascii=False)
             async with execution_scope(self.db, task_id, self.app.state.context.limits, "planning"):
                 context = self.app.state.context
                 # Demo keeps its deterministic splitter. The LLM planning
@@ -152,6 +160,9 @@ class TaskCoordinator:
                      "route": state.get("tool_result", {}).get("route_result", {}),
                      "result": state.get("tool_result", {}), "slots": state.get("slots", {})}
             for key in keys:
+                if isinstance(value, list) and key.isdecimal() and 0 <= int(key) < len(value):
+                    value = value[int(key)]
+                    continue
                 if not isinstance(value, dict) or key not in value:
                     raise ValueError(f"前置任务未提供绑定字段：{path}")
                 value = value[key]

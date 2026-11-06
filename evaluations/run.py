@@ -19,6 +19,9 @@ from langchain_openai import ChatOpenAI
 
 from car_agent.adapters.mcp_client import LocalMCPClient
 from car_agent.config import get_settings
+from car_agent.domain_routing import build_domain_router
+from car_agent.model_roles import build_models
+from car_agent.planning_gate import LLMPlanningGate, build_planning_gate
 from car_agent.harness import resolve_intent, resolve_domain_intent
 from car_agent.task_planning import plan_tasks
 
@@ -31,6 +34,7 @@ MODEL_GROUPS = {"single_task", "multi_task", "slot_extraction", "clarification"}
 class Usage(BaseCallbackHandler):
     def __init__(self):
         self.input_tokens = self.output_tokens = self.responses = self.missing = 0
+        self.total_tokens = 0
 
     def on_llm_end(self, response, **_):
         for generation in response.generations:
@@ -40,13 +44,20 @@ class Usage(BaseCallbackHandler):
             if usage:
                 self.input_tokens += usage.get("input_tokens", 0)
                 self.output_tokens += usage.get("output_tokens", 0)
+                self.total_tokens += usage.get("total_tokens", usage.get("input_tokens", 0) + usage.get("output_tokens", 0))
             else:
                 self.missing += 1
 
     def value(self):
         return {"responses": self.responses, "input_tokens": self.input_tokens if self.responses > self.missing else None,
                 "output_tokens": self.output_tokens if self.responses > self.missing else None,
+                "known_total_tokens": self.total_tokens,
+                "total_tokens": self.total_tokens if not self.missing else None,
                 "responses_missing_usage": self.missing}
+
+    def on_llm_error(self, error, **_):
+        self.responses += 1
+        self.missing += 1
 
 
 def normalize(value, key=""):
@@ -60,7 +71,7 @@ def normalize(value, key=""):
 def expected_slots(slots, anchor):
     dates = {"$today": anchor.date().isoformat(), "$tomorrow": (anchor.date() + timedelta(days=1)).isoformat(),
              "$day_after": (anchor.date() + timedelta(days=2)).isoformat()}
-    for alias, days, hour in (("$tomorrow9", 1, 9), ("$day_after15", 2, 15), ("$tomorrow20", 1, 20)):
+    for alias, days, hour in (("$tomorrow9", 1, 9), ("$day_after15", 2, 15), ("$tomorrow20", 1, 20), ("$tomorrow14", 1, 14)):
         dates[alias] = (anchor + timedelta(days=days)).replace(hour=hour, minute=0, second=0, microsecond=0).isoformat()
     return {key: dates.get(value, value) if isinstance(value, str) else value for key, value in slots.items()}
 
@@ -73,17 +84,17 @@ def score_decision(case, prediction, anchor):
         good = prediction.get("domain") == expected["domain"]
         metrics["domain_accuracy"] = [int(good), 1]
         checks.append(good)
-    if "action" in expected:
+    if expected.get("action") is not None:
         good = prediction.get("action") == expected["action"]
         metrics["intent_exact"] = [int(all(checks) and good), 1]
         checks.append(good)
     if "slots" in expected:
         targets = expected_slots(expected["slots"], anchor)
-        predicted = prediction.get("slots", {})
+        predicted = prediction.get("extracted_slots", {}) if expected.get("slot_stage") == "extracted" else prediction.get("slots", {})
         matches = {}
         for key, target in targets.items():
             actual = predicted.get(key)
-            if target is None:
+            if target is None or target == "":
                 good = actual in (None, "")
             elif key == "remind_at":
                 try:
@@ -101,21 +112,39 @@ def score_decision(case, prediction, anchor):
 
 def score_plan(case, tasks):
     expected = case["expected"]
+    if expected.get("equivalent_plans"):
+        choices = [score_plan({"expected": candidate}, tasks) for candidate in (
+            {key: value for key, value in expected.items() if key != "equivalent_plans"}, *expected["equivalent_plans"])]
+        return max(choices, key=lambda choice: (choice[0], sum(pair[0] for pair in choice[1].values())))
     target, actual = Counter(expected["domains"]), Counter(task["domain"] for task in tasks)
     matched = sum((target & actual).values())
     exact = target == actual
-    if expected["dependency"] == "independent":
+    if expected["dependency"] in {"none", "independent"}:
         dependency_ok = not any(task.get("depends_on") or task.get("bind_slots") for task in tasks)
     else:
         roots = {task["id"] for task in tasks if task["domain"] == expected["domains"][0]}
         dependency_ok = any(task["domain"] == expected["domains"][-1]
             and roots.intersection(task.get("depends_on", []))
             and any(path.split(".")[0] in roots for path in task.get("bind_slots", {}).values()) for task in tasks)
-    return exact and dependency_ok, {
+    goals = expected.get("goals", [])
+    def matches(goal, task):
+        query = normalize(task.get("query", ""))
+        return goal["domain"] == task["domain"] and all(normalize(term) in query for term in goal.get("query_contains", []))
+    def covered(index, used):
+        if index == len(goals):
+            return 0
+        return max([covered(index + 1, used), *[1 + covered(index + 1, used | {j})
+            for j, task in enumerate(tasks) if j not in used and matches(goals[index], task)]])
+    coverage = covered(0, set()) if goals else 0
+    coverage_ok = not goals or coverage == len(goals)
+    metrics = {
         "task_domain_multiset_exact": [int(exact), 1], "task_domain_precision": [matched, len(tasks)],
         "task_domain_recall": [matched, len(expected["domains"])],
         "dependency_policy_accuracy": [int(dependency_ok), 1],
     }
+    if goals:
+        metrics["annotated_goal_coverage"] = [coverage, len(goals)]
+    return exact and dependency_ok and coverage_ok, metrics
 
 
 def error_metrics(case):
@@ -213,29 +242,33 @@ def write_report(path, report):
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
-async def model_case(case, llm, lab, anchor):
+async def model_case(case, llm, lab, anchor, *, context=None):
+    context = context or SimpleNamespace(llm=llm, planning_gate=LLMPlanningGate())
     if case["group"] == "multi_task":
-        plan = await plan_tasks(case["query"], "live", llm)
+        planner = getattr(context, "model_roles", {}).get("planner", llm)
+        plan = await plan_tasks(case["query"], "live", planner, now=anchor, gate=context.planning_gate)
         if plan:
             tasks = [task.model_dump() for task in plan.tasks]
         else:
-            decision = await resolve_intent({"original_query": case["query"], "mode": "live"}, {}, SimpleNamespace(context=SimpleNamespace(llm=llm)))
+            decision = await resolve_intent({"original_query": case["query"], "mode": "live"}, {}, SimpleNamespace(context=context))
             tasks = [{"id": "single", **decision}]
         passed, metrics = score_plan(case, tasks)
         return passed, metrics, {"tasks": tasks}
     state = {"original_query": case["query"], "mode": "live"}
-    runtime = SimpleNamespace(context=SimpleNamespace(llm=llm))
+    runtime = SimpleNamespace(context=context)
     state.update(await resolve_intent(state, {}, runtime))
     decision = await resolve_domain_intent(state, {}, runtime)
     if case["group"] == "clarification":
         result = await lab.clarification(case, decision)
         expected, actual = case["expected"]["missing_field"], result["missing_field"]
+        valid_fields = case["expected"].get("acceptable_missing_fields", [expected])
+        correct = actual in valid_fields
         necessary = expected is not None
-        metrics = {"clarification_field_accuracy": [int(actual == expected), 1]}
+        metrics = {"clarification_field_accuracy": [int(correct), 1]}
         metrics["necessary_clarification_recall" if necessary else "unnecessary_clarification_rate"] = [int(actual is not None), 1]
         if necessary:
-            metrics["necessary_clarification_correct_field_recall"] = [int(actual == expected), 1]
-        return actual == expected, metrics, {"decision": decision, "graph": result}
+            metrics["necessary_clarification_correct_field_recall"] = [int(correct), 1]
+        return correct, metrics, {"decision": decision, "graph": result}
     passed, metrics = score_decision(case, decision, anchor)
     return passed, metrics, decision
 
@@ -252,18 +285,26 @@ async def run(args):
     if unknown:
         raise ValueError(f"Unknown groups: {sorted(unknown)}")
     cases = [case for case in cases if case["group"] in selected]
+    if getattr(args, "ids", None):
+        wanted = set(args.ids.split(","))
+        cases = [case for case in cases if case["id"] in wanted]
+        if wanted != {case["id"] for case in cases}:
+            raise ValueError("Unknown case ID")
     settings = get_settings()
     anchor = datetime.now(TZ)
     output = Path(args.output or f"evaluations/runs/{anchor.strftime('%Y%m%d-%H%M%S')}")
     output.mkdir(parents=True, exist_ok=True)
-    metadata = {"version": 1, "dataset_sha256": hashlib.sha256(data).hexdigest(),
+    metadata = {"version": 2, "dataset_sha256": hashlib.sha256(data).hexdigest(),
         "started_at": anchor.isoformat(), "model": settings.model_name,
         "concurrency": args.concurrency, "selected_groups": sorted(selected),
         "real_tool_min_interval_seconds": args.tool_interval,
         "source_sha256": {name: hashlib.sha256(Path(name).read_bytes()).hexdigest() for name in (
             "src/car_agent/harness.py", "src/car_agent/task_planning.py", "src/car_agent/tool_queue.py",
             "evaluations/dataset.py", "evaluations/runtime.py", "evaluations/run.py")},
-        "scope": "component_evaluation_not_end_to_end_sla"}
+        "scope": "component_evaluation_not_end_to_end_sla",
+        "execution_conditions": {key: getattr(settings, key) for key in (
+            "input_event_provider", "planning_gate_provider", "domain_route_provider", "model_thinking",
+            "default_current_location", "default_current_city")}}
     manifest = output / "manifest.json"
     rows_path = output / "results.jsonl"
     if manifest.exists():
@@ -279,12 +320,13 @@ async def run(args):
     rows = [json.loads(line) for line in rows_path.read_text().splitlines()] if rows_path.exists() else []
     done = {row["id"] for row in rows}
     semaphore = asyncio.Semaphore(args.concurrency)
-    base_llm = None
+    base_llm, roles, domain_router, planning_gate = None, {}, None, None
     if selected & MODEL_GROUPS:
         if not settings.model_api_key or not settings.model_base_url or not settings.model_name:
             raise RuntimeError("Real model configuration is missing; never fall back to demo")
-        base_llm = ChatOpenAI(base_url=settings.model_base_url, api_key=settings.model_api_key,
-            model=settings.model_name, temperature=0, timeout=25, max_retries=1)
+        base_llm, roles = build_models(settings)
+        domain_router = build_domain_router(settings)
+        planning_gate = build_planning_gate(settings)
 
     def persist(row):
         rows.append(row)
@@ -304,7 +346,9 @@ async def run(args):
                        "query": case["query"], "expected": case["expected"]}
                 try:
                     llm = base_llm.model_copy(update={"callbacks": [usage]})
-                    passed, metrics, prediction = await asyncio.wait_for(model_case(case, llm, lab, anchor), 75)
+                    context = SimpleNamespace(llm=llm, model_roles={role: client.model_copy(update={"callbacks": [usage]})
+                        for role, client in roles.items()}, planning_gate=planning_gate, domain_router=domain_router)
+                    passed, metrics, prediction = await asyncio.wait_for(model_case(case, llm, lab, anchor, context=context), 75)
                     row.update(passed=passed, metrics=metrics, prediction=prediction)
                 except Exception as exc:
                     error = str(exc).replace(settings.model_api_key or "__unset_secret__", "[REDACTED]")
@@ -326,6 +370,10 @@ async def run(args):
                 row.update(passed=False, error_type=type(exc).__name__, error=str(exc)[:1200], metrics={"scenario_assertion_pass": [0, 1]})
             row["elapsed_ms"] = round((perf_counter() - start) * 1000)
             persist(row)
+    if domain_router:
+        await domain_router.close()
+    if planning_gate:
+        await planning_gate.close()
     if "real_tools" in selected:
         with TemporaryDirectory(prefix="lifeplus-eval-mcp-") as temporary:
             environment = dict(os.environ, LIFEPLUS_DATA_PATH=str(Path(temporary) / "tools.sqlite3"))
@@ -382,6 +430,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default="evaluations/data/lifeplus-v1.jsonl")
     parser.add_argument("--groups", default="all")
+    parser.add_argument("--ids")
     parser.add_argument("--concurrency", type=int, default=3)
     parser.add_argument("--output")
     parser.add_argument("--resume", action="store_true")

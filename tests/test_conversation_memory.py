@@ -58,6 +58,27 @@ async def test_weather_followup_retains_city_but_requeries_date(client):
 
 
 @pytest.mark.asyncio
+async def test_save_previous_route_uses_receipt_without_planning_an_external_dependency(client):
+    original = app.state.context.tool_queue.dispatcher
+    async def controlled_route(name, args, task_id):
+        if name == "maps_route":
+            return {"ok": True, "origin": args["origin"], "destination": args["destination"],
+                    "distance_m": 2000, "duration_s": 300, "travel_mode": args["travel_mode"]}
+        return await original(name, args, task_id)
+    app.state.context.tool_queue.dispatcher = controlled_route
+    first, session = await send(client, "从无锡站导航到东南大学无锡国际校区")
+    await wait(client, first["task_id"], "waiting_user")
+    await send(client, "第一个", session)
+    await wait(client, first["task_id"], "completed")
+    saved, _ = await send(client, "把刚才的路线存起来", session)
+    waiting = await wait(client, saved["task_id"], "waiting_user")
+    assert waiting["interrupt"]["kind"] == "approval"
+    trace = (await client.get(f"/api/tasks/{saved['task_id']}/trace")).json()
+    assert any(event["type"] == "plan.completed" and event.get("source") == "conversation_reference" for event in trace)
+    assert not any(event["type"] == "tool.started" for event in trace)
+
+
+@pytest.mark.asyncio
 async def test_city_clarification_can_be_answered_in_the_composer(client):
     first, session = await send(client, "明天天气怎么样")
     await wait(client, first["task_id"], "waiting_user")

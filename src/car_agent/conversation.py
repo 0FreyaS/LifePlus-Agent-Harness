@@ -11,6 +11,13 @@ from .travel_modes import explicit_travel_mode
 from .user_events import selection_index
 
 RELATIVE_ROUTE = re.compile(r"^(?:请|帮我)?(?:导航过去|导航到那里|带我过去|怎么去那里|(?:骑行|骑车|驾车|开车|步行|走路)过去)[吧。！？!?]*$")
+SAVE_ROUTE = re.compile(r"^(?:请|帮我)?(?:把)?(?:刚才|刚刚|上一条|上一个)(?:的)?路线(?:存起来|保存起来|保存到行程|保存|加入行程)[吧。！？!?]*$")
+
+
+def model_references(references):
+    """Models see reference handles; the host retains complete execution receipts."""
+    return [{**{key: value for key, value in reference.items() if key != "route"},
+             "route_available": bool(reference.get("route"))} for reference in references]
 
 
 async def save_reference(db, state: dict, freshness) -> None:
@@ -27,6 +34,10 @@ async def save_reference(db, state: dict, freshness) -> None:
                "slots": {key: slots[key] for key in ("city", "forecast_date", "origin", "destination", "travel_mode", "keyword", "anchor") if key in slots}}
     if selected:
         payload["selected"] = {key: selected[key] for key in ("id", "name", "location", "address", "city", "singer") if key in selected}
+    route = result.get("route_result") or (result if result.get("distance_m") else {})
+    if route.get("ok") is True and route.get("distance_m", 0) > 0 and route.get("duration_s", 0) > 0:
+        from .route_geometry import without_map_geometry
+        payload["route"] = without_map_geometry(route)
     now = utcnow()
     seconds = freshness.context_seconds if domain == "weather" else freshness.selection_seconds
     deadline = now + timedelta(seconds=seconds)
@@ -56,6 +67,15 @@ async def load_references(db, owner: str, session: str) -> list[dict]:
 
 def followup_decision(query: str, references: list[dict]) -> dict | None:
     text = query.strip()
+    if SAVE_ROUTE.fullmatch(text):
+        routes = [ref for ref in references if ref.get("route") and not expired(ref["route"].get("_freshness") or {})]
+        if len(routes) == 1:
+            source = routes[0]
+            destination = (source.get("selected") or {}).get("name") or source.get("slots", {}).get("destination") or "目的地"
+            return {"domain": "planning", "action": "save_itinerary", "slots": {
+                "title": f"前往{destination}的路线", "details": source["route"]},
+                "context_source_task_id": source["source_task_id"]}
+        return {"domain": "planning", "action": "save_itinerary", "slots": {}, "requires_route_reference": True}
     day = re.fullmatch(r"(?:那)?(明天|后天)(?:的天气)?(?:呢|怎么样)?[？?。]*", text)
     if day and references and references[0].get("domain") == "weather":
         source = references[0]

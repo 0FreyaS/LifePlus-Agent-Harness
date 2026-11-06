@@ -42,6 +42,8 @@ def validate_binding_source(target: str, path: str, source_domain: str) -> None:
             {"source_task": parts[0], "target": target, "domain": source_domain, "allowed": ",".join(sorted(FIELDS[source_domain]))})
     if root == "selected" and source_domain not in {"navigation", "local_life", "music"}:
         raise PydanticCustomError("binding_source_export", "前置领域不提供候选选择对象", {"source_task": parts[0], "domain": source_domain})
+    if root == "selected" and len(parts) > 2 and parts[2] not in {"id", "name", "location", "address", "city", "singer", "url", "mid", "rating", "cost"}:
+        raise PydanticCustomError("binding_selected_field", "候选对象不包含该字段；POI标识使用selected.id", {"source_task": parts[0], "field": parts[2]})
     if root == "route" and source_domain not in {"navigation", "local_life"}:
         raise PydanticCustomError("binding_source_export", "前置领域不提供路线回执", {"source_task": parts[0], "domain": source_domain})
 
@@ -162,14 +164,18 @@ def planning_prompt(memory_brief: str = "", *, variant: str = "baseline", now: d
         "weather查天气；music歌曲检索；planning负责创建取消查询提醒、保存查询行程；wellbeing仅健康知识检索。"
         "local_life负责商家检索、详情及商家路线；navigation负责一般地点路线；chat负责闲聊与歌手介绍等知识问答。"
         "query必须保留本项目标、城市、时间、起终点、出行方式、否定及筛选限制。共享城市时间要传递到相关子任务，不增加用户未表达的信息。"
+        "地点的作用范围不能扩大：某个天气目标的城市不自动用于独立的商家目标。只有用户明确把城市作为所有任务的共同范围时才共享；未限定地点的商家查询交给宿主默认参考点。"
         "每个明确目标恰好覆盖一次；未知地点、时间和ID交给领域澄清，不猜值。"
         "同一领域也可能有不同目标，例如查看提醒和查看行程须分为两个planning任务。"
+        "查上海和无锡天气需要两个weather目标，分别保留上海和无锡，不能生成一个笼统查询或重复同一城市。"
+        "搜歌后保存结果、列出提醒后取消第二个都是两个目标，后项绑定前项真实结果或提醒ID；不能遗漏保存或取消。"
         "bind_slots是输入来源映射，不是槽位值：左侧是接收任务的合法字段，右侧是前置任务ID加证据路径。"
         "左侧按接收领域限制：" + json.dumps(GOAL_BINDING_FIELDS, ensure_ascii=False)
         + "。保存天气、歌曲或商家检索结果使用{\"details\":\"t1.result\"}；保存路线使用{\"details\":\"t1.route\"}。"
         "禁止把result、route、content、weather_result用作左侧key，它们不是接收业务字段；右侧t1.result则是合法的结果来源。"
         "例如查询天气后保存：t1为weather且无依赖；t2为planning，depends_on=[\"t1\"]，bind_slots={\"details\":\"t1.result\"}。"
         "来源只引用直接depends_on的任务，可引用selected(用户选中项)、route(路线回执)、result(工具结果)、slots及其字段。"
+        "商家POI标识是t1.selected.id，禁止t1.selected.poi_id。提醒列表没有selected：列出提醒后取消第二个使用reminder_id=t1.result.items.1.id，数组下标从0开始；只能读取实际存在的条目。"
         "origin/destination/city等标量字段不能绑定整个selected/result/route对象；选中地点坐标用t1.selected.location。"
         "slots字段必须确实属于前置领域，local_life只有anchor等字段，没有origin；当前请求已明确的无锡站等起点保留在后继query，"
         "不要为了建立依赖额外绑定origin/city或猜不存在的路径。selected只来自地点/商家/歌曲，route只来自导航/商家路线。"

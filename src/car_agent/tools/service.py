@@ -328,6 +328,16 @@ class LifeTools:
             params["city"] = city
         payload = await self._amap("v3/geocode/geo", **params)
         candidates = payload.get("geocodes") or []
+        if len(candidates) != 1 and re.search(r"大学|校区", value):
+            places = await self.maps_search(value, city)
+            pois = [item for item in places.get("items", []) if item.get("name") and item.get("location")]
+            canonical = {"东南大学无锡校区": "东南大学无锡国际校区"}.get(value, value)
+            exact = [item for item in pois if item["name"] == canonical]
+            if len(exact) == 1:
+                candidates = [{"location": exact[0]["location"]}]
+            elif pois:
+                raise ToolError("AMBIGUOUS_LOCATION", "请确认具体的校区或地点", field=field,
+                                requires_clarification=True, candidates=pois)
         if len(candidates) != 1:
             raise ToolError("AMBIGUOUS_LOCATION" if candidates else "NO_RESULTS",
                             "请补充更明确的起点或终点", field=field, requires_clarification=True,

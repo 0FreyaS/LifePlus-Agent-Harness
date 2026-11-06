@@ -72,6 +72,9 @@ class AgentState(TypedDict, total=False):
     domain: str
     action: str
     slots: dict[str, Any]
+    extracted_slots: dict[str, Any]
+    slot_sources: dict[str, str]
+    requires_route_reference: bool
     skill: str
     tool_name: str
     tool_args: dict[str, Any]

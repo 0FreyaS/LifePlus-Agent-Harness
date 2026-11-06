@@ -100,3 +100,21 @@ async def test_ambiguous_origin_remains_a_clarification_instead_of_first_candida
         "origin": "人民医院", "destination": "118.795193,32.054213"})
     assert result["requires_clarification"] is True and result["field"] == "origin"
     assert len(result["candidates"]) == 2
+
+
+@pytest.mark.asyncio
+async def test_ambiguous_campus_geocode_uses_exact_real_poi_instead_of_bus_stop(tmp_path):
+    def handler(request):
+        if request.url.path == "/v3/geocode/geo":
+            return httpx.Response(200, json={"status": "1", "geocodes": [
+                {"formatted_address": "无锡校区", "location": "120.1,31.5"},
+                {"formatted_address": "东南大学公交站", "location": "120.2,31.5"}]})
+        if request.url.path == "/v3/place/text":
+            return httpx.Response(200, json={"status": "1", "pois": [
+                {"id": "campus", "name": "东南大学无锡国际校区", "location": "120.260817,31.471941"},
+                {"id": "building", "name": "东南大学无锡国际校区南高院", "location": "120.261381,31.470508"}]})
+        assert request.url.params["origin"] == "120.260817,31.471941"
+        return httpx.Response(200, json={"status": "1", "route": {"paths": [{"distance": "15000", "duration": "2000"}]}})
+    result = await LifeTools(str(tmp_path / "campus.sqlite3"), "test-key", httpx.MockTransport(handler)).call("maps_route", {
+        "origin": "东南大学无锡校区", "destination": "120.30545,31.586899", "travel_mode": "driving"})
+    assert result["ok"] is True and result["origin"] == "120.260817,31.471941"

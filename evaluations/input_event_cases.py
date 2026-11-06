@@ -86,7 +86,7 @@ def make_waiting(case, now):
     from datetime import timedelta
     return [{"id": t["id"], "query": t["query"], "domain": t["domain"], "status": "waiting_user",
              "interrupt_json": json.dumps({"id": "i-" + t["id"], "kind": t["kind"], "field": t.get("field"),
-                 "expires_at": (now + timedelta(minutes=5)).isoformat(),
+                 "expires_at": (now + (timedelta(seconds=-1) if case.get("expired") else timedelta(minutes=5))).isoformat(),
                  "candidates": [{"name": name} for name in t.get("candidates", [])]}, ensure_ascii=False)} for t in case["waiting"]]
 
 
