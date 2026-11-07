@@ -45,9 +45,21 @@ async def invoke_structured(llm: Any, schema: Any, messages: list[dict], *, stag
         span_id, started = str(uuid4()), monotonic()
         usage = {}
         await record("model.attempt.started", stage=stage, attempt=attempt + 1, span_id=span_id,
-                     model_name=getattr(llm, "model_name", None))
+                     model_name=getattr(llm, "model_name", None), framework_traced=True)
         try:
-            value = await model.ainvoke(current)
+            config = None
+            if scope:
+                sink = getattr(scope.db, "event_sink", None)
+                handler = sink.callback_handler(scope.task_id) if sink else None
+                if handler:
+                    names = {
+                        "plan": "plan-tasks",
+                        "domain_route": "classify-domain",
+                        "domain_understanding": "extract-intent-and-slots",
+                        "input_events": "classify-input-event",
+                    }
+                    config = {"callbacks": [handler], "run_name": names.get(stage, "generate-structured-output")}
+            value = await model.ainvoke(current, config=config) if config else await model.ainvoke(current)
             if isinstance(value, dict) and {"raw", "parsed", "parsing_error"} <= value.keys():
                 usage = getattr(value["raw"], "usage_metadata", None) or {}
                 if value["parsing_error"]:
@@ -55,13 +67,14 @@ async def invoke_structured(llm: Any, schema: Any, messages: list[dict], *, stag
                 value = value["parsed"]
             value = schema.model_validate(value.model_dump() if callable(getattr(value, "model_dump", None)) else value)
             await record("model.attempt.completed", stage=stage, attempt=attempt + 1, span_id=span_id,
-                         elapsed_ms=round((monotonic() - started) * 1000), usage=usage, usage_known=bool(usage))
+                         elapsed_ms=round((monotonic() - started) * 1000), usage=usage,
+                         usage_known=bool(usage), framework_traced=True)
             return value
         except (OutputParserException, ValidationError) as exc:
             diagnostic = validation_diagnostics(exc)
             await record("model.attempt.failed", stage=stage, attempt=attempt + 1, span_id=span_id,
                          elapsed_ms=round((monotonic() - started) * 1000), error_type=type(exc).__name__,
-                         usage=usage, usage_known=bool(usage))
+                         usage=usage, usage_known=bool(usage), framework_traced=True)
             await record("model.structured.invalid", fallback=report, stage=stage, attempt=attempt + 1,
                          error_type=type(exc).__name__, will_retry=attempt == 0, diagnostics=diagnostic)
             if attempt:
@@ -76,5 +89,5 @@ async def invoke_structured(llm: Any, schema: Any, messages: list[dict], *, stag
         except BaseException as exc:
             await record("model.attempt.failed", stage=stage, attempt=attempt + 1, span_id=span_id,
                          elapsed_ms=round((monotonic() - started) * 1000), error_type=type(exc).__name__,
-                         usage=usage, usage_known=bool(usage))
+                         usage=usage, usage_known=bool(usage), framework_traced=True)
             raise

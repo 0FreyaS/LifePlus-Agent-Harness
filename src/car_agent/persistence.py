@@ -117,6 +117,10 @@ class Database:
         self.path = path
         self.conn: aiosqlite.Connection | None = None
         self.lock = asyncio.Lock()
+        self.event_sink = None
+
+    def set_event_sink(self, sink) -> None:
+        self.event_sink = sink
 
     async def open(self) -> None:
         self.conn = await aiosqlite.connect(self.path)
@@ -204,7 +208,8 @@ class Database:
             await self.conn.execute("BEGIN IMMEDIATE")
             try:
                 cursor = await self.conn.execute(
-                    "SELECT last_seq,parent_task_id FROM tasks WHERE id = ?", (task_id,)
+                    "SELECT last_seq,parent_task_id,session_id,user_id,request_id,query,mode,domain "
+                    "FROM tasks WHERE id = ?", (task_id,)
                 )
                 row = await cursor.fetchone()
                 if not row:
@@ -224,6 +229,17 @@ class Database:
                 raise
         event = {"event_id": event_id, "task_id": task_id, "seq": seq,
                  "type": event_type, "created_at": now, **data}
+        if self.event_sink:
+            self.event_sink.publish({
+                "task_id": task_id,
+                "parent_task_id": row["parent_task_id"],
+                "session_id": row["session_id"],
+                "user_id": row["user_id"],
+                "request_id": row["request_id"],
+                "query": row["query"],
+                "mode": row["mode"],
+                "domain": row["domain"],
+            }, event_type, {"event_id": event_id, "seq": seq, "created_at": now, **data})
         if row["parent_task_id"]:
             forwarded_type = "subtask." + event_type if event_type.startswith(("task.", "answer.completed", "interrupt.")) else event_type
             await self.publish(row["parent_task_id"], forwarded_type,

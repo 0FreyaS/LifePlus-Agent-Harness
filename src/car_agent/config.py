@@ -72,6 +72,16 @@ class Settings(BaseSettings):
     model_base_url: str | None = None
     model_api_key: str | None = None
     model_name: str | None = None
+    langfuse_enabled: bool = True
+    langfuse_public_key: SecretStr | None = None
+    langfuse_secret_key: SecretStr | None = None
+    langfuse_base_url: str = "http://localhost:3000"
+    langfuse_environment: str = "local"
+    langfuse_release: str = "lifeplus-0.2.0"
+    langfuse_capture_content: bool = False
+    langfuse_hash_user_ids: bool = True
+    langfuse_timeout_seconds: float = Field(default=5, gt=0, le=30)
+    langfuse_flush_interval_seconds: float = Field(default=1.0, gt=0, le=30)
     amap_maps_api_key: str | None = None
     old_intent_url: str | None = None
     old_reject_url: str | None = None

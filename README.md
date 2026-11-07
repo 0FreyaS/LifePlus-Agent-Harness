@@ -1,6 +1,6 @@
 # LifePlus
 
-**生活健康与出行服务智能体：支持多轮对话、并行任务、信息澄清与可视化执行链路。**
+**生活健康与出行服务智能体：支持多轮对话、并行任务、信息澄清与可视化执行链路。使用Langfuse辅助测评**
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![LangGraph](https://img.shields.io/badge/Workflow-LangGraph-1C3C3C)
@@ -10,7 +10,6 @@
 
 基于 **LangGraph + Agent Harness + MCP** 构建，将用户需求转为可执行任务，通过真实模型与工具完成天气查询、地点检索、路线规划、音乐检索和日常对话，并在前端展示执行进度与结果。
 
-当前模型组合：**DeepSeek Flash（关闭思考）＋ Jev 单目标领域分类**。文本事件、全局目标规划和领域执行理解分工处理，宿主负责依赖、权限、预算、恢复及结果证据。本文按 2026-10-30 工作区源码整理；源码更新不代表已有容器自动加载新版本。
 
 ## 核心功能
 
@@ -23,6 +22,7 @@
 | 地图与本地生活 | 高德地点和商家检索；在回复内展示地图，切换驾车、步行、骑行及可用路线方案 |
 | 天气、音乐与生活清单 | 天气查询、歌曲检索、行程保存、提醒创建与站内通知 |
 | 流式输出与可观测 | SSE 增量回复、任务依赖 DAG、可展开的领域子图、工具回执和 bad case 标记 |
+| Langfuse 评测与追踪 | 记录 Agent Trace、模型 Generation、Token/延迟、Guardrail 与 MCP Tool 证据，支持后续 Dataset、Experiment 和 Evaluator 评测 |
 | 工具执行治理 | 本域工具与参数契约、权限校验、并发限制、超时预算、有限重试及 Dead Letter |
 | 规划契约与修复 | 校验目标、依赖、绑定接收字段和证据路径；结构化输出失败最多一次修复，提供脱敏字段诊断 |
 
@@ -43,6 +43,12 @@ GitHub 页面内可直接播放（约 1 分 21 秒，已内嵌中文字幕）。
 [![LifePlus 整体流程架构：请求入口、领域执行、运行治理、业务能力与可观测闭环](docs/assets/lifeplus-architecture-layered-v2.png)](docs/assets/lifeplus-architecture-layered-v2.png)
 
 天气、路线与音乐展示独立并行任务，保存行程消费路线任务的真实回执；文字回复恢复原任务，结构化按钮走宿主协议。图为分层总览，不是逐语句执行图：所有工具调用都经队列与权限校验，SSE 可在执行期间持续返回进度。点击图片查看原图。
+
+### Langfuse 链路观测与评测底座
+
+![Langfuse 真实天气任务 Trace：规划、记忆、领域理解、权限校验、高德工具与模型 Token](docs/assets/screenshots/langfuse-trace-tree.jpg)
+
+上图来自一次真实的“查询无锡今天的天气”请求，可在同一 Trace 中对齐规划、记忆加载、领域理解、工具候选、权限校验、高德天气调用、结果校验和最终回复。Langfuse 记录每次模型调用的耗时与 Token，并通过 `session_id` / `task_id` / `request_id` 与本地 Trace 对账；当前先完成可观测接入，Dataset、Experiment 与自动 Evaluator 待评分口径确定后启用。
 
 以下为 **2026-10-26 通过 computer use 操作本地应用截取的真实界面**，使用当时的真实模型与 MCP，非设计稿。视频和截图用于展示交互，不代表当前模型、节点结构或性能；以本文架构和源码为准。工具数据、路线和候选随时间变化。
 
@@ -243,6 +249,27 @@ docker compose ps
 配置更新后使用 `docker compose up -d --build --force-recreate app`；单纯 restart 不会重新读取 env_file。Compose 使用 `restart: unless-stopped`，Docker 运行时可自动恢复已启动服务。健康检查只表示进程存活，模型和工具能力仍需真实请求核验。
 
 Dockerfile 包含构建与入口导入检查；此前本机曾因依赖下载超时复用已有镜像依赖运行，不能据此保证空白服务器构建成功。部署前应独立验证完整构建、持久卷、认证和真实 SSE；不要使用 `docker compose down -v` 删除已有业务数据。
+
+### Langfuse 可观测
+
+项目可选将 Harness 事件和 LangChain 模型回调发送到自托管 Langfuse。本地 SQLite 事件账本仍是业务审计真源；Langfuse 是最佳努力的观测副本，其超时、断线或上报失败不会改变任务结果。
+
+```dotenv
+LANGFUSE_ENABLED=true
+LANGFUSE_PUBLIC_KEY=
+LANGFUSE_SECRET_KEY=
+LANGFUSE_BASE_URL=http://localhost:3000
+# LifePlus 在 Docker、Langfuse 运行在宿主机时使用
+LANGFUSE_DOCKER_BASE_URL=http://host.docker.internal:3000
+LANGFUSE_ENVIRONMENT=local
+LANGFUSE_RELEASE=lifeplus-0.2.0
+LANGFUSE_CAPTURE_CONTENT=false
+LANGFUSE_HASH_USER_IDS=true
+```
+
+重建 LifePlus 后打开 [Langfuse](http://127.0.0.1:3000)。一个任务以 `process-lifeplus-task` Agent 为根观察，下层包含模型 Generation、业务节点、Guardrail 和 Tool 调用；`session_id` 串联多轮会话，`task_id`/`request_id` 用于与本地 Trace 对账。用户标识默认哈希，密钥、Authorization、邮箱、手机号和身份证会在上报前脱敏。生产环境在明确同意、保留期限和删除策略前，应保持 `LANGFUSE_CAPTURE_CONTENT=false`。
+
+`/api/health` 会返回 Langfuse 是否启用及最近一次上报错误。当前只接入 Trace，按需暂不创建 Dataset、Experiment 和自动 Evaluator；后续需先确定任务完成率、工具选择、参数正确性、虚假完成和延迟的评分口径。实现遵循 [Langfuse tracing best practices](https://langfuse.com/docs/observability/best-practices) 与 [LangGraph integration](https://langfuse.com/integrations/frameworks/langgraph)。
 
 ### 开始体验
 

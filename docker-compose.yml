@@ -18,6 +18,8 @@ services:
       CHECKPOINT_POSTGRES_DSN: ${CHECKPOINT_POSTGRES_DSN:-}
       MYSQL_DSN: ${MYSQL_DSN:-}
       REDIS_URL: ${REDIS_URL:-}
+      # A container cannot reach the host Langfuse instance through localhost.
+      LANGFUSE_BASE_URL: ${LANGFUSE_DOCKER_BASE_URL:-http://host.docker.internal:3000}
       MAX_ACTIVE_TASKS_PER_USER: ${MAX_ACTIVE_TASKS_PER_USER:-4}
     ports:
       - "127.0.0.1:${LIFEPLUS_PORT:-8088}:8000"

@@ -38,6 +38,7 @@ from ..skill_registry import LifeSkillRegistry
 from ..tool_queue import ToolQueue
 from ..tools import LifeTools
 from ..orchestration import TaskCoordinator, TERMINAL, session_messages, task_view
+from ..observability import LangfuseTraceSink
 from ..retry import can_retry, retry_failed
 from ..route_presentation import MapPreviewError, RouteMapRenderer, route_record, route_rows, stored_route
 
@@ -56,6 +57,8 @@ async def lifespan(app: FastAPI):
     limits = RuntimeLimits.from_settings(settings)
     db = Database(str(settings.database_file))
     await db.open()
+    langfuse = LangfuseTraceSink.from_settings(settings)
+    db.set_event_sink(langfuse)
     await db.execute("UPDATE tasks SET status='interrupted', updated_at=? WHERE status='running'",
                      (datetime.now(timezone.utc).isoformat(),))
     mcp_env = dict(__import__("os").environ)
@@ -108,6 +111,7 @@ async def lifespan(app: FastAPI):
     await reminder_scheduler.start()
     app.state.reminder_scheduler = reminder_scheduler
     app.state.db = db
+    app.state.langfuse = langfuse
     app.state.route_maps = RouteMapRenderer(settings.amap_maps_api_key)
     app.state.mcp = mcp
     app.state.saver_context = saver_context
@@ -141,6 +145,8 @@ async def lifespan(app: FastAPI):
         await input_event_router.close()
     if planning_gate:
         await planning_gate.close()
+    if langfuse:
+        langfuse.shutdown()
     await saver_context.__aexit__(None, None, None)
     await db.close()
 
@@ -196,6 +202,7 @@ async def health(request: Request):
         "input_event_provider": settings.input_event_provider,
         "planning_gate_provider": settings.planning_gate_provider,
         "jev_configured": bool(settings.jev_api_key and settings.jev_api_key.get_secret_value().strip()),
+        "langfuse": request.app.state.langfuse.status if request.app.state.langfuse else {"enabled": False},
     }
 
 
